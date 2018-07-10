@@ -1,0 +1,7 @@
+root\beans\JsonResult.class
+root\beans\ParamExceptionResult.class
+root\dto\UserDto.class
+root\model\User.class
+root\beans\ParamExceptionResult$ParamExceptionResultBuilder.class
+root\beans\JsonResult$JsonResultBuilder.class
+root\param\UserParam.class
