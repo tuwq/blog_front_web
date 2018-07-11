@@ -24,7 +24,7 @@ class HomeFooter extends React.Component {
           		<div className="contact">
           			<ul className="itemList">
           				<li className="item"><a>友情链接</a></li>
-          				<li className="item"><a>关系我</a></li>
+          				<li className="item"><a>联系我</a></li>
           			</ul>
           		</div>
 	          	<div className="contact">

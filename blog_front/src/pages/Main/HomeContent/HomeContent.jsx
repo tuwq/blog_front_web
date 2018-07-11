@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 
-import HomeContentTop from './subpages/HomeContentTop'
+import HomeContentTop from './subpages/HomeContentTop/HomeContentTop'
+import HomeContentBottom from './subpages/HomeContentBottom/HomeContentBottom'
 
 import './style/HomeContent.less'
 import './media/HomeContent.less'
@@ -10,7 +11,7 @@ class HomeContent extends React.Component {
 
 	constructor(props,context) {
 		super(props,context)
-		this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+		this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
 	}
 
 	componentDidMount() {
@@ -19,7 +20,10 @@ class HomeContent extends React.Component {
 	render() {
 		return (
           <div id="HomeContent" className="HomeContent">
-          	<HomeContentTop />
+          	 <div className="HomeContent-Wrapper">
+          	 	<HomeContentTop />
+          	 	<HomeContentBottom />
+          	 </div>
           </div>
         )
 	}
