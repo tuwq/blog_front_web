@@ -5,7 +5,7 @@
 
 	后端: 	SpringBoot + MyBatis
 
-	数据库:	MySql + Redis + HBase
+	数据库:	MySql + Redis + MongoDB
 
 	分布式: SpringCloud + SpringRestTemplate
 ## 后台管理
@@ -13,6 +13,6 @@
 
 	后端: 	SpringMVC + MyBatis
 
-	数据库:	MySql + MongoDB
+	数据库:	MySql + HBase
 
 	分布式:	ZooKeeper + Dubbo
