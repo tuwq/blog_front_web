@@ -1,7 +1,7 @@
 import React from 'react';
 import { HashRouter as Router, Route } from 'react-router-dom';
 
-import App from '@/pages/App.jsx'
+import App from '@/App.jsx'
 import SubRouter from './SubRouter.jsx'
 
 class AppRouter extends React.Component {
