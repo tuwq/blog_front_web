@@ -6,8 +6,11 @@ import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,18 +36,19 @@ public class TestController {
 	private TestService testService;
 	
 	@ApiOperation(value="测试接口", notes="测试的接口")
-	@GetMapping("/test1")
-	public JsonResult<List<UserDto>> getAll() {
+	@GetMapping("/get")
+	public String getAll(Integer id) {
 		
 		TestService contextService = ApplicationContextUtil.popBean(TestService.class);
 		System.out.println(contextService == testService); // true
 		List<User> all = contextService.getAll();
 		List<UserDto> dtoList = all.stream().map(user -> UserDto.adapt(user)).collect(Collectors.toList());
-		return JsonResult.<List<UserDto>>success(dtoList);
+		// return JsonResult.<List<UserDto>>success(dtoList);
+		return "getOk:id=" + id;
 	}
 	
-	@PostMapping("/test2")
-	public String postUser(UserParam param) {
+	@PostMapping("/post")
+	public String postUser(@RequestBody UserParam param) {
 		/*System.out.println();
 		DefaultValueUtil.setDefaultProp(param, UserParam.class);
 		DefaultValueUtil.onInsert(param);
@@ -52,7 +56,17 @@ public class TestController {
 		System.out.println(param.getTime());*/
 		// System.out.println(ThreadUtil.getCurrentRequest().getRequestURI());
 		// ValidatorUtil.check(param);
-		return "ok";
+		return "Postok:id=" + param.getId();
+	}
+	
+	@PutMapping("/put")
+	public String putUser(@RequestBody UserParam param) {
+		return "Putok:id="+ param.getId();
+	}
+	
+	@DeleteMapping("/del")
+	public String delUser(@RequestBody UserParam param) {
+		return "Delok:id=" + param.getId();
 	}
 
 }

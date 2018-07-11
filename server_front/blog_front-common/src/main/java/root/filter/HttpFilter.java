@@ -32,7 +32,6 @@ public class HttpFilter implements HandlerInterceptor {
 	}
 
 	public void removeThreadLocalInto() {
-		System.out.println("remove-----------------");
 		ThreadUtil.remove();
 	}
 }
