@@ -1,14 +1,21 @@
-# blog_back
+# blog_front
 
-> 我的博客_后台管理
+> myBlog
 
-## 技术栈
-	前端:	Sass + Vue + Vuex + jQuery
+## Build Setup
 
-	后端: 	SpringMVC + MyBatis
+``` bash
+# install dependencies
+npm install
 
-	数据库:	MySql + MongoDB
+# serve with hot reload at localhost:8080
+npm run dev
 
-	分布式:	ZooKeeper + Dubbo
+# build for production with minification
+npm run build
+
+# build for production and view the bundle analyzer report
+npm run build --report
+```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

@@ -1,0 +1,112 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>root</groupId>
+    <artifactId>blog_back</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <packaging>war</packaging>
+  <artifactId>blog_back-web</artifactId>
+  <dependencies>
+		 <dependency>
+		  	<groupId>root</groupId>
+		  	<artifactId>blog_back-service</artifactId>
+		  	<version>0.0.1-SNAPSHOT</version>
+		  </dependency>
+		<!-- 添加provided 否则会和maven的tomcat插件冲突 -->
+		<!-- <dependency>  
+		    <groupId>javax.servlet</groupId>  
+		    <artifactId>javax.servlet-api</artifactId>  
+		    <scope>provided</scope>  
+		    <version>3.1.0</version>  
+		</dependency>  -->
+		<!-- Servlet web -->
+		<dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat.maven</groupId>
+			<artifactId>tomcat7-maven-plugin</artifactId>
+			<version>2.2</version>
+			<type>maven-plugin</type>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-resources-plugin</artifactId>
+			<version>3.0.1</version>
+			<type>maven-plugin</type>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>1.8.13</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.8.13</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.shared</groupId>
+			<artifactId>maven-filtering</artifactId>
+			<version>3.1.1</version>
+		</dependency>
+  </dependencies>
+  
+	<build>
+		<resources>
+			<!-- 如果不加，那么打包的时候mapper文件不会被加载进来 -->
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+				</includes>
+				<filtering>false</filtering>
+			</resource>
+		</resources>
+		<plugins>
+			 <!-- 资源文件拷贝插件 -->
+	        <plugin>
+	            <groupId>org.apache.maven.plugins</groupId>
+	            <artifactId>maven-resources-plugin</artifactId>
+	            <version>2.7</version>
+	            <configuration>
+	                <encoding>UTF-8</encoding>
+	            </configuration>
+	        </plugin>
+	        <!-- tomcat -->
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<configuration>
+					<port>9000</port>
+					<server>tomcat7</server>
+					<path>/</path>
+					<useBodyEncodingForURI>true</useBodyEncodingForURI>
+					<uriEncoding>UTF-8</uriEncoding>
+				</configuration>
+			</plugin>
+			<plugin>
+			    <groupId>org.apache.tomcat.maven</groupId>
+			    <artifactId>tomcat7-maven-plugin</artifactId>
+			    <version>2.2</version>
+			</plugin>
+			
+		</plugins>
+	</build>
+</project>
