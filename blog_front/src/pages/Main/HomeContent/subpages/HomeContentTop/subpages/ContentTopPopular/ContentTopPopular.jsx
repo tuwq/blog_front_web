@@ -19,7 +19,7 @@ class ContentTopPopular extends React.Component {
 	
 	render() {
 		return (
-         	<div id="ContentTopPopular.less" className="ContentTopPopular.less">
+         	<div id="ContentTopPopular" className="ContentTopPopular">
          		<WidgetList />
          	</div>
         )
