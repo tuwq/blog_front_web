@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 
-import './style/HomeFooter.less'
-import './media/HomeFooter.less'
+import './HomeFooter.less'
+import './MHomeFooter.less'
 
 import qqSvg from 'static/svg/qq.svg'
 import githubSvg from 'static/svg/github.svg'
