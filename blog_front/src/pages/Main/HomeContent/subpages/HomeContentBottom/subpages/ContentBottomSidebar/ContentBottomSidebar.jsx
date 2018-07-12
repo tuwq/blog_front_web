@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 
+import SiderBarSelf from './subpages/SiderBarSelf/SiderBarSelf'
+import SiderBarCommentCollection from './subpages/SiderBarCommentCollection/SiderBarCommentCollection'
+import SiderBarHotCollection from './subpages/SiderBarHotCollection/SiderBarHotCollection'
+
 import './ContentBottomSidebar.less'
 import './MContentBottomSidebar.less'
 
@@ -18,7 +22,9 @@ class ContentBottomSidebar extends React.Component {
 	render() {
 		return (
          	<aside id="ContentBottomSidebar" className="ContentBottomSidebar">
-         		aside
+         		<SiderBarSelf />
+         		<SiderBarCommentCollection />
+         		<SiderBarHotCollection />
          	</aside>
         )
 	}

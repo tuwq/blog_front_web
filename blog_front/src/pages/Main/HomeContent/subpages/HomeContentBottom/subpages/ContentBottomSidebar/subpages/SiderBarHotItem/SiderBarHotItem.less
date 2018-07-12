@@ -1,0 +1,31 @@
+@import url("../../../../../../../../../base/style/constant.less");
+.SiderBarHotList {
+	.SiderBarHotItem {
+		margin-top: 10px;
+		max-height: 68px;
+		overflow: hidden;
+		display: flex;
+		.image {
+			max-width: 100px;
+			overflow: hidden;
+			img {max-height: 136px;}
+		}
+		.description {
+			display: flex;
+			flex-wrap: wrap;
+			flex-direction: column;
+			justify-content: center;
+			color: @gray_color;
+			.hot-title {
+				font-size: 1.4rem;
+				max-height: 40px;
+				overflow: hidden;
+				font-weight: 400;
+				margin-bottom: 10px;
+			}
+			.hot-content {
+				span {padding-right: 5px;}
+			}
+		}
+	}
+}
