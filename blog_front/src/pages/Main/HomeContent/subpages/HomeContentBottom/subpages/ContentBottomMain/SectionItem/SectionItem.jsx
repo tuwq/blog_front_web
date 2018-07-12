@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 
-import ModelBig from '../ModelBig/ModelBig'
-import ModelMediumList from '../ModelMediumList/ModelMediumList'
-import ModelShort from '../ModelShort/ModelShort'
+import ModelMediumCollection from '../ModelMediumCollection/ModelMediumCollection'
+import ModelShortCollection from '../ModelShortCollection/ModelShortCollection'
 
 import './SectionItem.less'
 import './MSectionItem.less'
@@ -22,9 +21,8 @@ class SectionItem extends React.Component {
 	render() {
 		return (
          	<div className="SectionItem">
-         		<ModelBig />
-         		<ModelMediumList />
-         		<ModelShort />
+         		<ModelMediumCollection />
+         		<ModelShortCollection />
          	</div>
         )
 	}

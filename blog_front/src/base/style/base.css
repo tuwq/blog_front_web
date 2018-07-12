@@ -82,6 +82,12 @@ a {
 a img {
     height: inherit;
 }
+a:hover {
+    color: #69bbea;
+}
+p {
+    margin: 0 0 10px;
+}
 html|* > svg {
     transform-origin: 50% 50% 0px;
 }

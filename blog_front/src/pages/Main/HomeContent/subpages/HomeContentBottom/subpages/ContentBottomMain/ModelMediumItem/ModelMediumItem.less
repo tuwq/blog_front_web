@@ -1,0 +1,36 @@
+.ModelMediumCollection {
+	.ModelMediumList {
+		.ModelMediumItem {
+			flex: 0 1 50%;
+			display: flex;
+			flex-direction: row;
+			flex-wrap: nowrap;
+			max-height: 100px;
+			overflow: hidden;
+			margin-bottom: 20px;
+			padding: 10px;
+			padding-right: 5px;
+			.image {img{max-height: 175px;}}
+			.description {
+				padding-left: 20px;
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				h3 {
+					margin: 10px 0;
+					overflow: hidden;
+					max-height: 40px;
+					line-height: 20px;
+				}
+				p {
+					margin-top: 5px;
+					font-size: 13px;
+					line-height: 20px;
+					max-height: 40px;
+					overflow: hidden;
+					color: #7f8c8d;
+				}
+			}
+		}
+	}
+}
