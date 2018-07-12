@@ -4,8 +4,8 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 import HomeContentTop from './subpages/HomeContentTop/HomeContentTop'
 import HomeContentBottom from './subpages/HomeContentBottom/HomeContentBottom'
 
-import './style/HomeContent.less'
-import './media/HomeContent.less'
+import './HomeContent.less'
+import './MHomeContent.less'
 
 class HomeContent extends React.Component {
 

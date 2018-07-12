@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 
-import './style/HomeContentBottom.less'
-import './media/HomeContentBottom.less'
+import ContentBottomMain from './subpages/ContentBottomMain/ContentBottomMain'
+import ContentBottomSidebar from './subpages/ContentBottomSidebar/ContentBottomSidebar'
+
+import './HomeContentBottom.less'
+import './MHomeContentBottom.less'
 
 class HomeContentBottom extends React.Component {
 
@@ -18,7 +21,8 @@ class HomeContentBottom extends React.Component {
 	render() {
 		return (
          	<section id="HomeContentBottom" className="HomeContentBottom">
-         		
+         		<ContentBottomMain />
+         		<ContentBottomSidebar />
          	</section>
         )
 	}

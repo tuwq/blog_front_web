@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 
-import './style/HomeHeader.less'
-import './media/HomeHeader.less'
+import './HomeHeader.less'
+import './MHomeHeader.less'
 
 import searchSvg from 'static/svg/search.svg'
 

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 
-import './style/HomeContentTop.less'
-import './media/HomeContentTop.less'
 
 import Slider from 'base/general/Slider'
-import Popular from './subpages/Popular'
+import ContentTopPopular from './subpages/ContentTopPopular/ContentTopPopular'
+
+import './HomeContentTop.less'
+import './MHomeContentTop.less'
 
 class HomeContentTop extends React.Component {
 
@@ -22,7 +23,7 @@ class HomeContentTop extends React.Component {
 		return (
          	<section id="HomeContentTop" className="HomeContentTop">
          		<Slider />
-         		<Popular />
+         		<ContentTopPopular />
          	</section>
         )
 	}
