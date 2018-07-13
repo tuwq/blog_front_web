@@ -23,6 +23,8 @@ class SectionItem extends React.Component {
          	<div className="SectionItem">
          		<ModelMediumCollection />
          		<ModelShortCollection />
+         		<ModelMediumCollection />
+         		<ModelShortCollection />
          	</div>
         )
 	}

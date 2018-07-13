@@ -1,0 +1,29 @@
+@import url("../../style/constant.less");
+.FixControl {
+	position: fixed;
+	top: 50%;
+	margin-top: -60px;
+	right: 15px;
+	width: 50px;
+	z-index: @fix_control_index;
+	background: #fff;
+	border: 1px solid #ddd;
+	font-size: 2rem;
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	.scroll-top {
+		display: block;
+		padding: 10px 0;
+		font-size: 20px;
+		border-bottom: 1px solid @home_content_title_blur_borderbottom_color;
+	}
+	.scroll-bottom {
+		display: block;
+		padding: 10px 0;
+		font-size: 20px;
+		img {
+			transform: rotateX(-180deg);
+		}
+	}
+}

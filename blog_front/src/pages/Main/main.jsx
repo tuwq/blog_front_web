@@ -5,6 +5,7 @@ import axios from 'axios'
 import HomeHeader from './HomeHeader/HomeHeader'
 import HomeContent from './HomeContent/HomeContent'
 import HomeFooter from './HomeFooter/HomeFooter'
+import FixControl from 'base/general/FixControl/FixControl'
 
 import './style/main.less'
 
@@ -24,6 +25,7 @@ class Main extends React.Component {
 	           <HomeHeader />
 	           <HomeContent />
 	           <HomeFooter />
+	           <FixControl />
         	</div>
         )
 	}

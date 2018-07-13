@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 
 
-import Slider from 'base/general/Slider'
+import Slider from 'base/general/Slider/Slider'
 import ContentTopPopular from './subpages/ContentTopPopular/ContentTopPopular'
 
 import './HomeContentTop.less'
