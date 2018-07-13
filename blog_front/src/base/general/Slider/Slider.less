@@ -1,0 +1,39 @@
+@import url("../../style/constant.less");
+.Silder {
+	flex: 0 1 66%;
+	overflow: hidden;
+	max-height: 460px;
+	min-height: 1px;
+	padding: 0 15px;
+	.screen {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+		ul {
+			position: absolute;
+			display: flex;
+			width: (@slider_image_count+1)*100%;
+		}
+		ol {
+			position: absolute;
+			right: 30px;
+			bottom: 10px;
+			line-height: 20px;
+			text-align: center;
+			display: flex;
+			li {
+				width: 10px;
+				height: 10px;
+				margin: 0 4px;
+				background: rgba(255,255,255,.6);
+			    border-radius: 10px;
+			    overflow: hidden;
+			    text-indent: -999em;
+			    border: none;
+			    box-sizing: content-box!important;	
+			    &.current {background: rgba(255,189,255,.9);}
+			}
+		}
+	}
+}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 
-import { GoTop,GoBottom,getLeader } from 'base/js/common'
+import { GoTop,GoBottom,getLeader,removeScroll } from 'base/js/scrollTo'
 import topSvg from 'static/svg/top.svg'
 import bottomSvg from 'static/svg/bottom.svg'
 
@@ -22,6 +22,16 @@ class FixControl extends React.Component {
 		GoTop(this.topArrow.current)
 		GoBottom(this.bottomArrow.current)
 	}
+
+	componentWillUnmount() {
+		// 关闭监听
+		removeScroll()
+		// 防止异步调用数据
+        this.setState = (state,callback)=>{
+	      return
+	    };
+	}
+
 	render() {
 		return (
 			<div className="FixControl">
