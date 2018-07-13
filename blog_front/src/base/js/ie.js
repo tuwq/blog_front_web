@@ -32,4 +32,16 @@ export function addEvent(ele,fn,str) {
         //在addEventListener和attachEvent都不存在的情况下，用此代码
         ele["on"+str] = fn;
     }
+    return fn
+}
+
+export function removeEvent(ele,fn,str) {
+    if(ele.removeEventListener){
+        ele.removeEventListener(str,fn);
+    }else if(ele.detachEvent){
+        ele.detachEvent("on"+str,fn);
+    }else{
+        ele["on"+str] = null;
+    }
+    return fn
 }
