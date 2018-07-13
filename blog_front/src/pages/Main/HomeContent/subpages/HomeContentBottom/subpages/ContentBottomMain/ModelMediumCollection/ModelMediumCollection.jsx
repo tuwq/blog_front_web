@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 
 
-import ModelMediumListTitle from '../ModelMediumListTitle/ModelMediumListTitle'
+import ModelMediumTitle from 'base/general/ModelMediumTitle/ModelMediumTitle'
 import ModelMediumList from '../ModelMediumList/ModelMediumList'
+import ModelBigItem from '../ModelBigItem/ModelBigItem'
+
 import rightSvg from 'static/svg/right.svg'
 
 import './ModelMediumCollection.less'
@@ -23,7 +25,8 @@ class ModelMediumCollection extends React.Component {
 	render() {
 		return (
          	<div className="ModelMediumCollection">
-         		<ModelMediumListTitle />	
+         		<ModelMediumTitle />	
+         		<ModelBigItem />
          		<ModelMediumList />
          	</div>
         )

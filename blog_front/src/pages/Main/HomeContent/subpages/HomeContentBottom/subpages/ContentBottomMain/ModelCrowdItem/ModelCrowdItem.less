@@ -1,0 +1,24 @@
+.ModelCrowdList {
+	display: flex;
+	flex-direction: column;
+	.ModelCrowdItem {
+		display: flex;
+		margin: 5px;
+		padding: 0 5px;
+		max-height: 75px;
+		overflow: hidden;
+		.image {
+			width: 100px;
+			overflow: hidden;
+			margin-right: 10px;
+			img {
+				max-height: 175px;
+			}
+		}
+		.content {
+			flex: 1;
+			font-size: 14px;
+			font-weight: 400;
+		}
+	}
+}

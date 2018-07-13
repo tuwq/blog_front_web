@@ -3,6 +3,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 
 import ModelMediumCollection from '../ModelMediumCollection/ModelMediumCollection'
 import ModelShortCollection from '../ModelShortCollection/ModelShortCollection'
+import ModelCrowdCollection from '../ModelCrowdCollection/ModelCrowdCollection'
 
 import './SectionItem.less'
 import './MSectionItem.less'
@@ -23,8 +24,7 @@ class SectionItem extends React.Component {
          	<div className="SectionItem">
          		<ModelMediumCollection />
          		<ModelShortCollection />
-         		<ModelMediumCollection />
-         		<ModelShortCollection />
+         		<ModelCrowdCollection />
          	</div>
         )
 	}
