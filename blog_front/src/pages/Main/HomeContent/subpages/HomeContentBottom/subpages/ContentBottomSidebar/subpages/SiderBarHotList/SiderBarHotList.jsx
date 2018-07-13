@@ -22,6 +22,8 @@ class SiderBarHotList extends React.Component {
          	<div id="SiderBarHotList" className="SiderBarHotList">
          		<SiderBarHotItem />
          		<SiderBarHotItem />
+         		<SiderBarHotItem />
+         		<SiderBarHotItem />
          	</div>
         )
 	}

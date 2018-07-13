@@ -90,7 +90,6 @@ class Slider extends React.Component {
 		this.Movetimer = setInterval(function(){
 			var val = target - ele.offsetLeft
             ele.style.left = ele.offsetLeft + speed + "px"
-
 			if (Math.abs(val) < Math.abs(speed)) {
 				ele.style.left = target + "px"
                 clearInterval(this.Movetimer)
@@ -100,13 +99,13 @@ class Slider extends React.Component {
 
 	autoPlay() {
 		this.Autotimer = setInterval(this.leftslide,2000)
-		this.screen = this.screen.current
-		addEvent(this.screen,()=>{
-			clearInterval(this.Autotimer)
-		},'mouseover')
-		addEvent(this.screen,()=>{
-			this.Autotimer = setInterval(this.leftslide,2000)
-		},'mouseout')
+		// this.screen = this.screen.current
+		// addEvent(this.screen,()=>{
+		// 	clearInterval(this.Autotimer)
+		// },'mouseover')
+		// addEvent(this.screen,()=>{
+		// 	this.Autotimer = setInterval(this.leftslide,2000)
+		// },'mouseout')
 	}
 
 	leftslide() {

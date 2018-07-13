@@ -1,0 +1,1 @@
+.ModelCrowdList{display:flex;flex-direction:column}.ModelCrowdList .ModelCrowdItem{display:flex;margin:5px;padding:0 5px;max-height:75px;overflow:hidden}.ModelCrowdList .ModelCrowdItem .image{width:100px;overflow:hidden;margin-right:10px}.ModelCrowdList .ModelCrowdItem .image img{max-height:175px}.ModelCrowdList .ModelCrowdItem .content{flex:1;font-size:14px;font-weight:400}
