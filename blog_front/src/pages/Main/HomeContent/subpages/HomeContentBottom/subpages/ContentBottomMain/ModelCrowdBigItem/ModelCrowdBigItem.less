@@ -1,4 +1,4 @@
-@import url("../../../../../../../../base/style/constant.less");
+@import url("../../../../../../../../base/style/an.less");
 .ModelCrowdBigItem {
 	display: flex;
 	flex: 1;
@@ -7,10 +7,14 @@
 	flex-direction: column;
 	overflow: hidden;
 	margin-bottom: 10px;
+	&:hover {
+		.image {img {.image-scale-after}}
+	}
 	.image {
 		max-height: 150px;
 		overflow: hidden;
 		margin-bottom: 10px;
+		img {max-height: 150px;.image-scale-before;.image-opacity;}
 	}
 	.description {
 		.title {

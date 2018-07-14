@@ -15,6 +15,7 @@ class Slider extends React.Component {
 		this.autoPlay = this.autoPlay.bind(this)
 		this.leftslide = this.leftslide.bind(this)
 		this.rightslide = this.rightslide.bind(this)
+		this.removeTimer = this.removeTimer.bind(this)
 		this.move = this.move.bind(this)
 		this.screen = React.createRef()
 		this.imageList = React.createRef()
@@ -26,6 +27,7 @@ class Slider extends React.Component {
 		this.Movetimer = null
 		this.Autotimer = null
 		this.pend = false
+		this.pointFnList = []
 	}
 
 	componentDidMount() {
@@ -34,6 +36,15 @@ class Slider extends React.Component {
 		this.autoPlay()
 	}
 	
+	componentWillUnmount() {
+		// 关闭滑动
+		this.removeTimer()
+		// 防止异步调用数据
+        this.setState = (state,callback)=>{
+	      return
+	    };
+	}
+
 	render() {
 		return (
          	<div id="Slider" className="Silder">
@@ -73,7 +84,7 @@ class Slider extends React.Component {
 		for (let i = 0 ;i < this.pointArr.length; i++) {
 			let current = this.pointArr[i]
 			current.index = i
-			addEvent(this.pointArr[i],()=>{
+			let pointFn = addEvent(this.pointArr[i],()=>{
 				if(this.pend) {return}
 				for (let j = 0;j < this.pointArr.length; j++) {
 					this.pointArr[j].className = ''
@@ -82,6 +93,7 @@ class Slider extends React.Component {
 				this.key = this.square = current.index
 				this.move(this.imageList.current,-current.index*this.imgWidth)
 			},'click')
+			this.pointFnList.push(pointFn)
 		}
 	}
 
@@ -111,6 +123,13 @@ class Slider extends React.Component {
 		// addEvent(this.screen,()=>{
 		// 	this.Autotimer = setInterval(this.leftslide,2000)
 		// },'mouseout')
+	}
+
+	removeTimer() {
+		clearInterval(this.Autotimer)
+		for (let i = 0 ;i < this.pointArr.length; i++) {
+			removeEvent(this.pointArr[i],this.pointFnList[i],'click')
+		}
 	}
 
 	leftslide() {

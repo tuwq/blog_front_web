@@ -1,16 +1,21 @@
-@import url("../../../../../../../../../base/style/constant.less");
+@import url("../../../../../../../../../base/style/an.less");
 .SiderBarHotList {
 	.SiderBarHotItem {
 		display: flex;
 		margin-top: 10px;
 		max-height: 68px;
 		overflow: hidden;
+		&:hover {
+			.image img{.image-scale-after}
+		}
 		.image {
 			max-width: 100px;
+			max-height: 136px;
 			overflow: hidden;
-			img {max-height: 136px;}
+			img {max-height: 136px;.image-scale-before;.image-opacity;}
 		}
 		.description {
+			flex: 1;
 			display: flex;
 			flex-wrap: wrap;
 			flex-direction: column;
