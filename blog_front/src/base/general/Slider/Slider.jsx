@@ -25,6 +25,7 @@ class Slider extends React.Component {
 		this.pointArr = []
 		this.Movetimer = null
 		this.Autotimer = null
+		this.pend = false
 	}
 
 	componentDidMount() {
@@ -73,6 +74,7 @@ class Slider extends React.Component {
 			let current = this.pointArr[i]
 			current.index = i
 			addEvent(this.pointArr[i],()=>{
+				if(this.pend) {return}
 				for (let j = 0;j < this.pointArr.length; j++) {
 					this.pointArr[j].className = ''
 				}
@@ -84,14 +86,17 @@ class Slider extends React.Component {
 	}
 
 	move(ele,target) {
+		// 工作中
+		this.pend = true
 		// 改变left滑动,需要元素添加绝对定位属性
 		clearInterval(this.Movetimer);
 		var speed = target > ele.offsetLeft?20:-20
-		this.Movetimer = setInterval(function(){
+		this.Movetimer = setInterval(()=>{
 			var val = target - ele.offsetLeft
             ele.style.left = ele.offsetLeft + speed + "px"
 			if (Math.abs(val) < Math.abs(speed)) {
 				ele.style.left = target + "px"
+				this.pend = false
                 clearInterval(this.Movetimer)
 			}
 		},10)
@@ -109,6 +114,7 @@ class Slider extends React.Component {
 	}
 
 	leftslide() {
+		if(this.pend) {return}
 		this.key++
 		let ul = this.imageList.current
 		if (this.key > this.pointArr.length) {
@@ -127,6 +133,7 @@ class Slider extends React.Component {
 	}
 
 	rightslide() {
+		if(this.pend) {return}
 		this.key--
 		let ul = this.imageList.current
 		if (this.key < 0) {
