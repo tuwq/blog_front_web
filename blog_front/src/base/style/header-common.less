@@ -9,7 +9,6 @@
 	line-height: @header_line_height;
 	z-index: @header_index;
 	background: @header_bg_color;
-	overflow: hidden;
 	box-shadow: rgba(0,0,0,.0980392) 0 1px 1px;
 }
 .common-nav {
@@ -28,6 +27,7 @@
 	top: 2px;
 	left: 0;
 	line-height: @logo_line_height;
+	margin-right: 5px;
 }
 // left ul
 .common-header-itemList {
@@ -37,6 +37,7 @@
 }
 // li
 .common-header-item {
+	position: relative;
 	font-size: 15px;
 	line-height: inherit;
 	&:hover {
@@ -94,3 +95,5 @@
 	line-height: @header_nav_height;
 	overflow: hidden;
 }
+
+

@@ -1,3 +1,4 @@
+@import url('../../../base/style/an.less');
 .HomeFooter-wapper {
 	background: #000;
 	display: flex;
@@ -16,6 +17,16 @@
 			.item {
 				display: inline-block;
 				margin: 0 5px;
+			}
+		}
+		.fontLink {
+			a {
+				position: relative;
+				.font-width-before;
+				&:hover {
+					color: #fff;
+					.font-width-after;
+				}
 			}
 		}
 	}

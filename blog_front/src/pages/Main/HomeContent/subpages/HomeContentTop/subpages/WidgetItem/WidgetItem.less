@@ -1,18 +1,25 @@
+@import url("../../../../../../../base/style/an.less");
 .WidgetItem {
 	display: flex;
 	justify-content: space-between;
 	height: 95px;
 	overflow: hidden;
+	&:hover {
+		.thumb {img {.image-scale-after}}
+	}
 	&:not(:last-child) {
 		margin-bottom: 20px;
 	} 
 	.thumb {
+		overflow: hidden;
 		a {
 			display: block;
 			max-height: 100%;
 			img {
 				display: block;
 				vertical-align: middle;
+				.image-scale-before;
+				.image-opacity;
 			}
 		}
 	}

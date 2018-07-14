@@ -28,9 +28,16 @@
 						white-space: nowrap;
 						text-overflow: ellipsis;
 						font-weight: 500;
+						&:hover {
+							animation: fontcolor .4s;
+						}
 					}
 				}	
 			}
 		}
 	}
+}
+@keyframes fontcolor{
+	from{color: inherit;}
+	to{color: @blue_color;}
 }

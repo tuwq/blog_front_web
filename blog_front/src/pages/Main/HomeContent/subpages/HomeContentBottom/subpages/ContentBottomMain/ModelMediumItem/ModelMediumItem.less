@@ -1,4 +1,4 @@
-@import url("../../../../../../../../base/style/constant.less");
+@import url("../../../../../../../../base/style/an.less");
 .ModelMediumCollection {
 	.ModelMediumList {
 		.ModelMediumItem {
@@ -11,7 +11,10 @@
 			margin-bottom: 20px;
 			padding: 10px;
 			padding-right: 5px;
-			.image {img{max-height: 175px;}}
+			&:hover {
+				.image {img{.image-scale-after}}
+			}
+			.image {overflow: hidden;img{max-height: 175px;.image-scale-before;.image-opacity;}}
 			.description {
 				padding-left: 20px;
 				flex: 1;

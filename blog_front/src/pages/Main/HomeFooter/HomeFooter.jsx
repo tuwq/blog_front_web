@@ -22,8 +22,8 @@ class HomeFooter extends React.Component {
           <footer id="HomeFooter">
           	<div className="HomeFooter-wapper">
           		<div className="contact">
-          			<ul className="itemList">
-          				<li className="item"><a>友情链接</a></li>
+          			<ul className="itemList fontLink">
+          				<li className="item "><a>友情链接</a></li>
           				<li className="item"><a>联系我</a></li>
           			</ul>
           		</div>
@@ -34,9 +34,9 @@ class HomeFooter extends React.Component {
 	          		</ul>
 	          	</div>
 	          	<div className="contact">
-	          		<ul className="itemList">
-	          			<li className="item"><a>@2018</a></li>
-	          			<li className="item"><a>tuwq</a></li>
+	          		<ul className="itemList fontLink">
+	          			<li className="item "><a>@2018</a></li>
+	          			<li className="item "><a>tuwq</a></li>
 	          		</ul>
 	          	</div>
           	</div>

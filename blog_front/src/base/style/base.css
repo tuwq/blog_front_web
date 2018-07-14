@@ -53,6 +53,7 @@ ul li {
     color: inherit;
 }
 a {
+    color: inherit;
     background-color: transparent;
     -webkit-text-decoration-skip: objects;
 }
