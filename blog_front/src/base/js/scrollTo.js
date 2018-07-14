@@ -25,7 +25,7 @@ export function removeScroll() {
 }
 // 去顶部
 export function GoTop(btn) {
-	topArrow= btn
+	topArrow = btn
 	// 当前距顶部
 	let Toptarget = 0
 	topFn = addEvent(btn,()=>{
