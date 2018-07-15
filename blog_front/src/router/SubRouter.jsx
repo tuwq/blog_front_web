@@ -2,7 +2,7 @@ import React from 'react';
 import { Route,Switch  } from 'react-router-dom';
 
 
-import Main from '@/pages/Main/main.jsx';
+import Main from '@/pages/Main/Main.jsx';
 
 class SubRouter extends React.Component {
     render() {

@@ -7,7 +7,8 @@ import HomeFooter from './HomeFooter/HomeFooter'
 import FixControl from 'base/general/FixControl/FixControl'
 import SearchModal from 'base/general/SearchModal/SearchModal'
 
-import './style/main.less'
+import './style/Main.less'
+import './style/MMain.less'
 
 class Main extends React.Component {
 
@@ -23,7 +24,7 @@ class Main extends React.Component {
 
 	render() {
 		return (
-			<div id="Main">
+			<div id="Main" className="Main">
 	           <HomeHeader />
 	           <HomeContent />
 	           <HomeFooter />
