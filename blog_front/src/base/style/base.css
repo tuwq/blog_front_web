@@ -96,6 +96,10 @@ html, body, ul, li, ol, dl, dd, dt, p, h1, h2, h3, h4, h5, h6, form, fieldset, l
     margin: 0;
     padding: 0;
 }
+input {
+   border: none;
+   outline: none;
+}
 table {
     border-collapse: collapse; 
 }

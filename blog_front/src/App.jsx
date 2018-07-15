@@ -18,7 +18,7 @@ class App extends Component {
 
   constructor(props,context) {
     super(props,context)
-    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
   }
 
 
@@ -32,7 +32,7 @@ class App extends Component {
     );
   }
   componentDidMount() {
-    
+     
   }
 }
 
