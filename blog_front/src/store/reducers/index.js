@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
-import user from './user.js'
+import modal from './modal.js'
+import people from './people.js'
 
 export default combineReducers({
-    user
+    modal,people
 })

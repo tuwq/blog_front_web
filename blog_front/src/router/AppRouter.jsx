@@ -5,8 +5,8 @@ import App from '@/App.jsx'
 import SubRouter from './SubRouter.jsx'
 
 class AppRouter extends React.Component {
-	constructor(props) {
-	  super(props);
+	constructor(props,context) {
+	  super(props,context)
 	  this.state = {};
 	}
 
@@ -19,6 +19,10 @@ class AppRouter extends React.Component {
 			</Router>
 		)
 	}
+
+	componentDidMount() {
+ 
+  	}
 }
 
 export default AppRouter

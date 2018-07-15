@@ -26,7 +26,7 @@ class ModelBigItem extends React.Component {
          			<a><img width="" height="" alt="" src="https://ikmoe.com/wp-content/uploads/wp-img/uploads/images/2017/11/28/iKmoe201711282143410abc5.png?imageView2/1/w/375/h/250/q/100"/></a>
          		</div>
          		<div className="description">
-         			<div className="title">#教程# nginx.1.12.2编译云锁安全模块/宝塔小白版本/一键！</div>
+         			<div className="title"><a>#教程# nginx.1.12.2编译云锁安全模块/宝塔小白版本/一键！</a></div>
          			<div className="meta">
          				<span><i><img width="14" height="14" alt="" src={clockSvg}/></i>2018-7-13</span>
          				<span><i><img width="14" height="14" alt="" src={eyeSvg}/></i>31377(阅读)</span>

@@ -91,6 +91,7 @@ module.exports = {
       '@': resolve('src'),
       'base': resolve('src/base'),
       'static': resolve('src/static'),
+      'store': resolve('src/store'),
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',

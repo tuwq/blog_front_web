@@ -1,0 +1,2 @@
+export const MODAL_DISPLAY = 'MODAL_DISPLAY'
+export const SAVE_PEOPLE = 'SAVE_PEOPLE'

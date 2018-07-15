@@ -22,7 +22,7 @@ class ModelCrowdItem extends React.Component {
          			<a><img width="" height="" alt="" src="https://ikmoe.com/wp-content/uploads/2017/06/ikmoe_2017-06-12_09-34-27.png?imageView2/1/w/375/h/250/q/100"/></a>
          		</div>
          		<div className="content">
-         			<p>[软件]可能是最好用的批量打水印黑科技</p>
+         			<a>[软件]可能是最好用的批量打水印黑科技</a>
          		</div>
          	</div>
         )
