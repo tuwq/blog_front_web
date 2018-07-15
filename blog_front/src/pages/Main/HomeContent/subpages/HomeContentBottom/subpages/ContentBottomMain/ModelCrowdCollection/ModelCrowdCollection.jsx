@@ -24,8 +24,6 @@ class ModelCrowdCollection extends React.Component {
          		<ModelMediumTitle />
          		<div className="ModelCrowdWarrper">
 	         		<ModelCrowdList />
-	         		<ModelCrowdList />
-	         		<ModelCrowdList />
          		</div>
          	</div>
         )

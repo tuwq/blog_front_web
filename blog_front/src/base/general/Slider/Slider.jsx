@@ -16,6 +16,8 @@ class Slider extends React.Component {
 		this.leftslide = this.leftslide.bind(this)
 		this.rightslide = this.rightslide.bind(this)
 		this.removeTimer = this.removeTimer.bind(this)
+		this.listenWindow = this.listenWindow.bind(this)
+		this.reSize = this.reSize.bind(this)
 		this.move = this.move.bind(this)
 		this.screen = React.createRef()
 		this.imageList = React.createRef()
@@ -28,9 +30,12 @@ class Slider extends React.Component {
 		this.Autotimer = null
 		this.pend = false
 		this.pointFnList = []
+		this.now = 0
+		this.lis = {}
 	}
 
 	componentDidMount() {
+		this.listenWindow()
 		this.initEle()
 		this.pointClick()
 		this.autoPlay()
@@ -43,6 +48,16 @@ class Slider extends React.Component {
         this.setState = (state,callback)=>{
 	      return
 	    };
+	}
+
+
+	listenWindow() {
+		window.onresize = this.reSize
+	}
+
+	reSize() {
+		this.imgWidth =	this.screen.current.offsetWidth
+		this.imageList.current.style.width = this.imgWidth * 3 + 'px'
 	}
 
 	render() {
@@ -64,13 +79,14 @@ class Slider extends React.Component {
 		let screen = this.screen.current
 		let imageList = this.imageList.current
 		let pointList = this.pointList.current
+		this.lis = this.imageList.current.children
 		// 单张图片的宽度
-		this.imgWidth =	screen.offsetWidth
+		this.reSize()
 		// 复制第一张图片所在的li,添加到ul的最后面
-		let newImage = imageList.children[0].cloneNode(true)
-		imageList.appendChild(newImage)
+			// let newImage = this.imageList.current.children[0].cloneNode(true)
+			// this.imageList.current.appendChild(newImage)
 		// 给ol中添加li，ul中的个数-1个，并点亮第一个按钮。
-		for (let i = 0 ;i < imageList.children.length - 1; i++) {
+		for (let i = 0 ;i < imageList.children.length ; i++) {
 			var point = document.createElement("li")
 			pointList.appendChild(point)
 		}
@@ -97,7 +113,7 @@ class Slider extends React.Component {
 		}
 	}
 
-	move(ele,target) {
+	move(ele,target,callback) {
 		// 工作中
 		this.pend = true
 		// 改变left滑动,需要元素添加绝对定位属性
@@ -109,6 +125,7 @@ class Slider extends React.Component {
 			if (Math.abs(val) < Math.abs(speed)) {
 				ele.style.left = target + "px"
 				this.pend = false
+				if(callback) {callback()}
                 clearInterval(this.Movetimer)
 			}
 		},10)
@@ -134,13 +151,23 @@ class Slider extends React.Component {
 
 	leftslide() {
 		if(this.pend) {return}
-		this.key++
-		let ul = this.imageList.current
-		if (this.key > this.pointArr.length) {
-			ul.style.left = 0
-			this.key = 1
-		} 
-		this.move(ul,-this.key*this.imgWidth)
+		var ul = this.imageList.current
+		console.log(this.key,this.pointArr.length-1)
+		if(this.key == this.pointArr.length-1) {
+			this.lis[0].style.position = 'relative'
+			this.lis[0].style.left = this.lis.length * this.imgWidth + 'px'
+			this.key = 0
+		} else {
+			this.key++ 
+		}
+		this.now++ 
+		this.move(ul,-this.now*this.imgWidth,()=>{
+			if(this.key == 0){
+				this.lis[0].style.position = 'static'
+				ul.style.left = 0
+				this.now = 0
+			}
+		})
 		this.square++
 		if (this.square > this.pointArr.length -1) {
 			this.square = 0

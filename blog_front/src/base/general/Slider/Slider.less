@@ -1,25 +1,27 @@
 @import url("../../style/constant.less");
-@media screen and (min-width: 768px) {
+@media screen and (min-width: @pc_width) {
 .Silder {
 	flex: 0 1 66%;
 	overflow: hidden;
-	max-height: 460px;
 	min-height: 1px;
 	padding: 0 15px;
 	.screen {
 		position: relative;
-		width: 100%;
+		width: 870px;
 		height: 100%;
 		overflow: hidden;
 		ul {
 			position: absolute;
-			display: flex;
-			width: (@slider_image_count+1)*100%;
+			left: 0;
+			li {
+				float: left;
+				img{position: relative;left: 0;width: 870px;}
+			}
 		}
 		ol {
 			position: absolute;
 			right: 30px;
-			bottom: 10px;
+			bottom: 20px;
 			line-height: 20px;
 			text-align: center;
 			display: flex;

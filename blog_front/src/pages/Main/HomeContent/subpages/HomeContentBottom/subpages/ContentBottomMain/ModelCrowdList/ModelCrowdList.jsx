@@ -21,9 +21,19 @@ class ModelCrowdList extends React.Component {
 	render() {
 		return (
          	<div className="ModelCrowdList">
-         		<ModelCrowdBigItem />
-         		<ModelCrowdItem />
-         		<ModelCrowdItem />
+         		<div className="BigItemList">
+	         		<ModelCrowdBigItem />
+	         		<ModelCrowdBigItem />
+	         		<ModelCrowdBigItem />
+         		</div>
+         		<div className="ItemList">
+	         		<ModelCrowdItem />
+	         		<ModelCrowdItem />
+	         		<ModelCrowdItem />
+	         		<ModelCrowdItem />
+	         		<ModelCrowdItem />
+	         		<ModelCrowdItem />
+         		</div>
          	</div>
         )
 	}
