@@ -22,6 +22,7 @@ class Slider extends React.Component {
 		this.screen = React.createRef()
 		this.imageList = React.createRef()
 		this.pointList = React.createRef()
+		this.silder = React.createRef()
 		this.key = 0
 		this.square = 0
 		this.imgWidth = 0
@@ -32,6 +33,7 @@ class Slider extends React.Component {
 		this.pointFnList = []
 		this.now = 0
 		this.lis = {}
+		this.imgs = {}
 	}
 
 	componentDidMount() {
@@ -56,13 +58,18 @@ class Slider extends React.Component {
 	}
 
 	reSize() {
-		this.imgWidth =	this.screen.current.offsetWidth
+		// 适应屏幕宽度
+		// TODO 需要优化
+		this.imgWidth =	this.screen.current.clientWidth
 		this.imageList.current.style.width = this.imgWidth * 3 + 'px'
+		$.each(this.imgs,(index,el)=>{
+			el.style.width = this.imgWidth + 'px'
+		})
 	}
 
 	render() {
 		return (
-         	<div id="Slider" className="Silder">
+         	<div id="Slider" className="Silder" ref={this.silder}>
          		<div className="screen" ref={this.screen}>
          			<ul ref={this.imageList}>
          				<li><a><img width="" height="" alt="" src="https://ikmoe.com/wp-content/uploads/wp-img/images/2018/02/09/98f57d54a6ac0a0161af26143161a460.png?imageView2/1/w/750/h/375/q/100"/></a></li>
@@ -80,6 +87,7 @@ class Slider extends React.Component {
 		let imageList = this.imageList.current
 		let pointList = this.pointList.current
 		this.lis = this.imageList.current.children
+		this.imgs = $(this.lis).find('img')
 		// 单张图片的宽度
 		this.reSize()
 		// 复制第一张图片所在的li,添加到ul的最后面
@@ -152,7 +160,6 @@ class Slider extends React.Component {
 	leftslide() {
 		if(this.pend) {return}
 		var ul = this.imageList.current
-		console.log(this.key,this.pointArr.length-1)
 		if(this.key == this.pointArr.length-1) {
 			this.lis[0].style.position = 'relative'
 			this.lis[0].style.left = this.lis.length * this.imgWidth + 'px'
