@@ -1,24 +1,102 @@
-// 小于等于768px
-@media screen and (max-width: 768px) {
-	header.HomeHeader .HomeHeaderNav {
-		display: flex;
-    	.HomeHeaderMenu {
+@import url('../../../base/style/constant.less');
+@import url('../../../base/style/an.less');
+@media screen and (max-width: @mobile_width) {
+	.HomeHeader {
+		height: @header_height;
+		box-shadow: rgba(0,0,0,.0980392) 0 1px 1px;
+		.HomeHeaderNav {
 			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			span {height: 6px;vertical-align: top;}
-			position: relative;
-			top: -12px;
-		}	
-		.HomeHeaderItemList {
-			display: none;
-		}
-		.HomeHeaderItemListRight {
-			width: 100%;
-			justify-content: flex-start;
-			.LoginIcon{display: block !important;}
-			.LoginLink{display: none !important;}
+			height: 100%;
+			align-items: center;
+			-webkit-box-align: center;
+			.HomeHeaderMenu {
+				display: flex;
+				flex-direction: column;
+				height: 48px;
+				width: 48px;
+				text-align: center;
+				span {
+					position: relative;
+					top: 8px;
+					height: 8px;
+					transition: all .2s ease;
+				}
+				&.cross {
+					transform: rotateZ(100deg);
+					.leftIcon  {transform: rotateZ(-60deg) translateX(-10px);transform-origin: center bottom;} 
+					.rightIcon {transform: rotateZ(40deg);transform-origin: center bottom;}
+				}
+			}
+			.HomeHeaderLogo {
+				flex: 1;
+				display: flex;
+				justify-content: center;
+			}
+			.HomeHeaderItemList {
+				position: absolute;
+				width: 100%;
+				top: @header_height + 1;
+				background: #fff;
+				display: none;
+				flex-direction: column;
+				.HomeHeaderItem {
+					display: flex;
+					flex-wrap: wrap;
+					line-height: 40px;
+					position: relative;
+					overflow: hidden;
+					&:hover {
+						.ItemMenu {display: flex;}
+						.ItemLink {
+							&:after {
+								.arrow-rotate-after;
+							}
+						}
+					}
+					.ItemLink {
+						width: 100%;
+						padding: 0 15px; 
+						margin: 0 5px;
+						&:after {
+							font-family: Tico;
+						    content: "∨";
+						    position: absolute;
+						    font-size: 1.4rem;
+						    right: 10px;
+						   .arrow-rotate-before;
+						}
+						&:after {}
+						&:hover {background: @lightblue_color;color: #fff;}
+					}
+					.ItemMenu {
+						display: none;
+						width: 100%;
+						flex-wrap: wrap;
+						flex-direction: column;
+						justify-content: center;
+						text-align: center;
+						a {
+							padding: 0 10px;
+							text-align: center;
+							&:hover {
+								display: inline-block;
+								height: 36px;
+								background: #77C9FF;
+								color: #fff;
+								.font-scale;	
+							}
+						}
+					}
+				}
+			}
+			.HomeHeaderItemListRight {
+				display: flex;
+				justify-content: flex-end;
+				.HomeHeaderItemRight {padding: 0 15px;margin: 0 5px;a{&:hover {svg path{fill: @blue_color;}}}}
+				svg {width: 16px;height: 16px;}
+				.LoginLink {display: none;}
+			}
 		}
 	}
 }
-
+// 

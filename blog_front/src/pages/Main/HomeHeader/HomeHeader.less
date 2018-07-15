@@ -1,7 +1,7 @@
 @import url('../../../base/style/header-common.less');
 @import url('../../../base/style/an.less');
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: @pc_width) {
 header.HomeHeader {
 	.common-header;
 	.HomeHeaderNav {
@@ -18,7 +18,7 @@ header.HomeHeader {
 			.HomeHeaderItem {
 				position: relative;
 				&:hover {
-					background: #77C9FF;
+					background: @lightblue_color;
 					.ItemLink {color: #fff !important;
 						&:after {
 							.arrow-rotate-after;

@@ -13,24 +13,31 @@ class HomeHeader extends React.Component {
 	constructor(props,context) {
 		super(props,context)
 		this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
-          this.searchModal = this.searchModal.bind(this)
-	}
+    this.searchModal = this.searchModal.bind(this)
+	  this.MenuIcon = React.createRef()
+  }
 
 	componentDidMount() {
-    
+   
 	}
 
   searchModal() {
       this.props.modalActions.update(true)
   }
 
+  dropMenu() {
+    $(this.MenuIcon.current).toggleClass('cross')
+    // show()默认时是block,会导致pc端排版变乱
+    $('.HomeHeaderItemList').css('display','flex')
+  }
+
 	render() {
 		return (
           <header id="HomeHeader" className="HomeHeader">
           	<nav className="HomeHeaderNav">
-              <div className="HomeHeaderMenu">
-                <span>—</span>
-                <span>—</span>
+              <div className="HomeHeaderMenu" onClick={this.dropMenu.bind(this)} ref={this.MenuIcon}>
+                <span className="leftIcon">—</span>
+                <span className="rightIcon">—</span>
               </div>
           		<a className="HomeHeaderLogo">
           			<img src="https://ikmoe.com/logo.png" alt="logo" title="大Logo"></img>
