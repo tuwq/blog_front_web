@@ -1,9 +1,11 @@
 @import url("../../../../../../../../base/style/an.less");
-@media screen and (min-width: 768px) {
+@media screen and (min-width: @pc_width) {
 .ModelCrowdList {
 	display: flex;
 	flex-direction: column;
 	.ModelCrowdItem {
+		flex: 0 1 30%;
+		flex-wrap: wrap;
 		display: flex;
 		margin: 5px;
 		padding: 0 5px;

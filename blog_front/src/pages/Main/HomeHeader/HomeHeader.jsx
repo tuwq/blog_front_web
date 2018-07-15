@@ -15,6 +15,7 @@ class HomeHeader extends React.Component {
 		this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
     this.searchModal = this.searchModal.bind(this)
 	  this.MenuIcon = React.createRef()
+    this.ItemList = React.createRef()
   }
 
 	componentDidMount() {
@@ -28,7 +29,12 @@ class HomeHeader extends React.Component {
   dropMenu() {
     $(this.MenuIcon.current).toggleClass('cross')
     // show()默认时是block,会导致pc端排版变乱
-    $('.HomeHeaderItemList').css('display','flex')
+    if($(this.ItemList.current).css('display')==='none') {
+      $(this.ItemList.current).css('display','flex')
+    } else {
+      $(this.ItemList.current).css('display','none')
+    }
+
   }
 
 	render() {
@@ -42,7 +48,7 @@ class HomeHeader extends React.Component {
           		<a className="HomeHeaderLogo">
           			<img src="https://ikmoe.com/logo.png" alt="logo" title="大Logo"></img>
           		</a>
-          		<ul className="HomeHeaderItemList">
+          		<ul className="HomeHeaderItemList" ref={this.ItemList}>
           			<li className="HomeHeaderItem">
           				<a className="ItemLink">我</a>
                     <ul className="ItemMenu">

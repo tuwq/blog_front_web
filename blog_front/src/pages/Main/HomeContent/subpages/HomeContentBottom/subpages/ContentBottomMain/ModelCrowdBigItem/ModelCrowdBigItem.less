@@ -1,5 +1,5 @@
 @import url("../../../../../../../../base/style/an.less");
-@media screen and (min-width: 768px) {
+@media screen and (min-width: @pc_width) {
 .ModelCrowdBigItem {
 	display: flex;
 	flex: 1;
@@ -15,7 +15,7 @@
 		max-height: 150px;
 		overflow: hidden;
 		margin-bottom: 10px;
-		img {max-height: 150px;.image-scale-before;.image-opacity;}
+		img {.image-scale-before;.image-opacity;}
 	}
 	.description {
 		.title {

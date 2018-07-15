@@ -5,7 +5,7 @@ import clockSvg from 'static/svg/clock.svg'
 import eyeSvg from 'static/svg/eye.svg'
 
 import './SiderBarHotItem.less'
-import './SiderBarHotItem.less'
+import './MSiderBarHotItem.less'
 
 class SiderBarHotItem extends React.Component {
 
