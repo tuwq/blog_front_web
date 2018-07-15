@@ -1,5 +1,7 @@
 @import url('../../../base/style/header-common.less');
 @import url('../../../base/style/an.less');
+
+@media screen and (min-width: 768px) {
 header.HomeHeader {
 	.common-header;
 	.HomeHeaderNav {
@@ -8,6 +10,7 @@ header.HomeHeader {
 			// logo
 			.common-logo;
 		}
+		.HomeHeaderMenu {display: none;}
 		// ul
 		.HomeHeaderItemList {
 			.common-header-itemList; 
@@ -86,12 +89,14 @@ header.HomeHeader {
 					.common-item-link-right;
 				}
 				// search
-				.ItemSearch {
+				.SearchIcon,.LoginIcon {
 					.common-item-link-right;
 					&:hover {svg path{fill: @blue_color;}}
 				}
+				.LoginIcon{display: none;}
+				.LoginLink{display: block;}
 			}
 		}
 	}
-}
+}}
 

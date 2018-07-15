@@ -1,4 +1,6 @@
 @import url("../../../../../../../../base/style/section-common.less");
+@import url("../../../../../../../../base/style/an.less");
+@media screen and (min-width: 768px) {
 .ModelShortList {
 	.ModelShortItem {
 		flex: 0 1 50%;
@@ -29,15 +31,11 @@
 						text-overflow: ellipsis;
 						font-weight: 500;
 						&:hover {
-							animation: fontcolor .4s;
+							.font-color-animation;
 						}
 					}
 				}	
 			}
 		}
 	}
-}
-@keyframes fontcolor{
-	from{color: inherit;}
-	to{color: @blue_color;}
-}
+}}
