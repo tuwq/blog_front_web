@@ -37,6 +37,10 @@ class HomeHeader extends React.Component {
 
   }
 
+  goLogin() {
+    this.props.history.replace('/user/login')
+  }
+
 	render() {
 		return (
           <header id="HomeHeader" className="HomeHeader">
@@ -81,12 +85,12 @@ class HomeHeader extends React.Component {
           				</a>
           			</li>
                 <li className="HomeHeaderItemRight">
-                  <a className="LoginIcon">
+                  <a className="LoginIcon" onClick={this.goLogin.bind(this)}>
                      <span><svg viewBox="0 0 1024 1024" width="14" height="14"><path d="M426.666667 736V597.333333H128v-170.666666h298.666667V288L650.666667 512 426.666667 736M341.333333 85.333333h384a85.333333 85.333333 0 0 1 85.333334 85.333334v682.666666a85.333333 85.333333 0 0 1-85.333334 85.333334H341.333333a85.333333 85.333333 0 0 1-85.333333-85.333334v-170.666666h85.333333v170.666666h384V170.666667H341.333333v170.666666H256V170.666667a85.333333 85.333333 0 0 1 85.333333-85.333334z" fill="#2c2c2c"></path></svg></span>
                   </a>
                 </li>
           			<li className="HomeHeaderItemRight LoginLink">
-          				<a className="ItemLinkRight">登录/注册</a>
+          				<a className="ItemLinkRight" onClick={this.goLogin.bind(this)}>登录/注册</a>
           			</li>
           		</ul>
           	</nav>

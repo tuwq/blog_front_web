@@ -36,6 +36,7 @@ export function addEvent(ele,fn,str) {
 }
 
 export function removeEvent(ele,fn,str) {
+    console.log(fn)
     if(ele.removeEventListener){
         ele.removeEventListener(str,fn);
     }else if(ele.detachEvent){

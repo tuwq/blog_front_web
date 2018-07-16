@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { withRouter } from 'react-router-dom'
+
 import {
   HashRouter,
   Route,
@@ -37,4 +39,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default withRouter(App)
