@@ -187,7 +187,7 @@ class Slider extends React.Component {
 	}
 
 	rightslide() {
-		if(this.pend) {return}
+		/*if(this.pend) {return}
 		this.key--
 		let ul = this.imageList.current
 		if (this.key < 0) {
@@ -202,7 +202,7 @@ class Slider extends React.Component {
 		for (let i = 0; i< this.pointArr.length; i++) {
 			this.pointArr[i].className = ''
 		}
-		this.pointArr[this.square].className = 'current'
+		this.pointArr[this.square].className = 'current'*/
 	}
 }
 

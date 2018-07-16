@@ -1,5 +1,5 @@
-@import url("../../../base/style/constant.less");
-@media screen and (min-width: 768px) {
+@import url("../../../base/style/an.less");
+@media screen and (min-width: @pc_width) {
 .SearchModal {
 	position: fixed;
 	top: 0;
@@ -28,6 +28,7 @@
 		overflow: hidden;
 		margin: 0 auto;
 		top: -150px;
+		.top-to-bottom-animation;
 		.ModelInner {
 			width: 500px;
 			input {
