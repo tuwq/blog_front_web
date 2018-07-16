@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { addEvent,removeEvent } from 'base/js/ie.js'
+import { debounce } from 'lodash'
 
 import './Slider.less'
 import './MSlider.less'
@@ -54,12 +55,12 @@ class Slider extends React.Component {
 
 
 	listenWindow() {
-		window.onresize = this.reSize
+		window.onresize = debounce(this.reSize,1000)
 	}
 
 	reSize() {
 		// 适应屏幕宽度
-		// TODO 需要优化
+		// debounce节流
 		this.imgWidth =	this.screen.current.clientWidth
 		this.imageList.current.style.width = this.imgWidth * 3 + 'px'
 		$.each(this.imgs,(index,el)=>{
