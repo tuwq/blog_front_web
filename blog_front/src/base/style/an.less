@@ -73,6 +73,9 @@
 .font-color-animation {
 	animation: fontcolor .2s;
 }
+.top-to-bottom-animation {
+	animation: toptobottom .2s linear ;
+}
 @keyframes fontcolor{
 	from{color: inherit;}
 	to{color: @blue_color;}
@@ -96,6 +99,10 @@
 	0% {width: 0;}
 	100% {width: 100%;}
 }
-
+@keyframes toptobottom {
+	// 从原点开始从中间在tranform偏移点和尾点展开
+	0% {transform: translateY(-50px);}
+	100% {transform: translateY(0px);}
+}
 
 
