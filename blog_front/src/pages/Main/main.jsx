@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
+import { withRouter } from 'react-router-dom'
 
 import HomeHeader from './HomeHeader/HomeHeader'
 import HomeContent from './HomeContent/HomeContent'
@@ -7,8 +8,8 @@ import HomeFooter from './HomeFooter/HomeFooter'
 import FixControl from 'base/general/FixControl/FixControl'
 import SearchModal from 'base/general/SearchModal/SearchModal'
 
-import './style/Main.less'
-import './style/MMain.less'
+import './Main.less'
+import './MMain.less'
 
 class Main extends React.Component {
 
@@ -35,6 +36,6 @@ class Main extends React.Component {
 	}
 }
 
-export default Main
+export default withRouter(Main)
 
 

@@ -35,6 +35,7 @@ class Slider extends React.Component {
 		this.now = 0
 		this.lis = {}
 		this.imgs = {}
+		this.listenfn = null
 	}
 
 	componentDidMount() {
@@ -152,6 +153,7 @@ class Slider extends React.Component {
 	}
 
 	removeTimer() {
+		window.onresize = ''
 		clearInterval(this.Autotimer)
 		for (let i = 0 ;i < this.pointArr.length; i++) {
 			removeEvent(this.pointArr[i],this.pointFnList[i],'click')
