@@ -1,0 +1,52 @@
+@import url('./constant.less');
+@import url('./an.less');
+.common-button-red {
+	padding: 8px 25px;
+	color: #fff;
+	background-color: @red_color;
+    border-color: @red_color;
+    font-weight: 500;
+    border-radius: 2px;
+    display: inline-block;
+    font-size: 14px;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    touch-action: manipulation;
+   	border: 1px solid transparent;
+}
+.comment-tig {
+    position: relative;
+    &:hover {
+        &:before {
+            display: block;
+        }
+    }
+    &:before{
+        display: none;
+        position: absolute;
+        top: -25px;
+        margin-top: -14px;
+        margin-right: 10px;
+        right: -50%;
+        left: auto;
+        padding: 5px;
+        border-radius: 3px;
+        background-color: #000;
+        color: #fff;
+        content: attr(data-tooltip);
+        text-align: left;
+        font-size: 13px;
+        line-height: 18px;
+        white-space: nowrap;
+        text-transform: none;
+        -webkit-line-clamp: 10;
+        -webkit-box-orient: vertical;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        max-height: 177px;
+        transition: .15s ease-in-out;
+        border-radius: 5px;
+        .animationtipopacity;
+    }
+}
