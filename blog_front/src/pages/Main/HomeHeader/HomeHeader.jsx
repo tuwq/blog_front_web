@@ -38,7 +38,7 @@ class HomeHeader extends React.Component {
   }
 
   goLogin() {
-    this.props.history.replace('/user/login')
+    this.props.history.push('/user/login')
   }
 
 	render() {

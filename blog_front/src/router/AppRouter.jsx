@@ -2,7 +2,8 @@ import React from 'react';
 import { HashRouter as Router, Route } from 'react-router-dom';
 
 import App from '@/App.jsx'
-import SubRouter from './SubRouter.jsx'
+import SubRouter from './SubRouter'
+import UserRouter from './UserRouter'
 
 class AppRouter extends React.Component {
 	constructor(props,context) {
@@ -15,6 +16,7 @@ class AppRouter extends React.Component {
 			<Router>
 				<App>
 					<Route path="/" component={SubRouter} />
+					<Route path="/user" component={UserRouter} />
 				</App>
 			</Router>
 		)
