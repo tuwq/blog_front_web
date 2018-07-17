@@ -1,10 +1,81 @@
-@import url("../../../../base/style/constant.less");
+@import url("../../../../base/style/an.less");
+@import url("../../../../base/style/login-common.less");
 @media screen and (max-width: @mobile_width) {
 	.LoginMain {
+		display: flex;
 		flex: 1;
-		position: relative;
-		height: 100%;
-		overflow: hidden;
-		background: url(https://ikmoe.com/wp-content/uploads/2018/03/20180301143405-ikmoe-39.png) top/cover no-repeat fixed;
+		height: 800px;
+		background: url(@login_bc_img) top/cover no-repeat fixed;
+		.content-wrapper {
+			position: relative;
+			display: flex;
+			flex: 0  1 50%;
+			justify-content: center;
+			margin: 0 auto;
+			.content {
+				display: flex;
+				flex-direction: column;
+				min-width: 120px;
+				width: 100vw-20%;
+				img{max-width: 120px;height: auto;overflow: hidden;margin: 30px auto 50px;}
+				.form {
+					margin-top: 20px;
+					.form-group {
+						display: flex;
+						flex-direction: column;
+						.msg {
+			    			display: block;
+			    			background: rgba(255,255,255,.5);
+			    			opacity: .6;
+			    			color: @login_border_color;
+			    			margin-bottom: 10px;
+			    			border-radius: 4px;
+			    			position: relative;
+			    			padding: 8px 30px 8px 15px;
+							font-size: 1.3rem;
+							button {
+								border: none;
+							    background: 0 0;
+							    position: absolute;
+							    right: 2%;
+							    color: inherit;
+							    padding: 1px 6px;
+							    text-align: center;
+							    font-size: 1.2em;
+							    top: .35em;
+							}
+			    		}
+						.form-control {
+							.common-form-control-gray;
+							button {
+								.common-form-width-button;
+								border: 1px solid #fff;
+								background: 0 0;
+								color: #fff;
+							}
+						}
+					}	
+					.meta {
+			    		margin: 10px 0;
+			    		text-align: center;
+			    		display: flex;
+			    		color: #fff;
+			    		span {padding: 0 5px;img{margin: 0;}}
+			    	}
+					.goreigist {
+						display: flex;justify-content: center;margin-bottom: 20px;
+						span {margin-right: 5px;color: #fff;color: rgba(255,255,255,.8);}
+						a {
+			    			position: relative;
+							.font-width-before;
+							&:hover {
+								color: #fff;
+								.font-width-after;
+							}
+			    		}
+					}
+				}
+			}
+		}
 	}
 }

@@ -26,7 +26,7 @@ class Main extends React.Component {
 	render() {
 		return (
 			<div id="Main" className="Main">
-	           <HomeHeader />
+			   <HomeHeader />
 	           <HomeContent />
 	           <HomeFooter />
 	           <FixControl />
