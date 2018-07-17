@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
-import { withRouter } from 'react-router-dom'
+import { withRouter,Link } from 'react-router-dom'
 
 import qqSvg from 'static/svg/qq.svg'
 
@@ -47,7 +47,7 @@ class LoginMain extends React.Component {
 	       				</div>
 	       				<div className="goreigist">
 	       					<span><a onClick={this.props.updateStatusFn}>现在注册</a></span>
-	       					<span><a>忘记密码?</a></span>
+	       					<span><Link to="/user/findpass">忘记密码?</Link></span>
 	       				</div>
 	          		</form>
 	          	</div>
