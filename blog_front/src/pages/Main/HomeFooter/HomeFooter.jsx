@@ -19,7 +19,7 @@ class HomeFooter extends React.Component {
 	}
 	render() {
 		return (
-          <footer id="HomeFooter">
+          <footer id="HomeFooter" className="HomeFooter">
           	<div className="HomeFooter-wapper">
           		<div className="contact">
           			<ul className="itemList fontLink">

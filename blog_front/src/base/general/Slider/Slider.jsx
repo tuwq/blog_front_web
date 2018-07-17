@@ -35,7 +35,6 @@ class Slider extends React.Component {
 		this.now = 0
 		this.lis = {}
 		this.imgs = {}
-		this.listenfn = null
 	}
 
 	componentDidMount() {
