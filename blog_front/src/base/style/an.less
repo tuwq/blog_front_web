@@ -76,6 +76,9 @@
 .top-to-bottom-animation {
 	animation: toptobottom .2s linear ;
 }
+.animationtipopacity {
+	animation: tipopacity .3s linear;
+}
 @keyframes fontcolor{
 	from{color: inherit;}
 	to{color: @blue_color;}
@@ -103,6 +106,11 @@
 	// 从原点开始从中间在tranform偏移点和尾点展开
 	0% {transform: translateY(-50px);}
 	100% {transform: translateY(0px);}
+}
+@keyframes tipopacity {
+	// 从原点开始从中间在tranform偏移点和尾点展开
+	0% {opacity: 0;}
+	100% {opacity: 1;}
 }
 
 
