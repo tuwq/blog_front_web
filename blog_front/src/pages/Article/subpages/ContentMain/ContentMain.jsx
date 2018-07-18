@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 
 import ArticleContent from '../ArticleContent/ArticleContent'
 import Choose from '../Choose/Choose'
-import CommentList from '../CommentList/CommentList'
+import CommentCollection from '../CommentCollection/CommentCollection'
 
 import './ContentMain.less'
 import './MContentMain.less'
@@ -26,7 +26,7 @@ class ContentMain extends React.Component {
 			<div className="ContentMain">
 				<ArticleContent />
 				<Choose />
-				<CommentList />
+				<CommentCollection />
         	</div>
         )
 	}

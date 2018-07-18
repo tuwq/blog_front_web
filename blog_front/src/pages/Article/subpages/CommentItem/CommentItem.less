@@ -1,0 +1,44 @@
+@import url("../../../../base/style/constant.less");
+.CommentItem {
+	display: flex;
+	margin-bottom: 15px;
+	position: relative;
+	flex-direction: column;
+	.rootcomment {margin-left: 50px;}
+	.childcomment {margin-left: 100px;position: relative;margin-top: 10px;}
+	.avatar {
+		position: absolute;
+		left: 0px;
+		max-width: 40px;
+		overflow: hidden;
+		img{border-radius: 20px;}
+	}
+	.content-wrapper {
+		display: flex;
+		flex-direction: column;
+		.meta {
+			display: flex;
+			flex-direction: column;
+			span:nth-child(1){color: @black_color;};
+			span:nth-child(2){color: @gray_color;};
+		}
+		.content {
+			margin-top: 10px;
+			margin-bottom: 10px;
+			p {font-size: 14px;font-weight: 300;}
+		}
+		.reply {
+			button {
+				width: 30px;
+				text-align: center;
+				padding: 5px;
+				font-size: 10px;
+				background: @lightblue_color;
+				color: #fff;
+				&.active {
+					background: @black_color;
+				}
+			}
+		}
+	}
+}
