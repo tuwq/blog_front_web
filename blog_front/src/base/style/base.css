@@ -113,6 +113,9 @@ input, textarea {
     border: 1px solid #ddd;
     border-radius: 3px;
 }
+h2 {
+    font-size: 30px;
+}
 input {
     -webkit-appearance: textfield;
     background-color: white;
