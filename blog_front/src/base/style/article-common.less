@@ -15,7 +15,7 @@
     touch-action: manipulation;
    	border: 1px solid transparent;
 }
-.comment-tig {
+.common-tig {
     position: relative;
     &:hover {
         &:before {
@@ -49,4 +49,56 @@
         border-radius: 5px;
         .animationtipopacity;
     }
+}
+
+.common-textarea {
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    min-height: 80px;
+    text-align: start;
+    font: 400 13.3333px Arial;
+    box-sizing: border-box;
+    color: @pink_color;
+    border: none;
+    padding: 8px 10px;  
+    font-size: 15px;
+    line-height: 15px;
+    background:  rgba(255,255,255,0)!important;
+    margin: 0 15px 0 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    outline: none;
+    letter-spacing: 50;
+    border: 1px solid  #cfdadd;
+    border-radius: 15px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-image: url(https://mikuac.com/images/load.gif);
+    &::active {
+        border: none;
+    }
+    &::-webkit-input-placeholder{
+      color: @regist_border_color;
+      font-size: 16px;
+      font-weight: 400;
+      opacity: .4;
+      line-height: 25px;
+    }
+}
+.common-reply-small {
+    margin-left: 5px;
+    color: #f4f3f9;
+    background-color: @purple_color;
+    font-weight: 700;
+    text-shadow: 0 1px 0 rgba(0,0,0,.2);
+    display: inline;
+    padding: .2em .6em .3em;
+    font-size: 75%;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
 }
