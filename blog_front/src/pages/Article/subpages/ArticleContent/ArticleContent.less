@@ -1,4 +1,5 @@
 @import url("../../../../base/style/article-common.less");
+@media screen and (min-width: @pc_width) {
 .ArticleContent {
 	width: 800px;
 	margin: 0 auto;
@@ -19,8 +20,12 @@
    			background-size: cover;
    			background-image: url(https://mikuac.com/usr/uploads/2018/05/4128022523.jpg)
 		}
-		.content {
+		.content-wrapper {
 			padding: 30px;
+			.content {
+				background-color: rgba(255,255,255,0);
+				.common-article-content;
+			}
 			.content-footer {
 				display: flex;
 				justify-content: space-between;
@@ -39,4 +44,4 @@
 			}
 		}
 	}
-}
+}}

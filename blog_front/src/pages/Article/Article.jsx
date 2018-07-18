@@ -7,6 +7,7 @@ import HomeFooter from '@/pages/Main/HomeFooter/HomeFooter'
 import ArticleMain from '@/pages/Article/subpages/ArticleMain/ArticleMain'
 import FixControl from 'base/general/FixControl/FixControl'
 import SearchModal from 'base/general/SearchModal/SearchModal'
+import ChildCommentListModal from 'base/general/ChildCommentListModal/ChildCommentListModal'
 
 import './Article.less'
 import './MArticle.less'
@@ -23,10 +24,6 @@ class Article extends React.Component {
 		
 	}
 
-	updatePass() {
-		
-	}
-
 	render() {
 		return (
 			<div className="Article">
@@ -35,6 +32,7 @@ class Article extends React.Component {
 				<HomeFooter />
 				<FixControl />
 				<SearchModal />
+				<ChildCommentListModal />
         	</div>
         )
 	}
