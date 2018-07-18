@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
-import * as modalActions from 'store/actions/modal' 
+import * as searchActions from 'store/actions/search' 
 
 
 import './SearchModal.less'
@@ -31,17 +31,21 @@ class SearchModal extends React.Component {
 	
 	componentWillUnmount() {
 		this.updateSearchModal()
+		// 防止异步调用数据
+        this.setState = (state,callback)=>{
+	      return
+	    };
 	}
 
 	listenRedux() {
 		let reduxState = this.store.getState()
 		this.setState({
-			searchModalStatus: reduxState.modal.searchModal
+			searchModalStatus: reduxState.search.searchModal
 		},()=>{})
 	}
 
 	updateSearchModal() {
-		this.props.modalActions.update(false)
+		this.props.searchActions.update(false)
 		this.setState({
 			value: ''
 		})
@@ -91,12 +95,12 @@ SearchModal.contextTypes = {
 function mapStateToProps(state) {
     return {
      // state.modal 对应的reducer注册时的名称
-        modal: state.modal
+        search: state.search
     }
 }
 function mapDispatchToProps(dispatch) {
     return {
-        modalActions: bindActionCreators(modalActions, dispatch)
+        searchActions: bindActionCreators(searchActions, dispatch)
     }
 }
 export default withRouter(

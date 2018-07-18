@@ -3,7 +3,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
-import * as modalActions from 'store/actions/modal' 
+import * as searchActions from 'store/actions/search' 
 
 import './HomeHeader.less'
 import './MHomeHeader.less'
@@ -23,7 +23,7 @@ class HomeHeader extends React.Component {
 	}
 
   searchModal() {
-      this.props.modalActions.update(true)
+      this.props.searchActions.update(true)
   }
 
   dropMenu() {
@@ -102,13 +102,13 @@ class HomeHeader extends React.Component {
 function mapStateToProps(state) {
     return {
      // state.modal 对应的reducer注册时的名称
-        modal: state.modal
+        search: state.search
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        modalActions: bindActionCreators(modalActions, dispatch)
+        searchActions: bindActionCreators(searchActions, dispatch)
     }
 }
 
