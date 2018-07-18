@@ -64,6 +64,7 @@ li, ol, ul {
 }
 img, label, legend {
     max-width: 100%;
+    vertical-align: middle;
 }
 fieldset, img, input, button {          
     border: none;

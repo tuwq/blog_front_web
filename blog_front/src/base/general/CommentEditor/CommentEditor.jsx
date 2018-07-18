@@ -20,10 +20,7 @@ class CommentEditor extends React.Component {
 	render() {
 		return (
 			<div className="CommentEditor">
-				<h4 className="title">
-					发表评论
-					{ this.props.switch && ( <small><a onClick={this.props.switchFn}>取消回复</a></small> ) }
-				</h4>
+				<h4 className="title">发表评论</h4>
 				<form className="form">
 					<div className="form-group">
 						<textarea placeholder="说点什么吧..."></textarea>
