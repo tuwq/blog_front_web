@@ -3,7 +3,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { withRouter } from 'react-router-dom'
 
 import CommentItem from '../CommentItem/CommentItem'
-
+import Pagination from 'base/general/Pagination/Pagination'
 
 import './CommentList.less'
 import './MCommentList.less'
@@ -12,8 +12,7 @@ class CommentList extends React.Component {
 
 	constructor(props,context) {
 		super(props,context)
-		this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
-		
+		this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)		
 	}
 
 	componentDidMount() {
@@ -28,11 +27,12 @@ class CommentList extends React.Component {
 		return (
 			<div className="CommentList">
 				<h2>8 条评论</h2>
-				<div className="list">
+				<div className="commentList">
 					<CommentItem replyFn={this.reply.bind(this)}/>
 					<CommentItem replyFn={this.reply.bind(this)}/>
 					<CommentItem replyFn={this.reply.bind(this)}/>
 				</div>
+				<Pagination />
         	</div>
         )
 	}

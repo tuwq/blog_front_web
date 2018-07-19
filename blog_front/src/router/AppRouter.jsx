@@ -6,6 +6,7 @@ import SubRouter from './SubRouter'
 import UserRouter from './UserRouter'
 import ArticleRouter from './ArticleRouter'
 import SearchRouter from './SearchRouter'
+import Pagination from 'base/general/Pagination/Pagination'
 
 class AppRouter extends React.Component {
 	constructor(props,context) {
@@ -21,6 +22,7 @@ class AppRouter extends React.Component {
 					<Route path="/user" component={UserRouter} />
 					<Route path="/article" component={ArticleRouter} />
 					<Route path="/search" component={SearchRouter} />
+					<Route path="/page" component={Pagination} />
 				</App>
 			</Router>
 		)

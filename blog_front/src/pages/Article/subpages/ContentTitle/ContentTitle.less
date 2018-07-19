@@ -1,4 +1,4 @@
-@import url("../../../../base/style/constant.less");
+@import url("../../../../base/style/an.less");
 @media screen and (min-width: @pc_width) {
 	.ContentTitle {
 		display: flex;
@@ -22,6 +22,14 @@
 				color: @article_title_color;
 				padding: 5px;
 				img{padding-right: 3px;}
+				a {
+					position: relative;
+					.font-width-before;
+					&:hover {
+						color: inherit;
+						.font-width-after;
+					}	
+				}
 			}
 		}
 	}

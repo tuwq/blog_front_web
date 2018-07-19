@@ -11,6 +11,7 @@ import './MChildCommentListModal.less'
 
 import CommentItem from '@/pages/Article/subpages/CommentItem/CommentItem'
 import CommentEditor from 'base/general/CommentEditor/CommentEditor'
+import Pagination from 'base/general/Pagination/Pagination'
 
 class ChildCommentListModal extends React.Component {
 
@@ -69,7 +70,9 @@ class ChildCommentListModal extends React.Component {
 										<CommentItem isModal={true}/>
 										<CommentItem isModal={true}/>
 										<CommentItem isModal={true}/>
+										<CommentItem isModal={true}/>
 									</div>
+									<Pagination />
 									<CommentEditor />
 								</div>
 							</div>
