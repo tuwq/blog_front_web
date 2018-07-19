@@ -11,9 +11,6 @@
     content: '';
     display: table;
 }
-.clearfix:after, .container-fluid:after, .container:after, .form-horizontal .form-group:after, .modal-footer:after, .modal-header:after, .row:after {
-    clear: both;
-}
 a {
     color: #69bbea;
 }

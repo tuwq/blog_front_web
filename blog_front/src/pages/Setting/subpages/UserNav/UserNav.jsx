@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { withRouter } from 'react-router-dom'
 
-import SettingAside from '../SettingAside/SettingAside'
-import SettingContent from '../SettingContent/SettingContent'
+import BasisSetting from '../BasisSetting/BasisSetting'
+import SecuritySetting from '../SecuritySetting/SecuritySetting'
 
-import './SettingMain.less'
-import './MSettingMain.less'
+import './UserNav.less'
+import './MUserNav.less'
 
-class SettingMain extends React.Component {
+class UserNav extends React.Component {
 
 	constructor(props,context) {
 		super(props,context)
@@ -21,16 +21,14 @@ class SettingMain extends React.Component {
 
 	render() {
 		return (
-			<div className="SettingMain">
-				<div className="SettingMain-Wrapper">
-					<SettingAside />
-					<SettingContent />
-				</div>
+			<div className="UserNav">
+				<BasisSetting />
+				<SecuritySetting />
         	</div>
         )
 	}
 }
 
-export default withRouter(SettingMain)
+export default withRouter(UserNav)
 
 
