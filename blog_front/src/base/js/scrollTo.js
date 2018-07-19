@@ -9,6 +9,7 @@ var bottomArrow
 var topFn
 var bottomFn
 
+
 // 监听位置变化
 export function getLeader() {
 	window.onscroll = function() {
@@ -26,7 +27,6 @@ export function removeScroll() {
 // 去顶部
 export function GoTop(btn) {
 	topArrow = btn
-	// 当前距顶部
 	let Toptarget = 0
 	topFn = addEvent(btn,()=>{
 		clearInterval(Toptimer)
@@ -45,7 +45,6 @@ export function GoTop(btn) {
 // 去底部
 export function GoBottom(btn) {
 	bottomArrow = btn
-	// 底部高度
 	bottomFn = addEvent(btn,()=>{
 		clearInterval(Toptimer)
 		clearInterval(Bottomtimer)

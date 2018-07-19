@@ -1,4 +1,4 @@
-@import url("../../../../base/style/constant.less");
+@import url("../../../../base/style/an.less");
 @import url("../../../../base/style/login-common.less");
 @media screen and (max-width: @mobile_width) {
 .SearchItem {
@@ -36,6 +36,9 @@
 			font-size: 25px;
 			text-overflow: ellipsis;
     		white-space: nowrap;
+    		&:hover {
+    			.font-color-animation;
+    		}
 		}
 		p {
 			color: #fff;

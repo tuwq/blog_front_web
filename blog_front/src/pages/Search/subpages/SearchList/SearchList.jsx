@@ -3,6 +3,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { withRouter } from 'react-router-dom'
 
 import SearchItem from '../SearchItem/SearchItem'
+import Pagination from 'base/general/Pagination/Pagination'
 
 import './SearchList.less'
 import './MSearchList.less'
@@ -27,6 +28,7 @@ class SearchList extends React.Component {
 			  		<SearchItem />
 			  		<SearchItem />
 			  	</div>
+			  	<Pagination />
         	</div>
         )
 	}
