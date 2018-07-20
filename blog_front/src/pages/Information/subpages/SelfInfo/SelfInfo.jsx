@@ -20,14 +20,14 @@ class SelfInfo extends React.Component {
 	render() {
 		return (
 			<div className="SelfInfo">
-			  <div className="content">
+			  <div className="wrap">
 			  	<section className="card">
 			  		<div className="innter">
 			  			<img className="avatar" alt="" src="https://ikmoe.com/wp-content/uploads/avatars/190.jpg"/>
 			  			<div className="card-text">
 			  				<div>tuwenq@126.com</div>
 			  				<div>上次登录N/A</div>
-			  				<div>本次登录IP 117.178.245.160    上次登录IP N/A</div>
+			  				<div>本次登录IP 117.178.245.160</div>
 			  			</div>
 			  		</div>
 			  	</section>

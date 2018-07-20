@@ -1,0 +1,33 @@
+@import url("../../../../base/style/constant.less");
+@media screen and (max-width: @mobile_width) {
+.SelfCommentList {
+	position: relative;
+	padding: 20px;
+	margin-bottom: 50px;
+	background: #fff;
+	border-radius: 5px;
+	.wrap {
+		.noMessage {text-align: center;svg{margin-top: 20px;}}
+		.group-list {
+			.comment-group {
+				display: flex;
+				flex-direction: column;
+				.meta {
+					display: flex;
+					justify-content: space-between;
+					font-size: 12px;
+					color: @gray_color;
+					overflow: hidden;
+					max-height: 30px;
+					line-height: 30px;
+				}
+				.title {
+					font-weight: 500;
+					overflow: hidden;
+					max-height: 30px;
+					h2 {font-size: 22px;}
+				}
+			}
+		}
+	}	
+}}

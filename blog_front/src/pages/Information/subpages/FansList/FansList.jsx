@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { withRouter } from 'react-router-dom'
 
-import './FollowList.less'
-import './MFollowList.less'
+import './FansList.less'
+import './MFansList.less'
 
-class FollowList extends React.Component {
+class FansList extends React.Component {
 
 	constructor(props,context) {
 		super(props,context)
@@ -19,7 +19,7 @@ class FollowList extends React.Component {
 
 	render() {
 		return (
-			<div className="FollowList">
+			<div className="FansList">
 				<div className="group-list">
 					<div className="follow-group">
 					 	<div className="avatar">
@@ -30,7 +30,7 @@ class FollowList extends React.Component {
 					 		<p className="descrtipion">xxxxxxxxxxx</p>
 					 	</div>
 					 	<div className="button">
-					 		<button>关注</button>
+					 		<button>关注他</button>
 					 	</div>
 				 	</div>
 			 	</div>
@@ -39,6 +39,6 @@ class FollowList extends React.Component {
 	}
 }
 
-export default withRouter(FollowList)
+export default withRouter(FansList)
 
 
