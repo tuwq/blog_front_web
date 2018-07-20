@@ -1,0 +1,51 @@
+@import url("../../../../base/style/constant.less");
+@media screen and (min-width: @pc_width) {
+.SelfMessageList {
+	position: relative;
+	padding: 20px;
+	margin-bottom: 50px;
+	background: #fff;
+	border-radius: 5px;
+	.wrap {
+		.noMessage {text-align: center;svg{margin-top: 20px;}}
+		.comment-group {
+			margin-bottom: 10px;
+			padding: 5px;
+			border-bottom: 1px solid @gray_color;
+			label {
+				font-size: 12px;
+				overflow: hidden;
+			}
+			.title {
+					font-size: 25px;
+					font-weight: 400;
+					max-height: 60px;
+					overflow: hidden;
+					margin-top: 5px;
+			}
+			.meta {
+				display: flex;
+				overflow: hidden;
+				margin-top: 5px;
+				.avatar {
+					max-width: 40px;
+
+					img {border-radius: 15px;}
+				}
+				.name {
+					display: flex;
+					flex-direction: column;
+					margin-top: 5px;
+					padding-left: 10px;
+					a {font-size: 12px;font-weight: 300;} span{font-size: 12px;color: @gray_color;}
+				}
+			}
+			.content {
+				margin-top: 5px;
+				font-size: 16px;
+				max-height: 75px;
+				overflow: hidden;
+			}
+		}
+	}	
+}}
