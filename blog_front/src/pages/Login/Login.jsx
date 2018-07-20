@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom'
 
 import LoginMain from '@/pages/Login/subpages/LoginMain/LoginMain'
 import RegistMain from '@/pages/Login/subpages/RegistMain/RegistMain'
-import HomeFooter from '@/pages/Main/HomeFooter/HomeFooter'
 
 import './Login.less'
 import './MLogin.less'
@@ -37,7 +36,6 @@ class Login extends React.Component {
 					?<LoginMain updateStatusFn={this.updateStatusFn.bind(this)}/>
 					:<RegistMain updateStatusFn={this.updateStatusFn.bind(this)}/>
 				}
-				<HomeFooter />
         	</div>
         )
 	}

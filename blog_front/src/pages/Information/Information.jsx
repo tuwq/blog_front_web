@@ -4,8 +4,6 @@ import { withRouter } from 'react-router-dom'
 
 import InformationCard from './subpages/InformationCard/InformationCard'
 import InformationMain from './subpages/InformationMain/InformationMain'
-import HomeHeader from '@/pages/Main/HomeHeader/HomeHeader'
-import HomeFooter from '@/pages/Main/HomeFooter/HomeFooter'
 
 import './Information.less'
 import './MInformation.less'
@@ -25,9 +23,7 @@ class Information extends React.Component {
 	render() {
 		return (
 			<div id="Information" className="Information">
-			  <HomeHeader />
 			  <InformationMain />
-			  <HomeFooter />
         	</div>
         )
 	}

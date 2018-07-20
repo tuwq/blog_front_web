@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { withRouter } from 'react-router-dom'
 
-import HomeFooter from '@/pages/Main/HomeFooter/HomeFooter'
-
 import './FindPass.less'
 import './MFindPass.less'
 
@@ -48,7 +46,6 @@ class FindPass extends React.Component {
 						</form>
 					</div>
 				</div>
-				<HomeFooter />
         	</div>
         )
 	}
