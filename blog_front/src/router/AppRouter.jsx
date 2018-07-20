@@ -1,12 +1,10 @@
 import React from 'react';
-import { HashRouter as Router, Route } from 'react-router-dom';
+import { HashRouter as Router, Route,Switch } from 'react-router-dom';
 
 import App from '@/App.jsx'
-import SubRouter from './SubRouter'
-import UserRouter from './UserRouter'
-import ArticleRouter from './ArticleRouter'
-import SearchRouter from './SearchRouter'
-import Pagination from 'base/general/Pagination/Pagination'
+import HFMainRouter from './HFMainRouter'
+import JustFooterRouter from './JustFooterRouter'
+import NotFound from '@/pages/NotFound/NotFound'
 
 class AppRouter extends React.Component {
 	constructor(props,context) {
@@ -14,15 +12,24 @@ class AppRouter extends React.Component {
 	  this.state = {};
 	}
 
+	// Home -> HomeContent          // footer header control search
+	// setting -> setting 			// footer header control search
+	// self -> self 				// footer header control search
+	// article -> article childmonent			// footer header control search 
+	// search -> search 			// footer header control search
+	// login -> Login 				// footer
+	// find -> findpass				// footer
+	// updatp -> updatep 			// footer		
+
 	render() {
 		return (
 			<Router>
 				<App>
-					<Route path="/" component={SubRouter} />
-					<Route path="/user" component={UserRouter} />
-					<Route path="/article" component={ArticleRouter} />
-					<Route path="/search" component={SearchRouter} />
-					<Route path="/page" component={Pagination} />
+					 <Switch>
+						<Route path="/extra" component={JustFooterRouter} />
+						<Route path="/" component={HFMainRouter} />
+						<Route path="*" component={NotFound}/>
+					 </Switch>
 				</App>
 			</Router>
 		)

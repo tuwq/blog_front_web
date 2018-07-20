@@ -18,6 +18,10 @@ class InformationContent extends React.Component {
 	constructor(props,context) {
 		super(props,context)
 		this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+		this.updateNavType = this.updateNavType.bind(this)
+		this.state = {
+			navType: 1
+		}
 		
 	}
 
@@ -25,11 +29,29 @@ class InformationContent extends React.Component {
 		
 	}
 
+	updateNavType(type) {
+		this.setState({
+			navType: type
+		})
+	}
+
 	render() {
 		return (
 			<div className="InformationContent">
-			  <InformationNav />
-			  <FansList />
+			  <InformationNav updateNavTypeFn={this.updateNavType.bind(this)}/>
+			  {
+			  	this.state.navType==1
+			  	?<SelfInfo />
+			  	:this.state.navType==2
+			  	?<SelfMessageList />
+			  	:this.state.navType==3
+			  	?<SelfCommentList />
+			  	:this.state.navType==4
+			  	?<FollowList />
+			  	:this.state.navType==5
+			  	? <FansList />
+			  	:<div></div>
+			  }
         	</div>
         )
 	}
