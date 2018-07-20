@@ -4,6 +4,8 @@ import { withRouter } from 'react-router-dom'
 
 import InformationNav from '../InformationNav/InformationNav'
 import FollowList from '../FollowList/FollowList'
+import SelfInfo from '../SelfInfo/SelfInfo'
+import SelfCommentList from '../SelfCommentList/SelfCommentList'
 
 import './InformationContent.less'
 import './MInformationContent.less'
@@ -24,7 +26,7 @@ class InformationContent extends React.Component {
 		return (
 			<div className="InformationContent">
 			  <InformationNav />
-			  <FollowList />
+			  <SelfCommentList />
         	</div>
         )
 	}

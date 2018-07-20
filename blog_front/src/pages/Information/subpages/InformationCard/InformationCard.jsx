@@ -20,7 +20,13 @@ class InformationCard extends React.Component {
         render() {
             return (
                 <div className="InformationCard">
-                    card
+                    <div className="container">
+                        <div className="avatar-wrap">
+                            <img alt="" src="https://ikmoe.com/wp-content/uploads/avatars/190.jpg"/>
+                        </div>
+                        <h2>tuwenq@126.com<a><i></i></a></h2>
+                        <p className="bio">asd</p>
+                    </div>
                 </div>
             )
         }
