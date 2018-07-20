@@ -21,8 +21,9 @@ class InformationNav extends React.Component {
 		return (
 			<div className="InformationNav">
 			  	<nav className="nav-wrapper">
-			  		<a className="current">评论<span>4</span></a>
+			  		<a className="current">资料</a>
 			  		<a>消息<span>4</span></a>
+			  		<a>评论<span>4</span></a>
 			  		<a>粉丝<span>4</span></a>
 			  		<a>关注<span>4</span></a>
 			  	</nav>

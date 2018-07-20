@@ -1,5 +1,37 @@
 @import url("../../../../base/style/information-common.less");
 .InformationCard {
 	margin-bottom: 20px;
-	background: #fff;
+	position: relative;
+    background-color: rgba(5,15,25,.2);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-image: url(https://ikmoe.com/wp-content/themes/Tint/assets/img/user-default-cover-full.jpg);
+    height: 280px;
+    padding: 20px 20px 0;
+	.container {
+		position: relative;
+		color: #fff;
+		width: 100%;
+		margin: 0 auto;
+		padding: 0 15px;
+		text-align: center;
+		.avatar-wrap {
+			position: relative;
+			width: 98px;
+			height: 98px;
+			padding: 4px;
+			margin: 10px auto;
+			border-radius: 50%;
+			background: rgba(255,255,255,.3);
+		}
+		h2 {margin-top: 0;font-size: 2.4rem;line-height: 1;margin-bottom: 10px;}
+		.bio {
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			line-height: 1.2;
+			margin:  0 0 10px;
+		}
+	}
 }
