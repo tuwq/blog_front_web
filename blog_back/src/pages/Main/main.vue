@@ -1,5 +1,5 @@
 <template>
-  <div id="Home">
+  <div id="Main">
       123
   </div>
 </template>
@@ -42,6 +42,6 @@
   }
 </script>
 
-<style lang="scss" scoped="" type="text/css">
-  @import "./sass/main.scss"
+<style lang="scss" scoped type="text/css">
+  @import "./main.scss"
 </style>
