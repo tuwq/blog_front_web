@@ -33,7 +33,7 @@
         this.$router.replace('/article/add')
       },
       updateNavType(type,e) {
-        $('.menu-group').hide()
+        $('.menu-group').removeClass('show')
         $(e.target).parents('.nav-control').find('.menu-group').toggleClass('show')
         $(e.target).parents('.nav-control').addClass('current').siblings().removeClass('current')
         let pageName = type==1?'':'article'
