@@ -1,0 +1,44 @@
+@mixin common-btn {
+	background-size: 200% 20000%;
+	background-position: 50%;
+	color: #fff;
+	background-color: $red_color;
+	border: none;
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 1.4;
+    border-radius: 4px;
+    padding: 10px 15px;
+    margin-bottom: 0;
+    white-space: nowrap;
+    vertical-align: middle;
+    background-image: none;
+    -webkit-font-smoothing: subpixel-antialiased;
+    transition: all .4s;
+}
+@mixin common-form-control {
+    position: relative;
+    margin: 10px 0;
+    text-align: center;
+    input {
+        display: block;
+        width: 100%;
+        color: $lightpink_color;
+        outline: 0;
+        font-size: 1.6rem;
+        line-height: 28px;
+        border: 1px solid $lightpink_color;
+        padding: 8px 12px;
+        height: 42px;
+        border-radius: 3px;
+        box-shadow: none;
+        background: #fff;
+        &::-webkit-input-placeholder{
+            color: $lightpink_color;
+            font-size: 16px;
+            font-weight: 400;
+            opacity: .4;
+            line-height: 25px;
+        }
+    }
+}

@@ -13,6 +13,6 @@
 
 	后端: 	SpringMVC + MyBatis
 
-	数据库:	MySql + HBase
+	数据库:	MySql + Redis + HBase
 
 	分布式:	ZooKeeper + Dubbo

@@ -2,7 +2,7 @@
   <div id="HomeHeader" class="HomeHeader">
   	<div class="leftIcon">
   		<div class="icon-group">
-	  		<a class="icon-control"><i class="fa fa-list"></i></a>
+	  		<a class="icon-control" @click="openNav"><i class="fa fa-list"></i></a>
 	  		<a class="icon-control"><i class="fa fa-refresh"></i></a>
 	  		<a class="icon-control"><i class="fa fa-search"></i></a>
   		</div>
@@ -25,6 +25,11 @@
   export default {  
      created() {
      	
+     },
+     methods: {
+      openNav() {
+        $('#HomeMenuNav').toggleClass('open')
+       }
      }
   }
 </script>

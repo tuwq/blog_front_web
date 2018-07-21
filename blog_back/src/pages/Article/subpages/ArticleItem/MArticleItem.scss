@@ -1,0 +1,14 @@
+@media screen and (max-width: $mobile_width) {
+.ArticleItem {
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+	align-items: center;
+	border-bottom: 1px solid $pink_color;
+	&:hover {background: $pink_color;}
+	span {
+		flex: 1;
+		padding: 10px;
+		input[type="checkbox"] {-webkit-appearance: checkbox;}
+	}
+}}

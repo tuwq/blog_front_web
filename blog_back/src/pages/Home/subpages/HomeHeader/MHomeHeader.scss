@@ -1,8 +1,8 @@
 @media screen and (max-width: $mobile_width) {
 .HomeHeader {
 	z-index: $header_index;
-	max-width: 100vw;
-	min-width: 100vw;
+	max-width: 100%;
+	min-width: 100%;
 	border: #e7e7e7;
 	max-height: 340px;
 	position: relative;
@@ -10,7 +10,7 @@
 	display: flex;
 	align-items: center;
 	color: #fff;
-	background: #000;
+	background: $header_color;
 	overflow: hidden;
 	.leftIcon {
 		height: 100%;

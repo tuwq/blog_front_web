@@ -20,6 +20,7 @@
     	this.initChart()
     },
     methods: {
+    	// 宽度被固定了,响应式时需要重新计算
     	initChart() {
     		this.flowChart = echarts.init(document.getElementById('flowChart'))
     		this.flowChart.setOption({

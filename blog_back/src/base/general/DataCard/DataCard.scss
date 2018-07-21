@@ -1,3 +1,4 @@
+@media screen and (min-width: $pc_width) {
 .DataCard {
 	padding: 0 10px;
 	.card-list {
@@ -31,7 +32,7 @@
 			}
 		}
 	}
-}
+}}
 
 .bac_lightred {
 	background: $lightred_color;

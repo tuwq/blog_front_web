@@ -1,0 +1,50 @@
+@media screen and (max-width: $mobile_width) {
+.DataCard {
+	width: 100%;
+	padding: 0 10px;
+	.card-list {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		margin-bottom: 20px;
+		.card-control {
+			position: relative;
+			min-height: 80px;
+			border-radius: 20px;
+			margin-bottom: 10px;
+			.card-wrap {
+				height: 100%;
+				position: relative;
+				width: 100%;
+				padding: 15px;
+				z-index: $card_index;
+				.meta {
+					display: flex;
+					span {
+						i {font-size: 48px;margin-top: 5px;}
+					}
+					.info {
+						margin-left: 10px;
+						display: flex;
+						flex-direction: column;
+						small {color: rgba(255,255,255,0.5);text-transform: uppercase;font-weight: 300;}
+						h2 {font-weight: 400;}
+					}
+				}
+			}
+		}
+	}
+}}
+
+.bac_lightred {
+	background: $lightred_color;
+}
+.bac_lightblue {
+	background: $lightblue_color;
+}
+.bac_lightgreen {
+	background: $lightgreen_color;
+}
+.bac_lightblack {
+	background: $lightblack_color;
+}
