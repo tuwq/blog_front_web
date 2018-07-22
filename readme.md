@@ -9,7 +9,7 @@
 
 	分布式: SpringCloud + SpringRestTemplate
 ## 后台管理
-	前端:	Sass + Vue + Vuex + jQuery + Echarts
+	前端:	Sass + Vue + Vuex + jQuery + Echarts + MavonEditor
 
 	后端: 	SpringMVC + MyBatis
 
