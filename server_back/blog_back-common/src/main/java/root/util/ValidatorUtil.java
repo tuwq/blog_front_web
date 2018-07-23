@@ -67,7 +67,7 @@ public class ValidatorUtil {
     public static void check(Object param) {
         Map<String, String> map = ValidatorUtil.validateObject(param);
         if (MapUtils.isNotEmpty(map)) {
-        	throw new CheckParamException("参数错误",toMessage(map.toString()));
+        	throw new CheckParamException("参数错误",map.toString());
         }
     }
     

@@ -78,4 +78,11 @@ public class JsonUtils {
     	return null;
     }
     
+    public static void main(String[] args) {
+		/*A a = new A();
+		String json = JsonUtils.objectToJson(a);
+		System.out.println(json);
+		A jsonToPojo = JsonUtils.jsonToPojo(json, A.class);
+		System.out.println(jsonToPojo);*/
+	}
 }

@@ -11,8 +11,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.stereotype.Component;
-
 import lombok.extern.slf4j.Slf4j;
 import root.util.ThreadUtil;
 
@@ -31,6 +29,7 @@ public class ThreadRequestFilter implements Filter{
 		HttpServletRequest req = (HttpServletRequest)request;
 		HttpServletResponse resp = (HttpServletResponse)response;
 		ThreadUtil.add(req);
+		ThreadUtil.add(resp);
 		chain.doFilter(request, response);
 		return;
 	}

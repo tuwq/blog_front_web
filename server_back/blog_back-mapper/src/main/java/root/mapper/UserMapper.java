@@ -1,12 +1,8 @@
 package root.mapper;
 
-
-import java.util.List;
-
 import org.apache.ibatis.annotations.Mapper;
 
 import root.model.User;
-
 @Mapper
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
@@ -20,6 +16,4 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
-
-	List<User> getAll();
 }

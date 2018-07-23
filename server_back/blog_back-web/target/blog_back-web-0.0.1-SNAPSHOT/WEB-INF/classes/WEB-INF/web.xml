@@ -75,6 +75,7 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
+	<!-- 获取request放入线程存储中的过滤器 -->
 	<filter>
 	  <filter-name>ThreadRequestFilter</filter-name>  
 	  <filter-class>root.filter.ThreadRequestFilter</filter-class>

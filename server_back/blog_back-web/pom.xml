@@ -70,14 +70,24 @@
 	<build>
 		<resources>
 			<!-- 如果不加，那么打包的时候mapper文件不会被加载进来 -->
-			<resource>
-				<directory>src/main/java</directory>
-				<includes>
-					<include>**/*.properties</include>
-					<include>**/*.xml</include>
-				</includes>
-				<filtering>false</filtering>
-			</resource>
+			<resource>  
+            <directory>src/main/resources</directory>  
+            	<includes>  
+	                <include>**/*.properties</include>  
+	                <include>**/*.xml</include>  
+	                <include>**/*.tld</include>  
+	            </includes>  
+	            <filtering>true</filtering>  
+	        </resource>  
+	        <resource>  
+	            <directory>src/main/java</directory>  
+	            <includes>  
+	                <include>**/*.properties</include>  
+	                <include>**/*.xml</include>  
+	                <include>**/*.tld</include>  
+	            </includes>  
+	            <filtering>true</filtering>  
+	        </resource>
 		</resources>
 		<plugins>
 			 <!-- 资源文件拷贝插件 -->

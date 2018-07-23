@@ -15,6 +15,7 @@
   	<module>blog_back-web</module>
   </modules>
   <build>
+  
   	<plugins>
   		<!-- jdk10支持 -->
 		<plugin>
