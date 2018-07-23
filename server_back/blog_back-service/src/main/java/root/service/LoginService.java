@@ -77,14 +77,11 @@ public class LoginService {
 				redis.del(RedisCode.LOGIN_TOKEN+":"+ userId);
 				return JsonResult.<Void>success();
 			}
-			maturityToken();
 		}
-		return JsonResult.<Void>error(ResultCode.PARAM_MATURITY,"LOGIN_TOKEN过期了");
+		throw new LoginTokenException("LOGIN_TOKEN过期了");
 	}
 	
 	public void maturityToken() {
-		// 处理token是伪造的
-		// TODO 伪造TOKEN日志
 		throw new LoginTokenException("LOGIN_TOKEN是伪造的");
 	}
 }

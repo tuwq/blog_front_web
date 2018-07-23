@@ -10,6 +10,8 @@ import root.beans.TokenExceptionResult;
 import root.constant.ResultCode;
 import root.exception.CheckParamException;
 import root.exception.LoginTokenException;
+import root.util.CookieUtil;
+import root.util.ThreadUtil;
 
 @ControllerAdvice
 public class ExceptionAdvice {
@@ -24,7 +26,7 @@ public class ExceptionAdvice {
 	// 检查LOGIN_TOKEN过期异常
 	@ExceptionHandler(LoginTokenException.class)
 	public ResponseEntity<TokenExceptionResult> handleBindException(LoginTokenException e) {
-		// TODO 记录异常日志
+		// 删除cookie中的token和user_info
 		return new ResponseEntity<TokenExceptionResult>(TokenExceptionResult.errror(ResultCode.PARAM_MATURITY, e.getMessage()),HttpStatus.OK);
 	}
 	

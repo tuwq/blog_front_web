@@ -15,9 +15,11 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 
 import root.exception.LoginTokenException;
+import root.exception.WebException;
 
 public class JwtUtil {
 	
@@ -55,7 +57,6 @@ public class JwtUtil {
 			jwt = verifier.verify(token);
 		} catch (SecurityException | SignatureVerificationException e1) {
 			// TOKEN到期了,应该用回调
-			System.out.println("into===========================================================");
 			try {
 				Method method = clazz.getMethod(methodName);
 				try {
@@ -66,8 +67,12 @@ public class JwtUtil {
 					e.printStackTrace();
 				} catch (InvocationTargetException e) {
 					// 获得反射方法中抛出的异常
+					// 抛出的异常是否实现了自定义的异常类接口
 					RuntimeException targetException =(RuntimeException) e.getTargetException();
-					throw targetException;
+					if(WebException.class.isAssignableFrom(targetException.getClass()) ) {
+						throw targetException;
+					}
+					e.printStackTrace();
 				}
 			} catch (NoSuchMethodException e) {
 				e.printStackTrace();
@@ -82,7 +87,28 @@ public class JwtUtil {
 		return resultMap;
 	}
 	
-	public static void main(String[] args) {
+	// 解析token
+	public static Map<String, String> verifyToken(String token) {
+		Algorithm algorithm = null;
+		try {
+			algorithm = Algorithm.HMAC256(LOGIN_TOKEN);
+		}catch(IllegalArgumentException | UnsupportedEncodingException e) {
+			throw new RuntimeException(e);
+		}
+		JWTVerifier verifier = JWT.require(algorithm).withIssuer(ISSUE).build();
+		DecodedJWT jwt = null;
+		try {
+			jwt =verifier.verify(token);
+		} catch (SecurityException | SignatureVerificationException e1) {
+			throw new LoginTokenException("LOGIN_TOKEN是伪造的");
+		}
+		Map<String, Claim> map = jwt.getClaims();
+		Map<String, String> resultMap = Maps.newHashMap();
+		map.forEach((k,v) -> resultMap.put(k, v.asString()));
+		return resultMap;
+	}
 	
+	public static void main(String[] args) {
+		
 	}
 }

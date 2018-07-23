@@ -45,7 +45,7 @@
       #{status,jdbcType=INTEGER}, #{weight,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="root.model.Articale" >
+  <insert id="insertSelective" parameterType="root.model.Articale" keyProperty="id" useGeneratedKeys="true">
     insert into articale
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

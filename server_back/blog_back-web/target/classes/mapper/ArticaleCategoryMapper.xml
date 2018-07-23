@@ -68,4 +68,11 @@
       category_id = #{categoryId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <insert id="insertBatch">
+  	insert into articale_category(articale_id,category_id) values
+	<foreach collection="list" item="item" separator=",">
+		(#{item.articaleId},#{item.categoryId})
+	</foreach>
+  </insert>
 </mapper>
