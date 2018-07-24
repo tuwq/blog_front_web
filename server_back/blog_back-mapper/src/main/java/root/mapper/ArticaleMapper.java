@@ -1,6 +1,9 @@
 package root.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import root.model.Articale;
 
@@ -19,4 +22,15 @@ public interface ArticaleMapper {
     int updateByPrimaryKeyWithBLOBs(Articale record);
 
     int updateByPrimaryKey(Articale record);
+    /**
+     * 获得总数
+     * @return
+     */
+	Long countAll();
+	/**
+	 * 获得分页数据
+	 * @param pageSize
+	 * @param skip
+	 */
+	List<Articale> page(@Param("pageSize") Integer pageSize,@Param("skip") Integer skip);
 }

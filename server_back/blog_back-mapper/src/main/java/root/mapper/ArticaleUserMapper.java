@@ -1,10 +1,7 @@
 package root.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
-
 import root.model.ArticaleUser;
 
-@Mapper
 public interface ArticaleUserMapper {
     int deleteByPrimaryKey(Integer id);
 

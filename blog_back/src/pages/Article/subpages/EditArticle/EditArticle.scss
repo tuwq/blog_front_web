@@ -1,0 +1,47 @@
+.EditArticle {
+	.wrap {
+		padding: 20px;
+		width: 60%;
+		margin: 0 auto;
+		margin-top: 20px;
+		box-shadow: 1px 1px 5px 5px rgba(255, 112, 173, 0.35);
+		background-color: rgba(255, 255, 255, 0.8);
+		overflow: hidden;
+		.content {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			padding: 10px;
+			.title {
+				width: 100%;
+				@include common-form-control
+			}
+			.categroy {
+				width: 100%;
+				display: flex;
+				align-items: center;
+				flex-direction: column;
+				.checkbox-group {
+					margin-top: 10px;
+					width: 100%;
+					display: flex;
+					.checkbox-control {
+						color: $lightpink_color;
+						text-align: center;
+						padding-right: 20px;
+						label {font-size: 18px;}
+					}
+				}
+			}
+			.markdownEditor {
+				width: 100%;
+				height: 580px;
+				.uploadBtn {
+					@include common-btn;
+					margin-bottom: 10px;
+				}
+			}
+		}
+	}
+}
+input[type="checkbox"] {-webkit-appearance: checkbox;}

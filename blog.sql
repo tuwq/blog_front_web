@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80011
 File Encoding         : 65001
 
-Date: 2018-07-22 12:12:58
+Date: 2018-07-24 09:08:18
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -32,7 +32,7 @@ CREATE TABLE `articale` (
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建文章的时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新文章的时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文章的数据表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='文章的数据表';
 
 -- ----------------------------
 -- Table structure for articale_category
@@ -43,7 +43,7 @@ CREATE TABLE `articale_category` (
   `articale_id` int(11) NOT NULL COMMENT '文章id',
   `category_id` int(11) NOT NULL COMMENT '分类id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='处理分类与文章关系的数据表,文章需要通过该表获得分类信息';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='处理分类与文章关系的数据表,文章需要通过该表获得分类信息';
 
 -- ----------------------------
 -- Table structure for articale_user
@@ -56,6 +56,8 @@ CREATE TABLE `articale_user` (
   `visit_status` int(5) NOT NULL DEFAULT '0' COMMENT '用户是否看过该文章:0.未看过,1.看过,由消息队列进行更新',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建关系的时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新关系的时间',
+  `good` int(10) NOT NULL DEFAULT '0' COMMENT '点赞数',
+  `bad` int(10) NOT NULL DEFAULT '0' COMMENT '点踩数',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文章用户关系的数据表,扩展后可添加点赞之类的字段';
 
@@ -66,7 +68,7 @@ DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '分类主键id',
   `name` varchar(20) NOT NULL DEFAULT '' COMMENT '分类的名称',
-  `articale_sum` int(10) NOT NULL DEFAULT '0' COMMENT '该分类的文章数量,新增文章后进行更新',
+  `articale_sum` int(10) NOT NULL DEFAULT '0' COMMENT '该分类的文章数量,由消息队列更新',
   `comment_sum` int(10) NOT NULL DEFAULT '0' COMMENT '分类的评论数量,由定时任务进行更新',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='分类的数据表,描述分类的信息';
@@ -99,6 +101,8 @@ CREATE TABLE `comment_user` (
   `visit_status` int(5) NOT NULL DEFAULT '0' COMMENT '用户是否看过评论嵌套.0:没看过,1:看过,由消息队列进行更新',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建关系的时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新关系的时间',
+  `good` int(10) NOT NULL DEFAULT '0' COMMENT '点赞数',
+  `bad` int(10) NOT NULL DEFAULT '0' COMMENT '点踩数',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='评论用户关系的数据表,,扩展后可添加点赞之类的字段';
 
@@ -109,10 +113,11 @@ DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '后台用户主键id',
   `username` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '用户名称,用于登陆,后台用户没有昵称',
-  `password` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '用户密码',
+  `password` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '用户密码',
+  `avatar` varchar(100) NOT NULL DEFAULT '' COMMENT '后台用户的头像',
   `operate_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '最后一次操作的时间',
   `operate_ip` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '最后一次操作的ip',
-  `create_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '用户创建的时间',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '用户创建的时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='后台用户的数据表';
 
@@ -140,7 +145,7 @@ CREATE TABLE `user` (
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '用户创建的时间',
   `operate_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '用户最后一次操作的时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户的数据表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户的数据表';
 
 -- ----------------------------
 -- Table structure for user_dynamic

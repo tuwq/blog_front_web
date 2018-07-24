@@ -11,7 +11,7 @@
 	align-items: center;
 	color: #fff;
 	background: $header_color;
-	overflow: hidden;
+
 	.leftIcon {
 		height: 100%;
 		padding: 0 10px;
@@ -43,20 +43,32 @@
 		}
 	}
 	.user {
-		display: none;
+		display: flex;
 		height: 100%;
+		align-items: center;
 		.avatar {
 			width: 45px;
 			height: 45px;
 			overflow: hidden;
 			margin-left: 15px;
 		}
-		.name {
-			display: inline-block;
+		.name, .login {
+			display: none;
 			height: 100%;
 			font-size: 12px;
 			text-align: center;
 			padding-right: 20px;
+		}
+	}
+	.user-menu {
+		display: none;
+		position: absolute;
+		top: 60px;
+		right: 0px;
+		background: $header_color;
+		li {
+			text-align: center;
+			padding: 10px;
 		}
 	}
 }}

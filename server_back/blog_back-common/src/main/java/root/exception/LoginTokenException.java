@@ -4,6 +4,13 @@ package root.exception;
 public class LoginTokenException extends RuntimeException implements WebException{
 
 	
+	private int ResultCode;
+	
+	
+	public int getResultCode() {
+		return ResultCode;
+	}
+
 	public LoginTokenException() {
 		super();
 	}
@@ -16,8 +23,9 @@ public class LoginTokenException extends RuntimeException implements WebExceptio
 		super(message, cause);
 	}
 
-	public LoginTokenException(String message) {
+	public LoginTokenException(int code,String message) {
 		super(message);
+		this.ResultCode = code;
 	}
 
 	public LoginTokenException(Throwable cause) {

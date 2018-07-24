@@ -6,6 +6,8 @@ import Charts from '@/pages/Charts/Charts'
 import Article from '@/pages/Article/Article'
 import Comments from '@/pages/Comments/Comments'
 import AddArticle from '@/pages/Article/subpages/AddArticle/AddArticle'
+import Login from '@/pages/Login/Login'
+import EditArticle from '@/pages/Article/subpages/EditArticle/EditArticle'
 
 Vue.use(Router)
 export default new Router({
@@ -21,9 +23,15 @@ export default new Router({
         path: '/article/add',
         component: AddArticle,
       },{
+        path: '/article/edit/:id',
+        component: EditArticle
+      },{
       	 path: '/article',
          component: Article,
-      },,{
+      },{
+         path: '/login',
+         component: Login
+      },{
       	 path: '/comments',
       	 component: Comments
       }]

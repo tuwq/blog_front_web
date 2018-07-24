@@ -1,18 +1,27 @@
 <template>
   <div class="ArticleItem">
-      <span>哇</span>
-      <span>123</span>
-      <span>2018-7-21</span>
-      <span>2018-7-23</span>
-      <span>可用</span>
-      <span>tuwq</span>
+      <span>{{item.title}}</span>
+      <span>{{item.commentSum||0}}</span>
+      <span>{{item.createTime}}</span>
+      <span>{{item.updateTime}}</span>
+      <span>{{item.status}}</span>
+      <span>{{item.userId}}</span>
       <span><input type="checkbox"></span>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   export default {  
-    
+    props: {
+      item: {
+        type: Object,
+        default: null
+      },
+      index: {
+        type: Number,
+        default: 0
+      }
+    }
   }
 </script>
 

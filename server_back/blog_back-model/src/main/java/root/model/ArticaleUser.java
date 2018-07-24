@@ -15,6 +15,10 @@ public class ArticaleUser {
 
     private Date updateTime;
 
+    private Integer good;
+
+    private Integer bad;
+
     public Integer getId() {
         return id;
     }
@@ -61,5 +65,21 @@ public class ArticaleUser {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Integer getGood() {
+        return good;
+    }
+
+    public void setGood(Integer good) {
+        this.good = good;
+    }
+
+    public Integer getBad() {
+        return bad;
+    }
+
+    public void setBad(Integer bad) {
+        this.bad = bad;
     }
 }

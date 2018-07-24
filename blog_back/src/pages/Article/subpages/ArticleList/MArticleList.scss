@@ -1,0 +1,9 @@
+@media screen and (max-width: $mobile_width) {
+	.ArticleList {
+		.articleList-inner {
+			display: flex;
+			flex-direction: column;
+			.total {text-align: center;margin-top: 20px;width: 100%;display: block;}
+		}
+	}
+}

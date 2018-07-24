@@ -126,4 +126,10 @@
     FROM sys_user
     WHERE username = #{username}
   </select>
+  
+  <select id="InfoById" parameterType="map" resultMap="BaseResultMap">
+  	SELECT <include refid="Base_Column_List" />
+    FROM sys_user
+    WHERE id = #{userId}
+  </select>
 </mapper>

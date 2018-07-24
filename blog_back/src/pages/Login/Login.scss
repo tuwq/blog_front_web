@@ -1,0 +1,24 @@
+.Login {
+	.login-wrap {
+		width: 800px;
+		margin: 0 auto;
+		margin-top: 40px;
+		display: flex;
+		justify-content: center;
+		.form-group {
+			display: flex;
+			flex-direction: column;
+			.form-control {
+				width: 100%;
+				text-align: center;
+				h2 {font-weight: 400;}
+				@include common-form-control;
+				button {@include common-btn;background: $green_color;}
+				.lr {
+					display: flex;
+					justify-content: space-between;
+				}
+			}
+		}		
+	}
+}

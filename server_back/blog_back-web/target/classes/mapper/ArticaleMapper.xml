@@ -181,4 +181,15 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="countAll" resultType="long">
+  	SELECT count(1)
+  	FROM articale
+  </select>
+  <select id="page" parameterType="map" resultMap="BaseResultMap">
+  	SELECT <include refid="Base_Column_List" />
+  	FROM articale
+  	ORDER BY create_time desc
+  	LIMIT #{skip}, #{pageSize}
+  </select>
+  
 </mapper>

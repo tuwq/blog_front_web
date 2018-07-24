@@ -1,28 +1,23 @@
 @media screen and (max-width: $mobile_width) {
 .Pagination {
 	color: #fff;
-	margin-top: 50px;
 	.pages {
 		display: flex;
-		li {
-			flex: 1;
-			a {
-				width: 100%;
-				display: inline-block;
-				text-align: center;
-				z-index: 3;
-				background: $lightblue_color;
-				border: 1px solid $lightblue_color;
-				font-size: 12px;
-				padding: 2px;
-				position: relative;
-
-			}
-			&.current a{
-				color: #fff;
-				background: $pink_color;
-				border: 1px solid $pink_color;
-			}
+		margin: 0 auto;
+		justify-content: space-between;
+		.arrow {
+			color: #000;
 		}
+		.page-control {
+			color: #000;
+			width: 100%;
+			font-size: 15px;
+			display: flex;
+			justify-content: center;
+			button {padding: 0 2px;background: #fff;}
+		}
+	}
+	.current {
+		background: $gray_color;
 	}
 }}

@@ -34,10 +34,9 @@ public class TokenService {
 			String dbToken = redis.get(RedisCode.LOGIN_TOKEN+":"+ userId);
 			if(LOGIN_TOKEN.equals(dbToken)) {
 				// 正确的token
-				System.out.println(userId+":==========================================================");
 				return Integer.parseInt(userId);
 			}
 		}
-		throw new LoginTokenException("LOGIN_TOKEN到期了");
+		return null;
 	}	
 }

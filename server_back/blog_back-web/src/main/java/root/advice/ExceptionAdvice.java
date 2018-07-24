@@ -26,8 +26,8 @@ public class ExceptionAdvice {
 	// 检查LOGIN_TOKEN过期异常
 	@ExceptionHandler(LoginTokenException.class)
 	public ResponseEntity<TokenExceptionResult> handleBindException(LoginTokenException e) {
-		// 删除cookie中的token和user_info
-		return new ResponseEntity<TokenExceptionResult>(TokenExceptionResult.errror(ResultCode.PARAM_MATURITY, e.getMessage()),HttpStatus.OK);
+		// token过期
+		return new ResponseEntity<TokenExceptionResult>(TokenExceptionResult.errror(e.getResultCode(), e.getMessage()),HttpStatus.OK);
 	}
 	
 }

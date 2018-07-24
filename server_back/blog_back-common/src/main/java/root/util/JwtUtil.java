@@ -18,6 +18,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 
+import root.constant.ResultCode;
 import root.exception.LoginTokenException;
 import root.exception.WebException;
 
@@ -100,7 +101,7 @@ public class JwtUtil {
 		try {
 			jwt =verifier.verify(token);
 		} catch (SecurityException | SignatureVerificationException e1) {
-			throw new LoginTokenException("LOGIN_TOKEN是伪造的");
+			throw new LoginTokenException(ResultCode.TOKEN_NOTUSER,"LOGIN_TOKEN无法解析");
 		}
 		Map<String, Claim> map = jwt.getClaims();
 		Map<String, String> resultMap = Maps.newHashMap();

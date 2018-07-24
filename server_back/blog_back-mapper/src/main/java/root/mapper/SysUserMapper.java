@@ -30,4 +30,9 @@ public interface SysUserMapper {
 	 * @param username
 	 */
 	SysUser findSysUserByUsername(@Param("username") String username);
+	/**
+	 * 获得用户信息
+	 * @param userId
+	 */
+	SysUser InfoById(@Param("userId") Integer userId);
 }

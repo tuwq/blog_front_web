@@ -35,6 +35,8 @@ public class LoginService {
 	@Resource
 	private SysUserMapper sysUserMapper;
 	@Resource
+	private TokenService TokenService;
+	@Resource
 	private RedisOperator redis;
 	@Value("${TOKEN_MAXAGE}")
 	private Integer TOKEN_MAXAGE;
@@ -68,20 +70,13 @@ public class LoginService {
 		// 根据id获取redis中的token
 		// 比对token是否一致
 		// 删除redis中的token
-		String LOGIN_TOKEN = ThreadUtil.getCurrentRequest().getHeader("login_token");
-		if (StringUtils.isNotBlank(LOGIN_TOKEN)) {
-			Map<String, String> verifyToken = JwtUtil.verifyToken(LOGIN_TOKEN,this.getClass(),this,"maturityToken");
-			String userId = verifyToken.get("userId");	
-			String dbToken = redis.get(RedisCode.LOGIN_TOKEN+":"+ userId);
-			if(LOGIN_TOKEN.equals(dbToken)) {
-				redis.del(RedisCode.LOGIN_TOKEN+":"+ userId);
-				return JsonResult.<Void>success();
-			}
+		Integer userId = TokenService.checkToken();
+		if (userId != null) {
+			redis.del(RedisCode.LOGIN_TOKEN+":"+ userId);
+			return JsonResult.<Void>success();
 		}
-		throw new LoginTokenException("LOGIN_TOKEN过期了");
+		return JsonResult.<Void>error(ResultCode.TOKEN_MATURITY);
 	}
 	
-	public void maturityToken() {
-		throw new LoginTokenException("LOGIN_TOKEN是伪造的");
-	}
+
 }

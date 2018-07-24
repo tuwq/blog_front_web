@@ -8,9 +8,11 @@
     <result column="visit_status" property="visitStatus" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="good" property="good" jdbcType="INTEGER" />
+    <result column="bad" property="bad" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, comment_id, user_id, visit_status, create_time, update_time
+    id, comment_id, user_id, visit_status, create_time, update_time, good, bad
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -24,11 +26,11 @@
   </delete>
   <insert id="insert" parameterType="root.model.CommentUser" >
     insert into comment_user (id, comment_id, user_id, 
-      visit_status, create_time, update_time
-      )
+      visit_status, create_time, update_time, 
+      good, bad)
     values (#{id,jdbcType=INTEGER}, #{commentId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
-      #{visitStatus,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
-      )
+      #{visitStatus,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{good,jdbcType=INTEGER}, #{bad,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="root.model.CommentUser" >
     insert into comment_user
@@ -51,6 +53,12 @@
       <if test="updateTime != null" >
         update_time,
       </if>
+      <if test="good != null" >
+        good,
+      </if>
+      <if test="bad != null" >
+        bad,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -70,6 +78,12 @@
       </if>
       <if test="updateTime != null" >
         #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="good != null" >
+        #{good,jdbcType=INTEGER},
+      </if>
+      <if test="bad != null" >
+        #{bad,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -91,6 +105,12 @@
       <if test="updateTime != null" >
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="good != null" >
+        good = #{good,jdbcType=INTEGER},
+      </if>
+      <if test="bad != null" >
+        bad = #{bad,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -100,7 +120,9 @@
       user_id = #{userId,jdbcType=INTEGER},
       visit_status = #{visitStatus,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      good = #{good,jdbcType=INTEGER},
+      bad = #{bad,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
