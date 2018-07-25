@@ -57,7 +57,11 @@ public interface ArticaleMapper {
 	 */
 	List<Articale> pageByKeyWord(@Param("keyword") String keyword, 
 			@Param("pageSize") Integer pageSize, @Param("skip") Integer skip);
-	
-	
+	/**
+	 * 是否存在文章
+	 * @param id
+	 * @return
+	 */
+	int countById(@Param("id") Integer id);
 	
 }

@@ -43,3 +43,18 @@ export function getSearchListApi(currentPage,pageSize,keyword,success) {
 		success(res)
 	})
 }
+
+export function getArticleDetail(id,success) {
+	axios.get('/sys/article/'+id)
+	.then((res)=>{
+		success(res)
+	})
+}
+
+export function updateArticleApi(id,title,categoryNames,content,success) {
+	axios.put('/sys/article/'+id,{
+		title,categoryNames,content
+	}).then((res)=>{
+		success(res)
+	})
+}

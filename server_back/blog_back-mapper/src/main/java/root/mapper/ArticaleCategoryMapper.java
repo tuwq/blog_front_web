@@ -30,4 +30,5 @@ public interface ArticaleCategoryMapper {
      * @param ids
      */
 	void delBatch(@Param("ids") List<Integer> ids);
+	
 }

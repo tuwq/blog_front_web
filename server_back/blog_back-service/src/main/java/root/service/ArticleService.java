@@ -1,14 +1,13 @@
 package root.service;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,6 +17,7 @@ import com.google.common.collect.Lists;
 
 import root.beans.ImgNode;
 import root.beans.ImgURIResult;
+import root.beans.JsonResult;
 import root.beans.PageModel;
 import root.beans.PageResult;
 import root.constant.ResultCode;
@@ -187,5 +187,60 @@ public class ArticleService {
 			dto.formatTime();
 		});
 		return PageResult.<ArticaleDto>builder().data(dtoData).pageModel(pageModel).build();
+	}
+
+	public JsonResult<ArticaleDto> detail(Integer id) {
+		// 检查字段
+		// 查询文章
+		// 是否存在
+		// 查找分类
+		// 处理结构返回前端
+		if ( id == null) {
+			throw new CheckParamException("文章id","为空");
+		}
+		int count = articaleMapper.countById(id);
+		if (count == 0) {
+			throw new CheckParamException("文章","不存在");
+		}
+		Articale articale = articaleMapper.selectByPrimaryKey(id);
+		List<Category> categoryList = categoryMapper.getArtCategoryListById(id);
+		articale.setCategoryList(categoryList);
+		ArticaleDto dto = DtoUtil.adapt(new ArticaleDto(), articale);
+		List<Integer> cateids = dto.getCategoryList().stream().map(item -> item.getId()).collect(Collectors.toList());
+		dto.setCategoryIds(cateids);
+		dto.setTimeAgo(TimeAgoUtils.format(dto.getUpdateTime()));
+		dto.formatTime();
+		return JsonResult.<ArticaleDto>success(dto);
+	}
+
+	@Transactional
+	public JsonResult<Void> update(Integer id, ArticleParam param) {
+		// 检查字段
+		// 文章是否存在
+		// 修改文章
+		// 删除原先的分类关系
+		// 新键文章的分类关系
+		if(id == null) {
+			throw new CheckParamException("文章id","为空");
+		}
+		ValidatorUtil.check(param);
+		int count = articaleMapper.countById(id);
+		if (count == 0) {
+			throw new CheckParamException("文章","不存在");
+		}
+		Articale articale = articaleMapper.selectByPrimaryKey(id);
+		articale.setTitle(param.getTitle());
+		articale.setContent(param.getContent());
+		articale.setUpdateTime(new Date());
+		articaleMapper.updateByPrimaryKeySelective(articale);
+		articaleCategoryMapper.delBatch(Lists.newArrayList(id));
+		List<ArticaleCategory> collect = param.getCategoryNames().stream().map( categoryId -> 
+			 ArticaleCategory.builder()
+			.articaleId(articale.getId())
+			.categoryId(categoryId)
+			.build()
+		).collect(Collectors.toList());
+		articaleCategoryMapper.insertBatch(collect);
+		return JsonResult.<Void>success();
 	}
 }

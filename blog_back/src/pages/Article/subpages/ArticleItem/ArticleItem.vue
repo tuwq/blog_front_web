@@ -1,5 +1,5 @@
 <template>
-  <div class="ArticleItem">
+  <div class="ArticleItem" @click.stop.prevent="toArticle">
       <span>{{item.title}}</span>
       <span>{{item.categoryName}}</span>
       <span>{{item.commentSum||0}}</span>
@@ -12,7 +12,6 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import moment from 'moment'
   export default {  
     props: {
       item: {
@@ -22,6 +21,11 @@
       index: {
         type: Number,
         default: 0
+      }
+    },
+    methods: {
+      toArticle() {
+        this.$router.push('/article/edit/'+this.item.id)
       }
     }
   }

@@ -64,4 +64,14 @@ public class ArticleController {
 	public PageResult<ArticaleDto> listBySearch(@RequestParam("keyword") String keyword, PageParam param) {
 		return articleService.listByKeyWord(keyword,param);
 	} 
+	
+	@GetMapping("/{id}")
+	public JsonResult<ArticaleDto> detail(@PathVariable("id") Integer id) {
+		return articleService.detail(id);
+	}
+	
+	@PutMapping("/{id}")
+	public JsonResult<Void> update(@PathVariable("id") Integer id,@RequestBody ArticleParam param) {
+		return articleService.update(id,param);
+	}
 }

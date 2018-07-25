@@ -1,5 +1,7 @@
 package root.dto;
 
+import java.util.List;
+
 import lombok.Data;
 import root.model.Articale;
 import root.util.TimeUtil;
@@ -8,6 +10,8 @@ import root.util.TimeUtil;
 public class ArticaleDto extends Articale{
 	// 分类
 	private String categoryName;
+	// 分类id数组
+	private List<Integer> categoryIds;
 	// 操作人名
 	private String operatorerName;
 	// ..日前的时间格式

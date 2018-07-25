@@ -262,4 +262,9 @@
 	ORDER BY a.create_time desc
 	LIMIT #{skip}, #{pageSize}
   </select>
+  <select id="countById" parameterType="map" resultType="int">
+  	SELECT count(1)
+  	FROM articale a 
+  	WHERE id = #{id}
+  </select>
 </mapper>

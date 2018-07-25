@@ -4,32 +4,33 @@
      	<div class="content">
      		<div class="title">
           <h2>更改文章</h2>
-     			<input type="text" placeholder="文章标题">
+     			<input v-model="title" type="text" placeholder="文章标题">
      		</div>
      		<div class="categroy">
      			<h2>文章分类</h2>
      			<div class="checkbox-group">
 	     			<div class="checkbox-control">
 	     				<label for="article">文章</label> 
-	     				<input type="checkbox" id="article" value="1" v-model="checkCategroy">
+	     				<input type="checkbox" id="article" value="1" v-model="categoryNames">
 	     			</div>
 	     			<div class="checkbox-control">
 		     			<label for="tutorial">教程</label>
-						<input type="checkbox" id="checkbox" value="2" v-model="checkCategroy">
+						<input type="checkbox" id="checkbox" value="2" v-model="categoryNames">
 					</div>
 					<div class="checkbox-control">
 						<label for="shortCode">短代码</label>
-						<input type="checkbox" id="checkbox" value="3" v-model="checkCategroy">
+						<input type="checkbox" id="checkbox" value="3" v-model="categoryNames">
 	     			</div>
 	     			<div class="checkbox-control">
 						<label for="leisure">个人闲谈</label>
-						<input type="checkbox" id="leisure" value="4" v-model="checkCategroy">
+						<input type="checkbox" id="leisure" value="4" v-model="categoryNames">
 	     			</div>
      			</div>
      		</div>
      		<div class="markdownEditor" id="editor">
            <button @click="uploadimg" class="uploadBtn">上传图片</button>
-     			 <mavon-editor style="height: 100%" ref=updatemd @imgAdd="$imgAdd" @imgDel="$imgDel"></mavon-editor>
+           <button @click="finish" class="finishBtn">完成修改</button>
+     			 <mavon-editor style="height: 100%" v-model="content" ref=updatemd @imgAdd="$imgAdd" @imgDel="$imgDel"></mavon-editor>
      		</div>
      	</div>
      </div>
@@ -38,16 +39,34 @@
 
 <script type="text/ecmascript-6">
   import { mavonEditor } from 'mavon-editor'
+  import { getArticleDetail,updateArticleApi } from 'api/Article/article'
   import 'mavon-editor/dist/css/index.css'
   export default {  
     data() {
     	return {
-	    	checkCategroy: [],
-	        value: '',
-	        img_file: {}
+	    	  categoryNames: [],
+	        content: '',
+	        img_file: {},
+          title: ''
     	}
     },
+    created() {
+      getArticleDetail(this.$route.params.id,(res)=>{
+        if (res.data.code==200) {
+            this.title = res.data.result.title
+            this.content = res.data.result.content
+            this.categoryNames = res.data.result.categoryIds
+        }
+      })
+    },
     methods: {
+      finish() {
+        updateArticleApi(this.$route.params.id,this.title,this.categoryNames,this.content,(res)=>{
+           if (res.data.code==200) {
+            alert('修改成功了')
+           }
+        })
+      },
       $imgAdd(pos,$file) {
         // pos为图片标志
         // 保存图片

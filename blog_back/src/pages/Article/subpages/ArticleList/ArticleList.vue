@@ -59,20 +59,16 @@
             this.articleList = res.data.data
             this.maxPageCode = res.data.pageModel.maxPageCode
             this.total = res.data.pageModel.total
-             console.log(this.maxPageCode)
-             console.log(this.total)
             this.$refs.pagination.currentClass(this.currentPage)
          })
       },
       searchByKeyWord(keyword) {
          this.keyword = keyword.trim()
          if(this.keyword==''){
-          this.isSerch = false
-          console.log('all')
+            this.isSerch = false
             this.pageArticle(1)
          } else {
             this.isSerch = true
-            console.log('search')
             this.pageSearch(1)
          }
       }

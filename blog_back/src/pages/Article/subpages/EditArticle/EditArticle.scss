@@ -40,6 +40,11 @@
 					@include common-btn;
 					margin-bottom: 10px;
 				}
+				.finishBtn {
+					@include common-btn;
+					background: $lightblue_color;
+					margin-bottom: 10px;
+				}
 			}
 		}
 	}
