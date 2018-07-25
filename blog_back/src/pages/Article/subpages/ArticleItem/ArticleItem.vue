@@ -1,16 +1,18 @@
 <template>
   <div class="ArticleItem">
       <span>{{item.title}}</span>
+      <span>{{item.categoryName}}</span>
       <span>{{item.commentSum||0}}</span>
-      <span>{{item.createTime}}</span>
-      <span>{{item.updateTime}}</span>
+      <span>{{item.createTimeString}}</span>
+      <span>{{item.updateTimeString}}</span>
       <span>{{item.status}}</span>
-      <span>{{item.userId}}</span>
-      <span><input type="checkbox"></span>
+      <span>{{item.operatorerName}}</span>
+      <span><input class="opearcheck" type="checkbox" :value="item.id"></span>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+  import moment from 'moment'
   export default {  
     props: {
       item: {

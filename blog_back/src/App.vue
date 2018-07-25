@@ -6,12 +6,14 @@
 
 <script type="text/ecmascript-6">
   import '@/lib/jquery/jquery-3.3.1.min.js'
-  import { getUserInfo } from 'api/User/user'
+  import { getUserInfoApi } from 'api/User/user'
   import {mapMutations} from 'vuex';
+  
+  
 
   export default {
     created() {
-    	getUserInfo((res)=>{
+    	getUserInfoApi((res)=>{
     		this.setNowUserInfo(res.data.result)
     	})
     },

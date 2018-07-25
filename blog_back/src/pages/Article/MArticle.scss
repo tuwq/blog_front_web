@@ -15,6 +15,11 @@
 			.searchBtn {
 				@include common-btn;background: $green_color;
 			}
+			.updateBtn {
+				@include common-btn;
+				background: $lightblue_color;
+				margin-right: 20px;
+			}
 			.search-wrap {
 				font-size: 15px;
 				@include common-form-control;

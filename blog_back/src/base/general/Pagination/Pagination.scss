@@ -8,6 +8,7 @@
 		justify-content: space-between;
 		.arrow {
 			color: #000;
+			background: #fff !important;
 		}
 		.page-control {
 			width: 100%;
@@ -19,6 +20,6 @@
 		}
 	}
 	.current {
-		background: $gray_color;
+		background: $gray_color !important;
 	}
 }}

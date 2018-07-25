@@ -66,11 +66,20 @@
       pageSize: {
         type: Number,
         default: 5
+      },
+      isSerch: {
+        type: Boolean,
+        default: false
       }
     },
     methods: {
       pageList(page) {
-        this.$emit('load',page)
+        if(this.isSerch) {
+          this.$emit('loadSearch',page)
+        } else {
+          this.$emit('load',page)
+        }
+        
       },
       currentClass(page) {
         this.$nextTick().then(()=> {

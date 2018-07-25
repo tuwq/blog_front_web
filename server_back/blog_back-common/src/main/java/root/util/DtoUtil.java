@@ -8,4 +8,5 @@ public class DtoUtil {
 		BeanUtils.copyProperties(model, dto);
 		return dto;
 	}
+	
 }

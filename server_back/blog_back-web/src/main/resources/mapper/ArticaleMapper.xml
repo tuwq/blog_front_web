@@ -181,15 +181,85 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  
+   <resultMap id="articaleMap" type="root.model.Articale">
+  	<id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="commentSum" property="commentsum" jdbcType="INTEGER" />
+    <result column="browseSum" property="browsesum" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <association property="user" javaType="root.model.User">
+    	<result column="user_name" property="username"/>
+    </association>
+    <collection property="categoryList" javaType="list" ofType="root.model.Category">
+        <result column="category_id" property="id"/>
+    	<result column="category_name" property="name"/>
+    </collection>
+  </resultMap>
+  
+  
+  
   <select id="countAll" resultType="long">
   	SELECT count(1)
   	FROM articale
   </select>
-  <select id="page" parameterType="map" resultMap="BaseResultMap">
-  	SELECT <include refid="Base_Column_List" />
-  	FROM articale
-  	ORDER BY create_time desc
-  	LIMIT #{skip}, #{pageSize}
+  <select id="page" parameterType="map" resultMap="articaleMap">
+  	SELECT a.id id,a.title title,a.commentSum commentSum,a.browseSum browseSum,a.create_time create_time,a.update_time update_time,
+  	a.status status,a.user_id user_id,u.username user_name
+  	FROM articale a 
+  	LEFT JOIN articale_category ac on a.id = ac.articale_id
+	LEFT JOIN category c on c.id = ac.category_id
+	LEFT JOIN `user` u on u.id = a.user_id
+	GROUP BY a.id
+	ORDER BY a.create_time desc
+	LIMIT #{skip}, #{pageSize}
+  </select>
+ 
+  <delete id="delBatch" parameterType="map">
+  	DELETE FROM articale
+  	WHERE id in 
+  	<foreach collection="ids" item="id" separator="," index="index" open="(" close=")">
+		#{id}
+	</foreach>
+  </delete>
+  <update id="updateBatch" parameterType="map">
+  	UPDATE articale 
+  	SET status=ABS(status-1)
+  	WHERE id in 
+  	<foreach collection="ids" item="id" separator="," open="(" close=")">
+		#{id}
+	</foreach>
+  </update>
+  <select id="countAllByKeyWord" parameterType="map" resultType="long">
+  	SELECT count(DISTINCT a.id) 
+	FROM articale a 
+	LEFT JOIN articale_category ac on a.id = ac.articale_id 
+	LEFT JOIN category c on c.id = ac.category_id
+	<where>
+		<if test="keyword!=null and keyword!= ''">
+			and (a.title like '%${keyword}%' or c.name like '%${keyword}%' or a.content like '%${keyword}%')
+		</if>
+	</where>
   </select>
   
+  <select id="pageByKeyWord" parameterType="map" resultMap="articaleMap">
+    SELECT a.id id,a.title title,a.commentSum commentSum,a.browseSum browseSum,a.create_time create_time,a.update_time update_time,
+  	a.status status,a.user_id user_id,u.username user_name
+  	FROM articale a 
+  	LEFT JOIN articale_category ac on a.id = ac.articale_id
+	LEFT JOIN category c on c.id = ac.category_id
+	LEFT JOIN `user` u on u.id = a.user_id
+	<where>
+		<if test="keyword != null and keyword != ''" >
+			and (a.title like '%${keyword}%' or c.name like '%${keyword}%' or a.content like '%${keyword}%')
+		</if>
+	</where>
+	GROUP BY a.id
+	ORDER BY a.create_time desc
+	LIMIT #{skip}, #{pageSize}
+  </select>
 </mapper>

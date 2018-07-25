@@ -33,4 +33,31 @@ public interface ArticaleMapper {
 	 * @param skip
 	 */
 	List<Articale> page(@Param("pageSize") Integer pageSize,@Param("skip") Integer skip);
+	/**
+	 * 批量删除
+	 * @param ids
+	 */
+	void delBatch(@Param("ids") List<Integer> ids);
+	/**
+	 * 批量修改，取反状态1和0
+	 * @param ids
+	 */
+	void updateBatch(@Param("ids") List<Integer> ids);
+	/**
+	 * 获得总数,过滤条件后的总数
+	 * @param keyword
+	 * @return
+	 */
+	Long countAllByKeyWord(@Param("keyword") String keyword);
+	/**
+	 * 获得分页数据，过滤条件后的数量
+	 * @param keyword
+	 * @param integer2 
+	 * @param integer 
+	 */
+	List<Articale> pageByKeyWord(@Param("keyword") String keyword, 
+			@Param("pageSize") Integer pageSize, @Param("skip") Integer skip);
+	
+	
+	
 }

@@ -125,4 +125,11 @@
       bad = #{bad,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <delete id="delBatch" parameterType="map">
+  	DELETE FROM articale_user
+  	WHERE articale_id in 
+  	<foreach collection="ids" item="id" separator="," index="no" open="(" close=")">
+		#{id}
+	</foreach>
+  </delete>
 </mapper>

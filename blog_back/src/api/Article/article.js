@@ -14,11 +14,32 @@ export function getImgURIApi(formdata,success) {
 	})
 }
 
-export function getArticleList(params,success) {
+export function getArticleListApi(currentPage,pageSize,success) {
 	axios.get('/sys/article/list',{
-		params: params
+		params: {currentPage,pageSize}
+	}).then((res)=>{
+		success(res)
 	})
+}
+
+export function delBatchApi(ids,success) {
+	axios.delete('/sys/article/delBatch/'+ids)
 	.then((res)=>{
+		success(res)
+	})
+}
+
+export function updateBatchApi(ids,success) {
+	axios.put('/sys/article/updateBatch/'+ids)
+	.then((res)=>{
+		success(res)
+	})
+}
+
+export function getSearchListApi(currentPage,pageSize,keyword,success) {
+	axios.get('/sys/article/search',{
+		params: {currentPage,pageSize,keyword}
+	}).then((res)=>{
 		success(res)
 	})
 }

@@ -58,5 +58,10 @@
 			<artifactId>spring-core</artifactId>
 			<version>5.0.7.RELEASE</version>
 		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>18.0</version>
+		</dependency>
   </dependencies>
 </project>

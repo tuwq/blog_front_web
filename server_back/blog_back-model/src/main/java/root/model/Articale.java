@@ -1,6 +1,7 @@
 package root.model;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,7 +32,12 @@ public class Articale {
     private Date updateTime;
 
     private String content;
-
+    
+    private List<Category> categoryList;
+    
+    private User user;
+    
+    
     public Integer getId() {
         return id;
     }
@@ -119,4 +125,20 @@ public class Articale {
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
     }
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public List<Category> getCategoryList() {
+		return categoryList;
+	}
+
+	public void setCategoryList(List<Category> categoryList) {
+		this.categoryList = categoryList;
+	}
 }

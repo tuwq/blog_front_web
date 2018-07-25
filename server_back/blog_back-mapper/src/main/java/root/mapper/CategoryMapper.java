@@ -1,6 +1,9 @@
 package root.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import root.model.Category;
 @Mapper
@@ -16,4 +19,10 @@ public interface CategoryMapper {
     int updateByPrimaryKeySelective(Category record);
 
     int updateByPrimaryKey(Category record);
+    /**
+     * 获得指定文章id的分类列表
+     * @param integer
+     * @return
+     */
+	List<Category> getArtCategoryListById(@Param("id") Integer id);
 }

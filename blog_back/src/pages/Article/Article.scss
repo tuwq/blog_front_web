@@ -12,6 +12,11 @@
 				@include common-btn;
 				margin-right: 20px;
 			}
+			.updateBtn {
+				@include common-btn;
+				background: $lightblue_color;
+				margin-right: 20px;
+			}
 			.searchBtn {
 				@include common-btn;margin-left: 10px;background: $green_color;
 			}

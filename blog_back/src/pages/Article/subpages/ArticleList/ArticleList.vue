@@ -12,7 +12,9 @@
         :total="total"
         :currentPage="currentPage"
         :pageSize="pageSize"
+        :isSerch="isSerch"
         @load="pageArticle"
+        @loadSearch="pageSearch"
         ref="pagination"/>
       </div>
   </div>
@@ -21,7 +23,7 @@
 <script type="text/ecmascript-6"> 
   import ArticleItem from '../ArticleItem/ArticleItem'
   import Pagination from 'base/general/Pagination/Pagination'
-  import { getArticleList } from 'api/Article/article'
+  import { getArticleListApi,getSearchListApi } from 'api/Article/article'
   export default {  
     data(){
       return {
@@ -30,6 +32,8 @@
         total: 0,
         currentPage: 1,
         pageSize: 5,
+        isSerch: false,
+        keyword: ''
       }
     },
     created() {
@@ -37,13 +41,40 @@
     },
     methods:{
       pageArticle(page) {
-        this.currentPage = page
-        getArticleList({page},(res)=>{
+        if(page) {
+           this.currentPage = page
+        }
+        getArticleListApi(this.currentPage,this.pageSize,(res)=>{
             this.articleList = res.data.data
             this.maxPageCode = res.data.pageModel.maxPageCode
             this.total = res.data.pageModel.total
-            this.$refs.pagination.currentClass(page)
+            this.$refs.pagination.currentClass(this.currentPage)
         })
+      },
+      pageSearch(page) {
+        if(page){
+          this.currentPage = page
+        }
+        getSearchListApi(this.currentPage,this.pageSize,this.keyword,(res)=>{
+            this.articleList = res.data.data
+            this.maxPageCode = res.data.pageModel.maxPageCode
+            this.total = res.data.pageModel.total
+             console.log(this.maxPageCode)
+             console.log(this.total)
+            this.$refs.pagination.currentClass(this.currentPage)
+         })
+      },
+      searchByKeyWord(keyword) {
+         this.keyword = keyword.trim()
+         if(this.keyword==''){
+          this.isSerch = false
+          console.log('all')
+            this.pageArticle(1)
+         } else {
+            this.isSerch = true
+            console.log('search')
+            this.pageSearch(1)
+         }
       }
     },
     components: {

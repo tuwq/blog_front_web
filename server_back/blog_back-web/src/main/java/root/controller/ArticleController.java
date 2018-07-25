@@ -5,8 +5,11 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,4 +47,21 @@ public class ArticleController {
 	public PageResult<ArticaleDto> list(PageParam param) {
 		return articleService.list(param);
 	}
+	
+	@DeleteMapping("/delBatch/{ids}")
+	public JsonResult<Void> delBatch(@PathVariable("ids") String ids) {
+		articleService.delBatch(ids);
+		return JsonResult.<Void>success();
+	}
+	
+	@PutMapping("/updateBatch/{ids}")
+	public JsonResult<Void> updateBatch(@PathVariable("ids") String ids) {
+		articleService.updateBatch(ids);
+		return JsonResult.<Void>success();
+	}
+	
+	@GetMapping("/search")
+	public PageResult<ArticaleDto> listBySearch(@RequestParam("keyword") String keyword, PageParam param) {
+		return articleService.listByKeyWord(keyword,param);
+	} 
 }

@@ -79,4 +79,22 @@
       comment_sum = #{commentSum,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <resultMap id="categoryMap" type="root.model.Category" >
+    <id column="category_id" property="id" jdbcType="INTEGER" />
+    <result column="category_name" property="name" jdbcType="VARCHAR" />
+    <result column="articale_sum" property="articaleSum" jdbcType="INTEGER" />
+    <result column="comment_sum" property="commentSum" jdbcType="INTEGER" />
+  </resultMap>
+  
+  <select id="getArtCategoryListById" parameterType="map" resultMap="categoryMap">
+  	SELECT c.name category_name,c.id category_id,c.articale_sum articale_sum,c.comment_sum comment_sum
+	FROM articale_category ac,category c
+	<where>
+		<if test="id!=null and id !=''">
+			AND ac.articale_id = #{id}
+		</if>
+		AND c.id = ac.category_id 
+	</where>
+  </select>
 </mapper>
