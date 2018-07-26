@@ -1,8 +1,8 @@
 .AddArticle {
+	display: flex;
 	.wrap {
+		flex: 0 1 50%;
 		padding: 20px;
-		width: 60%;
-		margin: 0 auto;
 		margin-top: 20px;
 		box-shadow: 1px 1px 5px 5px rgba(255, 112, 173, 0.35);
 		background-color: rgba(255, 255, 255, 0.8);
@@ -43,6 +43,11 @@
 				.finishBtn {
 					@include common-btn;
 					background: $green_color;
+					margin-bottom: 10px;
+				}
+				.MountedBtn {
+					@include common-btn;
+					background: $lightblue_color;
 					margin-bottom: 10px;
 				}
 			}

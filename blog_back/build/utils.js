@@ -67,7 +67,7 @@ exports.cssLoaders = function (options) {
         loader: 'sass-resources-loader',
         options: {
           // 多个文件时用数组的形式传入，单个文件时可以直接使用 path.resolve(__dirname, '../static/style/common.scss'
-          resources: [resolveResource('constant.scss'),resolveResource('common.scss')]  
+          resources: [resolveResource('constant.scss'),resolveResource('common.scss'),resolveResource('content.scss')]  
         }
       }
       ];

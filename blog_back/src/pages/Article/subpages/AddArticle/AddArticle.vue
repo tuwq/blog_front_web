@@ -30,10 +30,12 @@
      		<div class="markdownEditor" id="editor">
            <button @click="finish" class="finishBtn">完成</button>
            <button @click="uploadimg" class="uploadBtn">上传图片</button>
+           <button @click="reMounted" class="MountedBtn">重新渲染</button>
      			 <mavon-editor style="height: 100%" v-model="content" ref=md @imgAdd="$imgAdd" @imgDel="$imgDel"></mavon-editor>
      		</div>
      	</div>
      </div>
+     <ArticleTemplate ref="$addTemplate" :content="content"/>
   </div>
 </template>
 
@@ -42,6 +44,7 @@
     import 'mavon-editor/dist/css/index.css'
     import { addArticleApi,getImgURIApi } from 'api/Article/article'
     import { checkContent } from 'base/js/check'
+    import ArticleTemplate from '../ArticleTemplate/ArticleTemplate'
   export default {  
     data() {
     	return {
@@ -66,20 +69,11 @@
         for(var _img in this.img_file){
             formdata.append('fileArray', this.img_file[_img])
         }
-        /*var data = {
-          "0": "1a.jpg",
-          "1": "2b.jpg",
-          "2": "3c.jpg"
-        }
-        for (var img in data) {
-          this.$refs.md.$img2Url(img,data[img])
-        }*/
         getImgURIApi(formdata,(res)=>{
            for(var img in res.data.imgNodes) {
-            console.log(img)
-            console.log(res.data.imgNodes[img].path)
             this.$refs.md.$img2Url(img,res.data.imgNodes[img].path)
            }
+           alert('上传成功')
         })
       },
       finish() {
@@ -87,15 +81,22 @@
           addArticleApi(this.title,this.categoryNames,this.content,(res)=>{
             if(res.data.code==200) {
                 alert('发表成功了')
+                this.title = ''
+                this.categoryNames=[]
+                this.content=''
             }
           })
         } else {
           alert('不能为空')
         }
+      },
+      reMounted() {
+        this.$refs.$addTemplate.mountedContent()
       }
     },
     components: {
-        mavonEditor
+        mavonEditor,
+        ArticleTemplate
     }
   }
 </script>

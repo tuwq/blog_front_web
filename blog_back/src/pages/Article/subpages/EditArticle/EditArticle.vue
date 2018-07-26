@@ -30,10 +30,12 @@
      		<div class="markdownEditor" id="editor">
            <button @click="uploadimg" class="uploadBtn">上传图片</button>
            <button @click="finish" class="finishBtn">完成修改</button>
+           <button @click="reMounted" class="MountedBtn">重新渲染</button>
      			 <mavon-editor style="height: 100%" v-model="content" ref=updatemd @imgAdd="$imgAdd" @imgDel="$imgDel"></mavon-editor>
      		</div>
      	</div>
      </div>
+     <ArticleTemplate ref="$editTemplate" :content="content"/>
   </div>
 </template>
 
@@ -41,6 +43,7 @@
   import { mavonEditor } from 'mavon-editor'
   import { getArticleDetail,updateArticleApi } from 'api/Article/article'
   import 'mavon-editor/dist/css/index.css'
+  import ArticleTemplate from '../ArticleTemplate/ArticleTemplate'
   export default {  
     data() {
     	return {
@@ -80,10 +83,15 @@
         for (var _img in this.img_file) {
           formData.append(_img,this.img_file[_img])
         }
+        alert('上传成功')
+      },
+      reMounted() {
+        this.$refs.$editTemplate.mountedContent()
       }
     },
     components: {
-        mavonEditor
+        mavonEditor,
+        ArticleTemplate
     }
   }
 </script>

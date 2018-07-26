@@ -1,0 +1,47 @@
+.ArticleTemplate {
+	display: flex;
+	margin-top: 20px;
+	flex: 0 1 50%;
+	.article {
+		width: 100%;
+		box-shadow: 1px 1px 5px 5px $lightpink_color;
+		position: relative;
+		overflow: hidden;
+		border-radius: 15px;
+		margin-bottom: 20px;
+		background-color: rgba(255,255,255,.8);
+		.thumbnail {
+			border-radius: 15px;
+			transition: all 0.6s;
+			min-height: 400px;
+			position: relative;
+			display: block;
+			background-position: 50% 50%;
+   			background-size: cover;
+   			/* background-image: url(https://mikuac.com/usr/uploads/2018/05/4128022523.jpg) */
+		}
+		.content-wrapper {
+			padding: 30px;
+			.content {
+				@include common-article-content;
+				background-color: rgba(255,255,255,0);
+			}
+			.content-footer {
+				display: flex;
+				justify-content: space-between;
+				margin: 40px 0 30px;
+				font-size: 12px;
+				color: $gray_color;
+			}
+		}
+		.support {
+			padding: 10px 0 40px;
+			text-align: center;
+			color: $gray_color;
+			button {
+				@include common-btn;;
+				margin-bottom: 20px;
+			}
+		}
+	}
+}

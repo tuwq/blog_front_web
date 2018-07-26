@@ -10,6 +10,7 @@ import fastclick from 'fastclick'
 import 'api/constant/constant'
 import axios from 'axios'
 global.axios = axios
+
 import './router/carry'
 
 import 'font-awesome/css/font-awesome.css'

@@ -6,6 +6,7 @@
 
 <script type="text/ecmascript-6">
   import '@/lib/jquery/jquery-3.3.1.min.js'
+  import 'highlight/lib/vendor/highlight.js/styles/dark.css'
   import { getUserInfoApi } from 'api/User/user'
   import {mapMutations} from 'vuex';
   

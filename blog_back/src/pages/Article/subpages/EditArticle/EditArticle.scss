@@ -1,7 +1,8 @@
 .EditArticle {
+	display: flex;
 	.wrap {
 		padding: 20px;
-		width: 60%;
+		flex: 0 1 50%;
 		margin: 0 auto;
 		margin-top: 20px;
 		box-shadow: 1px 1px 5px 5px rgba(255, 112, 173, 0.35);
@@ -41,6 +42,11 @@
 					margin-bottom: 10px;
 				}
 				.finishBtn {
+					@include common-btn;
+					background: $green_color;
+					margin-bottom: 10px;
+				}
+				.MountedBtn {
 					@include common-btn;
 					background: $lightblue_color;
 					margin-bottom: 10px;
