@@ -21,11 +21,12 @@
 		<property name="url" value="${jdbc.jdbcUrl}"></property>
  
 		<!-- 初始化连接大小 -->
-		<property name="initialSize" value="0"></property>
+		<property name="initialSize" value="1"></property>
 		<!-- 连接池最大使用连接数量 -->
 		<property name="maxActive" value="20"></property>
 		<!-- 连接池最小空闲 -->
-		<property name="minIdle" value="0" />
+		<property name="minIdle" value="10" />
+		<property name="maxIdle" value="100" />
 		<!-- 获取连接最大等待时间 -->
 		<property name="maxWait" value="60000" />
  

@@ -5,10 +5,10 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="from_id" property="fromId" jdbcType="INTEGER" />
     <result column="target_id" property="targetId" jdbcType="INTEGER" />
-    <result column="followStatus" property="followstatus" jdbcType="INTEGER" />
+    <result column="follow_status" property="followStatus" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, from_id, target_id, followStatus
+    id, from_id, target_id, follow_status
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -22,9 +22,9 @@
   </delete>
   <insert id="insert" parameterType="root.model.UserFollow" >
     insert into user_follow (id, from_id, target_id, 
-      followStatus)
+      follow_status)
     values (#{id,jdbcType=INTEGER}, #{fromId,jdbcType=INTEGER}, #{targetId,jdbcType=INTEGER}, 
-      #{followstatus,jdbcType=INTEGER})
+      #{followStatus,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="root.model.UserFollow" >
     insert into user_follow
@@ -38,8 +38,8 @@
       <if test="targetId != null" >
         target_id,
       </if>
-      <if test="followstatus != null" >
-        followStatus,
+      <if test="followStatus != null" >
+        follow_status,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -52,8 +52,8 @@
       <if test="targetId != null" >
         #{targetId,jdbcType=INTEGER},
       </if>
-      <if test="followstatus != null" >
-        #{followstatus,jdbcType=INTEGER},
+      <if test="followStatus != null" >
+        #{followStatus,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -66,8 +66,8 @@
       <if test="targetId != null" >
         target_id = #{targetId,jdbcType=INTEGER},
       </if>
-      <if test="followstatus != null" >
-        followStatus = #{followstatus,jdbcType=INTEGER},
+      <if test="followStatus != null" >
+        follow_status = #{followStatus,jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -76,7 +76,7 @@
     update user_follow
     set from_id = #{fromId,jdbcType=INTEGER},
       target_id = #{targetId,jdbcType=INTEGER},
-      followStatus = #{followstatus,jdbcType=INTEGER}
+      follow_status = #{followStatus,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -7,7 +7,7 @@ public class UserFollow {
 
     private Integer targetId;
 
-    private Integer followstatus;
+    private Integer followStatus;
 
     public Integer getId() {
         return id;
@@ -33,11 +33,11 @@ public class UserFollow {
         this.targetId = targetId;
     }
 
-    public Integer getFollowstatus() {
-        return followstatus;
+    public Integer getFollowStatus() {
+        return followStatus;
     }
 
-    public void setFollowstatus(Integer followstatus) {
-        this.followstatus = followstatus;
+    public void setFollowStatus(Integer followStatus) {
+        this.followStatus = followStatus;
     }
 }

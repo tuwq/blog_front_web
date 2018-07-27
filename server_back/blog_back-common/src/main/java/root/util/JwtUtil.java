@@ -12,6 +12,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTCreator.Builder;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.InvalidClaimException;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
@@ -35,7 +36,7 @@ public class JwtUtil {
 			Algorithm algorithm = Algorithm.HMAC256(LOGIN_TOKEN);
 			Builder builder= JWT.create()
 					.withIssuer(ISSUE)
-					.withExpiresAt(DateUtils.addDays(new Date(), 1));
+					.withExpiresAt(DateUtils.addDays(new Date(), 7));
 			// 为jwt添加一些信息
 			claims.forEach((k,v) -> builder.withClaim(k, v));
 			return builder.sign(algorithm).toString();
@@ -100,7 +101,7 @@ public class JwtUtil {
 		DecodedJWT jwt = null;
 		try {
 			jwt =verifier.verify(token);
-		} catch (SecurityException | SignatureVerificationException e1) {
+		} catch (Exception  e1) {
 			throw new LoginTokenException(ResultCode.TOKEN_NOTUSER,"LOGIN_TOKEN无法解析");
 		}
 		Map<String, Claim> map = jwt.getClaims();

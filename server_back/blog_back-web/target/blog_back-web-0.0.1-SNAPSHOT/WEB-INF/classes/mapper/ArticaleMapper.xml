@@ -4,10 +4,10 @@
   <resultMap id="BaseResultMap" type="root.model.Articale" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
-    <result column="sys_user_id" property="sysUserId" jdbcType="INTEGER" />
     <result column="title" property="title" jdbcType="VARCHAR" />
-    <result column="commentSum" property="commentsum" jdbcType="INTEGER" />
-    <result column="browseSum" property="browsesum" jdbcType="INTEGER" />
+    <result column="face_cover" property="faceCover" jdbcType="VARCHAR" />
+    <result column="comment_sum" property="commentSum" jdbcType="INTEGER" />
+    <result column="browse_sum" property="browseSum" jdbcType="INTEGER" />
     <result column="status" property="status" jdbcType="INTEGER" />
     <result column="weight" property="weight" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
@@ -17,7 +17,7 @@
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, user_id, sys_user_id, title, commentSum, browseSum, status, weight, create_time, 
+    id, user_id, title, face_cover, comment_sum, browse_sum, status, weight, create_time, 
     update_time
   </sql>
   <sql id="Blob_Column_List" >
@@ -36,12 +36,12 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="root.model.Articale" >
-    insert into articale (id, user_id, sys_user_id, 
-      title, commentSum, browseSum, 
+    insert into articale (id, user_id, title, 
+      face_cover, comment_sum, browse_sum, 
       status, weight, create_time, 
       update_time, content)
-    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{sysUserId,jdbcType=INTEGER}, 
-      #{title,jdbcType=VARCHAR}, #{commentsum,jdbcType=INTEGER}, #{browsesum,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
+      #{faceCover,jdbcType=VARCHAR}, #{commentSum,jdbcType=INTEGER}, #{browseSum,jdbcType=INTEGER}, 
       #{status,jdbcType=INTEGER}, #{weight,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR})
   </insert>
@@ -54,17 +54,17 @@
       <if test="userId != null" >
         user_id,
       </if>
-      <if test="sysUserId != null" >
-        sys_user_id,
-      </if>
       <if test="title != null" >
         title,
       </if>
-      <if test="commentsum != null" >
-        commentSum,
+      <if test="faceCover != null" >
+        face_cover,
       </if>
-      <if test="browsesum != null" >
-        browseSum,
+      <if test="commentSum != null" >
+        comment_sum,
+      </if>
+      <if test="browseSum != null" >
+        browse_sum,
       </if>
       <if test="status != null" >
         status,
@@ -89,17 +89,17 @@
       <if test="userId != null" >
         #{userId,jdbcType=INTEGER},
       </if>
-      <if test="sysUserId != null" >
-        #{sysUserId,jdbcType=INTEGER},
-      </if>
       <if test="title != null" >
         #{title,jdbcType=VARCHAR},
       </if>
-      <if test="commentsum != null" >
-        #{commentsum,jdbcType=INTEGER},
+      <if test="faceCover != null" >
+        #{faceCover,jdbcType=VARCHAR},
       </if>
-      <if test="browsesum != null" >
-        #{browsesum,jdbcType=INTEGER},
+      <if test="commentSum != null" >
+        #{commentSum,jdbcType=INTEGER},
+      </if>
+      <if test="browseSum != null" >
+        #{browseSum,jdbcType=INTEGER},
       </if>
       <if test="status != null" >
         #{status,jdbcType=INTEGER},
@@ -124,17 +124,17 @@
       <if test="userId != null" >
         user_id = #{userId,jdbcType=INTEGER},
       </if>
-      <if test="sysUserId != null" >
-        sys_user_id = #{sysUserId,jdbcType=INTEGER},
-      </if>
       <if test="title != null" >
         title = #{title,jdbcType=VARCHAR},
       </if>
-      <if test="commentsum != null" >
-        commentSum = #{commentsum,jdbcType=INTEGER},
+      <if test="faceCover != null" >
+        face_cover = #{faceCover,jdbcType=VARCHAR},
       </if>
-      <if test="browsesum != null" >
-        browseSum = #{browsesum,jdbcType=INTEGER},
+      <if test="commentSum != null" >
+        comment_sum = #{commentSum,jdbcType=INTEGER},
+      </if>
+      <if test="browseSum != null" >
+        browse_sum = #{browseSum,jdbcType=INTEGER},
       </if>
       <if test="status != null" >
         status = #{status,jdbcType=INTEGER},
@@ -157,10 +157,10 @@
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="root.model.Articale" >
     update articale
     set user_id = #{userId,jdbcType=INTEGER},
-      sys_user_id = #{sysUserId,jdbcType=INTEGER},
       title = #{title,jdbcType=VARCHAR},
-      commentSum = #{commentsum,jdbcType=INTEGER},
-      browseSum = #{browsesum,jdbcType=INTEGER},
+      face_cover = #{faceCover,jdbcType=VARCHAR},
+      comment_sum = #{commentSum,jdbcType=INTEGER},
+      browse_sum = #{browseSum,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},
       weight = #{weight,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -171,26 +171,54 @@
   <update id="updateByPrimaryKey" parameterType="root.model.Articale" >
     update articale
     set user_id = #{userId,jdbcType=INTEGER},
-      sys_user_id = #{sysUserId,jdbcType=INTEGER},
       title = #{title,jdbcType=VARCHAR},
-      commentSum = #{commentsum,jdbcType=INTEGER},
-      browseSum = #{browsesum,jdbcType=INTEGER},
+      face_cover = #{faceCover,jdbcType=VARCHAR},
+      comment_sum = #{commentSum,jdbcType=INTEGER},
+      browse_sum = #{browseSum,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},
       weight = #{weight,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+   <resultMap id="articaleMap" type="root.model.Articale">
+  	<id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="faceCover" property="faceCover" jdbcType="VARCHAR" />
+    <result column="commentSum" property="commentSum" jdbcType="INTEGER" />
+    <result column="browseSum" property="browseSum" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <association property="user" javaType="root.model.User">
+    	<result column="user_name" property="username"/>
+    </association>
+    <collection property="categoryList" javaType="list" ofType="root.model.Category">
+        <result column="category_id" property="id"/>
+    	<result column="category_name" property="name"/>
+    </collection>
+  </resultMap>
+  
+  
+  
   <select id="countAll" resultType="long">
   	SELECT count(1)
   	FROM articale
   </select>
-  <select id="page" parameterType="map" resultMap="BaseResultMap">
-  	SELECT <include refid="Base_Column_List" />
-  	FROM articale
-  	ORDER BY create_time desc
-  	LIMIT #{skip}, #{pageSize}
+  <select id="page" parameterType="map" resultMap="articaleMap">
+  	SELECT a.id id,a.title title,a.face_cover faceCover,a.comment_sum commentSum,a.browse_sum browseSum,a.create_time create_time,a.update_time update_time,
+  	a.status status,a.user_id user_id,u.username user_name
+  	FROM articale a 
+  	LEFT JOIN articale_category ac on a.id = ac.articale_id
+	LEFT JOIN category c on c.id = ac.category_id
+	LEFT JOIN `user` u on u.id = a.user_id
+	GROUP BY a.id
+	ORDER BY a.create_time desc
+	LIMIT #{skip}, #{pageSize}
   </select>
+ 
   <delete id="delBatch" parameterType="map">
   	DELETE FROM articale
   	WHERE id in 
@@ -206,4 +234,37 @@
 		#{id}
 	</foreach>
   </update>
+  <select id="countAllByKeyWord" parameterType="map" resultType="long">
+  	SELECT count(DISTINCT a.id) 
+	FROM articale a 
+	LEFT JOIN articale_category ac on a.id = ac.articale_id 
+	LEFT JOIN category c on c.id = ac.category_id
+	<where>
+		<if test="keyword!=null and keyword!= ''">
+			and (a.title like '%${keyword}%' or c.name like '%${keyword}%' or a.content like '%${keyword}%')
+		</if>
+	</where>
+  </select>
+  
+  <select id="pageByKeyWord" parameterType="map" resultMap="articaleMap">
+    SELECT a.id id,a.title title,a.face_cover faceCover,a.comment_sum commentSum,a.browse_sum browseSum,a.create_time create_time,a.update_time update_time,
+  	a.status status,a.user_id user_id,u.username user_name
+  	FROM articale a 
+  	LEFT JOIN articale_category ac on a.id = ac.articale_id
+	LEFT JOIN category c on c.id = ac.category_id
+	LEFT JOIN `user` u on u.id = a.user_id
+	<where>
+		<if test="keyword != null and keyword != ''" >
+			and (a.title like '%${keyword}%' or c.name like '%${keyword}%' or a.content like '%${keyword}%')
+		</if>
+	</where>
+	GROUP BY a.id
+	ORDER BY a.create_time desc
+	LIMIT #{skip}, #{pageSize}
+  </select>
+  <select id="countById" parameterType="map" resultType="int">
+  	SELECT count(1)
+  	FROM articale a 
+  	WHERE id = #{id}
+  </select>
 </mapper>

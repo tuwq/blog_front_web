@@ -9,6 +9,7 @@ D:\eclipse-workspace\blog_back\blog_back-model\src\main\java\root\model\User.jav
 D:\eclipse-workspace\blog_back\blog_back-model\src\main\java\root\model\ArticaleUser.java
 D:\eclipse-workspace\blog_back\blog_back-model\src\main\java\root\model\Category.java
 D:\eclipse-workspace\blog_back\blog_back-model\src\main\java\root\beans\ImgURIResult.java
+D:\eclipse-workspace\blog_back\blog_back-model\src\main\java\root\beans\MyPutRet.java
 D:\eclipse-workspace\blog_back\blog_back-model\src\main\java\root\beans\ParamExceptionResult.java
 D:\eclipse-workspace\blog_back\blog_back-model\src\main\java\root\dto\LoginDto.java
 D:\eclipse-workspace\blog_back\blog_back-model\src\main\java\root\model\Articale.java

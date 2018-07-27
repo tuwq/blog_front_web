@@ -34,5 +34,11 @@ public interface SysUserMapper {
 	 * 获得用户信息
 	 * @param userId
 	 */
-	SysUser InfoById(@Param("userId") Integer userId);
+	SysUser InfoById(@Param("id") Integer id);
+	/**
+	 * 后台用户的前台账号
+	 * @param userId
+	 * @return
+	 */
+	Integer FrontUserIdById(@Param("id") Integer id);
 }

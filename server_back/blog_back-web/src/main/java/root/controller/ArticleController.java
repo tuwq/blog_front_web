@@ -4,6 +4,7 @@ package root.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +25,7 @@ import root.model.Articale;
 import root.param.ArticleParam;
 import root.param.PageParam;
 import root.service.ArticleService;
+import root.util.ThreadUtil;
 
 @RestController
 @RequestMapping("/sys/article")
@@ -31,7 +33,7 @@ public class ArticleController {
 	
 	@Resource
 	private ArticleService articleService;
-	
+
 	@PostMapping("/add")
 	public JsonResult<Void> add(@RequestBody ArticleParam param) {
 		articleService.add(param);
@@ -73,5 +75,10 @@ public class ArticleController {
 	@PutMapping("/{id}")
 	public JsonResult<Void> update(@PathVariable("id") Integer id,@RequestBody ArticleParam param) {
 		return articleService.update(id,param);
+	}
+	
+	@PostMapping(value="/faceCover", headers="content-type=multipart/form-data")
+	public ImgURIResult faceCover(@RequestParam(value = "faceCover") List<MultipartFile> files,@RequestParam(value = "coverImg")String coverImg) {
+		return articleService.getCoverSrc(files,coverImg);
 	}
 }

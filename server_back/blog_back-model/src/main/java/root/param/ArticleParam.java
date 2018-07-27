@@ -9,9 +9,10 @@ import javax.validation.constraints.Size;
 import org.springframework.stereotype.Service;
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
-@Service
+@Setter
 public class ArticleParam {
 
 	@NotBlank(message = "标题不可以为空")
@@ -22,4 +23,7 @@ public class ArticleParam {
 	
 	@NotBlank(message = "内容不可以为空")
 	private String content;
+	
+	@NotBlank(message = "封面不可以为空")
+	private String coverImg;
 }

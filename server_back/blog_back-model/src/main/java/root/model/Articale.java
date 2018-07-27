@@ -6,6 +6,7 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import root.model.Articale.ArticaleBuilder;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,13 +16,13 @@ public class Articale {
 
     private Integer userId;
 
-    private Integer sysUserId;
-
     private String title;
 
-    private Integer commentsum;
+    private String faceCover;
 
-    private Integer browsesum;
+    private Integer commentSum;
+
+    private Integer browseSum;
 
     private Integer status;
 
@@ -36,8 +37,7 @@ public class Articale {
     private List<Category> categoryList;
     
     private User user;
-    
-    
+
     public Integer getId() {
         return id;
     }
@@ -54,14 +54,6 @@ public class Articale {
         this.userId = userId;
     }
 
-    public Integer getSysUserId() {
-        return sysUserId;
-    }
-
-    public void setSysUserId(Integer sysUserId) {
-        this.sysUserId = sysUserId;
-    }
-
     public String getTitle() {
         return title;
     }
@@ -70,20 +62,28 @@ public class Articale {
         this.title = title == null ? null : title.trim();
     }
 
-    public Integer getCommentsum() {
-        return commentsum;
+    public String getFaceCover() {
+        return faceCover;
     }
 
-    public void setCommentsum(Integer commentsum) {
-        this.commentsum = commentsum;
+    public void setFaceCover(String faceCover) {
+        this.faceCover = faceCover == null ? null : faceCover.trim();
     }
 
-    public Integer getBrowsesum() {
-        return browsesum;
+    public Integer getCommentSum() {
+        return commentSum;
     }
 
-    public void setBrowsesum(Integer browsesum) {
-        this.browsesum = browsesum;
+    public void setCommentSum(Integer commentSum) {
+        this.commentSum = commentSum;
+    }
+
+    public Integer getBrowseSum() {
+        return browseSum;
+    }
+
+    public void setBrowseSum(Integer browseSum) {
+        this.browseSum = browseSum;
     }
 
     public Integer getStatus() {
@@ -126,19 +126,19 @@ public class Articale {
         this.content = content == null ? null : content.trim();
     }
 
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
 	public List<Category> getCategoryList() {
 		return categoryList;
 	}
 
 	public void setCategoryList(List<Category> categoryList) {
 		this.categoryList = categoryList;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

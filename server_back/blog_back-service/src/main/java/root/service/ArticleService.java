@@ -28,9 +28,12 @@ import root.mapper.ArticaleCategoryMapper;
 import root.mapper.ArticaleMapper;
 import root.mapper.ArticaleUserMapper;
 import root.mapper.CategoryMapper;
+import root.mapper.SysUserMapper;
+import root.mapper.UserMapper;
 import root.model.Articale;
 import root.model.ArticaleCategory;
 import root.model.Category;
+import root.model.User;
 import root.param.ArticleParam;
 import root.param.PageParam;
 import root.util.DtoUtil;
@@ -53,25 +56,42 @@ public class ArticleService {
 	private TokenService tokenService;
 	@Resource
 	private FileService fileService;
+	@Resource
+	private QiNiuIMGService qiNiuIMGService;
+	@Resource
+	private UserMapper userMapper;
+	@Resource
+	private SysUserMapper sysUserMapper; 
 	
 	@Transactional
 	public void add(ArticleParam param) {
 		// 检查字段
 		// 检查token
+		// 给该后台用户的前台用户id文章编写数加1
 		// 创建文章对象
 		// TODO 数据库分类表，用户表需要更新文章数量,rabbitmq
 		// 创建文章分类关系对象
 		// 插入
 		ValidatorUtil.check(param);
 		Integer userId = tokenService.checkToken();
+		// 这个id是后台用户的id
 		if(userId == null) {
 			// token不存在
 			throw new LoginTokenException(ResultCode.TOKEN_MATURITY_TOLOGIN,"LOGIN_TOKEN到期了");
 		}
+		Integer frontId = sysUserMapper.FrontUserIdById(userId);
+		if (frontId == null) {
+			throw new CheckParamException("该后台用户","没有前台账号");
+		}
+		User front = userMapper.selectByPrimaryKey(frontId);
+		if (front == null) {
+			throw new CheckParamException("该后台用户","没有前台账号");
+		}
+		userMapper.increaseArtSum(frontId);
 		Articale articale = Articale.builder()
-		.userId(userId)
-		.sysUserId(userId)
+		.userId(frontId)
 		.title(param.getTitle())
+		.faceCover(param.getCoverImg())
 		.content(param.getContent())
 		.createTime(new Date())
 		.updateTime(new Date())
@@ -91,12 +111,12 @@ public class ArticleService {
 	public ImgURIResult getImgSrc(List<MultipartFile> formdata) {
 		// 上传图片
 		// 获取文件自身名称 img.jpg
-		// 添加http服务器前缀
+		// 添加http服务器前缀和目录前缀
 		// 进行返回格式创建:0:img1.jpg,1:img2.jpg,2:img3.jpg
 		if (formdata != null) {
-			List<String> pathList = fileService.getImgPaths(formdata);
-			List<String> httpPaths = fileService.addPrefix(pathList);
-			List<ImgNode> nodes = fileService.httpPathsToNodeList(httpPaths);
+			List<String> pathList = qiNiuIMGService.getImgPaths(formdata);
+			List<String> httpPaths = qiNiuIMGService.addPrefix(pathList);
+			List<ImgNode> nodes = qiNiuIMGService.httpPathsToNodeList(httpPaths);
 			return new ImgURIResult(nodes);
 		} 
 		return new ImgURIResult(Lists.newArrayList());
@@ -230,6 +250,7 @@ public class ArticleService {
 		}
 		Articale articale = articaleMapper.selectByPrimaryKey(id);
 		articale.setTitle(param.getTitle());
+		articale.setFaceCover(param.getCoverImg());
 		articale.setContent(param.getContent());
 		articale.setUpdateTime(new Date());
 		articaleMapper.updateByPrimaryKeySelective(articale);
@@ -242,5 +263,22 @@ public class ArticleService {
 		).collect(Collectors.toList());
 		articaleCategoryMapper.insertBatch(collect);
 		return JsonResult.<Void>success();
+	}
+
+	public ImgURIResult getCoverSrc(List<MultipartFile> formdata, String coverImg) {
+		// 删除前一张,如果有的话
+		// 上传图片封面至七牛云
+		// 获取文件自身名称  2018/7/843_img.jpg
+		// http服务器前缀和目录前缀由前端添加  
+		// 进行返回格式创建:0:img1.jpg,1:img2.jpg,2:img3.jpg
+		if (StringUtils.isNotBlank(coverImg) ) {
+			qiNiuIMGService.delIMG(coverImg);
+		}
+		if (formdata != null) {
+			List<String> pathList = qiNiuIMGService.getImgPaths(formdata);
+			List<ImgNode> nodes = qiNiuIMGService.httpPathsToNodeList(pathList);
+			return new ImgURIResult(nodes);
+		} 
+		return new ImgURIResult(Lists.newArrayList());
 	}
 }

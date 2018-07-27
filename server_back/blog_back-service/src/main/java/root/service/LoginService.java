@@ -58,7 +58,9 @@ public class LoginService {
 			throw new CheckParamException("密码","错误");
 		}
 		dbSysUser.setPassword("");
-		String token = JwtUtil.getToken(ImmutableMap.of("userId",Integer.toString(dbSysUser.getId())));
+		String token = JwtUtil.getToken(ImmutableMap.of(
+				"userId",Integer.toString(dbSysUser.getId()),
+				"username",dbSysUser.getUsername()));
 		redis.set(RedisCode.LOGIN_TOKEN+":"+Integer.toString(dbSysUser.getId()),token,TOKEN_MAXAGE);
 		return LoginDto.builder().token(token).SysUser(dbSysUser).build();
 	}
@@ -77,6 +79,5 @@ public class LoginService {
 		}
 		return JsonResult.<Void>error(ResultCode.TOKEN_MATURITY);
 	}
-	
 
 }

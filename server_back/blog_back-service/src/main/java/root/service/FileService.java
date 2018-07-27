@@ -15,6 +15,7 @@ import com.google.common.collect.Lists;
 import com.google.common.io.Files;
 
 import root.beans.ImgNode;
+import root.util.TimeUtil;
 
 @Service
 public class FileService {
@@ -35,7 +36,7 @@ public class FileService {
 					// 12312312312_img.jpg
 					String path = 
 							StringUtils.substringAfterLast(localFile.getAbsolutePath(), artimgPath.replaceAll("/", "\\\\"));
-					paths.add(path);
+					paths.add(path.replace("\\", "/"));
 				}catch(IOException e) {
 					throw new IllegalArgumentException(e);
 				}
@@ -45,8 +46,9 @@ public class FileService {
 	}
 	
 	private File saveToLocal(MultipartFile file) throws IOException{
-		// D:/eclipse-workspace/blog_back/blog_back-web/src/main/webapp/upload/acrimg/12312312312_img.jpg
-		File newFile = new File(artimgPath 
+		// D:/blog/upload/artImg/2018/7/
+		// 12312312312_img.jpg
+		File newFile = new File(artimgPath + TimeUtil.nowYear() + "/" + TimeUtil.nowMonth() + "/"
 					+ Instant.now().getEpochSecond()+"_"+file.getOriginalFilename());
 		if(!newFile.exists()) {
 			newFile.getParentFile().mkdirs();
@@ -58,9 +60,11 @@ public class FileService {
 
 	
 	public static void main(String[] args) {
-		String sublast = StringUtils.substringAfterLast("D:\\eclipse-workspace\\blog_back\\blog_back-web\\src\\main\\webapp\\upload\\acrimg\\1532405747_4-12.jpg", 
-				"D:/eclipse-workspace/blog_back/blog_back-web/src/main/webapp/upload/acrimg/".replaceAll("/", "\\\\"));
-		System.out.println(sublast); // ghijk
+		String sublast = StringUtils.substringAfterLast("D:\\blog\\upload\\artImg\\2018\\7\\123.jpg", 
+				"D:/blog/upload/artImg/".replaceAll("/", "\\\\"));
+		System.out.println(sublast.replace("\\", "/")); // 2018/7/123.jpg
+		
+		
 	}
 
 	public List<String> addPrefix(List<String> pathList) {

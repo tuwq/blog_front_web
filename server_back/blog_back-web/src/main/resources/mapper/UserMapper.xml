@@ -21,9 +21,8 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="operate_time" property="operateTime" jdbcType="TIMESTAMP" />
   </resultMap>
-  
   <sql id="Base_Column_List" >
-    id, username, email, password, nickname, desc, website, avatar, status, activation_status, 
+    id, username, email, `password`, nickname, `desc`, website, avatar, `status`, activation_status, 
     follower_sum, fans_sum, comment_sum, articale_sum, before_login_ip, now_login_ip, 
     create_time, operate_time
   </sql>
@@ -245,5 +244,11 @@
       create_time = #{createTime,jdbcType=TIMESTAMP},
       operate_time = #{operateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <update id="increaseArtSum" parameterType="map">
+  	UPDATE user
+  	SET articale_sum = articale_sum+1
+  	WHERE id = #{id}
   </update>
 </mapper>
