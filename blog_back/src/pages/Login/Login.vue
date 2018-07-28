@@ -31,7 +31,8 @@
 <script type="text/ecmascript-6">
   import { checkLogin } from 'base/js/check'
   import { loginApi } from 'api/Login/login'
-  import {mapMutations} from 'vuex';
+  import {mapMutations} from 'vuex'
+  import { _set,_remove } from 'base/js/cookie'
   export default {  
     data() {
       return {
@@ -45,7 +46,7 @@
           loginApi(this.username,this.password,(res)=>{
              if(res.data.code < 400) {
                 // 存放用户信息和LOGIN_TOKEN,跳转首页
-                this.setLoginToken(res.data.result.token)
+                _set('_TOKEN_',res.data.result.token,{ expires: global.TOKEN_TIME_DAY })
                 this.setNowUserInfo(res.data.result.sysUser)
                 this.$router.replace('/')
              } else {
@@ -55,8 +56,7 @@
         }
       },
       ...mapMutations({
-        setNowUserInfo: 'SET_NOW_USER_INFO',
-        setLoginToken: 'SET_LOGIN_TOKEN'
+        setNowUserInfo: 'SET_NOW_USER_INFO'
       }),
     }
   }

@@ -29,7 +29,7 @@
 <script type="text/ecmascript-6">
   import {mapMutations,mapGetters} from 'vuex';
   import { quitLoginApi } from 'api/Login/login'
-  
+  import { _set,_remove } from 'base/js/cookie'
   export default {  
      data() {
        return {
@@ -47,12 +47,11 @@
          quitLoginApi((res)=>{
            // 删除存储的用户信息和LOGIN_TOKEN
            this.setNowUserInfo(undefined)
-           this.removeLoginToken()
+           _remove('_TOKEN_')
            this.menu()
          }) 
        },
        ...mapMutations({
-          removeLoginToken: 'REMOVE_LOGIN_TOKEN',
           setNowUserInfo: 'SET_NOW_USER_INFO'
         }),
      },

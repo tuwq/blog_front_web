@@ -2,8 +2,8 @@
   <div id="Article" class="Article">
       <div class="wrap">
       	<div class="utils">
-      		<button class="delBtn" @click.stop.prevent="delBatch">批量删除</button>
-          <button class="updateBtn" @click.stop.prevent="updateBatch">批量修改状态</button>
+      		<button class="delBtn" @click.stop="delBatch">批量删除</button>
+          <button class="updateBtn" @click.stop="updateBatch">批量修改状态</button>
       		<div class="search-wrap">
       			<input class="" placeholder="请输入搜索条件" v-model="keyword"/>
       		</div>
@@ -48,7 +48,8 @@ import { delBatchApi,updateBatchApi } from 'api/Article/article'
                 ids += $(item).val() + ','
               })
               delBatchApi(ids,(res)=>{
-                this.$refs.$ArticleList.pageArticle()
+                console.log(res)
+                this.$refs.$ArticleList.pageArticle(1)
               })
            }
         }
@@ -62,7 +63,7 @@ import { delBatchApi,updateBatchApi } from 'api/Article/article'
                 ids += $(item).val() + ','
               })
               updateBatchApi(ids,(res)=>{
-                this.$refs.$ArticleList.pageArticle()
+                this.$refs.$ArticleList.pageArticle(1)
               })
           }
         }

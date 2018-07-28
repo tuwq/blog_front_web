@@ -27,7 +27,7 @@ public class TokenService {
 		// 获得redis中的token
 		// 是否一致
 		// 返回userId
-		String LOGIN_TOKEN = ThreadUtil.getCurrentRequest().getHeader("login_token");
+		String LOGIN_TOKEN = ThreadUtil.getCurrentRequest().getHeader("_TOKEN_");
 		if (StringUtils.isNotBlank(LOGIN_TOKEN)) {
 			Map<String, String> verifyToken = JwtUtil.verifyToken(LOGIN_TOKEN);
 			String userId = verifyToken.get("userId");	

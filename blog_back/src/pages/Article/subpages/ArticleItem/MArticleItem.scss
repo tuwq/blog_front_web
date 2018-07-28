@@ -9,6 +9,6 @@
 	span {
 		flex: 1;
 		padding: 10px;
-		input[type="checkbox"] {-webkit-appearance: checkbox;}
+		input[type="checkbox"] {-webkit-appearance: checkbox;z-index: 2;}
 	}
 }}

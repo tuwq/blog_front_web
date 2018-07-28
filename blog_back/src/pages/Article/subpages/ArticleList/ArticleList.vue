@@ -45,10 +45,12 @@
            this.currentPage = page
         }
         getArticleListApi(this.currentPage,this.pageSize,(res)=>{
+          if(res.data.code == 200) {
             this.articleList = res.data.data
             this.maxPageCode = res.data.pageModel.maxPageCode
             this.total = res.data.pageModel.total
             this.$refs.pagination.currentClass(this.currentPage)
+          } 
         })
       },
       pageSearch(page) {
@@ -56,10 +58,12 @@
           this.currentPage = page
         }
         getSearchListApi(this.currentPage,this.pageSize,this.keyword,(res)=>{
-            this.articleList = res.data.data
-            this.maxPageCode = res.data.pageModel.maxPageCode
-            this.total = res.data.pageModel.total
-            this.$refs.pagination.currentClass(this.currentPage)
+            if (res.data.code == 200) {
+              this.articleList = res.data.data
+              this.maxPageCode = res.data.pageModel.maxPageCode
+              this.total = res.data.pageModel.total
+              this.$refs.pagination.currentClass(this.currentPage)
+            }
          })
       },
       searchByKeyWord(keyword) {

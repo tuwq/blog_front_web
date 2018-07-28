@@ -149,7 +149,7 @@ public class ArticleService {
 			dto.setTimeAgo(TimeAgoUtils.format(dto.getUpdateTime()));
 			dto.formatTime();
 		});
-		return PageResult.<ArticaleDto>builder().data(dtoData).pageModel(pageModel).build();
+		return PageResult.<ArticaleDto>builder().data(dtoData).pageModel(pageModel).code(200).build();
 	}
 	
 	@Transactional
@@ -206,7 +206,7 @@ public class ArticleService {
 			dto.setTimeAgo(TimeAgoUtils.format(dto.getUpdateTime()));
 			dto.formatTime();
 		});
-		return PageResult.<ArticaleDto>builder().data(dtoData).pageModel(pageModel).build();
+		return PageResult.<ArticaleDto>builder().data(dtoData).pageModel(pageModel).code(200).build();
 	}
 
 	public JsonResult<ArticaleDto> detail(Integer id) {

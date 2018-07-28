@@ -18,7 +18,10 @@ import lombok.ToString;
 @NoArgsConstructor
 public class PageResult<T> {
 	
+	private int code = 200;
+	
 	private List<T> data;
 	
 	private PageModel pageModel;
+	
 }

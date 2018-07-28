@@ -3,11 +3,12 @@ import store from 'store/main.js'
 import axios from 'axios'
 import router from './index'
 import * as CONSTANT_CODE from 'api/constant/resultCode'
+import { _set,_get,_remove } from 'base/js/cookie'
 // 每次请求携带LOGIN_TOKEN
 axios.interceptors.request.use(
     config => {
-        if (store.state.login_token) {  // 判断是否存在token，如果存在的话，则每个http header都加上token
-            config.headers.login_token  = `${store.state.login_token}`;
+        if (_get('_TOKEN_')) {  // 判断是否存在token，如果存在的话，则每个http header都加上token
+            config.headers._TOKEN_  = _get('_TOKEN_');
         }
         return config;
     },
@@ -20,13 +21,15 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
     response => {
     	if ( response.data.code == CONSTANT_CODE.TOKEN_MATURITY_LOGIN || response.data.code == CONSTANT_CODE.TOKEN_NOTUSER ) {
-    		store.commit(types.REMOVE_LOGIN_TOKEN)
+    		_remove('_TOKEN_')
+            store.commit(types.SET_NOW_USER_INFO,undefined)
             router.replace({
               path: '/login',
               query: {redirect: router.currentRoute.fullPath}
             })
     	} else if (response.data.code == CONSTANT_CODE.TOKEN_MATURITY) {
-            store.commit(types.REMOVE_LOGIN_TOKEN)
+            _remove('_TOKEN_')
+            store.commit(types.SET_NOW_USER_INFO,undefined)
         }
         return response;
     },

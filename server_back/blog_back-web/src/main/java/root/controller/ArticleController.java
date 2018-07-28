@@ -4,7 +4,6 @@ package root.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +24,6 @@ import root.model.Articale;
 import root.param.ArticleParam;
 import root.param.PageParam;
 import root.service.ArticleService;
-import root.util.ThreadUtil;
 
 @RestController
 @RequestMapping("/sys/article")
@@ -52,7 +50,7 @@ public class ArticleController {
 	
 	@DeleteMapping("/delBatch/{ids}")
 	public JsonResult<Void> delBatch(@PathVariable("ids") String ids) {
-		articleService.delBatch(ids);
+		// articleService.delBatch(ids);
 		return JsonResult.<Void>success();
 	}
 	

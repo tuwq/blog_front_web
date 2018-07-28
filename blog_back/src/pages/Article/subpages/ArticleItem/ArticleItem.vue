@@ -6,8 +6,8 @@
       <span>{{item.createTimeString}}</span>
       <span>{{item.updateTimeString}}</span>
       <span>{{item.status}}</span>
-      <span>{{item.operatorerName}}</span>
-      <span><input class="opearcheck" type="checkbox" :value="item.id"></span>
+      <span @click.stop>{{item.operatorerName}}</span>
+      <span @click.stop><input class="opearcheck" @click.stop type="checkbox" :value="item.id"></span>
   </div>
 </template>
 

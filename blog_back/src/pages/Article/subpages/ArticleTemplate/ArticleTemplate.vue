@@ -23,6 +23,7 @@
     },
     mounted() {
       hljs.initHighlightingOnLoad()
+      this.mountedContent()
     },
     methods: {
     	mountedContent() {

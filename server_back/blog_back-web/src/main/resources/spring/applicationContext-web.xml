@@ -22,6 +22,12 @@
 	<!-- 拦截器 -->
 	<mvc:interceptors>
 		<mvc:interceptor>
+			<mvc:mapping path="/sys/article/**"/>
+			<mvc:exclude-mapping path="/sys/login"/>
+			<mvc:exclude-mapping path="/sys/quitlogin"/>
+			<bean class="root.Interceptor.TokenInterceptor"></bean>
+		</mvc:interceptor>
+		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
 			<mvc:exclude-mapping path="/login/**"/>
 			<mvc:exclude-mapping path="/css/**"/>

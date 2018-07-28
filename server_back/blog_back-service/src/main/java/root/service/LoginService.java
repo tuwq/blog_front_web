@@ -77,7 +77,7 @@ public class LoginService {
 			redis.del(RedisCode.LOGIN_TOKEN+":"+ userId);
 			return JsonResult.<Void>success();
 		}
-		return JsonResult.<Void>error(ResultCode.TOKEN_MATURITY);
+		return JsonResult.<Void>error(ResultCode.TOKEN_MATURITY_TOLOGIN);
 	}
 
 }

@@ -8,6 +8,8 @@
      		</div>
      		<div class="categroy">
      			<h2>文章分类</h2>
+          封面<input type="file" class="uploadCover" ref="$updateCover">
+          <div class="faceCover" v-if="faceCover"><img :src="artimgUrl+faceCover" alt="cover"/></div>
      			<div class="checkbox-group">
 	     			<div class="checkbox-control">
 	     				<label for="article">文章</label> 
@@ -29,19 +31,19 @@
      		</div>
      		<div class="markdownEditor" id="editor">
            <button @click="uploadimg" class="uploadBtn">上传图片</button>
-           <button @click="finish" class="finishBtn">完成修改</button>
            <button @click="reMounted" class="MountedBtn">重新渲染</button>
+           <button @click="finish" class="finishBtn">完成修改</button>
      			 <mavon-editor style="height: 100%" v-model="content" ref=updatemd @imgAdd="$imgAdd" @imgDel="$imgDel"></mavon-editor>
      		</div>
      	</div>
      </div>
-     <ArticleTemplate ref="$editTemplate" :content="content"/>
+     <ArticleTemplate v-if="content" ref="$editTemplate" :content="content"/>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import { mavonEditor } from 'mavon-editor'
-  import { getArticleDetail,updateArticleApi } from 'api/Article/article'
+  import { getArticleDetail,updateArticleApi,getFaceCoverUrlApi,getImgURIApi } from 'api/Article/article'
   import 'mavon-editor/dist/css/index.css'
   import ArticleTemplate from '../ArticleTemplate/ArticleTemplate'
   export default {  
@@ -50,8 +52,18 @@
 	    	  categoryNames: [],
 	        content: '',
 	        img_file: {},
-          title: ''
+          title: '',
+          faceCover: '',
+          artimgUrl: global.artimgUrl
     	}
+    },
+    mounted() {
+      $(this.$refs.$updateCover).on('change',()=>{
+        this.uploadCover()
+      })
+    },
+    destroyed() {
+      $(this.$refs.$updateCover).off('change')
     },
     created() {
       getArticleDetail(this.$route.params.id,(res)=>{
@@ -59,12 +71,22 @@
             this.title = res.data.result.title
             this.content = res.data.result.content
             this.categoryNames = res.data.result.categoryIds
+            this.faceCover = res.data.result.faceCover
         }
       })
     },
     methods: {
+      uploadCover() {
+        var file = $(this.$refs.$updateCover)[0].files[0]
+        var formdata = new FormData()
+        formdata.append('faceCover',file)
+        formdata.append("coverImg", this.faceCover)
+        getFaceCoverUrlApi(formdata,(res)=>{
+          this.faceCover = res.data.imgNodes[0].path
+        })
+      },
       finish() {
-        updateArticleApi(this.$route.params.id,this.title,this.categoryNames,this.content,(res)=>{
+        updateArticleApi(this.$route.params.id,this.title,this.categoryNames,this.content,this.faceCover,(res)=>{
            if (res.data.code==200) {
             alert('修改成功了')
            }
@@ -79,11 +101,18 @@
         delete this.img_file[pos]
       },
       uploadimg() {
-        var formData = new FormData()
-        for (var _img in this.img_file) {
-          formData.append(_img,this.img_file[_img])
+        var formdata = new FormData();
+        for(var _img in this.img_file){
+            formdata.append('fileArray', this.img_file[_img])
         }
-        alert('上传成功')
+        getImgURIApi(formdata,(res)=>{
+          if (res.data.code == 200) {
+            for(var img in res.data.imgNodes) {
+              this.$refs.updatemd.$img2Url(img,res.data.imgNodes[img].path)
+             }
+             alert('上传成功')
+          }
+        })
       },
       reMounted() {
         this.$refs.$editTemplate.mountedContent()

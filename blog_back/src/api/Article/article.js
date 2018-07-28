@@ -1,6 +1,6 @@
-export function addArticleApi(title,categoryNames,content,success) {
+export function addArticleApi(title,categoryNames,content,coverImg,success) {
 	axios.post('/sys/article/add',{
-		title,categoryNames,content
+		title,categoryNames,content,coverImg
 	}).then((res)=>{
 		success(res)
 	})
@@ -51,9 +51,17 @@ export function getArticleDetail(id,success) {
 	})
 }
 
-export function updateArticleApi(id,title,categoryNames,content,success) {
+export function updateArticleApi(id,title,categoryNames,content,coverImg,success) {
 	axios.put('/sys/article/'+id,{
-		title,categoryNames,content
+		title,categoryNames,content,coverImg
+	}).then((res)=>{
+		success(res)
+	})
+}
+
+export function getFaceCoverUrlApi(formdata,success) {
+	axios.post('/sys/article/faceCover',formdata,{
+		headers:{'Content-Type':'multipart/form-data'}
 	}).then((res)=>{
 		success(res)
 	})
