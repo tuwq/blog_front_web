@@ -48,6 +48,17 @@
 			<artifactId>pagehelper-spring-boot-starter</artifactId>
 			<version>1.2.3</version>
 		</dependency>
+		<!-- jwt -->
+		<dependency>
+           <groupId>com.auth0</groupId>
+           <artifactId>java-jwt</artifactId>
+           <version>3.1.0</version>
+         </dependency>
+         <!-- springmail -->
+          <dependency>
+		 	<groupId>org.springframework.boot</groupId>
+		 	<artifactId>spring-boot-starter-mail</artifactId>
+		 </dependency>
 		<!-- json转换 -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.datatype</groupId>
@@ -87,6 +98,10 @@
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-redis</artifactId>
 		</dependency>
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-cache</artifactId>
+		</dependency>
 		 <dependency>
 		  <groupId>org.apache.commons</groupId>
 		  <artifactId>commons-pool2</artifactId>
@@ -106,13 +121,12 @@
 		</dependency>
 		<!-- hibernate验证 -->
 		<dependency>
-	      <groupId>javax.validation</groupId>
-	      <artifactId>validation-api</artifactId>
-	    </dependency>
-	    <dependency>
-	      <groupId>org.hibernate</groupId>
-	      <artifactId>hibernate-validator</artifactId>
-	      <version>5.2.4.Final</version>
-	    </dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			</dependency>
+		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			</dependency>
   </dependencies>
 </project>

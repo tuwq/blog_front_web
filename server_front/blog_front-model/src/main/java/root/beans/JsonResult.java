@@ -35,7 +35,7 @@ public class JsonResult<T> {
 	}
 	
 	public static JsonResult<Void> success() {
-		return new JsonResult<Void>();
+		return JsonResult.<Void>builder().flag(true).code(200).build();
 	}
 	
 	public static JsonResult<Void> error(int code, String msg) {

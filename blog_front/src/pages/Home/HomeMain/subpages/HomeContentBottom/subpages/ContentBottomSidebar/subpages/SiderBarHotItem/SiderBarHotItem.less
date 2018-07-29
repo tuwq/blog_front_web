@@ -1,0 +1,37 @@
+@import url("../../../../../../../../../base/style/an.less");
+@media screen and (min-width: @pc_width) {
+.SiderBarHotList {
+	.SiderBarHotItem {
+		display: flex;
+		margin-top: 10px;
+		max-height: 68px;
+		overflow: hidden;
+		&:hover {
+			.image img{.image-scale-after}
+		}
+		.image {
+			max-width: 100px;
+			max-height: 136px;
+			overflow: hidden;
+			img {max-height: 136px;.image-scale-before;.image-opacity;}
+		}
+		.description {
+			flex: 1;
+			display: flex;
+			flex-wrap: wrap;
+			flex-direction: column;
+			justify-content: center;
+			color: @gray_color;
+			.hot-title {
+				font-size: 1.4rem;
+				max-height: 40px;
+				overflow: hidden;
+				font-weight: 400;
+				margin-bottom: 10px;
+			}
+			.hot-content {
+				span {padding-right: 5px;i{padding-right: 2px;}}
+			}
+		}
+	}
+}}

@@ -16,6 +16,6 @@ public class ExceptionAdvice {
 	@ExceptionHandler(CheckParamException.class)
 	public ResponseEntity<ParamExceptionResult> handleBindException(CheckParamException e) {
 		// TODO 记录异常日志
-		return new ResponseEntity<ParamExceptionResult>(ParamExceptionResult.error(e.getFieldName(),e.getFieldValue()),HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<ParamExceptionResult>(ParamExceptionResult.error(e.getFieldName(),e.getFieldValue()),HttpStatus.OK);
 	}
 }

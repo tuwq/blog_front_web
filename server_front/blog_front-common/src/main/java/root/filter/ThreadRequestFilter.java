@@ -29,6 +29,7 @@ public class ThreadRequestFilter implements Filter{
 		HttpServletRequest req = (HttpServletRequest)request;
 		HttpServletResponse resp = (HttpServletResponse)response;
 		ThreadUtil.add(req);
+		ThreadUtil.add(resp);
 		chain.doFilter(request, response);
 		return;
 	}

@@ -22,7 +22,8 @@ class Login extends React.Component {
 		
 	}
 
-	updateStatusFn() {
+	updateStatusFn(e) {
+		e.stopPropagation()
 		this.setState((prevState, props)=>({
 			status: !prevState.status
 		}))

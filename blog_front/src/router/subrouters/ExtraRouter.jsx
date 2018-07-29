@@ -5,6 +5,7 @@ import Login from '@/pages/Login/Login'
 import FindPass from '@/pages/FindPass/FindPass'
 import UpdatePass from '@/pages/UpdatePass/UpdatePass'
 import NotFound from '@/pages/NotFound/NotFound'
+import MailMessage from '@/pages/MailMessage/MailMessage'
 
 class ExtraRouter extends React.Component {
     render() {
@@ -14,6 +15,7 @@ class ExtraRouter extends React.Component {
         		<Route exact path="/extra/login" component={Login} />
         		<Route exact path="/extra/findpass" component={FindPass} />
         		<Route exact path="/extra/updatepass/:id" component={UpdatePass} />
+                <Route exact path="/extra/mailMessage" component={MailMessage} />
         		<Route path="/extra/*" component={NotFound}/>
             </Switch>
         )

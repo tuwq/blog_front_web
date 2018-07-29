@@ -1,13 +1,6 @@
 {
   "hints": [],
-  "groups": [
-    {
-      "sourceType": "root.druid.DruidConfig",
-      "name": "spring.druid",
-      "sourceMethod": "public com.alibaba.druid.pool.DruidDataSource dataSource() ",
-      "type": "com.alibaba.druid.pool.DruidDataSource"
-    }
-  ],
+  "groups": [],
   "properties": [
     {
       "sourceType": "com.alibaba.druid.pool.DruidDataSource",

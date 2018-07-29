@@ -61,11 +61,13 @@ class Slider extends React.Component {
 	reSize() {
 		// 适应屏幕宽度
 		// debounce节流
-		this.imgWidth =	this.screen.current.clientWidth
-		this.imageList.current.style.width = this.imgWidth * 3 + 'px'
-		$.each(this.imgs,(index,el)=>{
-			el.style.width = this.imgWidth + 'px'
-		})
+		if (this.screen) {
+			this.imgWidth =	this.screen.current.clientWidth
+			this.imageList.current.style.width = this.imgWidth * 3 + 'px'
+			$.each(this.imgs,(index,el)=>{
+				el.style.width = this.imgWidth + 'px'
+			})
+		}
 	}
 
 	render() {

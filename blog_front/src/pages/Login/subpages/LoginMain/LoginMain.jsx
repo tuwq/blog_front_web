@@ -41,10 +41,6 @@ class LoginMain extends React.Component {
        							<button className="regist">登录</button>
        						</div>
 	          			</div>
-	          			<div className="meta">
-	       					<span><a>快速登录</a></span>
-	       					<span><a><img width="20" height="20" alt="" src={qqSvg}/></a></span>
-	       				</div>
 	       				<div className="goreigist">
 	       					<span><a onClick={this.props.updateStatusFn}>现在注册</a></span>
 	       					<span><Link to="/user/findpass">忘记密码?</Link></span>
