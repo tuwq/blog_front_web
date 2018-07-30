@@ -20,7 +20,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 
 import root.constant.ResultCode;
-import root.exception.LoginTokenException;
+import root.exception.TokenException;
 import root.exception.WebException;
 
 public class JwtUtil {
@@ -50,7 +50,7 @@ public class JwtUtil {
 		Algorithm algorithm = null;
 		try {
 			algorithm = Algorithm.HMAC256(SALT);
-		}catch(IllegalArgumentException | UnsupportedEncodingException e) {
+		}catch(Exception e) {
 			throw new RuntimeException(e);
 		}
 		JWTVerifier verifier = JWT.require(algorithm).withIssuer(ISSUE).build();
@@ -58,7 +58,7 @@ public class JwtUtil {
 		try {
 			jwt =verifier.verify(token);
 		} catch (Exception  e1) {
-			throw new LoginTokenException(ResultCode.TOKEN_NOTUSER,"LOGIN_TOKEN无法解析");
+			throw new TokenException(ResultCode.TOKEN_NOTUSER,"TOKEN无法解析");
 		}
 		Map<String, Claim> map = jwt.getClaims();
 		Map<String, String> resultMap = Maps.newHashMap();

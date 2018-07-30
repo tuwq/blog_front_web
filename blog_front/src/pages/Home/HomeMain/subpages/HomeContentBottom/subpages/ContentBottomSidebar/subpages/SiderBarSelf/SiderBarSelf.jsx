@@ -23,7 +23,7 @@ class SiderBarSelf extends React.Component {
          	<div id="SiderBarSelf" className="SiderBarSelf">
          		<div className="SelfBg"><a><img alt=""/></a></div>
          		<div className="SelfMsg">
-         			<a className="SelfAvatar"><img alt="" src="https://ikmoe.com/wp-content/uploads/avatars/1.jpg"/></a>
+         			<a className="SelfAvatar"><img alt="" src="http://pcij2jrr4.bkt.clouddn.com/upload/tempauthor.jpg"/></a>
          			<div className="SelfName">
          				<span>tuwq</span>
          				<span>站长</span>

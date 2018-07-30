@@ -28,7 +28,25 @@
     now_login_ip, create_time, operate_time
   </sql>
   
+  <select id="InfoById" parameterType="map" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from `user`
+    where id = #{id,jdbcType=INTEGER}
+  </select>
   
+  <select id="countByUsernameOrEmail" resultType="int">
+  	SELECT count(1)
+	FROM `user`
+	WHERE username = #{loginname} OR email = #{loginname}
+  </select>
+  
+  <select id="getByUsernameOrEmail" resultMap="BaseResultMap">
+  	SELECT <include refid="Base_Column_List" />
+	FROM `user`
+	WHERE username = #{loginname} OR email = #{loginname}
+  </select>
+    
   <select id="getByEmail" parameterType="map" resultMap="BaseResultMap"> 
   	SELECT <include refid="Base_Column_List" />
   	FROM `user`

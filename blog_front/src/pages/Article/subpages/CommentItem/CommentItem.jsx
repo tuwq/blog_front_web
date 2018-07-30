@@ -31,7 +31,7 @@ class CommentItem extends React.Component {
 	render() {	
 		return (
 			<div className="CommentItem">
-				<a className="avatar"><img alt="" src="https://q.qlogo.cn/g?b=qq&nk=1537060553&s=40"/></a>
+				<a className="avatar"><img alt="" src="http://pcij2jrr4.bkt.clouddn.com/upload/tempartavatar.jpg"/></a>
 				<div className="content-wrapper">
 					<div className="meta">
 						<span>秋风酱</span>

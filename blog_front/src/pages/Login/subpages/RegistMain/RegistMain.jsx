@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 
 import qqSvg from 'static/svg/qq.svg'
-import { checkForm } from 'base/js/check'
+import { checkRegistForm } from 'base/js/check'
 import { registApi } from 'api/Login/login'
 
 import ValidateCode from 'base/general/ValidateCode/ValidateCode'
@@ -66,7 +66,8 @@ class RegistMain extends React.Component {
 
 	regist(e) {
 		e.stopPropagation()
-		var flag = checkForm(this.state)
+		e.preventDefault()
+		var flag = checkRegistForm(this.state)
 		if (flag == true) {
 			registApi(this.state,(res)=>{
 				if (res.data.code == 200) {
@@ -106,9 +107,9 @@ class RegistMain extends React.Component {
 	       					}
 	       					<p>我们将发送一封验证邮件至你的邮箱, 请正确填写以完成账号注册和激活</p>
 	       					<div className="form-group">
-	       						<div className="form-control"><input value={this.state.username} onChange={this.usernameChange.bind(this)} type="text" placeholder="账户"/></div>
-	       						<div className="form-control"><input value={this.state.email} onChange={this.emailChange.bind(this)} type="email" placeholder="邮箱"/></div>
-	       						<div className="form-control"><input value={this.state.password} onChange={this.passwordChange.bind(this)} type="password" placeholder="密码"/></div>
+	       						<div className="form-control"><input value={this.state.username} onChange={this.usernameChange.bind(this)} type="text" placeholder="账户" autoComplete="new-password" /></div>
+	       						<div className="form-control"><input value={this.state.email} onChange={this.emailChange.bind(this)} type="email" placeholder="邮箱" autoComplete="new-password" /></div>
+	       						<div className="form-control"><input value={this.state.password} onChange={this.passwordChange.bind(this)} type="password" placeholder="密码" autoComplete="new-password" /></div>
 	       						<div className="form-control validtion">
 	       							<input type="text" placeholder="验证码" value={this.state.usercode} onChange={this.usercodeChange.bind(this)}/>
 	       							<span><ValidateCode validateCodeChange={this.validateCodeChange.bind(this)}/></span>

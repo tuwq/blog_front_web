@@ -22,7 +22,7 @@ class SiderBarHotItem extends React.Component {
 		return (
          	<div className="SiderBarHotItem">
                <div className="image">
-                  <a><img width="200" height="136" alt="" src="https://ikmoe.com/wp-content/themes/ikmoe-Snow-Sakura/images/app/app-icon72x72@2x.png?imageView2/1/w/200/h/150/q/100"/></a>
+                  <a><img width="200" height="136" alt="" src="http://pcij2jrr4.bkt.clouddn.com/upload/tempicon.png"/></a>
                </div>
          		<div className="description">
          			<div className="hot-title"><a>友链说明</a></div>

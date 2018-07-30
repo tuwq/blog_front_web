@@ -20,7 +20,7 @@ class WidgetItem extends React.Component {
          	<div className="WidgetItem">
      			<div className="thumb">
      				<a>
-     					<img width="128" height="64" alt="" src="https://ikmoe.com/wp-content/uploads/2017/04/ikmoe_2017-04-05_06-54-15-400x200.png?imageView2/1/w/200/h/150/q/100"></img>
+     					<img width="128" height="64" alt="" src="http://pcij2jrr4.bkt.clouddn.com//upload/temptopside.png"></img>
      				</a>
      			</div>
      			<div className="detail">

@@ -3,7 +3,9 @@ package root.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import root.model.SysUser;
 import root.model.User;
+import root.param.LoginParam;
 
 @Mapper
 public interface UserMapper {
@@ -42,5 +44,24 @@ public interface UserMapper {
 	 * @return
 	 */
 	User getByActivationCode(@Param("key") String key);
+	/**
+	 * 是否存在用户名或邮箱
+	 * @param param
+	 * @return
+	 */
+	int countByUsernameOrEmail(LoginParam param);
+	/**
+	 * 用户名或邮箱查找用户
+	 * @param param
+	 * @return
+	 */
+	User getByUsernameOrEmail(LoginParam param);
+	/**
+	 * id查找用户
+	 * @param userId
+	 * @return
+	 */
+	User InfoById(@Param("id") Integer id);
+	
     
 }

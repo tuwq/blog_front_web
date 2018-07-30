@@ -12,14 +12,23 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.google.common.collect.ImmutableMap;
+
 import root.beans.JsonResult;
 import root.constant.RedisCode;
+import root.constant.ResultCode;
+import root.dto.LoginDto;
+import root.dto.UserDto;
+import root.exception.ActivationException;
 import root.exception.CheckParamException;
 import root.mapper.UserMapper;
 import root.model.User;
+import root.param.LoginParam;
 import root.param.RegistParam;
 import root.redis.RedisOperator;
+import root.util.DtoUtil;
 import root.util.IpUtil;
+import root.util.JwtUtil;
 import root.util.MD5Util;
 import root.util.RegExUtil;
 import root.util.ThreadUtil;
@@ -34,6 +43,8 @@ public class LoginService {
 	@Resource
 	private MailService mailService;
 	@Resource
+	private TokenService tokenService;
+	@Resource
 	private RedisOperator redis;
 	@Value("${mailTimeoutMINUTE}")
 	private Integer mailTimeoutMINUTE;
@@ -41,6 +52,8 @@ public class LoginService {
 	private String mailActivationApiName;
 	@Value("${mailMessageUrl}")
 	private String mailMessageUrl;
+	@Value("${defaultAvatarname}")
+	private String defaultAvatarname;
 	
 	@Transactional
 	public void regist(RegistParam param) {
@@ -72,6 +85,7 @@ public class LoginService {
 		User user = User.builder()
 					.username(param.getUsername())
 					.nickname(param.getUsername())
+					.avatar(defaultAvatarname)
 					.password(MD5Util.encrypt(param.getPassword()))
 					.email(param.getEmail())
 					.activationCode(randomKey)
@@ -99,7 +113,7 @@ public class LoginService {
 					response.sendRedirect(mailMessageUrl
 								+ "?message="+URLEncoder.encode("密钥已过期或不存在","UTF-8"));
 					return;
-				} catch (IOException e) {e.printStackTrace();}
+				} catch (IOException e) {throw new ActivationException("激活邮件重定向失败");}
 			}
 			String randomKey = MD5Util.encrypt(user.getEmail()) + TimeUtil.getSkipTime(Calendar.MINUTE, mailTimeoutMINUTE);
 			redis.set(RedisCode.EMAIL_ACTIVATION_CODE+":"+randomKey, user.getEmail(),mailTimeoutMINUTE*60);
@@ -115,7 +129,7 @@ public class LoginService {
 			try {
 				response.sendRedirect(mailMessageUrl+""
 							+ "?message="+URLEncoder.encode("激活时间过期,已经重新向 ","UTF-8")+user.getEmail()+URLEncoder.encode("发送了激活邮件","UTF-8"));
-			} catch (IOException e) {e.printStackTrace();}
+			} catch (IOException e) {throw new ActivationException("激活邮件重定向失败");}
 		} else {
 			User user = userMapper.getByEmail(redisEmail);
 			if (user == null) {
@@ -123,14 +137,14 @@ public class LoginService {
 					response.sendRedirect(mailMessageUrl
 								+ "?message="+URLEncoder.encode("密钥已过期或不存在","UTF-8"));
 					return;
-				} catch (IOException e) {e.printStackTrace();}
+				} catch (IOException e) {throw new ActivationException("激活邮件重定向失败");}
 			}
 			if(user.getActivationStatus() == 1) {
 				try {
 					response.sendRedirect(mailMessageUrl
 								+ "?message="+URLEncoder.encode("账号以激活","UTF-8"));
 					return;
-				} catch (IOException e) {e.printStackTrace();}
+				} catch (IOException e) {throw new ActivationException("激活邮件重定向失败");}
 			}
 			user.setActivationStatus(1);
 			user.setBeforeLoginIp(user.getNowLoginIp());
@@ -140,8 +154,63 @@ public class LoginService {
 			try {
 				response.sendRedirect(mailMessageUrl
 							+ "?message="+URLEncoder.encode("激活成功2秒后跳转到登陆页","UTF-8")+"&flag=1");
-			} catch (IOException e) {e.printStackTrace();}
+			} catch (IOException e) {throw new ActivationException("激活邮件重定向失败");}
 		}
+	}
+
+	@Transactional
+	public JsonResult<?> login(LoginParam param) {
+		// 检查字段
+		// 用户是否存在，输入的可能是用户名也有可能是有邮箱
+		// 检查密码
+		// 得到用户检查激活状态，未激活重新发送邮件并抛出异常
+		// 生成jwt，以(userId,jwt)的形式存储在redis中，不设置过期时间
+		// 将token和用户信息返回前端，前端把token放入localStorage或cookie
+		// 自定义的异常被自己advice捕获也会被spring回滚
+		ValidatorUtil.check(param);
+		int count = userMapper.countByUsernameOrEmail(param);
+		if (count == 0) {
+			throw new CheckParamException("登录账户","不存在");
+		}
+		User user = userMapper.getByUsernameOrEmail(param);
+		if(!user.getPassword().equals(MD5Util.encrypt(param.getPassword()))) {
+			throw new CheckParamException("密码","错误");
+		}
+		if (user.getActivationStatus() == 0) {
+			String randomKey = MD5Util.encrypt(user.getEmail()) + TimeUtil.getSkipTime(Calendar.MINUTE, mailTimeoutMINUTE);
+			redis.set(RedisCode.EMAIL_ACTIVATION_CODE+":"+randomKey, user.getEmail(),mailTimeoutMINUTE*60);
+			user.setBeforeLoginIp(user.getNowLoginIp());
+			user.setNowLoginIp(IpUtil.getRemoteIp(ThreadUtil.getCurrentRequest()));
+			user.setOperateTime(new Date());
+			user.setActivationCode(randomKey);
+			userMapper.updateByPrimaryKeySelective(user);
+			String content = 
+					"激活重试,您的登录邮箱为"+user.getEmail()+",点击链接激活账号 "+mailActivationApiName+"?key="+randomKey
+					+ " 若点击无效，请将内容复制放入浏览器地址栏当中";
+			mailService.sendSimpleMail("博客激活邮件", content, user.getEmail());
+			return JsonResult.error(ResultCode.EMAIL_MATURITY,"账户未激活邮箱已经重新向"+user.getEmail()+"发送了一封新激活邮件");
+		}
+		user.setBeforeLoginIp(user.getNowLoginIp());
+		user.setNowLoginIp(IpUtil.getRemoteIp(ThreadUtil.getCurrentRequest()));
+		user.setOperateTime(new Date());;
+		userMapper.updateByPrimaryKeySelective(user);
+		String token = JwtUtil.getToken(ImmutableMap.of(
+				"userId",Integer.toString(user.getId()),
+				"email",user.getEmail()));
+		redis.set(RedisCode.TOKEN+":"+Integer.toString(user.getId()),token);
+		user.setPassword("");
+		user.setActivationCode("");
+		LoginDto dto = LoginDto.builder().token(token).userDto(DtoUtil.adapt(new UserDto(), user)).build();
+		return JsonResult.success(dto);
+	}
+
+	public JsonResult<Void> logout() {
+		Integer userId = tokenService.checkToken();
+		if (userId != null) {
+			redis.del(RedisCode.TOKEN+":"+ userId);
+			return JsonResult.<Void>success();
+		}
+		return JsonResult.<Void>error(ResultCode.TOKEN_MATURITY);
 	}
 	
 }

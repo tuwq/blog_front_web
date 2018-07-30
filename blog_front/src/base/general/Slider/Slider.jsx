@@ -75,9 +75,9 @@ class Slider extends React.Component {
          	<div id="Slider" className="Silder" ref={this.silder}>
          		<div className="screen" ref={this.screen}>
          			<ul ref={this.imageList}>
-         				<li><a><img width="" height="" alt="" src="https://ikmoe.com/wp-content/uploads/wp-img/images/2018/02/09/98f57d54a6ac0a0161af26143161a460.png?imageView2/1/w/750/h/375/q/100"/></a></li>
-         				<li><a><img width="" height="" alt="" src="https://ikmoe.com/wp-content/uploads/2018/02/20180226231848-ikmoe-45.png?imageView2/1/w/750/h/375/q/100"/></a></li>
-         				<li><a><img width="" height="" alt="" src="https://ikmoe.com/wp-content/uploads/2018/02/20180226231848-ikmoe-45.png?imageView2/1/w/750/h/375/q/100"/></a></li>
+         				<li><a><img width="" height="" alt="" src="http://pcij2jrr4.bkt.clouddn.com/upload/silider/wp1.png"/></a></li>
+         				<li><a><img width="" height="" alt="" src="http://pcij2jrr4.bkt.clouddn.com/upload/silider/wp2.png"/></a></li>
+         				<li><a><img width="" height="" alt="" src="http://pcij2jrr4.bkt.clouddn.com/upload/silider/wp2.png"/></a></li>
          			</ul>
          			<ol ref={this.pointList}></ol>
          		</div>

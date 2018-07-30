@@ -1,6 +1,6 @@
-export function checkForm(state) {
+export function checkRegistForm(state) {
 	if (state.username.trim() == '' || state.username == null ) {
-		return '用户名不能为空'
+		return '账户不能为空'
 	}
 	if (state.password.trim() == '' || state.password == null ) {
 		return '密码不能为空'
@@ -20,4 +20,14 @@ export function checkmail(mail) {
 	return reg.test(mail)
 }
 
+
+export function checkLoginForm(state) {
+	if (state.loginname.trim() == '' || state.loginname == null) {
+		return '账户不能为空'
+	}
+	if (state.password.trim() == '' || state.password == null) {
+		return '密码不能为空'
+	}
+	return true
+}
 

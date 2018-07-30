@@ -19,7 +19,7 @@ class ModelMediumItem extends React.Component {
 		return (
          	<div className="ModelMediumItem">
          		<div className="image">
-         			<a><img width="" height="" alt="" src="https://ikmoe.com/wp-content/uploads/wp-img/uploads/2017/06/ikmoe_2017-06-24_17-13-18.jpg?imageView2/1/w/375/h/250/q/100"/></a>
+         			<a><img width="" height="" alt="" src="http://pcij2jrr4.bkt.clouddn.com/upload/tempitem2.jpg"/></a>
          		</div>
          		<div className="description">
          			<div className="section-title">

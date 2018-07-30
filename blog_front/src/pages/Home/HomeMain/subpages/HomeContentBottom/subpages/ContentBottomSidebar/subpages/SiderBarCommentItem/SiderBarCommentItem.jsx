@@ -20,7 +20,7 @@ class SiderBarCommentItem extends React.Component {
          	<div className="SiderBarCommentItem">
          		<div className="CommentTitle">
          			<a className="CommentAvatar">
-         				<img width="20" height="20px" alt="" src="https://q.qlogo.cn/qqapp/101404562/2AD8824D7FC82F3C48BBEAE97F1F920B/100"/>
+         				<img width="20" height="20px" alt="" src="http://pcij2jrr4.bkt.clouddn.com/upload/tempcomavatar.jpg"/>
          				1839583996@qq.com
          			</a>
          			<span>评论于</span>

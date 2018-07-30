@@ -39,7 +39,7 @@ public class JsonResult<T> {
 	}
 	
 	public static JsonResult<Void> error(int code, String msg) {
-		return JsonResult.<Void>builder().code(code).msg(msg).build();
+		return JsonResult.<Void>builder().result(null).code(code).msg(msg).build();
 	}
 	
 	public static JsonResult<Void> error(String msg) {
@@ -47,7 +47,7 @@ public class JsonResult<T> {
 	}
 	
 	public static JsonResult<Void> error(int code) {
-		return JsonResult.<Void>builder().code(code).build();
+		return JsonResult.<Void>builder().result(null).code(code).build();
 	}
 	
 	public Map<String, Object> toMap() {

@@ -23,7 +23,7 @@ class ModelCrowdBigItem extends React.Component {
 		return (
          	<div className="ModelCrowdBigItem">
          		<div className="image">
-         			<a><img width="" height="" alt="" src="https://ikmoe.com/wp-content/uploads/wp-img/uploads/2017/11/ikmoe_2017-11-08_14-58-18.png?imageView2/1/w/375/h/250/q/100"/></a>
+         			<a><img width="" height="" alt="" src="http://pcij2jrr4.bkt.clouddn.com/upload/tempitem3.png"/></a>
          		</div>
                <div className="description">
                   <div className="title">

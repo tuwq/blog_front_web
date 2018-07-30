@@ -23,7 +23,7 @@ class ModelBigItem extends React.Component {
 		return (
          	<div className="ModelBigItem">
          		<div className="image">
-         			<a><img width="" height="" alt="" src="https://ikmoe.com/wp-content/uploads/wp-img/uploads/images/2017/11/28/iKmoe201711282143410abc5.png?imageView2/1/w/375/h/250/q/100"/></a>
+         			<a><img width="" height="" alt="" src="http://pcij2jrr4.bkt.clouddn.com/upload/tempitem1.png"/></a>
          		</div>
          		<div className="description">
          			<div className="title"><a>#教程# nginx.1.12.2编译云锁安全模块/宝塔小白版本/一键！</a></div>

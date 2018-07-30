@@ -1,8 +1,8 @@
-import * as actionTypes from '../constants/user'
+import * as actionTypes from '../constants/constant.js'
 
-export function update(data) {
+export function save(data) {
     return {
-        type: actionTypes.USERINFO_UPDATE,
+        type: actionTypes.SAVE_USER_INFO,
         data
     }
 }
