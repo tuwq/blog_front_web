@@ -26,7 +26,7 @@ class HomeHeader extends React.Component {
     this.$ItemList = React.createRef()
     this.$userMenu = React.createRef()
     this.store = this.context.store
-    this.store.subscribe(this.listenRedux)
+    this.unsubscribe = this.store.subscribe(this.listenRedux)
     PubSub.subscribe(global.userMenuSubscribe,this.subscribeMenu)
     this.state = {
        avatar: ''
@@ -40,6 +40,7 @@ class HomeHeader extends React.Component {
 	}
 
   componentWillUnmount() {
+    this.unsubscribe()
     // 取消订阅
     PubSub.unsubscribe(this.subscribeMenu);
     // 防止异步调用数据
@@ -141,7 +142,7 @@ class HomeHeader extends React.Component {
                 {
                   JSON.stringify(this.props.user) != "{}"
                   ? (<li className="HomeHeaderItemRight UserLink">
-                      <a className="ItemLinkRight"><img onClick={this.userMenu.bind(this)} width="32" height="32"alt="" 
+                      <a className="ItemLinkRight"><img width="32" height="32" onClick={this.userMenu.bind(this)} alt="" 
                       src={this.state.avatar}/></a>
                       <ul className="user-menu" ref={this.$userMenu}>
                         <li><Link to="/user/123"><span><svg fill="#33495e" viewBox="0 0 1069 1024" width="15.6591796875" height="15"><path d="M859.358609 837.698783C977.786435 752.350609 1053.495652 622.191304 1053.495652 476.40487 1053.495652 219.269565 818.198261 10.841043 527.961043 10.841043 237.723826 10.841043 2.448696 219.269565 2.448696 476.40487 2.448696 733.517913 237.723826 941.968696 527.961043 941.968696 568.876522 941.968696 608.701217 937.805913 646.92313 929.992348 724.680348 959.577043 840.592696 998.199652 936.047304 1007.215304 854.817391 924.872348 854.171826 863.944348 859.358609 837.698783L859.358609 837.698783ZM263.702261 573.529043C219.202783 573.529043 183.140174 537.444174 183.140174 492.966957 183.140174 448.467478 219.202783 412.40487 263.702261 412.40487 308.179478 412.40487 344.242087 448.467478 344.242087 492.966957 344.242087 537.444174 308.179478 573.529043 263.702261 573.529043L263.702261 573.529043ZM526.447304 573.529043C481.947826 573.529043 445.885217 537.444174 445.885217 492.966957 445.885217 448.467478 481.947826 412.40487 526.447304 412.40487 570.946783 412.40487 607.009391 448.467478 607.009391 492.966957 607.031652 537.444174 570.946783 573.529043 526.447304 573.529043L526.447304 573.529043ZM789.214609 573.529043C744.737391 573.529043 708.674783 537.444174 708.674783 492.966957 708.674783 448.467478 744.737391 412.40487 789.214609 412.40487 833.714087 412.40487 869.776696 448.467478 869.776696 492.966957 869.776696 537.444174 833.714087 573.529043 789.214609 573.529043L789.214609 573.529043Z"></path></svg>

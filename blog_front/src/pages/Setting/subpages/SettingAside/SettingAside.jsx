@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
-import { withRouter } from 'react-router-dom'
+import { withRouter,Link } from 'react-router-dom'
 
 import './SettingAside.less'
 import './MSettingAside.less'
@@ -26,9 +26,7 @@ class SettingAside extends React.Component {
 					</div>
 					<ul className="tab">
 						<li className="current"><a>设置</a></li>
-						<li><a>消息</a></li>
-						<li><a>粉丝</a></li>
-						<li><a>关注</a></li>
+						<li><Link to="/user/123">消息</Link></li>
 					</ul>
 				</nav>
         	</div>

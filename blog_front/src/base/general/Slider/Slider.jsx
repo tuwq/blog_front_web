@@ -53,6 +53,14 @@ class Slider extends React.Component {
 	    };
 	}
 
+	removeTimer() {
+		clearInterval(this.Autotimer)
+		window.onresize = ''
+		for (let i = 0 ;i < this.pointArr.length; i++) {
+			removeEvent(this.pointArr[i],this.pointFnList[i],'click')
+		}
+	}
+
 
 	listenWindow() {
 		window.onresize = debounce(this.reSize,1000)
@@ -151,14 +159,6 @@ class Slider extends React.Component {
 		// addEvent(this.screen,()=>{
 		// 	this.Autotimer = setInterval(this.leftslide,2000)
 		// },'mouseout')
-	}
-
-	removeTimer() {
-		window.onresize = ''
-		clearInterval(this.Autotimer)
-		for (let i = 0 ;i < this.pointArr.length; i++) {
-			removeEvent(this.pointArr[i],this.pointFnList[i],'click')
-		}
 	}
 
 	leftslide() {

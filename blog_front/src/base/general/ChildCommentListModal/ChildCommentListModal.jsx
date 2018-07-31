@@ -21,7 +21,7 @@ class ChildCommentListModal extends React.Component {
 		this.close = this.close.bind(this)
 		this.listenRedux = this.listenRedux.bind(this)
 		this.store = this.context.store
-		this.store.subscribe(this.listenRedux)
+		this.unsubscribe = this.store.subscribe(this.listenRedux)
 		this.state = {
 			commentModalStatus: false
 		}
@@ -33,6 +33,7 @@ class ChildCommentListModal extends React.Component {
 
 
 	componentWillUnmount() {
+		this.unsubscribe()
 		this.close()
 		// 防止异步调用数据
         this.setState = (state,callback)=>{

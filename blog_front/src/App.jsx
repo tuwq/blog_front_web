@@ -31,7 +31,10 @@ class App extends Component {
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
     this.closeMenu = this.closeMenu.bind(this)
     this.RediectLoginSubscribe = this.RediectLoginSubscribe.bind(this)
+    this.userInfo = this.userInfo.bind(this)
+    this.userInfoRefreshSubscribe = this.userInfoRefreshSubscribe.bind(this)
     PubSub.subscribe(global.RediectLoginSubscribe,this.RediectLoginSubscribe)
+    PubSub.subscribe(global.userInfoRefresh,this.userInfoRefreshSubscribe)
   }
 
 
@@ -46,20 +49,25 @@ class App extends Component {
   }
 
   componentDidMount() {
-     userInfoApi((res)=>{
-        if(res.data.code == 200) {
-          this.props.userActions.save(res.data.result)
-        }
-     })
+     this.userInfo()
   }
 
   componentWillUnmount() {
     // 取消订阅
     PubSub.unsubscribe(this.RediectLoginSubscribe);
+    PubSub.unsubscribe(this.userInfoRefreshSubscribe);
     // 防止异步调用数据
       this.setState = (state,callback)=>{
       return
     };
+  }
+
+  userInfo() {
+    userInfoApi((res)=>{
+        if(res.data.code == 200) {
+          this.props.userActions.save(res.data.result)
+        }
+    })
   }
 
   closeMenu() {
@@ -68,6 +76,10 @@ class App extends Component {
 
   RediectLoginSubscribe(msg,data) {
     this.props.history.replace('/extra/login')
+  }
+
+  userInfoRefreshSubscribe(msg,data) {
+    this.userInfo()
   }
 }
 

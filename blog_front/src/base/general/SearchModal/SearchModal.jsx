@@ -18,7 +18,7 @@ class SearchModal extends React.Component {
 		this.listenRedux = this.listenRedux.bind(this)
 		this.updateSearchModal = this.updateSearchModal.bind(this)
 		this.store = this.context.store
-		this.store.subscribe(this.listenRedux)
+		this.unsubscribe = this.store.subscribe(this.listenRedux)
 		this.state = {
 			searchModalStatus: false,
 			value: ''
@@ -30,6 +30,7 @@ class SearchModal extends React.Component {
 	}
 	
 	componentWillUnmount() {
+		this.unsubscribe()
 		this.updateSearchModal()
 		// 防止异步调用数据
         this.setState = (state,callback)=>{

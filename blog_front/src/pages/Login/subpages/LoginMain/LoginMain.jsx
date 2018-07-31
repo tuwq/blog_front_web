@@ -32,17 +32,10 @@ class LoginMain extends React.Component {
 		}
 	}	
 
-	loginnameChange(e) {
+	inputChange(e) {
+		const name = e.target.name
 		this.setState({
-			loginname: e.target.value,
-			error: ''
-		})
-	}
-
-	passwordChange(e) {
-		this.setState({
-			password: e.target.value,
-			error: ''
+			[name]: e.target.value
 		})
 	}
 
@@ -85,10 +78,10 @@ class LoginMain extends React.Component {
 			       					</div>)
 	       					}
 	          				<div className="form-control">
-	          					<input value={this.state.loginname} onChange={this.loginnameChange.bind(this)} type="text" placeholder="邮箱或账户" autoComplete="new-password" />
+	          					<input value={this.state.loginname} name="loginname" onChange={this.inputChange.bind(this)} type="text" placeholder="邮箱或账户" autoComplete="new-password" />
 	          				</div>
 	          				<div className="form-control">
-	          					<input value={this.state.password} onChange={this.passwordChange.bind(this)} type="password" placeholder="密码" autoComplete="new-password" />
+	          					<input value={this.state.password} name="password" onChange={this.inputChange.bind(this)} type="password" placeholder="密码" autoComplete="new-password" />
 	          				</div>
 	          				<div className="form-control">
        							<button className="regist" onClick={this.login.bind(this)} >登录</button>

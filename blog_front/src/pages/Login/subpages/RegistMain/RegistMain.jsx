@@ -36,24 +36,10 @@ class RegistMain extends React.Component {
 		})
 	}
 
-	emailChange(e) {
+	inputChange(e) {
+		const name = e.target.name
 		this.setState({
-			email: e.target.value,
-			error: ''
-		})
-	}
-
-	passwordChange(e) {
-		this.setState({
-			password: e.target.value,
-			error: ''
-		})
-	}
-
-	usercodeChange(e) {
-		this.setState({
-			usercode: e.target.value,
-			error: ''
+			[name]: e.target.value
 		})
 	}
 
@@ -108,10 +94,10 @@ class RegistMain extends React.Component {
 	       					<p>我们将发送一封验证邮件至你的邮箱, 请正确填写以完成账号注册和激活</p>
 	       					<div className="form-group">
 	       						<div className="form-control"><input value={this.state.username} onChange={this.usernameChange.bind(this)} type="text" placeholder="账户" autoComplete="new-password" /></div>
-	       						<div className="form-control"><input value={this.state.email} onChange={this.emailChange.bind(this)} type="email" placeholder="邮箱" autoComplete="new-password" /></div>
-	       						<div className="form-control"><input value={this.state.password} onChange={this.passwordChange.bind(this)} type="password" placeholder="密码" autoComplete="new-password" /></div>
+	       						<div className="form-control"><input value={this.state.email} name="email" onChange={this.inputChange.bind(this)} type="email" placeholder="邮箱" autoComplete="new-password" /></div>
+	       						<div className="form-control"><input value={this.state.password} name="password" onChange={this.inputChange.bind(this)} type="password" placeholder="密码" autoComplete="new-password" /></div>
 	       						<div className="form-control validtion">
-	       							<input type="text" placeholder="验证码" value={this.state.usercode} onChange={this.usercodeChange.bind(this)}/>
+	       							<input type="text" placeholder="验证码" value={this.state.usercode} name="usercode" onChange={this.inputChange.bind(this)}/>
 	       							<span><ValidateCode validateCodeChange={this.validateCodeChange.bind(this)}/></span>
 	       						</div>
 	       						<div className="form-control">
