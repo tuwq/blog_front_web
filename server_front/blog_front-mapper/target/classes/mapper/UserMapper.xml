@@ -28,6 +28,12 @@
     now_login_ip, create_time, operate_time
   </sql>
   
+  <select id="countByNickName" parameterType="map" resultType="int">
+  	SELECT count(1)
+	FROM `user`
+	WHERE nickname = #{nickname}
+  </select>
+  
   <select id="InfoById" parameterType="map" resultMap="BaseResultMap">
   	select 
     <include refid="Base_Column_List" />

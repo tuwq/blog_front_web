@@ -6,10 +6,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import root.beans.FileUploadExceptionResult;
 import root.beans.ParamExceptionResult;
 import root.beans.TokenExceptionResult;
 import root.exception.ActivationException;
 import root.exception.CheckParamException;
+import root.exception.FileUploadException;
 import root.exception.TokenException;
 
 @ControllerAdvice
@@ -31,5 +33,10 @@ public class ExceptionAdvice {
 	public void handleActivationException(ActivationException e) {
 		// TODO 记录异常日志
 		System.out.println(e.getMessage());
+	}
+	
+	@ExceptionHandler(FileUploadException.class)
+	public ResponseEntity<FileUploadExceptionResult> handlerFileUploadException(FileUploadException e) {
+		return new ResponseEntity<FileUploadExceptionResult>(FileUploadExceptionResult.builder().code(e.getResultCode()).msg(e.getMsg()).build(),HttpStatus.OK);
 	}
 }

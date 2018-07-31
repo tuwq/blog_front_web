@@ -25,6 +25,12 @@ class SecuritySetting extends React.Component {
 		
 	}
 
+	componentWillUnmount() {
+	   this.setState = (state,callback)=>{
+	     return
+	   }
+	}
+
 	inputChange(e) {
 		const name = e.target.name
 		this.setState({

@@ -62,6 +62,12 @@ public interface UserMapper {
 	 * @return
 	 */
 	User InfoById(@Param("id") Integer id);
+	/**
+	 * 是否存在昵称
+	 * @param nickname
+	 * @return
+	 */
+	int countByNickName(@Param("nickname") String nickname);
 	
     
 }

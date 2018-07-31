@@ -75,7 +75,7 @@ class App extends Component {
   }
 
   RediectLoginSubscribe(msg,data) {
-    this.props.history.replace('/extra/login')
+    this.props.history.replace({ pathname:'/extra/login',state:{from : data } })
   }
 
   userInfoRefreshSubscribe(msg,data) {

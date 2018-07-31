@@ -5,6 +5,8 @@ public interface ResultCode {
 	static int PARAM_ERROR = 270;
 	// 邮箱激活过期了
 	static int EMAIL_MATURITY = 300;
+	// 文件上传失败了
+	static int FILE_UPLOAD_FAIL = 301;
 	// TOKEN过期了但不需要回登陆页,依旧是成功的,不过没有数据返回
 	static int TOKEN_MATURITY = 280;
 	// 请求期间的普通错误

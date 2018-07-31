@@ -3,6 +3,7 @@ import * as RESULT_CODE from 'api/Constant/resultCode'
 import { _getToken,_removeToken } from 'base/js/cookie'
 import * as userActions from '@/store/actions/user'
 import PubSub from 'pubsub-js'
+import {createBrowserHistory, createHashHistory} from 'history'
 // 每次请求携带LOGIN_TOKEN
 axios.interceptors.request.use(
     config => {
@@ -24,9 +25,9 @@ axios.interceptors.response.use(
             || response.data.code == RESULT_CODE.TOKEN_REDIS_NOT_MATCH ) {
     		// 删除token和用户信息
             // 跳转登录
+            PubSub.publish(global.RediectLoginSubscribe,createHashHistory().location.pathname);
             global.store.dispatch(userActions.save(undefined))
-            _removeToken() 
-            PubSub.publish(global.RediectLoginSubscribe,false);
+            _removeToken()
             
     	} else if (response.data.code == RESULT_CODE.TOKEN_MATURITY) {
             // 删除token和用户信息

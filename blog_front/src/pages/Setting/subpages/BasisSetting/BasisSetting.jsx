@@ -19,16 +19,15 @@ class BasisSetting extends React.Component {
 	constructor(props,context) {
 		super(props,context)
 		this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
-		this.listenRedux = this.listenRedux.bind(this)
 		this.listenFile = this.listenFile.bind(this)
-		this.initData = this.initData.bind(this)
+		this.listenRedux = this.listenRedux.bind(this)
 		this.avatarInput = React.createRef()
-		this.nicknameInput = React.createRef()
-		this.websiteInput = React.createRef()
-		this.descInput = React.createRef()
 		this.store = this.context.store
-    	this.unsubscribe = this.store.subscribe(this.listenRedux)
+		this.unsubscribe = this.store.subscribe(this.listenRedux)
 		this.state = {
+			nickname: '',
+			website: '',
+			desc: '',
 			avatar: '',
 			avatar_file: {},
 			error: ''
@@ -36,34 +35,36 @@ class BasisSetting extends React.Component {
 	}
 
 	componentDidMount() {
-		this.initData()
-		this.listenFile()
+	  this.setState({
+	  	nickname: this.props.user.nickname,
+		website: this.props.user.website,
+		desc: this.props.user.desc,
+		avatar: global.userAvatarPrefix+this.props.user.avatar
+	  })
 	}
 
 	componentWillUnmount() {
-	   $(this.avatarInput.current).off('change')
 	   this.unsubscribe()
+	   $(this.avatarInput.current).off('change')
 	   this.setState = (state,callback)=>{
 	     return
 	   }
 	}
 
-	initData() {
-		this.nicknameInput.current.value = this.props.user.nickname
-		this.websiteInput.current.value = this.props.user.website
-		this.descInput.current.value = this.props.user.desc
+	listenRedux() {
+		let reduxState = this.store.getState()
 		this.setState({
-			avatar: global.userAvatarPrefix+this.props.user.avatar
+			nickname: reduxState.user.nickname,
+			website: reduxState.user.website,
+			desc: reduxState.user.desc,
+			avatar: global.userAvatarPrefix+reduxState.user.avatar
 		})
 	}
 
-	listenRedux() {
-		let reduxState = this.store.getState()
-		this.nicknameInput.current.value = reduxState.user.nickname
-		this.websiteInput.current.value = reduxState.user.website
-		this.descInput.current.value = reduxState.user.desc
+	inputChange(e) {
+		const name = e.target.name
 		this.setState({
-			avatar: global.userAvatarPrefix+reduxState.user.avatar
+			[name]: e.target.value
 		})
 	}
 
@@ -90,14 +91,9 @@ class BasisSetting extends React.Component {
 	}
 
 	saveInfo() {
-		var data = {
-			nickname: this.nicknameInput.current.value,
-			website: this.websiteInput.current.value,
-			desc: this.descInput.current.value,
-		}
-		var flag = checkUserBasisSettingForm(data)
+		var flag = checkUserBasisSettingForm(this.state)
 		if (flag == true) {
-			userBasisSettingApi(data,(res)=>{
+			userBasisSettingApi(this.state,(res)=>{
 				if (res.data.code == 200) {
 					this.setState({
 						error: '修改信息成功'
@@ -128,7 +124,10 @@ class BasisSetting extends React.Component {
 						<label className="control-label">头像</label>
 						<div className="radio">
 							<label>
-								<img width="40" height="40" alt="" src={this.state.avatar} />
+							    {
+							    	JSON.stringify(this.props.user) != "{}" &&
+							    	(<img width="40" height="40" alt="" src={this.state.avatar} />)
+							    }
 								<span><svg width="40" height="40" viewBox="-8 -8 80 80"><g>
 									<path d="M10.61 44.486V23.418c0-2.798 2.198-4.757 5.052-4.757h6.405c1.142-1.915 2.123-5.161 3.055-5.138L40.28 13.5c.79 0 1.971 3.4 3.073 5.14 0 .2 6.51 0 6.51 0 2.856 0 5.136 1.965 5.136 4.757V44.47c-.006 2.803-2.28 4.997-5.137 4.997h-34.2c-2.854.018-5.052-2.184-5.052-4.981zm5.674-23.261c-1.635 0-3.063 1.406-3.063 3.016v19.764c0 1.607 1.428 2.947 3.063 2.947H49.4c1.632 0 2.987-1.355 2.987-2.957v-19.76c0-1.609-1.357-3.016-2.987-3.016h-7.898c-.627-1.625-1.909-4.937-2.28-5.148 0 0-13.19.018-13.055 0-.554.276-2.272 5.143-2.272 5.143l-7.611.01z"/>
 									<path d="M32.653 41.727c-5.06 0-9.108-3.986-9.108-8.975 0-4.98 4.047-8.966 9.108-8.966 5.057 0 9.107 3.985 9.107 8.969 0 4.988-4.047 8.974-9.107 8.974v-.002zm0-15.635c-3.674 0-6.763 3.042-6.763 6.66 0 3.62 3.089 6.668 6.763 6.668 3.673 0 6.762-3.047 6.762-6.665 0-3.616-3.088-6.665-6.762-6.665v.002z"/>
@@ -141,19 +140,19 @@ class BasisSetting extends React.Component {
 					<div className="form-group">
 						<label className="control-label">昵称</label>
 						<p>
-							<input ref={this.nicknameInput} type="text" autoComplete="new-password"/>
+							<input defaultValue={this.state.nickname} name="nickname" onChange={this.inputChange.bind(this)} type="text" autoComplete="new-password"/>
 						</p>
 					</div>
 					<div className="form-group">
 						<label className="control-label">网站</label>
 						<p>
-							<input ref={this.websiteInput} type="text" autoComplete="new-password"/>
+							<input defaultValue={this.state.website} name="website" onChange={this.inputChange.bind(this)} type="text" autoComplete="new-password"/>
 						</p>
 					</div>
 					<div className="form-group">
 						<label className="control-label">个人描述</label>
 						<p>
-							<textarea ref={this.descInput} placeholder="添加你的个人简介" autoComplete="new-password"></textarea>
+							<textarea value={this.state.desc} name="desc" onChange={this.inputChange.bind(this)} placeholder="添加你的个人简介" autoComplete="new-password"></textarea>
 						</p>
 					</div>
 					<div className="form-group">

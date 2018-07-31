@@ -10,7 +10,7 @@ public class TokenException extends RuntimeException implements WebException{
 	
 	public TokenException(int ResultCode,String msg) {
 		this.ResultCode = ResultCode;
-		this.msg = this.msg;
+		this.msg = msg;
 	}
 	
 	public int getResultCode() {

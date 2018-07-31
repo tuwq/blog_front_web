@@ -9,6 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import root.filter.HttpFilter;
+import root.interceptor.NeedLoginInterceptor;
 
 @Configuration
 public class WebMvcConfig extends WebMvcConfigurerAdapter  {
@@ -28,11 +29,17 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter  {
         return new HttpFilter();
     }
 
+	@Bean
+	public NeedLoginInterceptor getNeedLoginInterceptor() {
+		return new NeedLoginInterceptor();
+	}
+	
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        InterceptorRegistration addInterceptor = registry.addInterceptor(getHttpFilter());
-        // 拦截配置
-        addInterceptor.addPathPatterns("/**");
+        registry.addInterceptor(getHttpFilter()).addPathPatterns("/**");
+        registry.addInterceptor(getNeedLoginInterceptor())
+        .addPathPatterns("/user/**")
+        .excludePathPatterns("/user/info");
         super.addInterceptors(registry);
     }
     

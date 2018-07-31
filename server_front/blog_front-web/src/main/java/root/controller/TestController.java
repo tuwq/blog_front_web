@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import root.beans.JsonResult;
 import root.redis.RedisOperator;
 import root.service.MailService;
+import root.service.QiNiuService;
 
 @RestController
 public class TestController {
@@ -17,8 +18,12 @@ public class TestController {
 	private RedisOperator redis;
 	@Resource
 	private MailService mailService;
+	@Resource
+	private QiNiuService qiNiuService;
 	@Value("${mailActivationApiName}")
 	private String mailActivationApiName;
+	
+	
 	
 	@GetMapping("/add")
 	public JsonResult add() {
@@ -27,6 +32,12 @@ public class TestController {
 					+ " 若点击无效，请将内容复制放入浏览器地址栏当中";		
 		mailService.sendSimpleMail("博客激活邮件", content, "1246361002@qq.com");
 		return JsonResult.<Void>success();
+	}
+	
+	
+	@GetMapping("/avatar")
+	public JsonResult avatar() {
+		return JsonResult.success();
 	}
 	
 	@GetMapping("/get")

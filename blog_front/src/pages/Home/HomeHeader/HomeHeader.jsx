@@ -44,7 +44,7 @@ class HomeHeader extends React.Component {
     // 取消订阅
     PubSub.unsubscribe(this.subscribeMenu);
     // 防止异步调用数据
-      this.setState = (state,callback)=>{
+    this.setState = (state,callback)=>{
       return
     };
   }

@@ -29,14 +29,15 @@ public class JwtUtil {
 	
 	private static final String ISSUE = "tuwq";
 	
+	
 	// 生成token
 	public static String getToken(Map<String, String> claims) {
 		try {
 			// 加密算法API
 			Algorithm algorithm = Algorithm.HMAC256(SALT);
 			Builder builder= JWT.create()
-					.withIssuer(ISSUE)
-					.withExpiresAt(DateUtils.addDays(new Date(), 7));
+					.withIssuer(ISSUE);
+			// .withExpiresAt(DateUtils.addDays(new Date(), 7));
 			// 为jwt添加一些信息
 			claims.forEach((k,v) -> builder.withClaim(k, v));
 			return builder.sign(algorithm).toString();
