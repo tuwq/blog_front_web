@@ -44,7 +44,10 @@ class InformationMain extends React.Component {
 				this.props.showInfoActions
 				.save({
 					identity: res.data.result.identity,
-					userDto: res.data.result.userDto
+					userDto: res.data.result.userDto,
+					followStatus: res.data.result.followStatus,
+					fansSum: res.data.result.fansSum,
+					followsSum: res.data.result.followsSum
 				})
 			}
 		})

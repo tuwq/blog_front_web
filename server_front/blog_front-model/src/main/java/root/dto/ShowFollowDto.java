@@ -11,15 +11,9 @@ import lombok.Setter;
 @Builder
 @Setter
 @Getter
-public class ShowUserDto {
-	
-	private Integer identity;
+public class ShowFollowDto {
 	
 	private UserDto userDto;
-
+	
 	private Integer followStatus;
-	
-	private Integer fansSum;
-	
-	private Integer followsSum;
 }

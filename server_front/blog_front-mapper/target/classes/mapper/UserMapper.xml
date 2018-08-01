@@ -29,6 +29,15 @@
   </sql>
   
   
+  <select id="getListByIdList" parameterType="map" resultMap="BaseResultMap">
+  	SELECT id,nickname,`desc`,avatar
+    FROM `user`
+    WHERE id IN
+    <foreach collection="idList" item="id" open="(" close=")" separator=",">
+      #{id}
+    </foreach>
+  </select>
+ 
   <select id="countById" parameterType="map" resultType="int">
   	SELECT count(1)
 	FROM `user`

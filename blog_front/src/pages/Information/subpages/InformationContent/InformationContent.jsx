@@ -47,9 +47,9 @@ class InformationContent extends React.Component {
 			  	:this.state.navType==3
 			  	?<SelfCommentList />
 			  	:this.state.navType==4
-			  	?<FollowList />
+			  	?<FansList />
 			  	:this.state.navType==5
-			  	? <FansList />
+			  	?<FollowList /> 
 			  	:<div></div>
 			  }
         	</div>

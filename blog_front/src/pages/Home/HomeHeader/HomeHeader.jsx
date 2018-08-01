@@ -43,7 +43,7 @@ class HomeHeader extends React.Component {
   }
 
   searchModal() {
-     PubSub.publish(global.searchModalShow,true);
+     PubSub.publish(global.searchModalShowSubscribe,true);
   }
 
   dropMenu() {

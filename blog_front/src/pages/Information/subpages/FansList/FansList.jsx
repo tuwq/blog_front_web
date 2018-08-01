@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { withRouter } from 'react-router-dom'
+import * as showInfoActions from 'store/actions/showInfo' 
+import FollowItem from '../FollowItem/FollowItem'
+
+import { userFansApi } from 'api/Informartion/informartion'
 
 import './FansList.less'
 import './MFansList.less'
@@ -10,35 +14,65 @@ class FansList extends React.Component {
 	constructor(props,context) {
 		super(props,context)
 		this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+		this.initData = this.initData.bind(this)
+		this.state = {
+			fansList: []
+		}
 		
 	}
 
 	componentDidMount() {
-		
+		this.initData();
+	}
+
+	componentWillUnmount() {
+	   this.setState = (state,callback)=>{
+	     return
+	   }
+	}
+
+	initData() {
+		userFansApi(this.props.match.params.id,(res)=>{
+			if (res.data.code == 200) {
+				this.setState({
+					fansList: res.data.result
+				})
+			}
+		})
+	}
+
+	followChangeFn(index,followStatus) {
+		var fansList = this.state.fansList.slice()
+		// 注意setState中数组比较更新时引用,所有需要拷贝一个新数组
+		fansList[index].followStatus = followStatus
+		this.setState({
+			fansList: fansList
+		})
 	}
 
 	render() {
+		var items = null
+		if (this.state.fansList.length) {
+			items = this.state.fansList.map((item,index)=>{
+				return (<FollowItem key={index} index={index} data={item} followChangeFn={this.followChangeFn.bind(this)}/>)
+			})
+		}
 		return (
 			<div className="FansList">
-				<div className="group-list">
-					<div className="follow-group">
-					 	<div className="avatar">
-					 		<img width="50" height="50" alt="" src="https://q.qlogo.cn/g?b=qq&nk=1537060553&s=40"/>
+				{
+					this.state.fansList.length>0 && 
+					(
+						<div className="group-list">
+							{items}
 					 	</div>
-					 	<div className="meta">
-					 		<h2 className="name">雾里酱</h2>
-					 		<p className="descrtipion">xxxxxxxxxxx</p>
-					 	</div>
-					 	<div className="button">
-					 		<button>关注他</button>
-					 	</div>
-				 	</div>
-			 	</div>
+					)
+				}
         	</div>
         )
 	}
 }
 
 export default withRouter(FansList)
+
 
 

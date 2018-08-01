@@ -5,6 +5,13 @@ export function userInfoApi(success) {
 	})
 }
 
+export function userEditInfoApi(success) {
+	axios.get('/user/editInfo')
+	.then((res)=>{
+		success(res)
+	})
+}
+
 export function userAvatarUploadApi(formdata,success) {
 	axios.post('/user/avatar',formdata,{
 		headers:{'Content-Type':'multipart/form-data'}

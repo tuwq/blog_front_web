@@ -31,8 +31,8 @@ class InformationNav extends React.Component {
 				<a className="current" onClick={this.updateNavType.bind(this,1)}>资料</a>
 		  		<a onClick={this.updateNavType.bind(this,2)}>消息<span>4</span></a>
 		  		<a onClick={this.updateNavType.bind(this,3)}>评论<span>4</span></a>
-		  		<a onClick={this.updateNavType.bind(this,4)}>粉丝<span>4</span></a>
-		  		<a onClick={this.updateNavType.bind(this,5)}>关注<span>4</span></a>
+		  		<a onClick={this.updateNavType.bind(this,4)}>粉丝<span>{this.props.showInfo.fansSum}</span></a>
+		  		<a onClick={this.updateNavType.bind(this,5)}>关注<span>{this.props.showInfo.followsSum}</span></a>
 		  		</React.Fragment>
 			)
 		} else if (this.props.showInfo.identity == 2) {
@@ -40,8 +40,8 @@ class InformationNav extends React.Component {
 				<React.Fragment>
 				<a className="current" onClick={this.updateNavType.bind(this,1)}>资料</a>
 		  		<a onClick={this.updateNavType.bind(this,3)}>评论<span>4</span></a>
-		  		<a onClick={this.updateNavType.bind(this,4)}>粉丝<span>4</span></a>
-		  		<a onClick={this.updateNavType.bind(this,5)}>关注<span>4</span></a>
+		  		<a onClick={this.updateNavType.bind(this,4)}>粉丝<span>{this.props.showInfo.fansSum}</span></a>
+		  		<a onClick={this.updateNavType.bind(this,5)}>关注<span>{this.props.showInfo.followsSum}</span></a>
 		  		</React.Fragment>
 			)
 		}

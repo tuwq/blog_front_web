@@ -1,0 +1,45 @@
+@import url("../../../../base/style/information-common.less");
+.FollowList,.FansList {
+	.follow-group {
+		margin-bottom: 10px;
+		display: flex;
+		align-items: center;
+		.avatar {
+			img{max-width: 50px;border-radius: 15px;}
+		}
+		.meta {
+			flex: 1;
+			display: flex;
+			padding-left: 10px;
+			flex-direction: column;
+			line-height: 30px;
+			justify-content: center;
+			.name {
+				font-size: 18px;
+				font-weight: 600;
+				overflow: hidden;
+				max-height: 30px;
+			}
+			.descrtipion {
+				font-size: 15px;
+				min-height: 30px;
+				font-weight: 300;
+				overflow: hidden;
+			}
+		}
+		.followbutton {
+			button {
+				.common-btn;
+				&.followed {
+					background: @blue_color;
+				}
+				&.unfollowed {
+					background: @purple_color;
+				}
+				&.unfollow {
+					background: @red_color;
+				}
+			}
+		}
+	}
+}

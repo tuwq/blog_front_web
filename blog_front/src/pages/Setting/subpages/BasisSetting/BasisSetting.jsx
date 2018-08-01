@@ -4,7 +4,8 @@ import { withRouter } from 'react-router-dom'
 import PubSub from 'pubsub-js'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import PropTypes from 'prop-types' 
+
+import { userEditInfoApi } from 'api/User/user'
 
 import { checkUserBasisSettingForm } from 'base/js/check'
 import { userAvatarUploadApi,userBasisSettingApi } from 'api/User/user'
@@ -20,10 +21,8 @@ class BasisSetting extends React.Component {
 		super(props,context)
 		this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
 		this.listenFile = this.listenFile.bind(this)
-		this.listenRedux = this.listenRedux.bind(this)
+		this.initData = this.initData.bind(this)
 		this.avatarInput = React.createRef()
-		this.store = this.context.store
-		this.unsubscribe = this.store.subscribe(this.listenRedux)
 		this.state = {
 			nickname: '',
 			website: '',
@@ -35,30 +34,30 @@ class BasisSetting extends React.Component {
 	}
 
 	componentDidMount() {
-	  this.setState({
-	  	nickname: this.props.user.nickname,
-		website: this.props.user.website,
-		desc: this.props.user.desc,
-		avatar: global.userAvatarPrefix+this.props.user.avatar
-	  })
+	   this.initData()
+	   this.listenFile()
 	}
 
 	componentWillUnmount() {
-	   this.unsubscribe()
 	   $(this.avatarInput.current).off('change')
 	   this.setState = (state,callback)=>{
 	     return
 	   }
 	}
 
-	listenRedux() {
-		let reduxState = this.store.getState()
-		this.setState({
-			nickname: reduxState.user.nickname,
-			website: reduxState.user.website,
-			desc: reduxState.user.desc,
-			avatar: global.userAvatarPrefix+reduxState.user.avatar
+	initData() {
+		userEditInfoApi((res)=>{
+			this.setState({
+				nickname: res.data.result.nickname,
+				website: res.data.result.website,
+				desc: res.data.result.desc,
+				avatar: global.userAvatarPrefix+res.data.result.avatar
+			})
 		})
+	}
+
+	shouldComponentUpdate(nextProps,nextState) {
+		
 	}
 
 	inputChange(e) {
@@ -80,7 +79,7 @@ class BasisSetting extends React.Component {
 						avatar: global.userAvatarPrefix+res.data.result,
 						error: '头像修改成功'
 					})
-					PubSub.publish(global.userInfoRefresh,true);
+					PubSub.publish(global.userInfoRefreshSubscribe,true);
 				} else {
 					this.setState({
 						error: res.data.msg
@@ -125,7 +124,7 @@ class BasisSetting extends React.Component {
 						<div className="radio">
 							<label>
 							    {
-							    	JSON.stringify(this.props.user) != "{}" &&
+							    	this.state.avatar!=''&&
 							    	(<img width="40" height="40" alt="" src={this.state.avatar} />)
 							    }
 								<span><svg width="40" height="40" viewBox="-8 -8 80 80"><g>
@@ -167,13 +166,8 @@ class BasisSetting extends React.Component {
 	}
 }
 
-BasisSetting.contextTypes = {
-  store: PropTypes.object
-}
-
 function mapStateToProps(state) {
     return {
-     // state.modal 对应的reducer注册时的名称
         user: state.user
     }
 }

@@ -23,7 +23,10 @@ class SettingAside extends React.Component {
 			<div className="SettingAside">
 				<nav className="nav">
 					<div className="avatar">
-						<img alt="" src={global.userAvatarPrefix+this.props.user.avatar}/>
+						{
+							JSON.stringify(this.props.user) != "{}" &&
+							(<img alt="" src={global.userAvatarPrefix+this.props.user.avatar}/>)
+						}
 						<a>{this.props.user.nickname}</a>
 					</div>
 					<ul className="tab">

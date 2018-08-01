@@ -1,5 +1,7 @@
 package root.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -74,6 +76,12 @@ public interface UserMapper {
 	 * @return
 	 */
 	int countById(@Param("id") Integer id);
+	/**
+	 * 获得Id列表中所有的用户信息
+	 * @param fromIdList
+	 * @return
+	 */
+	List<User> getListByIdList(@Param("idList") List<Integer> idList);
 	
     
 }

@@ -136,4 +136,12 @@ public class UserService {
 		user.setOperateTime(new Date());
 		userMapper.updateByPrimaryKeySelective(user);
 	}
+
+	public JsonResult<UserDto> editInfo() {
+		Integer userId = ThreadUtil.getCurrentUserId();
+		User user = userMapper.InfoById(userId);
+		user.setPassword("");
+		user.setActivationCode("");
+		return JsonResult.<UserDto>success(DtoUtil.adapt(new UserDto(), user));
+	}
 }

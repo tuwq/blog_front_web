@@ -29,6 +29,11 @@ public class UserController {
 		return userService.info();
 	}
 	
+	@GetMapping("/editInfo")
+	public JsonResult<UserDto> editInfo() {
+		return userService.editInfo();
+	}
+	
 	@PostMapping(value="/avatar", headers="content-type=multipart/form-data")
 	public JsonResult<String> avatar(@RequestParam(value = "avatar_file") MultipartFile file) {
 		return userService.avatar(file);

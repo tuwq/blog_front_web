@@ -10,6 +10,50 @@
   <sql id="Base_Column_List" >
     id, from_id, target_id, follow_status
   </sql>
+  
+  <select id="countByFromId" parameterType="map" resultType="int">
+  	SELECT count(1)
+	FROM user_follow
+	WHERE from_id = #{fromId} AND follow_status=1
+  </select>
+  
+  <select id="countByTargetId" parameterType="map" resultType="int">
+  	SELECT count(1)
+	FROM user_follow
+	WHERE target_id = #{targetId} AND follow_status=1
+  </select>
+  
+  <select id="getTargetIdListByFromId" parameterType="map" resultType="int">
+  	SELECT target_id
+	FROM user_follow
+	WHERE from_id = #{fromId} AND follow_status=1
+  </select>
+  
+  <select id="getStatusByFromId" parameterType="map" resultType="int">
+  	SELECT follow_status
+	FROM user_follow
+	WHERE from_id = #{fromId} AND target_id = #{targetId}
+  </select>
+  
+  <select id="getFromIdListByTargetId" parameterType="map" resultType="int">
+  	SELECT from_id
+	FROM user_follow
+	WHERE target_id = #{targetId} AND follow_status=1
+  </select>
+  
+  <select id="countByFromIdAndTargetId" parameterType="map" resultType="int">
+  	select count(1)
+    from user_follow
+    where from_id = #{fromId,jdbcType=INTEGER} and target_id = #{targetId,jdbcType=INTEGER}
+  </select>
+  
+  <select id="getByFromIdAndTargetId" parameterType="map" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from user_follow
+    where from_id = #{fromId,jdbcType=INTEGER} and target_id = #{targetId,jdbcType=INTEGER}
+  </select>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

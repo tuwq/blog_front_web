@@ -32,7 +32,9 @@ class App extends Component {
     this.closeMenu = this.closeMenu.bind(this)
     this.userInfo = this.userInfo.bind(this)
     this.userInfoRefreshSubscribe = this.userInfoRefreshSubscribe.bind(this)
-    PubSub.subscribe(global.userInfoRefresh,this.userInfoRefreshSubscribe)
+    this.rediectLoginSubscribe = this.rediectLoginSubscribe.bind(this)
+    PubSub.subscribe(global.userInfoRefreshSubscribe,this.userInfoRefreshSubscribe)
+    PubSub.subscribe(global.rediectLoginSubscribe,this.rediectLoginSubscribe)
   }
 
 
@@ -53,6 +55,7 @@ class App extends Component {
   componentWillUnmount() {
     // 取消订阅
     PubSub.unsubscribe(this.userInfoRefreshSubscribe);
+    PubSub.unsubscribe(this.rediectLoginSubscribe)
     // 防止异步调用数据
       this.setState = (state,callback)=>{
       return
@@ -73,6 +76,10 @@ class App extends Component {
 
   userInfoRefreshSubscribe(msg,data) {
     this.userInfo()
+  }
+
+  rediectLoginSubscribe(msg,pathname) {
+    this.props.history.replace({ pathname:'/extra/login',state:{from : pathname } })
   }
 }
 

@@ -12,7 +12,7 @@ class SearchModal extends React.Component {
 		super(props,context)
 		this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
 		this.searchModalShowSubscribe = this.searchModalShowSubscribe.bind(this)
-		PubSub.subscribe(global.searchModalShow,this.searchModalShowSubscribe)
+		PubSub.subscribe(global.searchModalShowSubscribe,this.searchModalShowSubscribe)
 		this.state = {
 			searchModalShow: false,
 			value: ''

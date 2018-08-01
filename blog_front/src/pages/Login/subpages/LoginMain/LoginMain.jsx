@@ -49,6 +49,7 @@ class LoginMain extends React.Component {
 					// 存储token和userinfo
 					this.props.userActions.save(res.data.result.userDto)
 					_setToken(res.data.result.token)
+					console.log(this.props.location)
 					let to = this.props.location.state!=undefined?this.props.location.state.from:'/'
 					this.props.history.replace(to)
 				} else {
