@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import search from './search.js'
-import user from './user.js'
-import comment from './comment.js'
+import user from './user'
+import comment from './comment'
+import showInfo from './showInfo'
 
 export default combineReducers({
-    search,user,comment
+    user,comment,showInfo
 })

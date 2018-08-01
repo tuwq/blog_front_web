@@ -1,5 +1,6 @@
 package root.exception;
 
+// 文件上传异常
 public class FileUploadException extends RuntimeException implements WebException{
 
 	private int ResultCode;

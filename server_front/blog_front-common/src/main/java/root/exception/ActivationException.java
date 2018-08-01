@@ -1,5 +1,6 @@
 package root.exception;
 
+// 激活校验异常
 public class ActivationException extends RuntimeException implements WebException{
 
 	public ActivationException() {

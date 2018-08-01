@@ -1,5 +1,6 @@
 package root.exception;
 
+// token校验异常
 public class TokenException extends RuntimeException implements WebException{
 
 	

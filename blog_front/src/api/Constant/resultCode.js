@@ -1,5 +1,7 @@
 // 请求参数不正确
 export const PARAM_ERROR = 270
+// 查找的目标资源不存在,比如文章
+export const ITEM_NOT_FOUND = 271
 // 邮箱激活过期了
 export const EMAIL_MATURITY = 300
 // TOKEN过期了但不需要回登陆页,依旧是成功的,不过没有数据返回

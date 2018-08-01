@@ -2,6 +2,7 @@ package root.exception;
 
 import lombok.Data;
 
+// 检查参数异常
 @Data
 public class CheckParamException extends RuntimeException implements WebException{
 

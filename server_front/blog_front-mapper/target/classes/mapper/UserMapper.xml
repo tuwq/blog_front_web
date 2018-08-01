@@ -28,6 +28,13 @@
     now_login_ip, create_time, operate_time
   </sql>
   
+  
+  <select id="countById" parameterType="map" resultType="int">
+  	SELECT count(1)
+	FROM `user`
+	WHERE id = #{id}
+  </select>
+ 
   <select id="countByNickName" parameterType="map" resultType="int">
   	SELECT count(1)
 	FROM `user`

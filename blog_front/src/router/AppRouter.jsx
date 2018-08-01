@@ -28,6 +28,7 @@ class AppRouter extends React.Component {
 					 <Switch>
 						<Route path="/extra" component={JustFooterRouter} />
 						<Route path="/" component={HFMainRouter} />
+						<Route path="/notFound" component={NotFound}/>
 						<Route path="*" component={NotFound}/>
 					 </Switch>
 				</App>

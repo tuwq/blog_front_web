@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { withRouter,Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 import './SettingAside.less'
 import './MSettingAside.less'
@@ -21,12 +23,12 @@ class SettingAside extends React.Component {
 			<div className="SettingAside">
 				<nav className="nav">
 					<div className="avatar">
-						<img alt="" src="https://ikmoe.com/wp-content/uploads/avatars/190.jpg"/>
-						<a>tuwenq@126.com</a>
+						<img alt="" src={global.userAvatarPrefix+this.props.user.avatar}/>
+						<a>{this.props.user.nickname}</a>
 					</div>
 					<ul className="tab">
 						<li className="current"><a>设置</a></li>
-						<li><Link to="/user/123">消息</Link></li>
+						<li><Link to={'/user/'+this.props.user.id}>消息</Link></li>
 					</ul>
 				</nav>
         	</div>
@@ -34,6 +36,20 @@ class SettingAside extends React.Component {
 	}
 }
 
-export default withRouter(SettingAside)
+function mapStateToProps(state) {
+    return {
+        user: state.user
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        
+    }
+}
+
+export default withRouter(
+     connect(mapStateToProps, mapDispatchToProps)(SettingAside)
+)
 
 

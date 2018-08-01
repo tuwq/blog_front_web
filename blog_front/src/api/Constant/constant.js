@@ -12,3 +12,5 @@ global.userMenuSubscribe = 'userMenuSubscribe'
 global.RediectLoginSubscribe = 'RediectLoginSubscribe'
 // 用户信息刷新的订阅key
 global.userInfoRefresh = 'userInfoRefresh'
+// 搜索框的显示状态
+global.searchModalShow = 'searchModalShow'

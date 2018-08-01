@@ -38,10 +38,10 @@ class InformationContent extends React.Component {
 	render() {
 		return (
 			<div className="InformationContent">
-			  <InformationNav updateNavTypeFn={this.updateNavType.bind(this)}/>
+			  <InformationNav updateNavTypeFn={this.updateNavType.bind(this)} />
 			  {
 			  	this.state.navType==1
-			  	?<SelfInfo />
+			  	?<SelfInfo/>
 			  	:this.state.navType==2
 			  	?<SelfMessageList />
 			  	:this.state.navType==3
