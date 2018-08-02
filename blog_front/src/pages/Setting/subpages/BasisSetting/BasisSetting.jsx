@@ -51,7 +51,7 @@ class BasisSetting extends React.Component {
 				nickname: res.data.result.nickname,
 				website: res.data.result.website,
 				desc: res.data.result.desc,
-				avatar: global.userAvatarPrefix+res.data.result.avatar
+				avatar: global.userAvatarPrefix+res.data.result.avatar+'?v='+new Date().getTime()
 			})
 		})
 	}
@@ -76,7 +76,7 @@ class BasisSetting extends React.Component {
 			userAvatarUploadApi(formdata,(res)=>{
 				if (res.data.code == 200) {
 					this.setState({
-						avatar: global.userAvatarPrefix+res.data.result,
+						avatar: global.userAvatarPrefix+res.data.result+'?v='+new Date().getTime(),
 						error: '头像修改成功'
 					})
 					PubSub.publish(global.userInfoRefreshSubscribe,true);

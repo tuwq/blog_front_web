@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
+import PubSub from 'pubsub-js'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -14,11 +15,18 @@ class InformationCard extends React.Component {
 
         constructor(props,context) {
             super(props,context)
-            this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);          
+            this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);  
+            this.fansChange = this.fansChange.bind(this)        
         }
 
         componentDidMount() {
             
+        }
+
+        componentWillUnmount() {
+           this.setState = (state,callback)=>{
+             return
+           }
         }
 
         componentwillreceiveprops(nextProps) {
@@ -31,8 +39,18 @@ class InformationCard extends React.Component {
                     this.props.showInfoActions.save({
                         followStatus: followAction
                     })
+                    this.fansChange(followAction) 
                 }
             })
+        }
+
+        fansChange(followAction) {
+            if (followAction == 1) {
+                this.props.showInfoActions.incrFans(1)
+            } else {
+                this.props.showInfoActions.incrFans(-1)
+            } 
+            PubSub.publish(global.fansListrefreshSubscribe,true);
         }
 
         mouseenterFn(e) {
@@ -59,7 +77,7 @@ class InformationCard extends React.Component {
                 <div className="InformationCard">
                     <div className="container">
                         <div className="avatar-wrap">
-                            <img alt="" src={global.userAvatarPrefix+this.props.showInfo.userDto.avatar}/>
+                            <img alt="" src={global.userAvatarPrefix+this.props.showInfo.userDto.avatar+'?v='+new Date().getTime()}/>
                         </div>
                         <h2>{this.props.showInfo.userDto.nickname}<a><i></i></a></h2>
                         <p className="bio">{this.props.showInfo.userDto.desc}</p>

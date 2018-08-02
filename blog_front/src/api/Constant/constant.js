@@ -14,3 +14,5 @@ global.rediectLoginSubscribe = 'rediectLoginSubscribe'
 global.userInfoRefreshSubscribe = 'userInfoRefreshSubscribe'
 // 搜索框的显示状态的订阅key
 global.searchModalShowSubscribe = 'searchModalShowSubscribe'
+// 粉丝列表刷新的订阅key
+global.fansListrefreshSubscribe = 'fansListrefreshSubscribe'

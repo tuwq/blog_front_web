@@ -44,17 +44,22 @@ class FollowList extends React.Component {
 	followChangeFn(index,followStatus) {
 		var followList = this.state.followList.slice()
 		// 注意setState中数组比较更新时引用,所有需要拷贝一个新数组
+		if(!followList[index]){return}
 		followList[index].followStatus = followStatus
 		this.setState({
 			followList: followList
 		})
 	}
 
+	refreshFn() {
+		this.initData()
+	}
+
 	render() {
 		var items = null
 		if (this.state.followList.length) {
 			items = this.state.followList.map((item,index)=>{
-				return (<FollowItem key={index} index={index} data={item} followChangeFn={this.followChangeFn.bind(this)}/>)
+				return (<FollowItem key={index} index={index} type="2" data={item} followChangeFn={this.followChangeFn.bind(this)} refreshFn={this.refreshFn.bind(this)}/>)
 			})
 		}
 		return (

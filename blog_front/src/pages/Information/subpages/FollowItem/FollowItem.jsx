@@ -14,8 +14,7 @@ class FollowItem extends React.Component {
 	constructor(props,context) {
 		super(props,context)
 		this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
-		this.changeMe = this.changeMe.bind(this)
-		this.changeOther = this.changeOther.bind(this)
+		this.followsChange = this.followsChange.bind(this)
 	}
 
 	componentDidMount() {
@@ -26,34 +25,18 @@ class FollowItem extends React.Component {
 		followUserApi(followId,followAction,(res)=>{
             if (res.data.code == 200) {
                 this.props.followChangeFn(this.props.index,followAction)
-              	if (this.props.showInfo.identity==1) {
-              		this.changeMe(followAction)
-              	} else if(this.props.showInfo.identity==2){
-              		this.changeOther(followAction)
-              	}
+                this.followsChange(followAction)
             }
         })
 	}
 
-	changeMe(followAction) {
-		if (followAction == 1) {
-			console.log('++')
-			this.props.showInfoActions.save({
-				followsSum: this.props.showInfo.followsSum++
-			})
-		} else {
-			console.log('--')
-			this.props.showInfoActions.save({
-				followsSum: this.props.showInfo.followsSum--
-			})
-		}
-	}
-
-	changeOther(followAction) {
-		if (followAction == 1) {
-
-		} else {
-			
+	followsChange(followAction) {
+		if (this.props.showInfo.identity == 1) {
+			if (followAction == 1) {
+				this.props.showInfoActions.incrFollow(1)
+			} else {
+				this.props.showInfoActions.incrFollow(-1)
+			}
 		}
 	}
 
@@ -80,7 +63,7 @@ class FollowItem extends React.Component {
 		return (
 			<div className="follow-group">
 			 	<div className="avatar">
-			 		<img width="50" height="50" alt="" src={global.userAvatarPrefix+this.props.data.userDto.avatar}/>
+			 		<img width="50" height="50" alt="" src={global.userAvatarPrefix+this.props.data.userDto.avatar+'?v='+new Date().getTime()}/>
 			 	</div>
 			 	<div className="meta">
 			 		<h2 className="name"><Link to={'/user/'+this.props.data.userDto.id}>

@@ -19,7 +19,11 @@ class InformationNav extends React.Component {
 	}
 
 	updateNavType(type,e) {
-		$(e.target).addClass('current').siblings().removeClass('current')
+		var $target = $(e.target)
+		if($target.prop('nodeName') == 'SPAN') {
+			$target = $target.parent()
+		}
+		$target.addClass('current').siblings().removeClass('current')
 		this.props.updateNavTypeFn(type)
 	}
 

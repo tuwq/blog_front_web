@@ -6,3 +6,17 @@ export function save(data) {
         data
     }
 }
+
+export function incrFollow(data) {
+	return {
+		type: actionTypes.INCR_FOLLOW_SUM,
+		data
+	}
+}
+
+export function incrFans(data) {
+	return {
+		type: actionTypes.INCR_FANS_SUM,
+		data
+	}
+}
