@@ -22,17 +22,14 @@ class ModelCrowdList extends React.Component {
 		return (
          	<div className="ModelCrowdList">
          		<div className="BigItemList">
-	         		<ModelCrowdBigItem />
-	         		<ModelCrowdBigItem />
-	         		<ModelCrowdBigItem />
+         			{
+         				this.props.tutorialList.map((item,index)=>{
+         					return (<ModelCrowdBigItem key={index} item={item} index={index}/>)
+         				})
+         			}
          		</div>
          		<div className="ItemList">
-	         		<ModelCrowdItem />
-	         		<ModelCrowdItem />
-	         		<ModelCrowdItem />
-	         		<ModelCrowdItem />
-	         		<ModelCrowdItem />
-	         		<ModelCrowdItem />
+	         		
          		</div>
          	</div>
         )

@@ -6,6 +6,7 @@
     <result column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="title" property="title" jdbcType="VARCHAR" />
     <result column="face_cover" property="faceCover" jdbcType="VARCHAR" />
+    <result column="praise" property="praise" jdbcType="INTEGER" />
     <result column="comment_sum" property="commentSum" jdbcType="INTEGER" />
     <result column="browse_sum" property="browseSum" jdbcType="INTEGER" />
     <result column="status" property="status" jdbcType="INTEGER" />
@@ -17,8 +18,8 @@
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, user_id, title, face_cover, comment_sum, browse_sum, status, weight, create_time, 
-    update_time
+    id, user_id, title, face_cover, praise, comment_sum, browse_sum, status, weight, 
+    create_time, update_time
   </sql>
   <sql id="Blob_Column_List" >
     content
@@ -37,13 +38,15 @@
   </delete>
   <insert id="insert" parameterType="root.model.Articale" >
     insert into articale (id, user_id, title, 
-      face_cover, comment_sum, browse_sum, 
-      status, weight, create_time, 
-      update_time, content)
+      face_cover, praise, comment_sum, 
+      browse_sum, status, weight, 
+      create_time, update_time, content
+      )
     values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
-      #{faceCover,jdbcType=VARCHAR}, #{commentSum,jdbcType=INTEGER}, #{browseSum,jdbcType=INTEGER}, 
-      #{status,jdbcType=INTEGER}, #{weight,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR})
+      #{faceCover,jdbcType=VARCHAR}, #{praise,jdbcType=INTEGER}, #{commentSum,jdbcType=INTEGER}, 
+      #{browseSum,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{weight,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="root.model.Articale" >
     insert into articale
@@ -59,6 +62,9 @@
       </if>
       <if test="faceCover != null" >
         face_cover,
+      </if>
+      <if test="praise != null" >
+        praise,
       </if>
       <if test="commentSum != null" >
         comment_sum,
@@ -95,6 +101,9 @@
       <if test="faceCover != null" >
         #{faceCover,jdbcType=VARCHAR},
       </if>
+      <if test="praise != null" >
+        #{praise,jdbcType=INTEGER},
+      </if>
       <if test="commentSum != null" >
         #{commentSum,jdbcType=INTEGER},
       </if>
@@ -130,6 +139,9 @@
       <if test="faceCover != null" >
         face_cover = #{faceCover,jdbcType=VARCHAR},
       </if>
+      <if test="praise != null" >
+        praise = #{praise,jdbcType=INTEGER},
+      </if>
       <if test="commentSum != null" >
         comment_sum = #{commentSum,jdbcType=INTEGER},
       </if>
@@ -159,6 +171,7 @@
     set user_id = #{userId,jdbcType=INTEGER},
       title = #{title,jdbcType=VARCHAR},
       face_cover = #{faceCover,jdbcType=VARCHAR},
+      praise = #{praise,jdbcType=INTEGER},
       comment_sum = #{commentSum,jdbcType=INTEGER},
       browse_sum = #{browseSum,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},
@@ -173,6 +186,7 @@
     set user_id = #{userId,jdbcType=INTEGER},
       title = #{title,jdbcType=VARCHAR},
       face_cover = #{faceCover,jdbcType=VARCHAR},
+      praise = #{praise,jdbcType=INTEGER},
       comment_sum = #{commentSum,jdbcType=INTEGER},
       browse_sum = #{browseSum,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},

@@ -18,12 +18,14 @@ class ModelMediumList extends React.Component {
 	}
 
 	render() {
+		let articleList = this.props.articleList
 		return (
          	<div className="ModelMediumList">
-         		<ModelMediumItem />
-         		<ModelMediumItem />
-         		<ModelMediumItem />
-         		<ModelMediumItem />
+         		{
+         			articleList.map((item,index)=>{
+         				return (<ModelMediumItem key={index} item={item} />)
+         			})
+         		}
          	</div>
         )
 	}

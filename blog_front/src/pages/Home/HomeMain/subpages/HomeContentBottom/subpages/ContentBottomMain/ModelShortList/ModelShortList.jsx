@@ -20,8 +20,8 @@ class ModelShortList extends React.Component {
 	render() {
 		return (
          	<div className="ModelShortList">
-         		<ModelShortItem />
-         		<ModelShortItem />
+         		<ModelShortItem data={this.props.shortCodeList} category={this.props.shortCodeCategory}/>
+         		<ModelShortItem data={this.props.chatList} category={this.props.chatCategory}/>
          	</div>
         )
 	}

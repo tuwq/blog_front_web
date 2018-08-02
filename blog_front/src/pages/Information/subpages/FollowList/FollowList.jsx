@@ -59,7 +59,7 @@ class FollowList extends React.Component {
 		var items = null
 		if (this.state.followList.length) {
 			items = this.state.followList.map((item,index)=>{
-				return (<FollowItem key={index} index={index} type="2" data={item} followChangeFn={this.followChangeFn.bind(this)} refreshFn={this.refreshFn.bind(this)}/>)
+				return (<FollowItem key={index} index={index} data={item} followChangeFn={this.followChangeFn.bind(this)} refreshFn={this.refreshFn.bind(this)}/>)
 			})
 		}
 		return (

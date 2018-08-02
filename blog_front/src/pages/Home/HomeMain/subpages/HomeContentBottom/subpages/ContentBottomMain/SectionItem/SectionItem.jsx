@@ -23,8 +23,8 @@ class SectionItem extends React.Component {
 		return (
          	<div className="SectionItem">
          		<ModelMediumCollection />
-         		<ModelShortCollection />
          		<ModelCrowdCollection />
+         		<ModelShortCollection />
          	</div>
         )
 	}

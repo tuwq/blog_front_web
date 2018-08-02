@@ -1,1 +1,7 @@
-root\service\TestService.class
+root\service\QiNiuService.class
+root\service\TokenService.class
+root\service\FollowService.class
+root\service\UserService.class
+root\service\MailService.class
+root\service\InformartionService.class
+root\service\LoginService.class

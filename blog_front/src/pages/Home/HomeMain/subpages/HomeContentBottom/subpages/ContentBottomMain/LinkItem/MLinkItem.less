@@ -1,0 +1,27 @@
+@import url("../../../../../../../../base/style/an.less");
+@media screen and (max-width: @mobile_width) {
+.ModelShortItemLinkList {
+	.LinkItem {
+		h3 {
+			display: flex;
+			align-items: center;
+			-webkit-box-align: center;
+			height: 36px;
+			font-size: 14px;
+			i {
+				margin-right: 5px;
+			}
+			a {
+				flex: 1;
+				overflow: hidden;
+				padding-left: 15px;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				font-weight: 500;
+				&:hover {
+					.font-color-animation;
+				}
+			}
+		}	
+	}
+}}

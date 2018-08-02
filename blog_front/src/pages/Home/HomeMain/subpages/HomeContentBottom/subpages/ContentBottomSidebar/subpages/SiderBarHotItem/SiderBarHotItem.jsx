@@ -22,13 +22,13 @@ class SiderBarHotItem extends React.Component {
 		return (
          	<div className="SiderBarHotItem">
                <div className="image">
-                  <a><img width="200" height="136" alt="" src="http://pcij2jrr4.bkt.clouddn.com/upload/tempicon.png"/></a>
+                  <a><img width="200" height="136" alt="" src={global.artImgPrefix+this.props.item.faceCover}/></a>
                </div>
          		<div className="description">
-         			<div className="hot-title"><a>友链说明</a></div>
+         			<div className="hot-title"><a>{this.props.item.title}</a></div>
          			<div className="hot-content">
-         				<span><i><img width="13" height="13" alt="" src={eyeSvg} /></i>698756</span>
-         				<span><i><img width="13" height="13" alt="" src={clockSvg} /></i>2018-7-12 22:56</span>
+         				<span><i><img width="13" height="13" alt="" src={eyeSvg} /></i>{this.props.item.browseSum}</span>
+         				<span><i><img width="13" height="13" alt="" src={clockSvg} /></i>{this.props.item.createTimeString}</span>
          			</div>
          		</div>
          	</div>

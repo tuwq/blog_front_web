@@ -85,25 +85,24 @@ class HomeHeader extends React.Component {
           			<li className="HomeHeaderItem">
           				<a className="ItemLink">我</a>
                     <ul className="ItemMenu">
-                         <li><a>关于</a></li>
                          <li><a>给我留言</a></li>
-                         <li><a>广告投放</a></li>
+                         <li><a>个人闲谈</a></li>
+                         <li><a>BUG反馈</a></li>
                     </ul>
           			</li>
           			<li className="HomeHeaderItem">
           				<a className="ItemLink">值得看</a> 
                   <ul className="ItemMenu">
-                       <li><a>关于</a></li>
-                       <li><a>给我留言</a></li>
-                       <li><a>广告投放</a></li>
+                       <li><a>文章</a></li>
+                       <li><a>教程</a></li>
+                       <li><a>短代码</a></li>
                   </ul> 
           			</li>
           			<li className="HomeHeaderItem">
           				<a className="ItemLink">收藏</a> 
                   <ul className="ItemMenu">
-                       <li><a>关于</a></li>
-                       <li><a>给我留言</a></li>
-                       <li><a>广告投放</a></li>
+                       <li><a>相册</a></li>
+                       <li><a>歌单</a></li>
                   </ul>
           			</li>
           		</ul>

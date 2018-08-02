@@ -16,15 +16,22 @@ class WidgetList extends React.Component {
 	componentDidMount() {
 		
 	}
+
+	componentWillUnmount() {
+	   this.setState = (state,callback)=>{
+	     return
+	   }
+	}
 	
 	render() {
 		return (
-         	<div id="WidgetList" className="WidgetList">
-     			<WidgetItem />
-     			<WidgetItem />
-     			<WidgetItem />
-     			<WidgetItem />
-         	</div>
+			<div id="WidgetList" className="WidgetList">         	
+     			{
+     				this.props.praiseList.map((item,index)=>{
+     					return (<WidgetItem key={index} item={item} index={index}/>)
+     				})
+     			}
+     		</div>
         )
 	}
 }

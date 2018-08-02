@@ -1,2 +1,10 @@
-D:\eclipse-workspace\blog_front\blog_front-mapper\src\main\java\root\druid\DruidConfig.java
+D:\eclipse-workspace\blog_front\blog_front-mapper\src\main\java\root\mapper\ArticaleMapper.java
+D:\eclipse-workspace\blog_front\blog_front-mapper\src\main\java\root\mapper\CategoryMapper.java
+D:\eclipse-workspace\blog_front\blog_front-mapper\src\main\java\root\mapper\CommentUserMapper.java
+D:\eclipse-workspace\blog_front\blog_front-mapper\src\main\java\root\mapper\UserFollowMapper.java
+D:\eclipse-workspace\blog_front\blog_front-mapper\src\main\java\root\mapper\CommentMapper.java
+D:\eclipse-workspace\blog_front\blog_front-mapper\src\main\java\root\mapper\SysUserMapper.java
 D:\eclipse-workspace\blog_front\blog_front-mapper\src\main\java\root\mapper\UserMapper.java
+D:\eclipse-workspace\blog_front\blog_front-mapper\src\main\java\root\mapper\UserDynamicMapper.java
+D:\eclipse-workspace\blog_front\blog_front-mapper\src\main\java\root\mapper\ArticaleCategoryMapper.java
+D:\eclipse-workspace\blog_front\blog_front-mapper\src\main\java\root\mapper\ArticaleUserMapper.java

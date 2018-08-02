@@ -17,6 +17,7 @@ class HomeMain extends React.Component {
 	componentDidMount() {
 		
 	}
+	
 	render() {
 		return (
           <div id="HomeMain" className="HomeMain">

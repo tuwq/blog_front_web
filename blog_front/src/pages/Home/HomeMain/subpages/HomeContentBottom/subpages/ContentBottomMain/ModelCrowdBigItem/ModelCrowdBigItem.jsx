@@ -23,19 +23,19 @@ class ModelCrowdBigItem extends React.Component {
 		return (
          	<div className="ModelCrowdBigItem">
          		<div className="image">
-         			<a><img width="" height="" alt="" src="http://pcij2jrr4.bkt.clouddn.com/upload/tempitem3.png"/></a>
+         			<a><img width="" height="" alt="" src={global.artImgPrefix+this.props.item.faceCover}/></a>
          		</div>
                <div className="description">
                   <div className="title">
-                     <h3><a>软件_心之印画每个人都可以用它做动画</a></h3>
+                     <h3><a>{this.props.item.title}</a></h3>
                   </div>
                   <div className="meta">
-                     <span><i><img width="" height="" alt="" src={clockSvg}/></i>2018-7-13</span>
-                     <span><i><img width="" height="" alt="" src={eyeSvg}/></i>67499阅读</span>
-                     <span><i><img width="" height="" alt="" src={commentSvg}/></i>8(评论)</span>
+                     <span><i><img width="" height="" alt="" src={clockSvg}/></i>{this.props.item.createTimeString}</span>
+                     <span><i><img width="" height="" alt="" src={eyeSvg}/></i>{this.props.item.browseSum}阅读</span>
+                     <span><i><img width="" height="" alt="" src={commentSvg}/></i>{this.props.item.commentSum}(评论)</span>
                   </div>
                   <div className="content">
-                     <p>介绍 好久没有推荐过软件了，今天月宅要给大家带来的是一款软件是可以让任何人都可以制作属于自己的动画软件。 演示地址 哔哩哔哩官方投稿：https://www.bilibili.com/video</p>
+                     <p>{this.props.item.content}</p>
                   </div>                  
                </div>
          	</div>

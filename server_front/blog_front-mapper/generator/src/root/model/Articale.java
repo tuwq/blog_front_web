@@ -11,6 +11,8 @@ public class Articale {
 
     private String faceCover;
 
+    private Integer praise;
+
     private Integer commentSum;
 
     private Integer browseSum;
@@ -55,6 +57,14 @@ public class Articale {
 
     public void setFaceCover(String faceCover) {
         this.faceCover = faceCover == null ? null : faceCover.trim();
+    }
+
+    public Integer getPraise() {
+        return praise;
+    }
+
+    public void setPraise(Integer praise) {
+        this.praise = praise;
     }
 
     public Integer getCommentSum() {

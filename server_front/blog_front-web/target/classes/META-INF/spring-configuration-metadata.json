@@ -4,7 +4,7 @@
     {
       "sourceType": "root.DruidConfig",
       "name": "spring.druid",
-      "sourceMethod": "public com.alibaba.druid.pool.DruidDataSource dataSource() ",
+      "sourceMethod": "dataSource()",
       "type": "com.alibaba.druid.pool.DruidDataSource"
     }
   ],

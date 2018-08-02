@@ -20,7 +20,7 @@ class ModelMediumTitle extends React.Component {
 	render() {
 		return (
      		<h2 className="ModelMediumTitle">
-     			<span>最新文章</span>
+     			<span>最新{this.props.category.name}</span>
      			<a>更多<i><img width="12" height="12" alt="" src={rightSvg} /></i></a>
      		</h2>
         )

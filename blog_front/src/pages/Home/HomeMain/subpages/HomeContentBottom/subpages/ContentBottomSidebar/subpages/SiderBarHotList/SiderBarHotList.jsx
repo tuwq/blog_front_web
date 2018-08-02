@@ -20,10 +20,11 @@ class SiderBarHotList extends React.Component {
 	render() {
 		return (
          	<div id="SiderBarHotList" className="SiderBarHotList">
-         		<SiderBarHotItem />
-         		<SiderBarHotItem />
-         		<SiderBarHotItem />
-         		<SiderBarHotItem />
+         		{
+         			this.props.hotDiscussList.map((item,index)=>{
+         				return (<SiderBarHotItem key={index} item={item} index={index}/>)
+         			})
+         		}
          	</div>
         )
 	}

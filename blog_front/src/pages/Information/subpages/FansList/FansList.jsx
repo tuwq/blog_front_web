@@ -64,7 +64,7 @@ class FansList extends React.Component {
 		var items = null
 		if (this.state.fansList.length) {
 			items = this.state.fansList.map((item,index)=>{
-				return (<FollowItem key={index} index={index} type="1" data={item} followChangeFn={this.followChangeFn.bind(this)}/>)
+				return (<FollowItem key={index} index={index} data={item} followChangeFn={this.followChangeFn.bind(this)}/>)
 			})
 		}
 		return (
