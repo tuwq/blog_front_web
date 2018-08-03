@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import root.model.Articale;
+import root.param.PageParam;
 
 @Mapper
 public interface ArticaleMapper {
@@ -40,4 +41,43 @@ public interface ArticaleMapper {
 	 * @return
 	 */
 	List<Articale> hotDiscuss(@Param("quantity") Integer quantity);
+	/**
+	 * 分类下的文章总数
+	 * @param id
+	 * @return
+	 */
+	Long countAllByCategoryId(@Param("categoryId") Integer category_id);
+	/**
+	 * 指定分类下的文章分页数据
+	 * @param param
+	 * @param id
+	 * @return
+	 */
+	List<Articale> categoryPage(@Param("skip") Integer skip,@Param("pageSize") Integer pageSize,@Param("categoryId") Integer category_id);
+	/**
+	 * 查找符合关键字的文章数量,符合包括文章标题,属于分类,文章内容
+	 * @param keyword
+	 * @return
+	 */
+	Long countByKeyword(@Param("keyword") String keyword);
+	/**
+	 * 查找符合关键字的文章，符合包括文章标题，属于分类，文章内容
+	 * @param keyword
+	 * @param skip
+	 * @param pageSize
+	 * @return
+	 */
+	List<Articale> pageByKeyWord(@Param("keyword")String keyword,@Param("skip") Integer skip,@Param("pageSize") Integer pageSize);
+	/**
+	 * 查找文章总数
+	 * @return
+	 */
+	Long countAll();
+	/**
+	 * 获得文章的分页数据和每个文章的用户信息
+	 * @param skip
+	 * @param pageSize
+	 * @return
+	 */
+	List<Articale> pageWithUser(@Param("skip") Integer skip,@Param("pageSize") Integer pageSize);
 }

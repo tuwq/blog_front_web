@@ -39,7 +39,7 @@ public class ArticaleService {
 	
 	
 	public JsonResult<List<ArticaleDto>> praise(Integer quantity) {
-		// 根据集体点赞数和更新时间获取指定数量文章信息
+		// 根据集体点赞数和更新时间获取指定数量文章数据
 		if (quantity == null) {
 			throw new CheckParamException("数量","未指定");
 		}

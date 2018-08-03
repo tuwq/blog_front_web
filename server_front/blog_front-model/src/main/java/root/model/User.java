@@ -27,6 +27,8 @@ public class User {
     private String website;
 
     private String avatar;
+    
+    private Integer praise;
 
     private Integer status;
 
@@ -106,6 +108,14 @@ public class User {
         this.website = website == null ? null : website.trim();
     }
 
+    public Integer getPraise() {
+		return praise;
+	}
+
+	public void setPraise(Integer praise) {
+		this.praise = praise;
+	}
+    
     public String getAvatar() {
         return avatar;
     }
@@ -201,4 +211,5 @@ public class User {
     public void setOperateTime(Date operateTime) {
         this.operateTime = operateTime;
     }
+
 }

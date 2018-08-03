@@ -44,6 +44,7 @@ class SiderBarSelf extends React.Component {
    }
 
 	render() {
+
 		return (
          	<div id="SiderBarSelf" className="SiderBarSelf">
          		<div className="SelfBg"><a><img alt=""/></a></div>
@@ -53,7 +54,7 @@ class SiderBarSelf extends React.Component {
                      (<a className="SelfAvatar"><img width="72" alt="" src={global.userAvatarPrefix+this.state.author.avatar+'?v='+new Date().getTime()}/></a>)
                   }
          			<div className="SelfName">
-         				<span>{this.state.author.nickname}</span>
+         				<span><Link to={'/user/'+this.state.author.id}>{this.state.author.nickname}</Link></span>
          				<span>站长</span>
          			</div>
          			<div className="SelfFllow">
@@ -68,9 +69,9 @@ class SiderBarSelf extends React.Component {
          			</div>
          			<div className="SelfStats">
          				<span className="stateItem">{this.state.author.articaleSum}<span>文章</span></span>
-         				<span className="stateItem">2623<span>点赞</span></span>
-         				<span className="stateItem">{this.state.followsSum}<span>关注</span></span>
-         				<span className="stateItem">{this.state.fansSum}<span>粉丝</span></span>
+         				<span className="stateItem">{this.state.author.praise}<span>点赞</span></span>
+         				<span className="stateItem">{this.state.followsSum!=null?this.state.followsSum:0}<span>关注</span></span>
+         				<span className="stateItem">{this.state.fansSum!=null?this.state.fansSum:0}<span>粉丝</span></span>
          			</div>
          		</div>
          	</div>

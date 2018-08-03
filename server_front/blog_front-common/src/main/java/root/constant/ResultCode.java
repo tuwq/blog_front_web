@@ -5,6 +5,8 @@ public interface ResultCode {
 	static int PARAM_ERROR = 270;
 	// 查找的目标资源不存在,比如文章
 	static int ITEM_NOT_FOUND = 271;
+	// 搜索查找的关键字数据不存在
+	static int SEARCH_KEYWORD_NOT_RESULT = 272;
 	// 邮箱激活过期了
 	static int EMAIL_MATURITY = 300;
 	// 文件上传失败了

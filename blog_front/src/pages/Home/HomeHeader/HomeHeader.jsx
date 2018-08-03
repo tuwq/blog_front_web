@@ -38,6 +38,10 @@ class HomeHeader extends React.Component {
     };
   }
 
+  goCategory(categoryId) {
+    this.props.history.replace('/category/'+categoryId)
+  }
+
   subscribeMenu(msg,data) {
      $(this.$userMenu.current).removeClass('show')
   }
@@ -85,7 +89,7 @@ class HomeHeader extends React.Component {
           			<li className="HomeHeaderItem">
           				<a className="ItemLink">我</a>
                     <ul className="ItemMenu">
-                         <li><a>给我留言</a></li>
+                         <li><a onClick={this.goCategory.bind(this,4)}>给我留言</a></li>
                          <li><a>个人闲谈</a></li>
                          <li><a>BUG反馈</a></li>
                     </ul>
@@ -93,9 +97,9 @@ class HomeHeader extends React.Component {
           			<li className="HomeHeaderItem">
           				<a className="ItemLink">值得看</a> 
                   <ul className="ItemMenu">
-                       <li><a>文章</a></li>
-                       <li><a>教程</a></li>
-                       <li><a>短代码</a></li>
+                       <li><a onClick={this.goCategory.bind(this,1)}>文章</a></li>
+                       <li><a onClick={this.goCategory.bind(this,2)}>教程</a></li>
+                       <li><a onClick={this.goCategory.bind(this,3)}>短代码</a></li>
                   </ul> 
           			</li>
           			<li className="HomeHeaderItem">
@@ -113,7 +117,7 @@ class HomeHeader extends React.Component {
           				</a>
           			</li>
                 {
-                  JSON.stringify(this.props.user) != "{}"
+                  JSON.stringify(this.props.user)!="{}"
                   ? (<li className="HomeHeaderItemRight UserLink">
                       <a className="ItemLinkRight"><img width="32" height="32" onClick={this.userMenu.bind(this)} alt="" 
                       src={global.userAvatarPrefix+this.props.user.avatar+'?v='+new Date().getTime()}/></a>

@@ -17,6 +17,7 @@ import SearchModal from 'base/general/SearchModal/SearchModal'
 import HomeRouter from './subrouters/HomeRouter'
 import UserRouter from './subrouters/UserRouter'
 import SearchRouter from './subrouters/SearchRouter'
+import CategoryRouter from './subrouters/CategoryRouter'
 import ArticleRouter from './subrouters/ArticleRouter'
 import NotFound from '@/pages/NotFound/NotFound'
 
@@ -38,6 +39,7 @@ class Main extends Component {
             <Route exact path="/" component={HomeRouter} />
             <Route path="/user" component={UserRouter} />
             <Route path="/search" component={SearchRouter} />
+            <Route path="/category" component={CategoryRouter} />
             <Route path="/article" component={ArticleRouter} />
             <Route path="*" component={NotFound} />
           </Switch>

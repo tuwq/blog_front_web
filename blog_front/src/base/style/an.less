@@ -80,6 +80,13 @@
 .animationtipopacity {
 	animation: tipopacity .3s linear;
 }
+.fromBottomToNow {
+	animation: beforeBottom .2s linear;
+}
+@keyframes beforeBottom{
+	0%{transform: translateY(200px);}
+	100%{transform: translateY(0px);}
+}
 @keyframes fontcolor{
 	from{color: inherit;}
 	to{color: @blue_color;}

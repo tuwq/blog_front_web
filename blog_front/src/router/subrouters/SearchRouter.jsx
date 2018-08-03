@@ -9,8 +9,7 @@ class SearchRouter extends React.Component {
     render() {
         return (
             <Switch>
-            	<Route exact path="/search" component={NotFound} />
-        		<Route exact path="/search/:keyword" component={Search} />
+            	<Route exact path="/search" component={Search} />
         		<Route path="/search/*" component={NotFound} />
             </Switch>
         )

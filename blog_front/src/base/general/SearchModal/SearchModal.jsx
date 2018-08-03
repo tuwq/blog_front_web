@@ -15,7 +15,7 @@ class SearchModal extends React.Component {
 		PubSub.subscribe(global.searchModalShowSubscribe,this.searchModalShowSubscribe)
 		this.state = {
 			searchModalShow: false,
-			value: ''
+			keyword: ''
 		}
 	}
 
@@ -46,14 +46,15 @@ class SearchModal extends React.Component {
 	handleChange(e) {
 		// 受控
 		this.setState({
-			value: e.target.value.toLowerCase()
+			keyword: e.target.value
 		})
 	}
 
 	keypress(e) {
 		// 回车搜索
 		if (e.which === 13) {
-			
+			this.props.history.replace('/search?keyword='+this.state.keyword)
+			this.closeSearchShow()
 		}
 	}
 
@@ -68,7 +69,8 @@ class SearchModal extends React.Component {
 	           	  <div className="ModelInner">
 	           	  		<div className="searchForm">
 	           	  			<div className="input">
-	           	  				<input type="text" placeholder="输入关键字" value={this.state.value} onChange={this.handleChange.bind(this)} onKeyPress={this.keypress.bind(this)}/>
+	           	  				<input type="text" placeholder="输入关键字" value={this.state.keyword} onChange={this.handleChange.bind(this)} onKeyPress={this.keypress.bind(this)}/>
+	           	  				<button>确定</button>
 	           	  			</div>
 	           	  			<div className="resultList"></div>
 	           	  		</div>

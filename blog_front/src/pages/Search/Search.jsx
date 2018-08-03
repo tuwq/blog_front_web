@@ -20,6 +20,12 @@ class Search extends React.Component {
 		
 	}
 
+	componentWillUnmount() {
+	   this.setState = (state,callback)=>{
+	     return
+	   }
+	}
+
 	render() {
 		return (
 			<div className="Search">

@@ -1,7 +1,15 @@
 package root.model;
 
 import java.util.Date;
+import java.util.List;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Articale {
     private Integer id;
 
@@ -26,12 +34,16 @@ public class Articale {
     private Date updateTime;
 
     private String content;
+    // 文章的分类信息
+    private List<Category> categoryList;
+    // 文章的用户信息
+    private User user;
 
     public Integer getId() {
         return id;
     }
 
-	public void setId(Integer id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -58,7 +70,7 @@ public class Articale {
     public void setFaceCover(String faceCover) {
         this.faceCover = faceCover == null ? null : faceCover.trim();
     }
-
+    
     public Integer getPraise() {
 		return praise;
 	}
@@ -66,7 +78,7 @@ public class Articale {
 	public void setPraise(Integer praise) {
 		this.praise = praise;
 	}
-    
+
     public Integer getCommentSum() {
         return commentSum;
     }
@@ -122,4 +134,22 @@ public class Articale {
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
     }
+
+	public List<Category> getCategoryList() {
+		return categoryList;
+	}
+
+	public void setCategoryList(List<Category> categoryList) {
+		this.categoryList = categoryList;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	
 }

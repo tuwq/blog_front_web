@@ -2,6 +2,8 @@
 export const PARAM_ERROR = 270
 // 查找的目标资源不存在,比如文章
 export const ITEM_NOT_FOUND = 271
+// 查找的关键字数量没有结果
+export const SEARCH_KEYWORD_NOT_RESULT = 272
 // 邮箱激活过期了
 export const EMAIL_MATURITY = 300
 // TOKEN过期了但不需要回登陆页,依旧是成功的,不过没有数据返回

@@ -5,7 +5,9 @@ public class Category {
 
     private String name;
 
-    private Integer articaleSum;
+    private String desc;
+    
+	private Integer articaleSum;
 
     private Integer commentSum;
 
@@ -24,7 +26,15 @@ public class Category {
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
     }
+    
+    public String getDesc() {
+		return desc;
+	}
 
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
+    
     public Integer getArticaleSum() {
         return articaleSum;
     }
