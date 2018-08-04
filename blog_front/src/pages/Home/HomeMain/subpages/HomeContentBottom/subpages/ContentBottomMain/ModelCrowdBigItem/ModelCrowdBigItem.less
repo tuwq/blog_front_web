@@ -18,9 +18,12 @@
 		img {.image-scale-before;.image-opacity;}
 	}
 	.description {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
 		.title {
 			font-size: 1.5rem;
-			max-height: 50px;
+			max-height: 20px;
 			overflow: hidden;
 			margin-bottom: 10px;
 		}
@@ -38,8 +41,9 @@
 			font-weight: 300;
 			margin-top: 5px;
 			line-height: 20px;
-			max-height: 80px;
+			max-height: 40px;
 			overflow: hidden;
+			text-overflow: ellipsis;
 		}
 	}
 }}

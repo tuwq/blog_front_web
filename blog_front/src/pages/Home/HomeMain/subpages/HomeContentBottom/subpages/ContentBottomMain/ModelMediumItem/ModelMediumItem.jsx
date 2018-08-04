@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
+import { withRouter,Link } from 'react-router-dom'
 
 import './ModelMediumItem.less'
 import './MModelMediumItem.less'
@@ -19,14 +20,14 @@ class ModelMediumItem extends React.Component {
 		return (
          	<div className="ModelMediumItem">
          		<div className="image">
-         			<a><img width="140" height="" alt="" src={global.artImgPrefix+this.props.item.faceCover}/></a>
+         			<Link to={'/article/'+this.props.item.id}><img width="140" height="" alt="" src={global.artImgPrefix+this.props.item.faceCover}/></Link>
          		</div>
          		<div className="description">
-         			<div className="section-title">
-         				<h3><a>{this.props.item.title}</a></h3>
-         			</div>
+         			<Link to={'/article/'+this.props.item.id} className="section-title">
+         				记录23杰拉德离开23了静安寺的记录23杰拉德离开23了静安寺的记录23杰拉德离开23了静安寺的记录23杰拉德离开23了静安寺的记录23杰拉德离开23了静安寺的记录23杰拉德离开23了静安寺的记录23杰拉德离开23了静安寺的记录23杰拉德离开23了静安寺的记录23杰拉德离开23了静安寺的记录23杰拉德离开23了静安寺的记录23杰拉德离开23了静安寺的记录23杰拉德离开23了静安寺的记录23杰拉德离开23了静安寺的记录23杰拉德离开23了静安寺的记录23杰拉德离开23了静安寺的记录23杰拉德离开23了静安寺的记录23杰拉德离开23了静安寺的记录23杰拉德离开23了静安寺的记录23杰拉德离开23了静安寺的记录23杰拉德离开23了静安寺的记录23杰拉德离开23了静安寺的记录23杰拉德离开23了静安寺的记录23杰拉德离开23了静安寺的记录23杰拉德离开23了静安寺的记录23杰拉德离开23了静安寺的记录23杰拉德离开23了静安寺的记录23杰拉德离开23了静安寺的记录23杰拉德离开23了静安寺的记录23杰拉德离开23了静安寺的记录23杰拉德离开23了静安寺的记录23杰拉德离开23了静安寺的记录23杰拉德离开23了静安寺的记录23杰拉德离开23了静安寺的记录23杰拉德离开23了静安寺的
+         			</Link>
          			<div className="section-content">
-         				<p>{this.props.item.content}</p>
+         				123似的经历23123啊大苏打2312312312aj内容垃圾啊类似的经历23123啊大苏打2312312312aj内容垃圾啊类似的经历23123啊大苏打2312312312aj内容垃圾啊类似的经历23123啊大苏打2312312312ajsd
          			</div>
          		</div>
          	</div>
@@ -34,5 +35,5 @@ class ModelMediumItem extends React.Component {
 	}
 }
 
-export default ModelMediumItem
+export default withRouter(ModelMediumItem)
 

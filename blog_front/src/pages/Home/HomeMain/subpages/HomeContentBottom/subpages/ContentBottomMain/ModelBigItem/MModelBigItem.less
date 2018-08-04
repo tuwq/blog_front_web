@@ -29,11 +29,14 @@
 	}
 	.description {
 		flex: 1;
+		display: flex;
+		flex-direction: column;
 		.title {
+			max-height: 25px;
 			margin-right: 20px;
 			overflow: hidden;
 			line-height: 25px;
-			font-size: 1.6rem;
+			font-size: 17px;
 			font-weight: 400;
 			margin-bottom: 20px;
 		}
@@ -50,9 +53,10 @@
 			margin-top: 10px;
 			font-size: 14px;
 			line-height: 25px;
-			max-height: 100px;
+			max-height: 80px;
 			overflow: hidden;
 			color: @gray_color;
+			text-overflow: ellipsis;
 		}
 	}
 }}

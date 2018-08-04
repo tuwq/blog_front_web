@@ -35,8 +35,8 @@ class App extends Component {
     this.rediectLoginSubscribe = this.rediectLoginSubscribe.bind(this)
     PubSub.subscribe(global.userInfoRefreshSubscribe,this.userInfoRefreshSubscribe)
     PubSub.subscribe(global.rediectLoginSubscribe,this.rediectLoginSubscribe)
-  }
 
+  }
 
   render() {
     return (

@@ -13,7 +13,7 @@
 		}
 	}
 	.image {
-		width: 300px;
+		flex: 0 1 40%;
 		overflow: hidden;
 		margin-right: 20px;
 		a {
@@ -26,14 +26,19 @@
 		}
 	}
 	.description {
-		flex: 1;
+		flex: 0 1 60%;
+		width: 0;
+		display: flex;
+		flex-direction: column;
 		.title {
+			max-height: 25px;
 			margin-right: 20px;
 			overflow: hidden;
 			line-height: 25px;
-			font-size: 1.8rem;
+			font-size: 18px;
 			font-weight: 400;
 			margin-bottom: 20px;
+			text-overflow: ellipsis;
 		}
 		.meta {
 			color: @gray_color;
@@ -48,7 +53,7 @@
 			margin-top: 10px;
 			font-size: 14px;
 			line-height: 25px;
-			max-height: 100px;
+			max-height: 80px;
 			overflow: hidden;
 			color: @gray_color;
 		}

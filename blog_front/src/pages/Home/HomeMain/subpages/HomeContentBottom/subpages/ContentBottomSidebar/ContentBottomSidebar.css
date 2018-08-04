@@ -1,1 +1,1 @@
-@media screen and (min-width:800px){.ContentBottomSidebar{padding-left:15px;display:flex;flex-direction:column;flex:0 1 33%}}
+@media screen and (min-width:800px){.ContentBottomSidebar{padding-left:15px;display:flex;flex-direction:column;flex:0 1 33%;max-width:33%}}

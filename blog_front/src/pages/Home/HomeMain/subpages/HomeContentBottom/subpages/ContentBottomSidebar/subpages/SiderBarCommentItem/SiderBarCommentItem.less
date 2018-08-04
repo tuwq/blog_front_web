@@ -12,16 +12,23 @@
 		align-items: center;
 		-webkit-box-align: center;
 		font-size: 13px;
-		a:nth-child(1) {margin-right: 5px;}
-		a:nth-child(3) {padding-left: 5px;}
+		flex: 1;
+		width: 400px;
+		max-height: 24px;
+		.avatar { width: 20px;height: 20px;}
+		.nickname {white-space: nowrap;overflow: hidden;}
+		.tip {white-space: nowrap;overflow: hidden;}
+		.articleName{white-space: nowrap;text-overflow: ellipsis;overflow: hidden;flex: 1;}
 	}
 	.CommentContent {
-		max-height: 150px;
+		flex: 1;
+		max-height: 52px;
 		padding: 10px 20px;
 		border-radius: 3px;
 		word-break: break-all;
 		font-size: 1.4rem;
 		overflow: hidden;
+		text-overflow: ellipsis;
 		color: @home_content_sider_font_color;
 		background: @home_content_sider_comment_bg_color;
 	}	

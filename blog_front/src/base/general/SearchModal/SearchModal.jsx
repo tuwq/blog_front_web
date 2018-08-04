@@ -58,6 +58,11 @@ class SearchModal extends React.Component {
 		}
 	}
 
+	search() {
+		this.props.history.replace('/search?keyword='+this.state.keyword)
+		this.closeSearchShow()
+	}
+
 	render() {
 		return (
 			<React.Fragment>
@@ -70,7 +75,7 @@ class SearchModal extends React.Component {
 	           	  		<div className="searchForm">
 	           	  			<div className="input">
 	           	  				<input type="text" placeholder="输入关键字" value={this.state.keyword} onChange={this.handleChange.bind(this)} onKeyPress={this.keypress.bind(this)}/>
-	           	  				<button>确定</button>
+	           	  				<button onClick={this.search.bind(this)}>确定</button>
 	           	  			</div>
 	           	  			<div className="resultList"></div>
 	           	  		</div>

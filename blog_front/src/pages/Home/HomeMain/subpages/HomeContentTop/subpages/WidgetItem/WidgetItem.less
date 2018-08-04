@@ -2,8 +2,8 @@
 @media screen and (min-width: 768px) {
 .WidgetItem {
 	display: flex;
+	flex: 1;
 	justify-content: space-between;
-	height: 95px;
 	overflow: hidden;
 	&:hover {
 		.thumb {img {.image-scale-after}}
@@ -12,26 +12,30 @@
 		margin-bottom: 20px;
 	} 
 	.thumb {
+		flex: 0 1 40%;
+		max-width: 40%;
 		overflow: hidden;
 		a {
-			display: block;
 			max-height: 100%;
 			img {
-				display: block;
-				vertical-align: middle;
 				.image-scale-before;
 				.image-opacity;
 			}
 		}
 	}
 	.detail {
-		flex: 1;
+		display: flex;
+		flex: 0 1 60%;
+		max-width: 60%;
+		width: 0;
 		margin-left: 10px;
+		flex-direction: column;
 		.detail-title {
-			max-height: 48px;
+			max-height: 24px;
 			overflow: hidden;
-			font-size: 1.6rem;
+			font-size: 16px;
 			font-weight: 400;
+			text-overflow: ellipsis;
 		}
 		.detail-meta {
 			margin-top: 12px;

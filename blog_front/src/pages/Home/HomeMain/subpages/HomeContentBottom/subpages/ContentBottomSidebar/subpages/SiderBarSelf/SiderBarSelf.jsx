@@ -54,7 +54,7 @@ class SiderBarSelf extends React.Component {
                      (<a className="SelfAvatar"><img width="72" alt="" src={global.userAvatarPrefix+this.state.author.avatar+'?v='+new Date().getTime()}/></a>)
                   }
          			<div className="SelfName">
-         				<span><Link to={'/user/'+this.state.author.id}>{this.state.author.nickname}</Link></span>
+         				<Link to={'/user/'+this.state.author.id}>友奈酱</Link>
          				<span>站长</span>
          			</div>
          			<div className="SelfFllow">

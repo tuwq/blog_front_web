@@ -22,19 +22,22 @@
 				display: flex;
 				flex-direction: column;
 				overflow: hidden;
-				h3 {
+				max-width: 100%;
+				.section-title {
 					margin: 10px 0;
+					font-size: 17px;
 					overflow: hidden;
-					max-height: 40px;
+					max-height: 20px;
 					line-height: 20px;
 				}
-				p {
+				.section-content {
 					margin-top: 5px;
 					font-size: 14px;
 					line-height: 16px;
-					max-height: 40px;
+					max-height: 30px;
 					overflow: hidden;
 					color: @gray_color;
+					text-overflow: ellipsis;
 				}
 			}
 		}
