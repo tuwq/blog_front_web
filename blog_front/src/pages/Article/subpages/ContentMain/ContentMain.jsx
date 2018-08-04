@@ -24,8 +24,8 @@ class ContentMain extends React.Component {
 	render() {
 		return (
 			<div className="ContentMain">
-				<ArticleContent />
-				<Choose />
+				<ArticleContent data={this.props.data}/>
+				<Choose data={this.props.data}/>
 				<CommentCollection />
         	</div>
         )

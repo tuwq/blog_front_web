@@ -3,7 +3,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 
 import SiderBarHotList from '../SiderBarHotList/SiderBarHotList'
 
-import { artHotDiscussApi } from 'api/Article/article'
+import { artHotDiscussApi } from 'api/Category/category'
 
 import './SiderBarHotCollection.less'
 import './MSiderBarHotCollection.less'

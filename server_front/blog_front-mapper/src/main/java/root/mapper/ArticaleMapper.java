@@ -80,4 +80,29 @@ public interface ArticaleMapper {
 	 * @return
 	 */
 	List<Articale> pageWithUser(@Param("skip") Integer skip,@Param("pageSize") Integer pageSize);
+	/**
+	 * 文章是否存在
+	 * @param id
+	 * @return
+	 */
+	int countById(@Param("id") Integer id);
+	/**
+	 * 获得指定文章的信息和用户信息
+	 * @param id
+	 * @return
+	 */
+	Articale getByIdWithUser(@Param("id") Integer id);
+	/**
+	 * 获得当前文章的上一篇文章信息
+	 * @param id
+	 * @return
+	 */
+	Articale getPrev(@Param("id") Integer id);
+	/**
+	 * 获得当前文章的下一篇文章信息
+	 * @param id
+	 * @return
+	 */
+	Articale getNext(@Param("id") Integer id);
+	
 }

@@ -43,7 +43,7 @@
 		<result column="user_nickname" property="nickname"/>
 	</association>
   </resultMap>
-  
+    
    <resultMap id="articleMap" type="root.model.Articale">
   	<id column="id" property="id" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
@@ -53,16 +53,48 @@
     <result column="commentSum" property="commentSum" jdbcType="INTEGER" />
     <result column="browseSum" property="browseSum" jdbcType="INTEGER" />
     <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <association property="user" javaType="root.model.User">
     	<result column="user_nickname" property="nickname"/>
+    	<result column="user_id" property="id"/>
     </association>
     <collection property="categoryList" javaType="list" ofType="root.model.Category">
         <result column="category_id" property="id"/>
     	<result column="category_name" property="name"/>
     </collection>
   </resultMap>
+  
+  <select id="getPrev" parameterType="int" resultMap="articleMap">
+  	SELECT *
+	FROM articale
+	WHERE id &lt; #{id}
+	ORDER BY id desc
+	LIMIT 1
+  </select>
+  
+  <select id="getNext" parameterType="int" resultMap="articleMap">
+  	SELECT *
+	FROM articale
+	WHERE id &gt; #{id}
+	ORDER BY id asc
+	LIMIT 1
+  </select>
+  
+  <select id="getByIdWithUser" parameterType="map" resultMap="articleMap">
+  	SELECT a.id id,a.title title,a.face_cover faceCover,a.praise praise,a.comment_sum commentSum,a.browse_sum browseSum,a.create_time create_time,a.update_time update_time,
+  	a.status status,a.user_id user_id,a.content content,u.nickname user_nickname,u.id user_id
+	FROM articale a
+	LEFT JOIN `user` u ON a.user_id = u.id
+	WHERE a.id = #{id}
+  </select>
+  
+  <select id="countById" parameterType="map" resultType="int">
+  	SELECT count(1)
+  	FROM articale
+  	WHERE id = #{id}
+  </select>
   
   <select id="countAll" resultType="long">
   	SELECT count(1)
@@ -71,7 +103,7 @@
   
   <select id="pageWithUser" parameterType="map" resultMap="articleMap">
   	SELECT a.id id,a.title title,a.face_cover faceCover,a.praise praise,a.comment_sum commentSum,a.browse_sum browseSum,a.create_time create_time,a.update_time update_time,
-  	a.status status,a.user_id user_id,u.nickname user_nickname
+  	a.status status,a.user_id user_id,a.content content,u.id user_id,u.nickname user_nickname
   	FROM articale a 
   	LEFT JOIN articale_category ac on a.id = ac.articale_id
 	LEFT JOIN category c on c.id = ac.category_id
@@ -83,7 +115,7 @@
   
   <select id="pageByKeyWord" parameterType="map" resultMap="articleMap">
     SELECT a.id id,a.title title,a.face_cover faceCover,a.praise praise,a.comment_sum commentSum,a.browse_sum browseSum,a.create_time create_time,a.update_time update_time,
-  	a.status status,a.user_id user_id,u.nickname user_nickname
+  	a.status status,a.user_id user_id,a.content content,u.nickname user_nickname
   	FROM articale a 
   	LEFT JOIN articale_category ac on a.id = ac.articale_id
 	LEFT JOIN category c on c.id = ac.category_id

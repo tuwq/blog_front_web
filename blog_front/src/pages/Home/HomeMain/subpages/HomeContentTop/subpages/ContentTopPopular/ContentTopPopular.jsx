@@ -3,7 +3,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 
 import WidgetList from '../WidgetList/WidgetList'
 
-import { artPraiseApi } from 'api/Article/article'
+import { artPraiseApi } from 'api/Category/category'
 
 import './ContentTopPopular.less'
 import './MContentTopPopular.less'

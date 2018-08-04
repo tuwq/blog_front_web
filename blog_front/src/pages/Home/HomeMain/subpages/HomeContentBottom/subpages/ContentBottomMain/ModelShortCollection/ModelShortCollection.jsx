@@ -3,7 +3,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 
 import ModelShortList from '../ModelShortList/ModelShortList'
 
-import { shortCodeCategoryApi,chatCategoryApi } from 'api/Article/article'
+import { shortCodeCategoryApi,chatCategoryApi } from 'api/Category/category'
 
 import './ModelShortCollection.less'
 import './ModelShortCollection.less'

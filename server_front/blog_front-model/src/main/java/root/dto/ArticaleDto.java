@@ -17,6 +17,10 @@ public class ArticaleDto extends Articale{
 	private String operatorerName;
 	// ..日前的时间格式
 	private String timeAgo;
+	// 上一篇文章
+	private Articale prev;
+	// 下一篇文章
+	private Articale next;
 	
 	private String createTimeString;
 	

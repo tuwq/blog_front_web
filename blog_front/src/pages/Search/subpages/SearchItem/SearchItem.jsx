@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
-import { withRouter } from 'react-router-dom'
+import { withRouter,Link } from 'react-router-dom'
 
 import './SearchItem.less'
 import './MSearchItem.less'
@@ -25,10 +25,10 @@ class SearchItem extends React.Component {
 		return (
 			<div className="SearchItem">
 			   <div className="image">
-			   		<a><div style={imgStyle}></div></a>
+			   		<Link to={'/article/'+this.props.item.id}><div style={imgStyle}></div></Link>
 			   </div>
 			   <div className="content">
-			   	  <h2><a>{this.props.item.title}</a></h2>
+			   	  <h2><Link to={'/article/'+this.props.item.id}>{this.props.item.title}</Link></h2>
 			   	  <p>{this.props.item.content}</p>
 			  	  <div className="line"></div>
 			  	  <div className="meta">

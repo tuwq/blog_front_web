@@ -17,6 +17,8 @@ global.userInfoRefreshSubscribe = 'userInfoRefreshSubscribe'
 global.searchModalShowSubscribe = 'searchModalShowSubscribe'
 // 粉丝列表刷新的订阅key
 global.fansListrefreshSubscribe = 'fansListrefreshSubscribe'
+// 文章详情页跳转至评论区
+global.artGoCommentListSubscribe = 'artGoCommentListSubscribe'
 // 首页火热文章获取数
 global.articalePraiseQuantity = 4
 global.articaleCategoryQuantity = 5

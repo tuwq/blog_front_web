@@ -4,7 +4,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 import ModelMediumTitle from 'base/general/ModelMediumTitle/ModelMediumTitle'
 import ModelCrowdList from '../ModelCrowdList/ModelCrowdList'
 
-import { tutorialCategoryApi } from 'api/Article/article'
+import { tutorialCategoryApi } from 'api/Category/category'
 
 import './ModelCrowdCollection.less'
 import './MModelCrowdCollection.less'

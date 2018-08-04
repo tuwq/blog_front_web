@@ -5,7 +5,7 @@ import ModelMediumTitle from 'base/general/ModelMediumTitle/ModelMediumTitle'
 import ModelMediumList from '../ModelMediumList/ModelMediumList'
 import ModelBigItem from '../ModelBigItem/ModelBigItem'
 
-import { articaleCategoryApi } from 'api/Article/article'
+import { articaleCategoryApi } from 'api/Category/category'
 
 import rightSvg from 'static/svg/right.svg'
 

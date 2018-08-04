@@ -35,6 +35,9 @@ export function checkUserBasisSettingForm(state) {
 	if (state.nickname.trim() == '' || state.nickname == null) {
 		return '昵称不能为空'
 	}
+	if (state.nickname.length < 1 || state.nickname > 10) {
+		return '昵称长度保持在1-10之间'
+	}
 	return true
 }
 
