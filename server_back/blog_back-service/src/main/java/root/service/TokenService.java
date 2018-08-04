@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import root.beans.JsonResult;
 import root.constant.RedisCode;
-import root.exception.LoginTokenException;
+import root.exception.TokenException;
 import root.redis.RedisOperator;
 import root.util.JwtUtil;
 import root.util.ThreadUtil;
@@ -27,12 +27,12 @@ public class TokenService {
 		// 获得redis中的token
 		// 是否一致
 		// 返回userId
-		String LOGIN_TOKEN = ThreadUtil.getCurrentRequest().getHeader("_TOKEN_");
-		if (StringUtils.isNotBlank(LOGIN_TOKEN)) {
-			Map<String, String> verifyToken = JwtUtil.verifyToken(LOGIN_TOKEN);
+		String TOKEN = ThreadUtil.getCurrentRequest().getHeader("_TOKEN_");
+		if (StringUtils.isNotBlank(TOKEN)) {
+			Map<String, String> verifyToken = JwtUtil.verifyToken(TOKEN);
 			String userId = verifyToken.get("userId");	
-			String dbToken = redis.get(RedisCode.LOGIN_TOKEN+":"+ userId);
-			if(LOGIN_TOKEN.equals(dbToken)) {
+			String dbToken = redis.get(RedisCode.TOKEN+":"+ userId);
+			if(TOKEN.equals(dbToken)) {
 				// 正确的token
 				return Integer.parseInt(userId);
 			}

@@ -29,6 +29,12 @@ class RegistMain extends React.Component {
 		
 	}
 
+	componentWillUnmount() {
+	   this.setState = (state,callback)=>{
+	     return
+	   }
+	}
+
 	usernameChange(e) {
 		this.setState({
 			username: e.target.value.toLowerCase(),

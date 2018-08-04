@@ -7,8 +7,6 @@ public class Comment {
 
     private Integer userId;
 
-    private Integer categoryId;
-
     private Integer articaleId;
 
     private Integer parentId;
@@ -18,6 +16,10 @@ public class Comment {
     private Date createTime;
 
     private Date updateTime;
+
+    private Integer approval;
+
+    private Integer oppose;
 
     private String content;
 
@@ -35,14 +37,6 @@ public class Comment {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
-    }
-
-    public Integer getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(Integer categoryId) {
-        this.categoryId = categoryId;
     }
 
     public Integer getArticaleId() {
@@ -83,6 +77,22 @@ public class Comment {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Integer getApproval() {
+        return approval;
+    }
+
+    public void setApproval(Integer approval) {
+        this.approval = approval;
+    }
+
+    public Integer getOppose() {
+        return oppose;
+    }
+
+    public void setOppose(Integer oppose) {
+        this.oppose = oppose;
     }
 
     public String getContent() {

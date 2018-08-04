@@ -4,18 +4,20 @@
   <resultMap id="BaseResultMap" type="root.model.Comment" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
-    <result column="category_id" property="categoryId" jdbcType="INTEGER" />
     <result column="articale_id" property="articaleId" jdbcType="INTEGER" />
     <result column="parent_id" property="parentId" jdbcType="INTEGER" />
     <result column="root_id" property="rootId" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="approval" property="approval" jdbcType="INTEGER" />
+    <result column="oppose" property="oppose" jdbcType="INTEGER" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="root.model.Comment" extends="BaseResultMap" >
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, user_id, category_id, articale_id, parent_id, root_id, create_time, update_time
+    id, user_id, articale_id, parent_id, root_id, create_time, update_time, approval, 
+    oppose
   </sql>
   <sql id="Blob_Column_List" >
     content
@@ -33,14 +35,14 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="root.model.Comment" >
-    insert into comment (id, user_id, category_id, 
-      articale_id, parent_id, root_id, 
-      create_time, update_time, content
-      )
-    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{categoryId,jdbcType=INTEGER}, 
-      #{articaleId,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, #{rootId,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}
-      )
+    insert into comment (id, user_id, articale_id, 
+      parent_id, root_id, create_time, 
+      update_time, approval, oppose, 
+      content)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{articaleId,jdbcType=INTEGER}, 
+      #{parentId,jdbcType=INTEGER}, #{rootId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{approval,jdbcType=INTEGER}, #{oppose,jdbcType=INTEGER}, 
+      #{content,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="root.model.Comment" >
     insert into comment
@@ -50,9 +52,6 @@
       </if>
       <if test="userId != null" >
         user_id,
-      </if>
-      <if test="categoryId != null" >
-        category_id,
       </if>
       <if test="articaleId != null" >
         articale_id,
@@ -69,6 +68,12 @@
       <if test="updateTime != null" >
         update_time,
       </if>
+      <if test="approval != null" >
+        approval,
+      </if>
+      <if test="oppose != null" >
+        oppose,
+      </if>
       <if test="content != null" >
         content,
       </if>
@@ -79,9 +84,6 @@
       </if>
       <if test="userId != null" >
         #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="categoryId != null" >
-        #{categoryId,jdbcType=INTEGER},
       </if>
       <if test="articaleId != null" >
         #{articaleId,jdbcType=INTEGER},
@@ -98,6 +100,12 @@
       <if test="updateTime != null" >
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="approval != null" >
+        #{approval,jdbcType=INTEGER},
+      </if>
+      <if test="oppose != null" >
+        #{oppose,jdbcType=INTEGER},
+      </if>
       <if test="content != null" >
         #{content,jdbcType=LONGVARCHAR},
       </if>
@@ -108,9 +116,6 @@
     <set >
       <if test="userId != null" >
         user_id = #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="categoryId != null" >
-        category_id = #{categoryId,jdbcType=INTEGER},
       </if>
       <if test="articaleId != null" >
         articale_id = #{articaleId,jdbcType=INTEGER},
@@ -127,6 +132,12 @@
       <if test="updateTime != null" >
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="approval != null" >
+        approval = #{approval,jdbcType=INTEGER},
+      </if>
+      <if test="oppose != null" >
+        oppose = #{oppose,jdbcType=INTEGER},
+      </if>
       <if test="content != null" >
         content = #{content,jdbcType=LONGVARCHAR},
       </if>
@@ -136,24 +147,26 @@
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="root.model.Comment" >
     update comment
     set user_id = #{userId,jdbcType=INTEGER},
-      category_id = #{categoryId,jdbcType=INTEGER},
       articale_id = #{articaleId,jdbcType=INTEGER},
       parent_id = #{parentId,jdbcType=INTEGER},
       root_id = #{rootId,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
+      approval = #{approval,jdbcType=INTEGER},
+      oppose = #{oppose,jdbcType=INTEGER},
       content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="root.model.Comment" >
     update comment
     set user_id = #{userId,jdbcType=INTEGER},
-      category_id = #{categoryId,jdbcType=INTEGER},
       articale_id = #{articaleId,jdbcType=INTEGER},
       parent_id = #{parentId,jdbcType=INTEGER},
       root_id = #{rootId,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      approval = #{approval,jdbcType=INTEGER},
+      oppose = #{oppose,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

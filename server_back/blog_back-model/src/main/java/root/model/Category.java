@@ -4,6 +4,8 @@ public class Category {
     private Integer id;
 
     private String name;
+    
+    private String desc;
 
     private Integer articaleSum;
 
@@ -25,7 +27,15 @@ public class Category {
         this.name = name == null ? null : name.trim();
     }
 
-    public Integer getArticaleSum() {
+    public String getDesc() {
+		return desc;
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
+
+	public Integer getArticaleSum() {
         return articaleSum;
     }
 

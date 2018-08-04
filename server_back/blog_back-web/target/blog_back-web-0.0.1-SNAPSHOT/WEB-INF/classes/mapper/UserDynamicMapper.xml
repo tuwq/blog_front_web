@@ -9,6 +9,7 @@
     <result column="target_id" property="targetId" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
+   
   <sql id="Base_Column_List" >
     id, type, action, user_id, target_id, create_time
   </sql>

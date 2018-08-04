@@ -8,8 +8,9 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import root.constant.ResultCode;
-import root.exception.LoginTokenException;
+import root.exception.TokenException;
 import root.service.TokenService;
+import root.util.ThreadUtil;
 
 public class TokenInterceptor implements HandlerInterceptor{
 	
@@ -21,8 +22,9 @@ public class TokenInterceptor implements HandlerInterceptor{
 			throws Exception {
 		Integer userId = tokenService.checkToken();
 		if(userId == null) {
-			throw new LoginTokenException(ResultCode.TOKEN_MATURITY_TOLOGIN,"LOGIN_TOKEN到期了");
+			throw new TokenException(ResultCode.TOKEN_TOLOGIN,"LOGIN_TOKEN到期了");
 		}
+		ThreadUtil.add(userId);
 		return true;
 	}
 

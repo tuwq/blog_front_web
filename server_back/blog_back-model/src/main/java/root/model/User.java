@@ -18,8 +18,12 @@ public class User {
     private String website;
 
     private String avatar;
+    
+    private Integer praise;
 
     private Integer status;
+
+    private String activationCode;
 
     private Integer activationStatus;
 
@@ -39,7 +43,7 @@ public class User {
 
     private Date operateTime;
 
-    public Integer getId() {
+	public Integer getId() {
         return id;
     }
 
@@ -102,6 +106,14 @@ public class User {
     public void setAvatar(String avatar) {
         this.avatar = avatar == null ? null : avatar.trim();
     }
+    
+    public Integer getPraise() {
+  		return praise;
+  	}
+
+  	public void setPraise(Integer praise) {
+  		this.praise = praise;
+  	}
 
     public Integer getStatus() {
         return status;
@@ -109,6 +121,14 @@ public class User {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getActivationCode() {
+        return activationCode;
+    }
+
+    public void setActivationCode(String activationCode) {
+        this.activationCode = activationCode == null ? null : activationCode.trim();
     }
 
     public Integer getActivationStatus() {

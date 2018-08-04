@@ -13,13 +13,15 @@
     <result column="weight" property="weight" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="approval" property="approval" jdbcType="INTEGER" />
+    <result column="oppose" property="oppose" jdbcType="INTEGER" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="root.model.Articale" extends="BaseResultMap" >
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, user_id, title, face_cover, praise, comment_sum, browse_sum, status, weight, 
-    create_time, update_time
+    create_time, update_time, approval, oppose
   </sql>
   <sql id="Blob_Column_List" >
     content
@@ -40,13 +42,13 @@
     insert into articale (id, user_id, title, 
       face_cover, praise, comment_sum, 
       browse_sum, status, weight, 
-      create_time, update_time, content
-      )
+      create_time, update_time, approval, 
+      oppose, content)
     values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
       #{faceCover,jdbcType=VARCHAR}, #{praise,jdbcType=INTEGER}, #{commentSum,jdbcType=INTEGER}, 
       #{browseSum,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{weight,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}
-      )
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{approval,jdbcType=INTEGER}, 
+      #{oppose,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="root.model.Articale" >
     insert into articale
@@ -83,6 +85,12 @@
       </if>
       <if test="updateTime != null" >
         update_time,
+      </if>
+      <if test="approval != null" >
+        approval,
+      </if>
+      <if test="oppose != null" >
+        oppose,
       </if>
       <if test="content != null" >
         content,
@@ -122,6 +130,12 @@
       <if test="updateTime != null" >
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="approval != null" >
+        #{approval,jdbcType=INTEGER},
+      </if>
+      <if test="oppose != null" >
+        #{oppose,jdbcType=INTEGER},
+      </if>
       <if test="content != null" >
         #{content,jdbcType=LONGVARCHAR},
       </if>
@@ -160,6 +174,12 @@
       <if test="updateTime != null" >
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="approval != null" >
+        approval = #{approval,jdbcType=INTEGER},
+      </if>
+      <if test="oppose != null" >
+        oppose = #{oppose,jdbcType=INTEGER},
+      </if>
       <if test="content != null" >
         content = #{content,jdbcType=LONGVARCHAR},
       </if>
@@ -178,6 +198,8 @@
       weight = #{weight,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
+      approval = #{approval,jdbcType=INTEGER},
+      oppose = #{oppose,jdbcType=INTEGER},
       content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -192,7 +214,9 @@
       status = #{status,jdbcType=INTEGER},
       weight = #{weight,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      approval = #{approval,jdbcType=INTEGER},
+      oppose = #{oppose,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

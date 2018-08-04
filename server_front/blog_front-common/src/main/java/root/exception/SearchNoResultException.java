@@ -1,5 +1,6 @@
 package root.exception;
 
+// 搜索无结果异常
 public class SearchNoResultException extends RuntimeException implements WebException{
 
 	private int ResultCode;

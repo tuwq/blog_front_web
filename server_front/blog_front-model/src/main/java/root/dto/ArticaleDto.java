@@ -15,7 +15,7 @@ public class ArticaleDto extends Articale{
 	private List<Integer> categoryIds;
 	// 操作人名
 	private String operatorerName;
-	// ..日前的时间格式
+	// ..月,日前的时间格式
 	private String timeAgo;
 	// 上一篇文章
 	private Articale prev;

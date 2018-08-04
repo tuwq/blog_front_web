@@ -38,7 +38,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter  {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(getHttpFilter()).addPathPatterns("/**");
         registry.addInterceptor(getNeedLoginInterceptor())
-        .addPathPatterns("/user/**","/follow/**")
+        .addPathPatterns("/user/**","/follow/**","/comment/add/**")
         .excludePathPatterns("/user/info");
         super.addInterceptors(registry);
     }

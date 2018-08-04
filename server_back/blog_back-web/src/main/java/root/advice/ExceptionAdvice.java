@@ -9,7 +9,7 @@ import root.beans.ParamExceptionResult;
 import root.beans.TokenExceptionResult;
 import root.constant.ResultCode;
 import root.exception.CheckParamException;
-import root.exception.LoginTokenException;
+import root.exception.TokenException;
 import root.util.CookieUtil;
 import root.util.ThreadUtil;
 
@@ -24,10 +24,10 @@ public class ExceptionAdvice {
 	}
 	
 	// 检查LOGIN_TOKEN过期异常
-	@ExceptionHandler(LoginTokenException.class)
-	public ResponseEntity<TokenExceptionResult> handleBindException(LoginTokenException e) {
+	@ExceptionHandler(TokenException.class)
+	public ResponseEntity<TokenExceptionResult> handleBindException(TokenException e) {
 		// token过期
-		return new ResponseEntity<TokenExceptionResult>(TokenExceptionResult.errror(e.getResultCode(), e.getMessage()),HttpStatus.OK);
+		return new ResponseEntity<TokenExceptionResult>(TokenExceptionResult.errror(e.getResultCode(), e.getMsg()),HttpStatus.OK);
 	}
 	
 }

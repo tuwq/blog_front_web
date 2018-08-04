@@ -25,6 +25,10 @@ public class Articale {
 
     private Date updateTime;
 
+    private Integer approval;
+
+    private Integer oppose;
+
     private String content;
 
     public Integer getId() {
@@ -113,6 +117,22 @@ public class Articale {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Integer getApproval() {
+        return approval;
+    }
+
+    public void setApproval(Integer approval) {
+        this.approval = approval;
+    }
+
+    public Integer getOppose() {
+        return oppose;
+    }
+
+    public void setOppose(Integer oppose) {
+        this.oppose = oppose;
     }
 
     public String getContent() {

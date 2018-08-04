@@ -23,7 +23,7 @@ import root.beans.PageResult;
 import root.constant.ResultCode;
 import root.dto.ArticaleDto;
 import root.exception.CheckParamException;
-import root.exception.LoginTokenException;
+import root.exception.TokenException;
 import root.mapper.ArticaleCategoryMapper;
 import root.mapper.ArticaleMapper;
 import root.mapper.ArticaleUserMapper;
@@ -77,7 +77,7 @@ public class ArticleService {
 		// 这个id是后台用户的id
 		if(userId == null) {
 			// token不存在
-			throw new LoginTokenException(ResultCode.TOKEN_MATURITY_TOLOGIN,"LOGIN_TOKEN到期了");
+			throw new TokenException(ResultCode.TOKEN_TOLOGIN,"TOKEN到期了");
 		}
 		Integer frontId = sysUserMapper.FrontUserIdById(userId);
 		if (frontId == null) {
@@ -180,13 +180,16 @@ public class ArticleService {
 
 	public PageResult<ArticaleDto> listByKeyWord(String keyword, PageParam param) {
 		// 检查字段
-		// 获得关键字过滤条件后的总数,关键字为空则是检索全部
+		// 获得关键字过滤条件后的总数
 		// 获得skip的数量
 		// 获得文章和用户信息，根据关键字
 		// 获得文章的分类信息
 		// 计算最大页码
 		// 处理合适的结构返回前端
 		ValidatorUtil.check(param);
+		if(StringUtils.isBlank(keyword)) {
+			throw new CheckParamException("关键字","不能为空");
+		}
 		Long total = articaleMapper.countAllByKeyWord(keyword);
 		param.buildSkip();
 		List<Articale> data = articaleMapper.pageByKeyWord(keyword,param.getPageSize(),param.getSkip());

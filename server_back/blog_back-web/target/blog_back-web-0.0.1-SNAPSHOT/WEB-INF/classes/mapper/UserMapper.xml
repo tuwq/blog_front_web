@@ -11,6 +11,7 @@
     <result column="website" property="website" jdbcType="VARCHAR" />
     <result column="avatar" property="avatar" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="activation_code" property="activationCode" jdbcType="VARCHAR" />
     <result column="activation_status" property="activationStatus" jdbcType="INTEGER" />
     <result column="follower_sum" property="followerSum" jdbcType="INTEGER" />
     <result column="fans_sum" property="fansSum" jdbcType="INTEGER" />
@@ -22,9 +23,9 @@
     <result column="operate_time" property="operateTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, username, email, `password`, nickname, `desc`, website, avatar, `status`, activation_status, 
-    follower_sum, fans_sum, comment_sum, articale_sum, before_login_ip, now_login_ip, 
-    create_time, operate_time
+    id, username, email, `password`, nickname, `desc`, website, avatar, `status`, activation_code, 
+    activation_status, follower_sum, fans_sum, comment_sum, articale_sum, before_login_ip, 
+    now_login_ip, create_time, operate_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -40,17 +41,17 @@
     insert into user (id, username, email, 
       password, nickname, desc, 
       website, avatar, status, 
-      activation_status, follower_sum, fans_sum, 
-      comment_sum, articale_sum, before_login_ip, 
-      now_login_ip, create_time, operate_time
-      )
+      activation_code, activation_status, follower_sum, 
+      fans_sum, comment_sum, articale_sum, 
+      before_login_ip, now_login_ip, create_time, 
+      operate_time)
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR}, 
       #{website,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
-      #{activationStatus,jdbcType=INTEGER}, #{followerSum,jdbcType=INTEGER}, #{fansSum,jdbcType=INTEGER}, 
-      #{commentSum,jdbcType=INTEGER}, #{articaleSum,jdbcType=INTEGER}, #{beforeLoginIp,jdbcType=VARCHAR}, 
-      #{nowLoginIp,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{operateTime,jdbcType=TIMESTAMP}
-      )
+      #{activationCode,jdbcType=VARCHAR}, #{activationStatus,jdbcType=INTEGER}, #{followerSum,jdbcType=INTEGER}, 
+      #{fansSum,jdbcType=INTEGER}, #{commentSum,jdbcType=INTEGER}, #{articaleSum,jdbcType=INTEGER}, 
+      #{beforeLoginIp,jdbcType=VARCHAR}, #{nowLoginIp,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{operateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="root.model.User" >
     insert into user
@@ -81,6 +82,9 @@
       </if>
       <if test="status != null" >
         status,
+      </if>
+      <if test="activationCode != null" >
+        activation_code,
       </if>
       <if test="activationStatus != null" >
         activation_status,
@@ -138,6 +142,9 @@
       <if test="status != null" >
         #{status,jdbcType=INTEGER},
       </if>
+      <if test="activationCode != null" >
+        #{activationCode,jdbcType=VARCHAR},
+      </if>
       <if test="activationStatus != null" >
         #{activationStatus,jdbcType=INTEGER},
       </if>
@@ -194,6 +201,9 @@
       <if test="status != null" >
         status = #{status,jdbcType=INTEGER},
       </if>
+      <if test="activationCode != null" >
+        activation_code = #{activationCode,jdbcType=VARCHAR},
+      </if>
       <if test="activationStatus != null" >
         activation_status = #{activationStatus,jdbcType=INTEGER},
       </if>
@@ -234,6 +244,7 @@
       website = #{website,jdbcType=VARCHAR},
       avatar = #{avatar,jdbcType=VARCHAR},
       status = #{status,jdbcType=INTEGER},
+      activation_code = #{activationCode,jdbcType=VARCHAR},
       activation_status = #{activationStatus,jdbcType=INTEGER},
       follower_sum = #{followerSum,jdbcType=INTEGER},
       fans_sum = #{fansSum,jdbcType=INTEGER},
@@ -246,9 +257,9 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   
-  <update id="increaseArtSum" parameterType="map">
-  	UPDATE user
-  	SET articale_sum = articale_sum+1
-  	WHERE id = #{id}
-  </update>
+    <update id="increaseArtSum" parameterType="map">
+	  	UPDATE user
+	  	SET articale_sum = articale_sum+1
+	  	WHERE id = #{id}
+	</update>
 </mapper>

@@ -104,5 +104,16 @@ public interface ArticaleMapper {
 	 * @return
 	 */
 	Articale getNext(@Param("id") Integer id);
+	/**
+	 * 文章的评论数量增加
+	 * @param articleId
+	 */
+	void commentSumIncr(@Param("id") Integer articleId);
+	/**
+	 * 获得文章作者的id
+	 * @param articleId
+	 * @return
+	 */
+	Integer getAuthIdById(@Param("id") Integer articleId);
 	
 }

@@ -35,7 +35,7 @@ export function checkUserBasisSettingForm(state) {
 	if (state.nickname.trim() == '' || state.nickname == null) {
 		return '昵称不能为空'
 	}
-	if (state.nickname.length < 1 || state.nickname > 10) {
+	if (state.nickname.length < 1 || state.nickname.length > 10) {
 		return '昵称长度保持在1-10之间'
 	}
 	return true
@@ -53,6 +53,16 @@ export function checkUserSecuritySettingForm(state) {
 	}
 	if (state.password.trim() != state.repassword.trim()) {
 		return '两次密码输入不一致'
+	}
+	return true
+}
+
+export function checkCommentForm(state) {
+	if (state.content.trim() == '' || state.content == null) {
+		return '内容信息不能为空'
+	}
+	if (state.content.length < 5 || state.content.length > 100) {
+		return '长度应该在5-100之间'
 	}
 	return true
 }

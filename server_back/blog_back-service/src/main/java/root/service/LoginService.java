@@ -13,12 +13,11 @@ import org.springframework.stereotype.Service;
 import com.google.common.collect.ImmutableMap;
 
 import root.beans.JsonResult;
-import root.constant.CookieCode;
 import root.constant.RedisCode;
 import root.constant.ResultCode;
 import root.dto.LoginDto;
 import root.exception.CheckParamException;
-import root.exception.LoginTokenException;
+import root.exception.TokenException;
 import root.mapper.SysUserMapper;
 import root.model.SysUser;
 import root.param.LoginParam;
@@ -35,7 +34,7 @@ public class LoginService {
 	@Resource
 	private SysUserMapper sysUserMapper;
 	@Resource
-	private TokenService TokenService;
+	private TokenService tokenService;
 	@Resource
 	private RedisOperator redis;
 	@Value("${TOKEN_MAXAGE}")
@@ -46,8 +45,8 @@ public class LoginService {
 		// 是否存在用户
 		// 得到用户检查密码
 		// 生成jwt,放入redis (code+id,token)
-		// 让前端把jwt放入cookie
 		// 将token和用户信息放入dto返回
+		// 让前端把jwt放入cookie
 		ValidatorUtil.check(param);
 		int count = sysUserMapper.CountfindByUsername(param.getUsername());
 		if(count == 0) {
@@ -61,7 +60,7 @@ public class LoginService {
 		String token = JwtUtil.getToken(ImmutableMap.of(
 				"userId",Integer.toString(dbSysUser.getId()),
 				"username",dbSysUser.getUsername()));
-		redis.set(RedisCode.LOGIN_TOKEN+":"+Integer.toString(dbSysUser.getId()),token,TOKEN_MAXAGE);
+		redis.set(RedisCode.TOKEN+":"+Integer.toString(dbSysUser.getId()),token,TOKEN_MAXAGE);
 		return LoginDto.builder().token(token).SysUser(dbSysUser).build();
 	}
 
@@ -72,12 +71,12 @@ public class LoginService {
 		// 根据id获取redis中的token
 		// 比对token是否一致
 		// 删除redis中的token
-		Integer userId = TokenService.checkToken();
+		Integer userId = tokenService.checkToken();
 		if (userId != null) {
-			redis.del(RedisCode.LOGIN_TOKEN+":"+ userId);
+			redis.del(RedisCode.TOKEN+":"+ userId);
 			return JsonResult.<Void>success();
 		}
-		return JsonResult.<Void>error(ResultCode.TOKEN_MATURITY_TOLOGIN);
+		return JsonResult.<Void>error(ResultCode.TOKEN_TOLOGIN);
 	}
 
 }

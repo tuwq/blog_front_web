@@ -82,6 +82,9 @@ public interface UserMapper {
 	 * @return
 	 */
 	List<User> getListByIdList(@Param("idList") List<Integer> idList);
-	
-    
+	/**
+	 * 评论者的评论数量增加
+	 * @param commentUserId
+	 */
+	void commentSumIncr(@Param("id") Integer id);    
 }

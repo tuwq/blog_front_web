@@ -2,6 +2,6 @@ package root.constant;
 
 public class RedisCode {
 	
-	public static final String LOGIN_TOKEN = "LOGIN_TOKEN";
+	public static final String TOKEN = "__TOKEN__";
 
 }

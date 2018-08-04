@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import root.constant.ResultCode;
 import root.dto.ArticaleDto;
 import root.dto.SysUserDto;
-import root.exception.LoginTokenException;
+import root.exception.TokenException;
 import root.mapper.SysUserMapper;
 import root.model.Articale;
 import root.model.Category;
@@ -30,7 +30,7 @@ public class SysUserService {
 			return SysUserDto.adapt(dbUser);
 		}
 		// token过期了
-		throw new LoginTokenException(ResultCode.TOKEN_MATURITY,"token到期了");
+		throw new TokenException(ResultCode.TOKEN_MATURITY,"token到期了");
 	}
 	
 }

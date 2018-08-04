@@ -2,12 +2,17 @@ package root.model;
 
 import java.util.Date;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Comment {
     private Integer id;
 
     private Integer userId;
-
-    private Integer categoryId;
 
     private Integer articaleId;
 
@@ -19,8 +24,14 @@ public class Comment {
 
     private Date updateTime;
 
-    private String content;
+    private Integer approval;
 
+    private Integer oppose;
+    
+    private String content;
+    // 评论的所属用户
+    private User user;
+    
     public Integer getId() {
         return id;
     }
@@ -35,14 +46,6 @@ public class Comment {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
-    }
-
-    public Integer getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(Integer categoryId) {
-        this.categoryId = categoryId;
     }
 
     public Integer getArticaleId() {
@@ -84,7 +87,23 @@ public class Comment {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+    
+    public Integer getApproval() {
+		return approval;
+	}
 
+	public void setApproval(Integer approval) {
+		this.approval = approval;
+	}
+
+	public Integer getOppose() {
+		return oppose;
+	}
+
+	public void setOppose(Integer oppose) {
+		this.oppose = oppose;
+	}
+    
     public String getContent() {
         return content;
     }
@@ -92,4 +111,12 @@ public class Comment {
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
     }
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 }

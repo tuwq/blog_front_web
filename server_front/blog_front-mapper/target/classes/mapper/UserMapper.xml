@@ -30,6 +30,12 @@
   </sql>
   
   
+  <select id="commentSumIncr" parameterType="map">
+  	UPDATE `user`
+	SET comment_sum = comment_sum+1
+	WHERE id = #{id}
+  </select>
+  
   <select id="getListByIdList" parameterType="map" resultMap="BaseResultMap">
   	SELECT id,nickname,`desc`,avatar
     FROM `user`

@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import root.beans.CommentExceptionResult;
 import root.beans.FileUploadExceptionResult;
 import root.beans.NotFoundExceptionResult;
 import root.beans.ParamExceptionResult;
@@ -13,6 +14,7 @@ import root.beans.SearchNoResultExceptionResult;
 import root.beans.TokenExceptionResult;
 import root.exception.ActivationException;
 import root.exception.CheckParamException;
+import root.exception.CommentException;
 import root.exception.FileUploadException;
 import root.exception.NotFoundException;
 import root.exception.SearchNoResultException;
@@ -59,4 +61,9 @@ public class ExceptionAdvice {
 		return new ResponseEntity<SearchNoResultExceptionResult>(SearchNoResultExceptionResult.builder().code(e.getResultCode()).msg(e.getMsg()).build(),HttpStatus.OK);
 	}
 	
+	// 评论相关异常
+	@ExceptionHandler(CommentException.class)
+	public ResponseEntity<CommentExceptionResult> handlerCommentException(CommentException e) {
+		return new ResponseEntity<CommentExceptionResult>(CommentExceptionResult.builder().code(e.getResultCode()).msg(e.getMsg()).build(),HttpStatus.OK);
+	}
 }

@@ -19,6 +19,8 @@ public class User {
 
     private String avatar;
 
+    private Integer praise;
+
     private Integer status;
 
     private String activationCode;
@@ -103,6 +105,14 @@ public class User {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar == null ? null : avatar.trim();
+    }
+
+    public Integer getPraise() {
+        return praise;
+    }
+
+    public void setPraise(Integer praise) {
+        this.praise = praise;
     }
 
     public Integer getStatus() {

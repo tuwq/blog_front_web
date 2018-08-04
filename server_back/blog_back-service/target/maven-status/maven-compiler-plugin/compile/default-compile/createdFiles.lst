@@ -1,0 +1,6 @@
+root\service\QiNiuIMGService.class
+root\service\ArticleService.class
+root\service\LoginService.class
+root\service\TokenService.class
+root\service\FileService.class
+root\service\SysUserService.class

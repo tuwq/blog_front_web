@@ -20,6 +20,8 @@ public class Articale {
 
     private String faceCover;
 
+    private Integer praise;
+    
     private Integer commentSum;
 
     private Integer browseSum;
@@ -31,6 +33,10 @@ public class Articale {
     private Date createTime;
 
     private Date updateTime;
+    
+    private Integer approval;
+
+    private Integer oppose;
 
     private String content;
     
@@ -69,6 +75,14 @@ public class Articale {
     public void setFaceCover(String faceCover) {
         this.faceCover = faceCover == null ? null : faceCover.trim();
     }
+    
+    public Integer getPraise() {
+		return praise;
+	}
+
+	public void setPraise(Integer praise) {
+		this.praise = praise;
+	}
 
     public Integer getCommentSum() {
         return commentSum;
@@ -117,6 +131,22 @@ public class Articale {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+    
+    public Integer getApproval() {
+		return approval;
+	}
+
+	public void setApproval(Integer approval) {
+		this.approval = approval;
+	}
+
+	public Integer getOppose() {
+		return oppose;
+	}
+
+	public void setOppose(Integer oppose) {
+		this.oppose = oppose;
+	}
 
     public String getContent() {
         return content;
@@ -141,4 +171,5 @@ public class Articale {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
 }

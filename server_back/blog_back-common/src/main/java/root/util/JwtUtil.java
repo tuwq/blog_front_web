@@ -20,7 +20,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 
 import root.constant.ResultCode;
-import root.exception.LoginTokenException;
+import root.exception.TokenException;
 import root.exception.WebException;
 
 public class JwtUtil {
@@ -35,8 +35,8 @@ public class JwtUtil {
 			// 加密算法API
 			Algorithm algorithm = Algorithm.HMAC256(LOGIN_TOKEN);
 			Builder builder= JWT.create()
-					.withIssuer(ISSUE)
-					.withExpiresAt(DateUtils.addDays(new Date(), 7));
+					.withIssuer(ISSUE);
+					// .withExpiresAt(DateUtils.addDays(new Date(), 7));
 			// 为jwt添加一些信息
 			claims.forEach((k,v) -> builder.withClaim(k, v));
 			return builder.sign(algorithm).toString();
@@ -102,7 +102,7 @@ public class JwtUtil {
 		try {
 			jwt =verifier.verify(token);
 		} catch (Exception  e1) {
-			throw new LoginTokenException(ResultCode.TOKEN_NOTUSER,"LOGIN_TOKEN无法解析");
+			throw new TokenException(ResultCode.TOKEN_NOTUSER,"LOGIN_TOKEN无法解析");
 		}
 		Map<String, Claim> map = jwt.getClaims();
 		Map<String, String> resultMap = Maps.newHashMap();

@@ -8,16 +8,14 @@ public class ArticaleUser {
     private Integer articaleId;
 
     private Integer userId;
-
-    private Integer visitStatus;
+    // 是否看过,0:没看过,1:看过
+    private Integer visit;
+    // 看法,1:赞,2:踩
+    private Integer vote;
 
     private Date createTime;
 
     private Date updateTime;
-
-    private Integer good;
-
-    private Integer bad;
 
     public Integer getId() {
         return id;
@@ -43,12 +41,20 @@ public class ArticaleUser {
         this.userId = userId;
     }
 
-    public Integer getVisitStatus() {
-        return visitStatus;
+    public Integer getVisit() {
+        return visit;
     }
 
-    public void setVisitStatus(Integer visitStatus) {
-        this.visitStatus = visitStatus;
+    public void setVisit(Integer visit) {
+        this.visit = visit;
+    }
+
+    public Integer getVote() {
+        return vote;
+    }
+
+    public void setVote(Integer vote) {
+        this.vote = vote;
     }
 
     public Date getCreateTime() {
@@ -65,21 +71,5 @@ public class ArticaleUser {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
-    }
-
-    public Integer getGood() {
-        return good;
-    }
-
-    public void setGood(Integer good) {
-        this.good = good;
-    }
-
-    public Integer getBad() {
-        return bad;
-    }
-
-    public void setBad(Integer bad) {
-        this.bad = bad;
     }
 }

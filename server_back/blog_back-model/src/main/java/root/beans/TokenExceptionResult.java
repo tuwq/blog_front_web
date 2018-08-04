@@ -17,7 +17,7 @@ public class TokenExceptionResult {
 	// 错误信息
 	private String msg;
 	
-	public static TokenExceptionResult errror(int code,String message) {
-		return TokenExceptionResult.builder().code(code).msg(message).build();
+	public static TokenExceptionResult errror(int code,String msg) {
+		return TokenExceptionResult.builder().code(code).msg(msg).build();
 	}
 }

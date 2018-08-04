@@ -2,8 +2,6 @@ package root.model;
 
 import java.util.Date;
 
-import javax.validation.constraints.NotBlank;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
