@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import root.model.Comment;
+import root.model.User;
 
 @Mapper
 public interface CommentMapper {
@@ -36,4 +37,41 @@ public interface CommentMapper {
 	 * @return
 	 */
 	Long countByArtId(@Param("articleId") Integer articleId);
+	/**
+	 * 评论是否存在
+	 * @param rootId
+	 * @return
+	 */
+	int countById(@Param("id") Integer id);
+	/**
+	 * 子评论的总数
+	 * @param rootId
+	 * @return
+	 */
+	Long countChildByRootId(@Param("rootId") Integer rootId);
+	/**
+	 * 子评论的数据和每个评论的用户信息
+	 * @param rootId
+	 * @return
+	 */
+	List<Comment> getChildByRootIdWithUser(@Param("skip") Integer skip,@Param("pageSize") Integer pageSize,@Param("rootId") Integer rootId);
+	/**
+	 * 获得评论者的id
+	 * @param parentId
+	 * @return
+	 */
+	Integer getUserIdById(@Param("id") Integer id);
+	/**
+	 * 获得评论的用户信息
+	 * @param id
+	 * @return
+	 */
+	User getUserById(@Param("id") Integer id);
+	/**
+	 * 获得评论的信息和评论的用户信息
+	 * @param rootId
+	 * @return
+	 */
+	Comment getByIdWithUser(@Param("id") Integer id);
+
 }

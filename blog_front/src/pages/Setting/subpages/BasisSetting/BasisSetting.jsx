@@ -77,7 +77,7 @@ class BasisSetting extends React.Component {
 				if (res.data.code == 200) {
 					this.setState({
 						avatar: global.userAvatarPrefix+res.data.result+'?v='+new Date().getTime(),
-						error: '头像修改成功'
+						error: '头像修改成功,若未及时加载请刷新页面'
 					})
 					PubSub.publish(global.userInfoRefreshSubscribe,true);
 				} else {

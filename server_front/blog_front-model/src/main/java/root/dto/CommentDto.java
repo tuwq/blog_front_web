@@ -2,12 +2,17 @@ package root.dto;
 
 import lombok.Data;
 import root.model.Comment;
+import root.model.User;
 import root.util.TimeUtil;
 
 
 @Data
 public class CommentDto extends Comment{
 	
+	// 父评论的用户信息
+	private User parentUser;
+	// 根评论的信息
+	private Comment rootComment;
 	// ..月,日前的时间格式
 	private String timeAgo;
 	

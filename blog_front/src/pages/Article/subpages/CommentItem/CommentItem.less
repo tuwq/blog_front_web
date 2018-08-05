@@ -17,13 +17,11 @@
 		flex-direction: column;
 		.meta {
 			display: flex;
-			flex-direction: column;
+			flex-direction: row;
 			a{color: @black_color;};
-			span{color: @gray_color;};
 		}
+		.time {color: @gray_color;}
 		.content {
-			margin-top: 10px;
-			margin-bottom: 10px;
 			font-size: 14px;
 			font-weight: 300;
 		}
@@ -39,6 +37,17 @@
 					background: @black_color;
 				}
 			}
-		}
+			.dialog {
+				width: 50px;
+				text-align: center;
+				padding: 5px;
+				font-size: 10px;
+				background: @purple_color;
+				color: #fff;
+				&.active {
+					background: @black_color;
+				}
+			}
+		}	
 	}
 }

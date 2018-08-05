@@ -6,6 +6,8 @@ export const ITEM_NOT_FOUND = 271
 export const SEARCH_KEYWORD_NOT_RESULT = 272
 // 邮箱激活过期了
 export const EMAIL_MATURITY = 300
+// 评论自己的评论
+export const COMMENT_REPLY_MYSELF = 305
 // TOKEN过期了但不需要回登陆页,依旧是成功的,不过没有数据返回
 export const TOKEN_MATURITY = 280
 // 请求期间的普通错误

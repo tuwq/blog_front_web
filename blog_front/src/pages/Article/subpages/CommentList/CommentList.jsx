@@ -29,8 +29,12 @@ class CommentList extends React.Component {
 	    };
 	}
 
-	reply(e) {
-		
+	replyFn(item) {
+		if (item.rootComment) {
+			PubSub.publish(global.childCommentSubscribe,item.rootComment);
+		} else {
+			PubSub.publish(global.childCommentSubscribe,item);
+		}
 	}
 
 	artGoCommentListSubscribe(msg,data) {
@@ -41,11 +45,10 @@ class CommentList extends React.Component {
 	render() {
 		return (
 			<div className="CommentList">
-				<h2>{this.props.pageModel.total} 条评论</h2>
 				<div className="commentList" ref={this.commentListDOM}>
 					{
 						this.props.data.map((item,index)=>{
-							return (<CommentItem key={index} item={item} index={index}/>)
+							return (<CommentItem replyFn={this.replyFn.bind(this)} key={index} item={item} index={index}/>)
 						})
 					}
 				</div>

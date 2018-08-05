@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
+import PubSub from 'pubsub-js'
 import { withRouter,Link } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import * as commentActions from 'store/actions/comment' 
 
 import './CommentItem.less'
 import './MCommentItem.less'
@@ -13,35 +11,40 @@ class CommentItem extends React.Component {
 	constructor(props,context) {
 		super(props,context)
 		this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
-		this.childModal = this.childModal.bind(this)
 	}
 
 	componentDidMount() {
 		
 	}
 
-	childModal(id) {
-		if (this.props.isModal) {return}
-		this.props.commentActions.load({
-			modalStatus: true,
-			cid: id
-		})
+	comment() {
+		this.props.replyFn(this.props.item)		
 	}
 
 	render() {	
 		return (
 			<div className="CommentItem">
-				<a className="avatar"><img alt="" src={global.userAvatarPrefix+this.props.item.user.avatar+'?v='+new Date().getTime()}/></a>
+				<a className="avatar">
+					<img width="40" height="40" alt="" src={global.userAvatarPrefix+this.props.item.user.avatar+'?v='+new Date().getTime()} />
+				</a>
 				<div className="content-wrapper">
 					<div className="meta">
 						<Link to={'/user/'+this.props.item.user.id}>{this.props.item.user.nickname}</Link>
-						<span>{this.props.item.timeAgo}&nbsp;{this.props.item.createTimeString}</span>
+						{
+							this.props.item.parentUser&&
+							(<Link to={'/user/'+this.props.item.parentUser.id}>&nbsp;回复&nbsp;{this.props.item.parentUser.nickname}</Link>)
+						}
 					</div>
+					<span className="time">{this.props.item.timeAgo}&nbsp;{this.props.item.createTimeString}</span>
 					<div className="content">
 						{this.props.item.content}
 					</div>
 					<div className="reply">
-						<button onClick={this.childModal.bind(this,1)}>回复</button>
+						{
+							this.props.item.rootComment
+							?(<button className="dialog" onClick={this.comment.bind(this)}>查看对话</button>)
+							:(<button onClick={this.comment.bind(this)}>回复</button>)
+						}
 					</div>
 				</div>
         	</div>
@@ -49,20 +52,6 @@ class CommentItem extends React.Component {
 	}
 }
 
-function mapStateToProps(state) {
-    return {
-     // state.modal 对应的reducer注册时的名称
-        comment: state.comment
-    }
-}
-function mapDispatchToProps(dispatch) {
-    return {
-        commentActions: bindActionCreators(commentActions, dispatch)
-    }
-}
-
-export default withRouter(
-	connect(mapStateToProps, mapDispatchToProps)(CommentItem)
-)
+export default withRouter(CommentItem)
 
 

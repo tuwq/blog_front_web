@@ -33,6 +33,7 @@
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="approval" property="approval" jdbcType="INTEGER" />
     <result column="oppose" property="oppose" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
     <association property="user" javaType="root.model.User">
 		<result column="user_id" property="id"/>
 		<result column="user_nickname" property="nickname"/>
@@ -40,14 +41,70 @@
 	</association>
   </resultMap>
     
+  <resultMap id="userMap" type="root.model.User" >
+    <id column="user_id" property="id" jdbcType="INTEGER" />
+    <result column="user_nickname" property="nickname"/>
+    <result column="user_avatar" property="avatar"/>
+  </resultMap>  
+ 
+ <select id="getByIdWithUser" parameterType="map" resultMap="commentMap">
+ 	SELECT c.id id,c.user_id user_id,c.articale_id articale_id,
+  	c.parent_id parent_id,c.root_id root_id,
+  	c.create_time create_time,c.update_time update_time,c.approval approval,c.oppose oppose,c.content content,
+  	c.parent_id parent_id,c.root_id root_id,
+  	u.id user_id,u.nickname user_nickname,u.avatar user_avatar
+  	FROM `comment` c
+  	LEFT JOIN `user` u ON u.id = c.user_id
+  	WHERE c.id = #{id}
+ </select>    
+    
+ <select id="getUserById" parameterType="map" resultMap="userMap">
+ 	SELECT u.id user_id,u.nickname user_nickname,u.avatar user_avatar
+	FROM `comment` c
+	LEFT JOIN `user` u ON c.user_id = u.id
+	WHERE c.id = #{id}
+ </select>   
+    
+  <select id="getUserIdById" parameterType="map" resultType="int">
+  	SELECT user_id
+  	FROM `comment`
+  	WHERE id = #{id}
+  </select> 
+   
+  <select id="getChildByRootIdWithUser" parameterType="map" resultMap="commentMap">
+  	SELECT c.id id,c.user_id user_id,c.articale_id articale_id,
+  	c.parent_id parent_id,c.root_id root_id,
+  	c.create_time create_time,c.update_time update_time,c.approval approval,c.oppose oppose,c.content content,
+  	c.parent_id parent_id,c.root_id root_id,
+  	u.id user_id,u.nickname user_nickname,u.avatar user_avatar
+  	FROM `comment` c
+  	LEFT JOIN `user` u ON u.id = c.user_id
+  	WHERE c.root_id = #{rootId}
+  	ORDER BY c.approval desc,c.create_time desc
+	LIMIT #{skip},#{pageSize}
+  </select>
+    
+  <select id="countChildByRootId" parameterType="map" resultType="long">
+  	SELECT count(1)
+  	FROM `comment`
+  	WHERE root_id = #{rootId}
+  </select>
+    
+  <select id="countById" parameterType="map" resultType="int">
+  	SELECT count(1)
+  	FROM `comment`
+  	WHERE id = #{id}
+  </select>   
+    
   <select id="pageByArtIdWithUser" parameterType="map" resultMap="commentMap">
   	SELECT c.id id,c.user_id user_id,c.articale_id articale_id,
   	c.parent_id parent_id,c.root_id root_id,
-  	c.create_time create_time,c.update_time update_time,c.approval approval,c.oppose oppose,
+  	c.create_time create_time,c.update_time update_time,c.approval approval,c.oppose oppose,c.content content,
+  	c.parent_id parent_id,c.root_id root_id,
   	u.id user_id,u.nickname user_nickname,u.avatar user_avatar
 	FROM `comment` c
 	LEFT JOIN `user` u ON u.id = c.user_id
-	WHERE c.articale_id = #{articleId} AND c.user_id = u.id
+	WHERE c.articale_id = #{articleId}
 	ORDER BY c.approval desc,c.create_time desc
 	LIMIT #{skip},#{pageSize}
   </select>
@@ -57,8 +114,6 @@
 	FROM `comment`
 	WHERE articale_id = #{articleId}
   </select>
-  
-  
   
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 

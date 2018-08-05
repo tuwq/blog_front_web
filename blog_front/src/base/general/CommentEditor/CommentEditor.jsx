@@ -6,10 +6,8 @@ import { bindActionCreators } from 'redux'
 import * as userActions from 'store/actions/user' 
 
 import { _setToken,_getToken } from 'base/js/cookie'
-import { checkLoginForm,checkCommentForm } from 'base/js/check'
+import { checkLoginForm } from 'base/js/check'
 import { loginApi } from 'api/Login/login'
-import { rootCommentApi } from 'api/Comment/comment'
-
 
 import './CommentEditor.less'
 import './MCommentEditor.less'
@@ -33,7 +31,6 @@ class CommentEditor extends React.Component {
 	}
 
 	componentWillUnmount() {
-	
 	   this.setState = (state,callback)=>{
 	     return
 	   }
@@ -75,22 +72,17 @@ class CommentEditor extends React.Component {
 	comment(e) {
 		e.stopPropagation()
 		e.preventDefault()
-		let nowArticleId = this.props.match.params.id
-		let flag = checkCommentForm(this.state)
-		if (flag == true) {
-			rootCommentApi(nowArticleId,this.state.content,(res)=>{
-				if (res.data.code == 200) {
-					this.setState({
-						content: ''
-					})
-					this.props.reInit()
-				}
-			})
-		} else {
-			this.setState({
-				contenterror: flag
-			})
-		}
+		this.props.commentFn(this.state.content,(flag)=>{
+			if (flag == true) {
+				this.setState({
+					content: ''
+				})
+			} else{
+				this.setState({
+					contenterror: flag
+				})
+			}
+		})
 	}
 
 	render() {

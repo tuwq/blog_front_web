@@ -57,11 +57,11 @@ export function checkUserSecuritySettingForm(state) {
 	return true
 }
 
-export function checkCommentForm(state) {
-	if (state.content.trim() == '' || state.content == null) {
+export function checkCommentForm(content) {
+	if (content.trim() == '' || content == null) {
 		return '内容信息不能为空'
 	}
-	if (state.content.length < 5 || state.content.length > 100) {
+	if (content.length < 5 || content.length > 100) {
 		return '长度应该在5-100之间'
 	}
 	return true

@@ -6,7 +6,8 @@ import CommentEditor from 'base/general/CommentEditor/CommentEditor'
 import CommentList from '../CommentList/CommentList'
 import Pagination from 'base/general/Pagination/Pagination'
 
-import { pageCommentAllApi } from 'api/Comment/comment'
+import { rootCommentApi,pageArtCommentAllApi } from 'api/Comment/comment'
+import { checkCommentForm } from 'base/js/check'
 
 import './CommentCollection.less'
 import './MCommentCollection.less'
@@ -17,11 +18,13 @@ class CommentCollection extends React.Component {
 		super(props,context)
 		this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
 		this.initData = this.initData.bind(this)
+		this.reInit = this.reInit.bind(this)
 		this.state = {
 			currentPage: 1,
 			pageSize: global.artCommentPageSize,
 			data: [],
-			pageModel: {}
+			pageModel: {},
+			commenSum: 0
 		}
 	}
 
@@ -36,11 +39,12 @@ class CommentCollection extends React.Component {
 	}
 
 	initData(currentPage,nowId) {
-		pageCommentAllApi(currentPage,this.state.pageSize,nowId,(res)=>{
+		pageArtCommentAllApi(currentPage,this.state.pageSize,nowId,(res)=>{
 			if (res.data.code == 200) {
 				this.setState({
 					data: res.data.data,
-					pageModel: res.data.pageModel
+					pageModel: res.data.pageModel,
+					commenSum: res.data.pageModel.total
 				})
 			}
 		})
@@ -48,6 +52,21 @@ class CommentCollection extends React.Component {
 
 	loadPage(page) {
 		this.initData(page,this.props.match.params.id)
+	}
+
+	commentFn(content,call) {
+		let nowArticleId = this.props.match.params.id
+		let flag = checkCommentForm(content)
+		if (flag == true) {
+			rootCommentApi(nowArticleId,content,(res)=>{
+				if (res.data.code == 200) {
+					call(true)
+					this.reInit()
+				}
+			})
+		} else {
+			call(flag)
+		}
 	}
 
 	reInit() {
@@ -62,7 +81,8 @@ class CommentCollection extends React.Component {
 	render() {
 		return (
 			<div className="CommentCollection">
-				<CommentEditor reInit={this.reInit.bind(this)}/>
+				<CommentEditor commentFn={this.commentFn.bind(this)}/>
+				<h2 className="commentSum">{this.state.commenSum} 条评论</h2>
 				{
 					this.state.data.length>0
 					?(

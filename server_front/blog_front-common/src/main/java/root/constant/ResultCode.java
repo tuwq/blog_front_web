@@ -13,6 +13,12 @@ public interface ResultCode {
 	static int FILE_UPLOAD_FAIL = 301;
 	// 评论的文章无法找到
 	static int COMMENT_ARTICLE_NOTFOUND = 302;
+	// 评论的父评论无法找到
+	static int COMMENT_PARENT_NOTFOUND = 303;
+	// 评论的根评论无法找到
+	static int COMMENT_ROOT_NOTFOUND = 304;
+	// 评论自己的评论
+	static int COMMENT_REPLY_MYSELF = 305;
 	// TOKEN过期了但不需要回登陆页,依旧是成功的,不过没有数据返回
 	static int TOKEN_MATURITY = 280;
 	// 请求期间的普通错误
