@@ -4,7 +4,6 @@ import PubSub from 'pubsub-js'
 import { withRouter } from 'react-router-dom'
 
 import CommentItem from '../CommentItem/CommentItem'
-import Pagination from 'base/general/Pagination/Pagination'
 
 import './CommentList.less'
 import './MCommentList.less'
@@ -14,7 +13,7 @@ class CommentList extends React.Component {
 	constructor(props,context) {
 		super(props,context)
 		this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
-		this.commentList = React.createRef()	
+		this.commentListDOM = React.createRef()	
 		this.artGoCommentListSubscribe = this.artGoCommentListSubscribe.bind(this)	
 		PubSub.subscribe(global.artGoCommentListSubscribe,this.artGoCommentListSubscribe)
 	}
@@ -35,20 +34,21 @@ class CommentList extends React.Component {
 	}
 
 	artGoCommentListSubscribe(msg,data) {
-		window.scrollTo(0,$(this.commentList.current).offset().top)
+		window.scrollTo(0,$(this.commentListDOM.current).offset().top)
 	}
 
 
 	render() {
 		return (
 			<div className="CommentList">
-				<h2>8 条评论</h2>
-				<div className="commentList" ref={this.commentList}>
-					<CommentItem replyFn={this.reply.bind(this)}/>
-					<CommentItem replyFn={this.reply.bind(this)}/>
-					<CommentItem replyFn={this.reply.bind(this)}/>
+				<h2>{this.props.pageModel.total} 条评论</h2>
+				<div className="commentList" ref={this.commentListDOM}>
+					{
+						this.props.data.map((item,index)=>{
+							return (<CommentItem key={index} item={item} index={index}/>)
+						})
+					}
 				</div>
-				<Pagination />
         	</div>
         )
 	}

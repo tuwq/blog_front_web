@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
-import { withRouter } from 'react-router-dom'
+import { withRouter,Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as commentActions from 'store/actions/comment' 
@@ -31,18 +31,14 @@ class CommentItem extends React.Component {
 	render() {	
 		return (
 			<div className="CommentItem">
-				<a className="avatar"><img alt="" src="http://pcij2jrr4.bkt.clouddn.com/upload/tempartavatar.jpg"/></a>
+				<a className="avatar"><img alt="" src={global.userAvatarPrefix+this.props.item.user.avatar+'?v='+new Date().getTime()}/></a>
 				<div className="content-wrapper">
 					<div className="meta">
-						<span>秋风酱</span>
-						<span>July 9th, 2018 at 08:17 am</span>
+						<Link to={'/user/'+this.props.item.user.id}>{this.props.item.user.nickname}</Link>
+						<span>{this.props.item.timeAgo}&nbsp;{this.props.item.createTimeString}</span>
 					</div>
 					<div className="content">
-						<span>
-							<p>Java好难，学不会!
-欢迎加入博客圈站长交流群，群聊号码：571334199
-							</p>
-						</span>
+						{this.props.item.content}
 					</div>
 					<div className="reply">
 						<button onClick={this.childModal.bind(this,1)}>回复</button>

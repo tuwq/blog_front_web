@@ -80,8 +80,10 @@ class CommentEditor extends React.Component {
 		if (flag == true) {
 			rootCommentApi(nowArticleId,this.state.content,(res)=>{
 				if (res.data.code == 200) {
-					// TODO 重新获取评论列表
-					alert('success')
+					this.setState({
+						content: ''
+					})
+					this.props.reInit()
 				}
 			})
 		} else {

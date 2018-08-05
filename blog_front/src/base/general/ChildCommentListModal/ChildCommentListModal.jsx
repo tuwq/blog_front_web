@@ -28,7 +28,7 @@ class ChildCommentListModal extends React.Component {
 	}
 
 	componentDidMount() {
-		console.log('did')
+		
 	}
 
 
