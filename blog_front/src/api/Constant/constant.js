@@ -21,6 +21,8 @@ global.fansListrefreshSubscribe = 'fansListrefreshSubscribe'
 global.artGoCommentListSubscribe = 'artGoCommentListSubscribe'
 // 打开子评论模态框
 global.childCommentSubscribe = 'childCommentSubscribe'
+// 文章点赞的密钥
+global.artPraiseKey = 'artPraiseKey'
 // 首页火热文章获取数
 global.articalePraiseQuantity = 4
 global.articaleCategoryQuantity = 5
@@ -30,4 +32,6 @@ global.chatCategoryQuantity = 4
 global.artHotDiscussQuantity = 3
 global.categroyPageSize = 3
 global.artCommentPageSize = 5
-global.childCommentPageSize = 5
+global.childCommentPageSize = 3
+global.initiatePageSize = 5
+

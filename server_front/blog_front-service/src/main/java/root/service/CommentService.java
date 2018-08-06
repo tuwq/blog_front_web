@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.collect.Lists;
 
+import root.async.CommentedDataHandler;
 import root.beans.PageModel;
 import root.beans.PageResult;
 import root.constant.ResultCode;
@@ -25,7 +26,6 @@ import root.model.User;
 import root.param.ChildCommentParam;
 import root.param.PageParam;
 import root.param.RootCommentParam;
-import root.praise.CommentedDataHandler;
 import root.util.DtoUtil;
 import root.util.ThreadUtil;
 import root.util.TimeAgoUtils;

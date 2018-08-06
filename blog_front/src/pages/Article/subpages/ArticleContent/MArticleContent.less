@@ -1,7 +1,8 @@
 @import url("../../../../base/style/article-common.less");
 @media screen and (max-width: @mobile_width) {
 .ArticleContent {
-	min-width: 100vw-10%;
+	width: 100vw-10%;
+	max-width: 100vw-10%;
 	margin: 0 auto;
 	.article {
 		box-shadow: 1px 1px 5px 5px @article_border_color;
@@ -13,12 +14,13 @@
 		.thumbnail {
 			border-radius: 15px;
 			transition: all 0.6s;
-			min-height: 400px;
+			max-width: 100%;
 			position: relative;
 			display: block;
-			background-position: 50% 50%;
-   			background-size: cover;
-   			background-image: url(http://pcij2jrr4.bkt.clouddn.com/upload/tempartCover.jpg)
+			padding-top:50%;
+			background-size:cover;
+			background-position:center;
+   			background-image: url(http://pcij2jrr4.bkt.clouddn.com/upload/tempartCover.jpg) no-repeat;
 		}
 		.content-wrapper {
 			padding: 30px;

@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { withRouter } from 'react-router-dom'
 
+import { _saveStorage,_loadStorage } from 'base/js/cache'
+import { artPraiseIncrApi } from 'api/Praise/praise'
+
 import './ArticleContent.less'
 import './MArticleContent.less'
 
@@ -9,11 +12,43 @@ class ArticleContent extends React.Component {
 
 	constructor(props,context) {
 		super(props,context)
-		this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)		
+		this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)	
+		this.praise = this.praise.bind(this)	
+		this.state = {
+			praiseSum: 0
+		}
 	}
 
 	componentDidMount() {
-		
+		this.praise()
+	}
+
+	componentWillUnmount() {
+	    this.setState = (state,callback)=>{
+	      return
+	    };
+	}
+
+	praise() {
+		this.setState({
+			praiseSum: this.props.data.praise
+		})
+	}
+
+	praiseIncr() {
+		let articleId = this.props.data.id
+		if (_loadStorage(global.artPraiseKey+articleId)) {
+			return
+		}
+		artPraiseIncrApi(articleId,(res)=>{
+			if (res.data.code == 200) {
+				_saveStorage(global.artPraiseKey+articleId,global.artPraiseKey+articleId)
+				this.setState({
+					praiseSum: this.state.praiseSum+1
+				})
+			}
+		})
+
 	}
 
 	render() {
@@ -36,8 +71,8 @@ class ArticleContent extends React.Component {
 						</div>
 					</div>
 					<div  className="support">
-						<button>
-							赞<i>&nbsp;</i>{this.props.data.praise}
+						<button onClick={this.praiseIncr.bind(this)}>
+							赞<i>&nbsp;</i>{this.state.praiseSum}
 						</button>
 						<p>如果觉得我的文章对你有用，请随意赞赏</p>
 					</div>

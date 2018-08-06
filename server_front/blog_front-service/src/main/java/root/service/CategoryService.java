@@ -60,6 +60,9 @@ public class CategoryService {
 		}
 		Category category = categoryMapper.selectByPrimaryKey(id);
 		Long total = articaleMapper.countAllByCategoryId(id);
+		if(total == 0) {
+			return PageResult.<ArticaleDto>builder().data(Lists.newArrayList()).pageModel(new PageModel()).code(200).build();
+		}
 		param.buildSkip();
 		List<Articale> articaleList = articaleMapper.categoryPage(param.getSkip(),param.getPageSize(),id);
 		List<ArticaleDto> articaleDtoList = Lists.newArrayList();

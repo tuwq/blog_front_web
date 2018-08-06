@@ -84,6 +84,9 @@ class Pagination extends React.Component {
 				})	
 			}
 		}
+		if (pageModel.maxPageCode <= 1) {
+			pagination = null
+		}
 			
 		return (
 			<div className="Pagination">

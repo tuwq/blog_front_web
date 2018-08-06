@@ -108,12 +108,22 @@ public interface ArticaleMapper {
 	 * 文章的评论数量增加
 	 * @param articleId
 	 */
-	void commentSumIncr(@Param("id") Integer articleId);
+	void commentSumIncr(@Param("id") Integer id);
 	/**
 	 * 获得文章作者的id
 	 * @param articleId
 	 * @return
 	 */
-	Integer getAuthIdById(@Param("id") Integer articleId);
+	Integer getAuthIdById(@Param("id") Integer id);
+	/**
+	 * 文章的点赞数自增
+	 * @param articleId
+	 */
+	void praiseSumIncr(@Param("id") Integer id);
+	/**
+	 * 文章的浏览量自增
+	 * @param articleId
+	 */
+	void browseSumIncr(@Param("id") Integer id);
 	
 }

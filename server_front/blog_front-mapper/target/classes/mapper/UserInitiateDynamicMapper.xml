@@ -12,6 +12,21 @@
   <sql id="Base_Column_List" >
     id, type, action, type_id, initiate_user_id, create_time
   </sql>
+  
+  <select id="getListByInitiateUserId" parameterType="map" resultMap="BaseResultMap">
+  	SELECT <include refid="Base_Column_List" />
+	FROM user_initiate_dynamic
+	WHERE initiate_user_id = #{initiateUserId}
+	ORDER BY create_time desc
+	LIMIT #{skip},#{pageSize}
+  </select>
+  
+  <select id="countByInitiateUserId" parameterType="map" resultType="long">
+  	SELECT count(1)
+	FROM user_initiate_dynamic
+	WHERE initiate_user_id = #{initiateUserId}
+  </select>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

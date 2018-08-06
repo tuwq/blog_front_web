@@ -16,7 +16,7 @@ public class ChildCommentParam {
 	@NotNull(message="根评论id不能为空")
 	private Integer rootId;
 	@NotBlank(message="文章内容不能为空")
-	@Size(min=5,max=100,message="内容范围应该在5-100之间")
+	@Size(min=5,max=200,message="内容范围应该在5-100之间")
 	private String content;
 	
 }

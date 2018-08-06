@@ -56,15 +56,13 @@ class ArticleMain extends React.Component {
 		return (
 			<div className="ArticleMain">
 				<div className="Content-Wrapper">
-					
-						{
-							JSON.stringify(this.state.data)!="{}"&&
-							(<div className="content">
-								<ContentTitle data={this.state.data}/>
-								<ContentMain data={this.state.data}/>
-							</div>)
-						}
-					
+					{
+						JSON.stringify(this.state.data)!="{}"&&
+						(<div className="content">
+							<ContentTitle data={this.state.data}/>
+							<ContentMain data={this.state.data}/>
+						</div>)
+					}
 				</div>
         	</div>
         )

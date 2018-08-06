@@ -18,6 +18,7 @@ public class MailService {
 
 	@Async
 	public void sendSimpleMail(String subject,String content,String toEmail){
+		// 发送邮件
 	    SimpleMailMessage message = new SimpleMailMessage();
 	    message.setFrom(from);
 	    message.setTo(toEmail);

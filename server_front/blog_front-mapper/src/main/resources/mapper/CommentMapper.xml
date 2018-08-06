@@ -46,6 +46,19 @@
     <result column="user_nickname" property="nickname"/>
     <result column="user_avatar" property="avatar"/>
   </resultMap>  
+  
+  <resultMap id="articleMap" type="root.model.Articale" >
+    <id column="article_id" property="id" jdbcType="INTEGER" />
+    <result column="article_title" property="title" jdbcType="VARCHAR" />
+  </resultMap>
+ 
+ <select id="getArtById" parameterType="map" resultMap="articleMap">
+ 	SELECT a.id article_id,a.title article_title
+	FROM `comment` c
+	LEFT JOIN articale a ON a.id = c.articale_id
+	WHERE c.id = #{id}
+ </select>
+ 
  
  <select id="getByIdWithUser" parameterType="map" resultMap="commentMap">
  	SELECT c.id id,c.user_id user_id,c.articale_id articale_id,

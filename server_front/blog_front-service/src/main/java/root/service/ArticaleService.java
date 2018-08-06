@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
 
+import root.async.IncrDataHandler;
 import root.beans.JsonResult;
 import root.constant.ResultCode;
 import root.dto.ArticaleDto;
@@ -25,6 +26,8 @@ import root.util.TimeAgoUtils;
 @Service
 public class ArticaleService {
 
+	@Resource
+	private IncrDataHandler incrDataHandler;
 	@Resource
 	private ArticaleMapper articaleMapper;
 	@Resource
@@ -53,6 +56,7 @@ public class ArticaleService {
 		articaleDto.setNext(next);
 		articaleDto.setTimeAgo(TimeAgoUtils.format(articaleDto.getUpdateTime()));
 		articaleDto.formatNoSecondTime();
+		incrDataHandler.articleBrowseIncr(id);
 		return JsonResult.<ArticaleDto>success(articaleDto);
 	}
 	

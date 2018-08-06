@@ -16,6 +16,7 @@ import root.dto.ShowUserDto;
 import root.dto.UserDto;
 import root.exception.NotFoundException;
 import root.mapper.UserFollowMapper;
+import root.mapper.UserInitiateDynamicMapper;
 import root.mapper.UserMapper;
 import root.model.User;
 import root.model.UserFollow;
@@ -32,6 +33,8 @@ public class InformartionService {
 	private UserMapper userMapper; 
 	@Resource
 	private UserFollowMapper userFollowMapper;
+	@Resource
+	private UserInitiateDynamicMapper userInitiateDynamicMapper;
 	
 	public JsonResult<ShowUserDto> userinfo(Integer id) {
 		// 检查字段，访问id不存在去404
@@ -61,8 +64,10 @@ public class InformartionService {
 				userDto.setOperateTime(new Date());
 				Integer followsSum = userFollowMapper.countByFromId(id);
 				Integer fansSum = userFollowMapper.countByTargetId(id);
+				Long dynamicInitiateSum = userInitiateDynamicMapper.countByInitiateUserId(id);
 				ShowUserDto showUserDto = ShowUserDto.builder().identity(1).userDto(userDto)
-						.followStatus(0).fansSum(fansSum).followsSum(followsSum).build();
+						.followStatus(0).fansSum(fansSum).followsSum(followsSum)
+						.dynamicInitiateSum(dynamicInitiateSum).build();
 				return JsonResult.<ShowUserDto>success(showUserDto);
 			} else {
 				User others = userMapper.selectByPrimaryKey(id);
@@ -75,8 +80,9 @@ public class InformartionService {
 				userDto.setNowLoginIp("");
 				Integer followsSum = userFollowMapper.countByFromId(id);
 				Integer fansSum = userFollowMapper.countByTargetId(id);
+				Long dynamicInitiateSum = userInitiateDynamicMapper.countByInitiateUserId(id);
 				ShowUserDto showUserDto = ShowUserDto.builder().identity(2).userDto(userDto)
-						.fansSum(fansSum).followsSum(followsSum).build();
+						.fansSum(fansSum).followsSum(followsSum).dynamicInitiateSum(dynamicInitiateSum).build();
 				UserFollow connection = userFollowMapper.getByFromIdAndTargetId(userId, id);
 				if (connection != null) {
 					showUserDto.setFollowStatus(connection.getFollowStatus());
@@ -96,8 +102,9 @@ public class InformartionService {
 		userDto.setNowLoginIp("");
 		Integer followsSum = userFollowMapper.countByFromId(id);
 		Integer fansSum = userFollowMapper.countByTargetId(id);
+		Long dynamicInitiateSum = userInitiateDynamicMapper.countByInitiateUserId(id);
 		ShowUserDto showUserDto = ShowUserDto.builder().identity(2).userDto(userDto)
-				.fansSum(fansSum).fansSum(fansSum).build();
+				.fansSum(fansSum).fansSum(fansSum).dynamicInitiateSum(dynamicInitiateSum).build();
 		showUserDto.setFollowStatus(0);
 		return JsonResult.<ShowUserDto>success(showUserDto);
 	}

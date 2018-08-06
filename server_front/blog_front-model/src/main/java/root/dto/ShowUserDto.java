@@ -22,4 +22,6 @@ public class ShowUserDto {
 	private Integer fansSum;
 	
 	private Integer followsSum;
+	
+	private Long dynamicInitiateSum;
 }

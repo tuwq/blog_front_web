@@ -16,15 +16,19 @@ public class PageModel {
 	// 最大页码
 	private Integer maxPageCode;
 	
+	public PageModel() {
+		
+	}
+	
 	public PageModel(Long total,Integer currentTotal,Integer currentPage,Integer pageSize) {
 		this.total = total;
 		this.currentPage = currentPage;
 		this.currentTotal = currentTotal;
 		this.pageSize = pageSize;
-		this.maxPageCode = getMaxPageCode();
+		this.maxPageCode = buildMaxPageCode();
 	}
 	
-	public int getMaxPageCode() {
+	public int buildMaxPageCode() {
 		if(this.pageSize == 0) {
 			this.pageSize = 1;
 		}

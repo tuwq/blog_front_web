@@ -34,7 +34,7 @@ class InformationNav extends React.Component {
 				<React.Fragment>
 				<a className="current" onClick={this.updateNavType.bind(this,1)}>资料</a>
 		  		<a onClick={this.updateNavType.bind(this,2)}>消息<span>4</span></a>
-		  		<a onClick={this.updateNavType.bind(this,3)}>评论<span>4</span></a>
+		  		<a onClick={this.updateNavType.bind(this,3)}>动态<span>{this.props.showInfo.dynamicInitiateSum}</span></a>
 		  		<a onClick={this.updateNavType.bind(this,4)}>粉丝<span>{this.props.showInfo.fansSum}</span></a>
 		  		<a onClick={this.updateNavType.bind(this,5)}>关注<span>{this.props.showInfo.followsSum}</span></a>
 		  		</React.Fragment>
@@ -43,7 +43,7 @@ class InformationNav extends React.Component {
 			nav = (
 				<React.Fragment>
 				<a className="current" onClick={this.updateNavType.bind(this,1)}>资料</a>
-		  		<a onClick={this.updateNavType.bind(this,3)}>评论<span>4</span></a>
+		  		<a onClick={this.updateNavType.bind(this,3)}>动态<span>{this.props.showInfo.dynamicInitiateSum}</span></a>
 		  		<a onClick={this.updateNavType.bind(this,4)}>粉丝<span>{this.props.showInfo.fansSum}</span></a>
 		  		<a onClick={this.updateNavType.bind(this,5)}>关注<span>{this.props.showInfo.followsSum}</span></a>
 		  		</React.Fragment>

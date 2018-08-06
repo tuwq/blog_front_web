@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import root.beans.CommentExceptionResult;
+import root.beans.DynamicExceptionResult;
 import root.beans.FileUploadExceptionResult;
 import root.beans.NotFoundExceptionResult;
 import root.beans.ParamExceptionResult;
@@ -15,6 +16,7 @@ import root.beans.TokenExceptionResult;
 import root.exception.ActivationException;
 import root.exception.CheckParamException;
 import root.exception.CommentException;
+import root.exception.DynamicException;
 import root.exception.FileUploadException;
 import root.exception.NotFoundException;
 import root.exception.SearchNoResultException;
@@ -22,6 +24,13 @@ import root.exception.TokenException;
 
 @ControllerAdvice
 public class ExceptionAdvice {
+	
+	// 处理未知异常
+	@ExceptionHandler(RuntimeException.class)
+	public void handlerUnknownException(RuntimeException e) {
+		// TODO 记录异常日志
+		e.printStackTrace();
+	}
 	
 	// 检查参数出错的异常
 	@ExceptionHandler(CheckParamException.class)
@@ -65,5 +74,11 @@ public class ExceptionAdvice {
 	@ExceptionHandler(CommentException.class)
 	public ResponseEntity<CommentExceptionResult> handlerCommentException(CommentException e) {
 		return new ResponseEntity<CommentExceptionResult>(CommentExceptionResult.builder().code(e.getResultCode()).msg(e.getMsg()).build(),HttpStatus.OK);
+	}
+	
+	// 动态相关异常
+	@ExceptionHandler(DynamicException.class)
+	public ResponseEntity<DynamicExceptionResult> handlerDynamicException(DynamicException e) {
+		return new ResponseEntity<DynamicExceptionResult>(DynamicExceptionResult.builder().code(e.getResultCode()).msg(e.getMsg()).build(),HttpStatus.OK);
 	}
 }

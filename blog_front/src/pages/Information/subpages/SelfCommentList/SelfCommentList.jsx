@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { withRouter } from 'react-router-dom'
 
+import { getinitiateApi } from 'api/Dynamic/dynamic'
+
+import DynamicInitiateItem from '../DynamicInitiateItem/DynamicInitiateItem'
+import LoadMore from 'base/general/LoadMore/LoadMore'
+
 import './SelfCommentList.less'
 import './MSelfCommentList.less'
 
@@ -10,32 +15,67 @@ class SelfCommentList extends React.Component {
 	constructor(props,context) {
 		super(props,context)
 		this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
-		
+		this.initData = this.initData.bind(this)
+		this.state = {
+			currentPage: 1,
+			pageSize: global.initiatePageSize,
+			data: [],
+			pageModel: {},
+			pend: false
+		}
 	}
 
 	componentDidMount() {
-		
+		this.initData(1,this.props.match.params.id);
+	}
+
+	componentWillUnmount() {
+	    this.setState = (state,callback)=>{
+	      return
+	    };
+	}
+
+	initData(currentPage,userId) {
+		this.setState({
+			pend: true
+		})
+		getinitiateApi(currentPage,this.state.pageSize,userId,(res)=>{
+			if (res.data.code == 200) {
+				this.setState({
+					data: this.state.data.concat(res.data.data),
+					pageModel: res.data.pageModel,
+					pend: false,
+					currentPage: this.state.currentPage+1
+				})
+			}
+		})
+	}
+
+	loadMoreData() {
+		this.initData(this.state.currentPage,this.props.match.params.id)
 	}
 
 	render() {
+
 		return (
 			<div className="SelfCommentList">
 				<div className="wrap">
-				  <div className="noMessage">
-				  	<h2>还没有发布任何评论</h2>
-				  	<svg viewBox="0 0 1024 1024" width="60" height="60"><path fill="#77C9FF" d="M364.088889 56.888889L48.355556 284.444444 199.111111 392.533333l312.888889-227.555555z" ></path><path fill="#77C9FF" d="M659.911111 56.888889l315.733333 227.555555-150.755555 108.088889-312.888889-227.555555zM659.911111 728.177778l315.733333-227.555556-150.755555-108.088889-312.888889 227.555556z"></path><path fill="#77C9FF" d="M364.088889 728.177778l-315.733333-227.555556L199.111111 392.533333l312.888889 227.555556z"></path><path fill="#77C9FF" d="M694.044444 773.688889l-34.133333 25.6-31.288889-25.6-116.622222-82.488889-116.622222 82.488889-31.288889 25.6-34.133333-25.6L199.111111 679.822222V768l312.888889 227.555556 312.888889-227.555556v-88.177778z"></path></svg>
-				  </div>
-				  <div className="group-list">
-				  	<div className="comment-group">
-				  		<div className="meta">
-				  			<label>回复了评论</label>
-				  			<span>2018-7-20</span>
-				  		</div>
-				  		<div className="title">
-				  			<h2>服务端是如何主动推送信息到客户端的？</h2>
-				  		</div>
-				  	</div>
-				  </div>
+				  {
+				  	this.state.data.length>0
+				  	?(<div className="dynamic-list">
+				  		{
+				  			this.state.data.map((item,index)=>{
+				  				return (<DynamicInitiateItem key={index} item={item} index={index}/>)
+				  			})
+				  		}
+				  	  </div>)
+				  	:(<div className="noMessage"></div>)
+				  }
+				  {
+				  	this.state.pageModel.currentTotal
+		  	 		?(<LoadMore pend={this.state.pend} loadMoreFn={this.loadMoreData.bind(this)}/>)
+		  	 		:(<div style={{textAlign: 'center',color: '#fff'}}></div>)
+				  }
 			  	</div>
         	</div>
         )
@@ -43,5 +83,7 @@ class SelfCommentList extends React.Component {
 }
 
 export default withRouter(SelfCommentList)
+/*
 
+*/
 

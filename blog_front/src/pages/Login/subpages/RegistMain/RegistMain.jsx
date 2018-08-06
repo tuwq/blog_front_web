@@ -45,7 +45,8 @@ class RegistMain extends React.Component {
 	inputChange(e) {
 		const name = e.target.name
 		this.setState({
-			[name]: e.target.value
+			[name]: e.target.value,
+			error: ''
 		})
 	}
 

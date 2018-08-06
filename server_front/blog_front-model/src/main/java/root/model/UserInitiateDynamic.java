@@ -14,7 +14,7 @@ public class UserInitiateDynamic {
     private Integer id;
     // 动态类型,1:评论相关,2:文章相关
     private Integer type;
-    // 动作类型,1:提出
+    // 动作类型,1:提出,2.回复另一个评论
     private Integer action;
     // 动态类型的id,取决于type的类型
     private Integer typeId;

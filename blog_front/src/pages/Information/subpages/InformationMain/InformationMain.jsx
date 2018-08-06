@@ -47,7 +47,8 @@ class InformationMain extends React.Component {
 					userDto: res.data.result.userDto,
 					followStatus: res.data.result.followStatus,
 					fansSum: res.data.result.fansSum,
-					followsSum: res.data.result.followsSum
+					followsSum: res.data.result.followsSum,
+					dynamicInitiateSum: res.data.result.dynamicInitiateSum
 				})
 			}
 		})

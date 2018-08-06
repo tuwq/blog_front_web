@@ -19,6 +19,8 @@ public interface ResultCode {
 	static int COMMENT_ROOT_NOTFOUND = 304;
 	// 评论自己的评论
 	static int COMMENT_REPLY_MYSELF = 305;
+	// 动态的用户未找到
+	static int DYNAMIC_USER_NOTFOUND = 306;
 	// TOKEN过期了但不需要回登陆页,依旧是成功的,不过没有数据返回
 	static int TOKEN_MATURITY = 280;
 	// 请求期间的普通错误

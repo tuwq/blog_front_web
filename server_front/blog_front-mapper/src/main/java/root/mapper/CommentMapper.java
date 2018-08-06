@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import root.model.Articale;
 import root.model.Comment;
 import root.model.User;
 
@@ -73,5 +74,11 @@ public interface CommentMapper {
 	 * @return
 	 */
 	Comment getByIdWithUser(@Param("id") Integer id);
+	/**
+	 * 获得评论的文章信息
+	 * @param commentIds
+	 * @return
+	 */
+	Articale getArtById(@Param("id") Integer id);
 
 }
