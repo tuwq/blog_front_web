@@ -18,6 +18,7 @@ import root.dto.UserDto;
 import root.exception.CheckParamException;
 import root.exception.TokenException;
 import root.mapper.UserMapper;
+import root.mapper.UserReceiveDynamicMapper;
 import root.model.User;
 import root.param.BasisSettingParam;
 import root.param.SecuritySettingParam;
@@ -37,17 +38,23 @@ public class UserService {
 	private UserMapper userMapper;
 	@Resource
 	private QiNiuService qiNiuService;
+	@Resource
+	private UserReceiveDynamicMapper userReceiveDynamicMapper;
 	
 	public JsonResult<UserDto> info() {
 		// 检查token获得id
 		// 获取用户信息返回
 		// 过期时返回token过期状态码给前端进行处理
+		// 获得新的动态消息
 		Integer userId = tokenService.checkToken();
 		if (userId != null) {
 			User user = userMapper.InfoById(userId);
-			user.setPassword("");
-			user.setActivationCode("");
-			return JsonResult.<UserDto>success(DtoUtil.adapt(new UserDto(), user));
+			Long dynamicReceiveSum = userReceiveDynamicMapper.countByReceiveUserIdAndVisit(userId);
+			UserDto userDto = DtoUtil.adapt(new UserDto(), user);
+			userDto.setPassword("");
+			userDto.setActivationCode("");
+			userDto.setNewDynamicReceiveSum(dynamicReceiveSum);
+			return JsonResult.<UserDto>success(userDto);
 		}
 		// token过期了
 		throw new TokenException(ResultCode.TOKEN_MATURITY,"token到期了");

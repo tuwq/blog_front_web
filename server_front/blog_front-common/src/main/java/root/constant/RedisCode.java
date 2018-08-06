@@ -1,10 +1,11 @@
 package root.constant;
 
-public class RedisCode {
+public interface RedisCode {
 	
 	// 邮箱验证的code
-	public static String EMAIL_ACTIVATION_CODE = "EMAIL_ACTIVATION_CODE";
+	static String EMAIL_ACTIVATION_CODE = "EMAIL_ACTIVATION_CODE";
 	// 维持用户状态token的code
-	public static String TOKEN = "___TOKEN___";
-	
+	static String TOKEN = "___TOKEN___";
+	// 找回密钥的code
+	static String EMAIL_FIND_PASS_CODE = "EMAIL_FIND_PASS_CODE"; 
 }

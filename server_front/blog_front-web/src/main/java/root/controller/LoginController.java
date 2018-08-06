@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +16,7 @@ import root.beans.JsonResult;
 import root.dto.LoginDto;
 import root.param.LoginParam;
 import root.param.RegistParam;
+import root.param.UpdatePassParam;
 import root.service.LoginService;
 
 @RestController
@@ -43,6 +45,18 @@ public class LoginController {
 	@DeleteMapping("/logout")
 	public JsonResult<Void> logout() {
 		return loginService.logout();
+	}
+	
+	@PostMapping("/findPass/{email}") 
+	public JsonResult<Void> findPass(@PathVariable("email") String email) {
+		loginService.findPass(email);
+		return JsonResult.<Void>success();
+	}
+	
+	@PutMapping("/updatePass") 
+	public JsonResult<Void> updatePass(@RequestBody UpdatePassParam param) {
+		loginService.updatePass(param);
+		return JsonResult.<Void>success();
 	}
 	
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
+import { withRouter,Link } from 'react-router-dom'
 
 import rightSvg from 'static/svg/right.svg'
 
@@ -20,12 +21,12 @@ class ModelMediumTitle extends React.Component {
 	render() {
 		return (
      		<h2 className="ModelMediumTitle">
-     			<span>最新{this.props.category.name}</span>
-     			<a>更多<i><img width="12" height="12" alt="" src={rightSvg} /></i></a>
+     			<span>{this.props.category.name}</span>
+     			<Link to={'/category/'+this.props.category.id}>更多<i><img width="12" height="12" alt="" src={rightSvg} /></i></Link>
      		</h2>
         )
 	}
 }
 
-export default ModelMediumTitle
+export default withRouter(ModelMediumTitle)
 

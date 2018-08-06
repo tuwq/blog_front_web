@@ -27,13 +27,13 @@ class ModelCrowdBigItem extends React.Component {
          			<Link to={'/article/'+this.props.item.id}><img width="" height="" alt="" src={global.artImgPrefix+this.props.item.faceCover}/></Link>
          		</div>
                <div className="description">
-                  <Link to={'/article/'+this.props.item.id} className="title">标题了23标题了23标题了23标题了23标题了23标题了23标题了23标题了23标题了23标题了23标题了23标题了23标题了23标题了23标题了23标题了23标题了23标题了23标题了23标题了23标题了23标题了23标题了23标题了23标题了23标题了23标题了23标题了23标题了23标题了23标题了23标题了23标题了23标题了23标题了23标题了23标题了23标题了23标题了23</Link>
+                  <Link to={'/article/'+this.props.item.id} className="title">{this.props.item.title}</Link>
                   <div className="meta">
                      <span><i><img width="" height="" alt="" src={clockSvg}/></i>{this.props.item.createTimeString}</span>
                      <span><i><img width="" height="" alt="" src={eyeSvg}/></i>{this.props.item.browseSum}阅读</span>
                      <span><i><img width="" height="" alt="" src={commentSvg}/></i>{this.props.item.commentSum}(评论)</span>
                   </div>
-                  <div className="content">内容考虑进来撒23内容考虑进来撒23内容考虑进来撒23内容考虑进来撒23内容考虑进来撒23内容考虑进来撒23内容考虑进来撒23内容考虑进来撒23内容考虑进来撒23内容考虑进来撒23内容考虑进来撒23内容考虑进来撒23内容考虑进来撒23内容考虑进来撒23内容考虑进来撒23内容考虑进来撒23内容考虑进来撒23内容考虑进来撒23内容考虑进来撒23内容考虑进来撒23内容考虑进来撒23内容考虑进来撒23内容考虑进来撒23内容考虑进来撒23内容考虑进来撒23内容考虑进来撒23内容考虑进来撒23</div>                  
+                  <div className="content">{this.props.item.content}</div>                  
                </div>
          	</div>
         )

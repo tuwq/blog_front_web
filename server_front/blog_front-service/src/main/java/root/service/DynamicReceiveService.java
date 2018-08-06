@@ -1,5 +1,6 @@
 package root.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
 
+import root.async.VisitDataHandler;
 import root.beans.PageModel;
 import root.beans.PageResult;
 import root.constant.ResultCode;
@@ -23,6 +25,7 @@ import root.mapper.UserReceiveDynamicMapper;
 import root.model.Articale;
 import root.model.Comment;
 import root.model.UserInitiateDynamic;
+import root.model.UserReceiveDynamic;
 import root.param.PageParam;
 import root.util.DtoUtil;
 import root.util.ThreadUtil;
@@ -38,6 +41,8 @@ public class DynamicReceiveService {
 	private UserReceiveDynamicMapper userReceiveDynamicMapper;
 	@Resource
 	private CommentMapper commentMapper;
+	@Resource
+	private VisitDataHandler visitDataHandler;
 	
 	public PageResult<DynamicReceiveDto> receive(PageParam param, Integer userId) {
 		// 检查字段
@@ -47,6 +52,7 @@ public class DynamicReceiveService {
 		// 获得总数量,若为0直接返回空数据
 		// 获得用户接收动态的列表
 		// 根据类型获得动态类型的具体信息
+		// 修改动态状态以观看
 		ValidatorUtil.check(param);
 		if (userId == null) {
 			throw new CheckParamException("用户Id","为空");
@@ -69,6 +75,11 @@ public class DynamicReceiveService {
 		List<DynamicReceiveDto> commentDynamicList = getCommentDynamicList(initiateDynamicList);
 		data.addAll(commentDynamicList);
 		PageModel pageModel = new PageModel(total,data.size(),param.getCurrentPage(),param.getPageSize());
+		List<UserReceiveDynamic> receiveList = userReceiveDynamicMapper.getByReceiverUserId(param.getSkip(),param.getPageSize(), userId);
+		List<UserReceiveDynamic> needVisit = receiveList.stream().filter(receive ->
+			receive.getVisit()==0
+		).collect(Collectors.toList());
+		visitDataHandler.visitReceiveDynamic(needVisit);
 		return PageResult.<DynamicReceiveDto>builder().pageModel(pageModel).data(data).code(200).build();
 	}
 

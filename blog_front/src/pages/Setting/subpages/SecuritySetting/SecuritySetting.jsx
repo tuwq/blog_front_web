@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
+import * as RESULT_CODE from 'api/Constant/resultCode'
 import { withRouter } from 'react-router-dom'
 
 import { checkUserSecuritySettingForm } from 'base/js/check'
@@ -48,7 +49,7 @@ class SecuritySetting extends React.Component {
 					this.setState({
 						error: '修改安全信息成功'
 					})
-				} else {
+				} else if(res.data.code == RESULT_CODE.PARAM_ERROR) {
 					this.setState({
 						error: res.data.msg
 					})

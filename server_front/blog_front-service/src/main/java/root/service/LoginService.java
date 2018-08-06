@@ -8,6 +8,7 @@ import java.util.Date;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +26,7 @@ import root.mapper.UserMapper;
 import root.model.User;
 import root.param.LoginParam;
 import root.param.RegistParam;
+import root.param.UpdatePassParam;
 import root.redis.RedisOperator;
 import root.util.DtoUtil;
 import root.util.IpUtil;
@@ -54,6 +56,8 @@ public class LoginService {
 	private String mailMessageUrl;
 	@Value("${defaultAvatarname}")
 	private String defaultAvatarname;
+	@Value("${updatePassUrl}")
+	private String updatePassUrl;
 	
 	@Transactional
 	public void regist(RegistParam param) {
@@ -76,12 +80,12 @@ public class LoginService {
 		if (emailexist != 0) {
 			throw new CheckParamException("邮箱","已被注册");
 		}
-		String randomKey = MD5Util.encrypt(param.getEmail()) + TimeUtil.getSkipTime(Calendar.MINUTE, mailTimeoutMINUTE);
+		String randomKey = MD5Util.encrypt(param.getEmail()+TimeUtil.getSkipTime(Calendar.MINUTE, mailTimeoutMINUTE));
 		redis.set(RedisCode.EMAIL_ACTIVATION_CODE+":"+randomKey, param.getEmail(),mailTimeoutMINUTE*60);
 		String content = 
 				"您的登录邮箱为"+param.getEmail()+",点击链接激活账号 "+mailActivationApiName+"?key="+randomKey
-				+ " 若点击无效，请将内容复制放入浏览器地址栏当中";
-		mailService.sendSimpleMail("博客激活邮件", content, param.getEmail());
+				+ " 若点击无效，请将内容复制放入浏览器地址栏当中,不是本人操作请忽略此邮件";
+		mailService.sendSimpleMail("激活邮件", content, param.getEmail());
 		User user = User.builder()
 					.username(param.getUsername())
 					.nickname(param.getUsername())
@@ -115,7 +119,7 @@ public class LoginService {
 					return;
 				} catch (IOException e) {throw new ActivationException("激活邮件重定向失败");}
 			}
-			String randomKey = MD5Util.encrypt(user.getEmail()) + TimeUtil.getSkipTime(Calendar.MINUTE, mailTimeoutMINUTE);
+			String randomKey = MD5Util.encrypt(user.getEmail()+TimeUtil.getSkipTime(Calendar.MINUTE, mailTimeoutMINUTE));
 			redis.set(RedisCode.EMAIL_ACTIVATION_CODE+":"+randomKey, user.getEmail(),mailTimeoutMINUTE*60);
 			user.setBeforeLoginIp(user.getNowLoginIp());
 			user.setNowLoginIp(IpUtil.getRemoteIp(ThreadUtil.getCurrentRequest()));
@@ -124,8 +128,8 @@ public class LoginService {
 			userMapper.updateByPrimaryKeySelective(user);
 			String content = 
 					"激活重试,您的登录邮箱为"+user.getEmail()+",点击链接激活账号 "+mailActivationApiName+"?key="+randomKey
-					+ " 若点击无效，请将内容复制放入浏览器地址栏当中";
-			mailService.sendSimpleMail("博客激活邮件", content, user.getEmail());
+					+ " 若点击无效，请将内容复制放入浏览器地址栏当中,不是本人操作请忽略此邮件";
+			mailService.sendSimpleMail("激活邮件", content, user.getEmail());
 			try {
 				response.sendRedirect(mailMessageUrl+""
 							+ "?message="+URLEncoder.encode("激活时间过期,已经重新向 ","UTF-8")+user.getEmail()+URLEncoder.encode("发送了激活邮件","UTF-8"));
@@ -152,6 +156,7 @@ public class LoginService {
 			user.setOperateTime(new Date());
 			userMapper.updateByPrimaryKeySelective(user);
 			try {
+				redis.del(RedisCode.EMAIL_ACTIVATION_CODE+":"+key);
 				response.sendRedirect(mailMessageUrl
 							+ "?message="+URLEncoder.encode("激活成功2秒后跳转到登陆页","UTF-8")+"&flag=1");
 			} catch (IOException e) {throw new ActivationException("激活邮件重定向失败");}
@@ -177,7 +182,7 @@ public class LoginService {
 			throw new CheckParamException("密码","错误");
 		}
 		if (user.getActivationStatus() == 0) {
-			String randomKey = MD5Util.encrypt(user.getEmail()) + TimeUtil.getSkipTime(Calendar.MINUTE, mailTimeoutMINUTE);
+			String randomKey = MD5Util.encrypt(user.getEmail()+TimeUtil.getSkipTime(Calendar.MINUTE, mailTimeoutMINUTE));
 			redis.set(RedisCode.EMAIL_ACTIVATION_CODE+":"+randomKey, user.getEmail(),mailTimeoutMINUTE*60);
 			user.setBeforeLoginIp(user.getNowLoginIp());
 			user.setNowLoginIp(IpUtil.getRemoteIp(ThreadUtil.getCurrentRequest()));
@@ -186,8 +191,8 @@ public class LoginService {
 			userMapper.updateByPrimaryKeySelective(user);
 			String content = 
 					"激活重试,您的登录邮箱为"+user.getEmail()+",点击链接激活账号 "+mailActivationApiName+"?key="+randomKey
-					+ " 若点击无效，请将内容复制放入浏览器地址栏当中";
-			mailService.sendSimpleMail("博客激活邮件", content, user.getEmail());
+					+ " 若点击无效，请将内容复制放入浏览器地址栏当中,不是本人操作请忽略此邮件";
+			mailService.sendSimpleMail("激活邮件", content, user.getEmail());
 			return JsonResult.error(ResultCode.EMAIL_MATURITY,"账户未激活邮箱已经重新向"+user.getEmail()+"发送了一封新激活邮件");
 		}
 		user.setBeforeLoginIp(user.getNowLoginIp());
@@ -212,5 +217,54 @@ public class LoginService {
 		}
 		return JsonResult.<Void>error(ResultCode.TOKEN_MATURITY);
 	}
-	
+
+	public void findPass(String email) {
+		// 检查字段
+		// 检查邮箱格式
+		// 寻找邮箱的用户是否存在
+		// 通过用户的邮箱加密和id过期时间生成密钥
+		// 以(密钥,email)形式放入redis中,设置过期时间
+		// 以服务器接口地址+请求url?key=密钥的形式发送内容
+		// 发送内容给目标邮箱
+		if (StringUtils.isBlank(email)||email == null) {
+			throw new CheckParamException("邮箱","内容为空");
+		}
+		if(!RegExUtil.RegExMail(email)) {
+			System.out.println(email+"..");
+			throw new CheckParamException("邮箱","格式不正确");
+		}
+		int count = userMapper.countByEmail(email);
+		if (count == 0) {
+			throw new CheckParamException("邮箱用户","不存在");
+		}
+		User user = userMapper.getByEmail(email);
+		String randomKey = MD5Util.encrypt(user.getEmail()+user.getId()+TimeUtil.getSkipTime(Calendar.MINUTE, mailTimeoutMINUTE));
+		redis.set(RedisCode.EMAIL_FIND_PASS_CODE+":"+randomKey, email,mailTimeoutMINUTE*60);
+		String content = 
+				"您的找回密码的邮箱为"+user.getEmail()+",点击链接激活账号 "+updatePassUrl+"/"+randomKey
+				+ " 若点击无效，请将内容复制放入浏览器地址栏当中,不是本人操作请忽略此邮件";
+		mailService.sendSimpleMail("找回密码邮件", content, user.getEmail());
+	}
+
+	@Transactional
+	public void updatePass(UpdatePassParam param) {
+		// 检查字段
+		// 检查密码是否一致
+		// 根据密钥从redis中获取邮箱
+		// 密钥是否取出邮箱
+		// 给邮箱的用户修改密码
+		// 删除redis中的密钥
+		ValidatorUtil.check(param);
+		if (!param.getPassword().equals(param.getRePassword())) {
+			throw new CheckParamException("两次密码","不一致");
+		}
+		String redisEmail = redis.get(RedisCode.EMAIL_FIND_PASS_CODE+":"+param.getKey());
+		if (redisEmail == null) {
+			throw new CheckParamException("修改时间以过期","请重新发送邮件");
+		} else {
+			User user = userMapper.getByEmail(redisEmail);
+			userMapper.updatePass(user.getId(),MD5Util.encrypt(param.getPassword()));
+			redis.del(RedisCode.EMAIL_FIND_PASS_CODE+":"+param.getKey());
+		}
+	}
 }

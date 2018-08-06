@@ -21,6 +21,36 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
   
+  <select id="getByReceiverUserId" parameterType="map" resultMap="BaseResultMap">
+  	SELECT <include refid="Base_Column_List" />
+	FROM user_receive_dynamic ur
+	WHERE ur.receive_user_id = #{receiveUserId}
+	ORDER BY create_time desc
+	LIMIT #{skip},#{pageSize}
+  </select>
+  
+  <select id="countByReceiveUserIdAndVisit" parameterType="map" resultType="long">
+   	SELECT count(1)
+	FROM user_receive_dynamic
+	WHERE receive_user_id = #{receiveUserId} AND visit=0
+  </select>
+  
+  <update id="updateBatchVisit" parameterType="map">
+  	UPDATE user_receive_dynamic 
+  	SET `visit`=1
+  	WHERE id in 
+  	<foreach collection="ids" item="id" separator="," open="(" close=")">
+		#{id}
+	</foreach>
+  </update>
+  
+  <select id="getIdsByReceiverUserId" parameterType="map" resultType="int">
+  	SELECT ur.id
+	FROM user_receive_dynamic ur
+	WHERE ur.receive_user_id = #{receiveUserId}
+	LIMIT #{skip},#{pageSize}
+  </select>
+  
   <select id="countByReceiveUserId" parameterType="map" resultType="long">
   	SELECT count(1)
 	FROM user_receive_dynamic

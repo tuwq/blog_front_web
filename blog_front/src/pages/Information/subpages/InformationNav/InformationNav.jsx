@@ -28,13 +28,19 @@ class InformationNav extends React.Component {
 	}
 
 	render() {
-		var nav = null
+		let  nav = null
+		let  dynamicReceiveSumPoint = null
+		if (this.props.showInfo.dynamicReceiveSum!=0) {
+			dynamicReceiveSumPoint = (<span style={{backgroundColor: '#f05050',color: '#fff'}}>{this.props.showInfo.dynamicReceiveSum}</span>)
+		}
+
+
 		if (this.props.showInfo.identity == 1) {
 			nav = (
 				<React.Fragment>
 				<a className="current" onClick={this.updateNavType.bind(this,1)}>资料</a>
-		  		<a onClick={this.updateNavType.bind(this,2)}>消息<span>{this.props.showInfo.dynamicReceiveSum}</span></a>
-		  		<a onClick={this.updateNavType.bind(this,3)}>动态<span>{this.props.showInfo.dynamicInitiateSum}</span></a>
+		  		<a onClick={this.updateNavType.bind(this,2)}>消息{dynamicReceiveSumPoint}</a>
+		  		<a onClick={this.updateNavType.bind(this,3)}>评论<span>{this.props.showInfo.dynamicInitiateSum}</span></a>
 		  		<a onClick={this.updateNavType.bind(this,4)}>粉丝<span>{this.props.showInfo.fansSum}</span></a>
 		  		<a onClick={this.updateNavType.bind(this,5)}>关注<span>{this.props.showInfo.followsSum}</span></a>
 		  		</React.Fragment>
@@ -43,7 +49,7 @@ class InformationNav extends React.Component {
 			nav = (
 				<React.Fragment>
 				<a className="current" onClick={this.updateNavType.bind(this,1)}>资料</a>
-		  		<a onClick={this.updateNavType.bind(this,3)}>动态<span>{this.props.showInfo.dynamicInitiateSum}</span></a>
+		  		<a onClick={this.updateNavType.bind(this,3)}>评论<span>{this.props.showInfo.dynamicInitiateSum}</span></a>
 		  		<a onClick={this.updateNavType.bind(this,4)}>粉丝<span>{this.props.showInfo.fansSum}</span></a>
 		  		<a onClick={this.updateNavType.bind(this,5)}>关注<span>{this.props.showInfo.followsSum}</span></a>
 		  		</React.Fragment>

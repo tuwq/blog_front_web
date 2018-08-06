@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
+import * as RESULT_CODE from 'api/Constant/resultCode'
 
 import qqSvg from 'static/svg/qq.svg'
 import { checkRegistForm } from 'base/js/check'
@@ -71,7 +72,7 @@ class RegistMain extends React.Component {
 						usercode: '',
 						password: ''
 					})
-				} else {
+				} else if(res.data.code == RESULT_CODE.PARAM_ERROR) {
 					this.setState({
 						error: res.data.msg
 					})
@@ -98,7 +99,7 @@ class RegistMain extends React.Component {
 			       						<ul><li>{this.state.error}</li></ul>
 			       					</div>)
 	       					}
-	       					<p>我们将发送一封验证邮件至你的邮箱, 请正确填写以完成账号注册和激活</p>
+	       					<p>注册成功后将会发送一封验证邮件至你的邮箱, 请正确填写以完成账号注册和激活</p>
 	       					<div className="form-group">
 	       						<div className="form-control"><input value={this.state.username} onChange={this.usernameChange.bind(this)} type="text" placeholder="账户" autoComplete="new-password" /></div>
 	       						<div className="form-control"><input value={this.state.email} name="email" onChange={this.inputChange.bind(this)} type="email" placeholder="邮箱" autoComplete="new-password" /></div>

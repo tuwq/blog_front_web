@@ -24,3 +24,18 @@ export function logoutApi(success) {
 		success(res)
 	})
 }
+
+export function findPassApi(email,success) {
+	axios.post('/login/findPass/'+email)
+	.then((res)=>{
+		success(res)
+	})
+}
+
+export function updatePassApi(key,password,rePassword,success) {
+	axios.put('/login/updatePass',{
+		key,password,rePassword
+	}).then((res)=>{
+		success(res)
+	})
+}

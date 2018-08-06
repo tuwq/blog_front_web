@@ -29,6 +29,11 @@
     now_login_ip, create_time, operate_time
   </sql>
   
+  <select id="updatePass" parameterType="map">
+  	UPDATE `user`
+  	SET `password`=#{password}
+  	WHERE id = #{id}
+  </select>
   
   <select id="commentSumIncr" parameterType="map">
   	UPDATE `user`

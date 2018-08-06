@@ -68,7 +68,7 @@ public class InformartionService {
 				Integer followsSum = userFollowMapper.countByFromId(id);
 				Integer fansSum = userFollowMapper.countByTargetId(id);
 				Long dynamicInitiateSum = userInitiateDynamicMapper.countByInitiateUserId(id);
-				Long dynamicReceiveSum = userReceiveDynamicMapper.countByReceiveUserId(id);
+				Long dynamicReceiveSum = userReceiveDynamicMapper.countByReceiveUserIdAndVisit(id);
 				ShowUserDto showUserDto = ShowUserDto.builder().identity(1).userDto(userDto)
 						.followStatus(0).fansSum(fansSum).followsSum(followsSum)
 						.dynamicInitiateSum(dynamicInitiateSum).dynamicReceiveSum(dynamicReceiveSum).build();
@@ -85,10 +85,9 @@ public class InformartionService {
 				Integer followsSum = userFollowMapper.countByFromId(id);
 				Integer fansSum = userFollowMapper.countByTargetId(id);
 				Long dynamicInitiateSum = userInitiateDynamicMapper.countByInitiateUserId(id);
-				Long dynamicReceiveSum = userReceiveDynamicMapper.countByReceiveUserId(id);
 				ShowUserDto showUserDto = ShowUserDto.builder().identity(2).userDto(userDto)
 						.fansSum(fansSum).followsSum(followsSum)
-						.dynamicInitiateSum(dynamicInitiateSum).dynamicReceiveSum(dynamicReceiveSum).build();
+						.dynamicInitiateSum(dynamicInitiateSum).build();
 				UserFollow connection = userFollowMapper.getByFromIdAndTargetId(userId, id);
 				if (connection != null) {
 					showUserDto.setFollowStatus(connection.getFollowStatus());
@@ -109,10 +108,9 @@ public class InformartionService {
 		Integer followsSum = userFollowMapper.countByFromId(id);
 		Integer fansSum = userFollowMapper.countByTargetId(id);
 		Long dynamicInitiateSum = userInitiateDynamicMapper.countByInitiateUserId(id);
-		Long dynamicReceiveSum = userReceiveDynamicMapper.countByReceiveUserId(id);
 		ShowUserDto showUserDto = ShowUserDto.builder().identity(2).userDto(userDto)
 						.fansSum(fansSum).followsSum(followsSum)
-						.dynamicInitiateSum(dynamicInitiateSum).dynamicReceiveSum(dynamicReceiveSum).build();
+						.dynamicInitiateSum(dynamicInitiateSum).build();
 		showUserDto.setFollowStatus(0);
 		return JsonResult.<ShowUserDto>success(showUserDto);
 	}

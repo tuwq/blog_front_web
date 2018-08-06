@@ -14,7 +14,7 @@ class ExtraRouter extends React.Component {
             	<Route exact path="/extra" component={NotFound}/>
         		<Route exact path="/extra/login" component={Login} />
         		<Route exact path="/extra/findpass" component={FindPass} />
-        		<Route exact path="/extra/updatepass/:id" component={UpdatePass} />
+        		<Route exact path="/extra/updatepass/:key" component={UpdatePass} />
                 <Route exact path="/extra/mailMessage" component={MailMessage} />
         		<Route path="/extra/*" component={NotFound}/>
             </Switch>

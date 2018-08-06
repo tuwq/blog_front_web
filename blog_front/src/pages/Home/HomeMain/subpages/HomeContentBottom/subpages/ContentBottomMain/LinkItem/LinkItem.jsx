@@ -23,7 +23,7 @@ class LinkItem extends React.Component {
 			<div className="LinkItem">
 				<h3>
 					<i><img width="5" height="5" alt="" src={pointSvg}/></i>
- 					<Link to={'/article/'+this.props.item.id}>asdasdjlwkejlqjjasljdlsajdklajsdlajsdjqjwejq啊就是断开连接了2及垃圾到家了2312312及几哦啊巨大????/</Link>
+ 					<Link to={'/article/'+this.props.item.id}>{this.props.item.title}</Link>
  				</h3>
         	</div>
         )

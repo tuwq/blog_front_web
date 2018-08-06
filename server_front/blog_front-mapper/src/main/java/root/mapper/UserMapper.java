@@ -86,5 +86,11 @@ public interface UserMapper {
 	 * 评论者的评论数量增加
 	 * @param commentUserId
 	 */
-	void commentSumIncr(@Param("id") Integer id);    
+	void commentSumIncr(@Param("id") Integer id);
+	/**
+	 * 修改用户密码
+	 * @param id
+	 * @param encrypt
+	 */
+	void updatePass(@Param("id") Integer id,@Param("password") String password);    
 }

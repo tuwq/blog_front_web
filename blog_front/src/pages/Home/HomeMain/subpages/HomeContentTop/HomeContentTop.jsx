@@ -3,7 +3,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 
 
 import Slider from 'base/general/Slider/Slider'
-import ContentTopPopular from './subpages/ContentTopPopular/ContentTopPopular'
+import WidgetCollection from './subpages/WidgetCollection/WidgetCollection'
 
 import './HomeContentTop.less'
 import './MHomeContentTop.less'
@@ -23,7 +23,7 @@ class HomeContentTop extends React.Component {
 		return (
          	<section id="HomeContentTop" className="HomeContentTop">
          		<Slider />
-         		<ContentTopPopular />
+         		<WidgetCollection />
          	</section>
         )
 	}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
+import * as RESULT_CODE from 'api/Constant/resultCode'
 import { withRouter } from 'react-router-dom'
 import PubSub from 'pubsub-js'
 import { connect } from 'react-redux'
@@ -80,7 +81,7 @@ class BasisSetting extends React.Component {
 						error: '头像修改成功,若未及时加载请刷新页面'
 					})
 					PubSub.publish(global.userInfoRefreshSubscribe,true);
-				} else {
+				} else if(res.data.code == RESULT_CODE.PARAM_ERROR) {
 					this.setState({
 						error: res.data.msg
 					})
@@ -97,7 +98,7 @@ class BasisSetting extends React.Component {
 					this.setState({
 						error: '修改信息成功'
 					})
-				} else {
+				} else if(res.data.code == RESULT_CODE.PARAM_ERROR) {
 					this.setState({
 						error: res.data.msg
 					})

@@ -26,7 +26,7 @@ class SiderBarHotItem extends React.Component {
                   <Link to={'/article/'+this.props.item.id}><img width="200" height="136" alt="" src={global.artImgPrefix+this.props.item.faceCover}/></Link>
                </div>
          		<div className="description">
-         			<Link to={'/article/'+this.props.item.id} className="hot-title">123jlasjdlajlklj大数据来看23123jlasjdlajlklj大数据来看23口类23就来3了好412312123jlasjdlajlklj大数据来看23口类23就来3了好412312123jlasjdlajlklj大数据来看23口类23就来3了好412312123jlasjdlajlklj大数据来看23口类23就来3了好412312123jlasjdlajlklj大数据来看23口类23就来3了好412312123jlasjdlajlklj大数据来看23口类23就来3了好412312123jlasjdlajlklj大数据来看23口类23就来3了好412312123jlasjdlajlklj大数据来看23口类23就来3了好412312123jlasjdlajlklj大数据来看23口类23就来3了好412312123jlasjdlajlklj大数据来看23口类23就来3了好412312123jlasjdlajlklj大数据来看23口类23就来3了好412312123jlasjdlajlklj大数据来看23口类23就来3了好412312123jlasjdlajlklj大数据来看23口类23就来3了好412312123jlasjdlajlklj大数据来看23口类23就来3了好412312123jlasjdlajlklj大数据来看23口类23就来3了好412312123jlasjdlajlklj大数据来看23口类23就来3了好412312123jlasjdlajlklj大数据来看23口类23就来3了好412312123jlasjdlajlklj大数据来看23口类23就来3了好412312123jlasjdlajlklj大数据来看23口类23就来3了好412312123jlasjdlajlklj大数据来看23口类23就来3了好412312123jlasjdlajlklj大数据来看23口类23就来3了好412312口类23就来3了好41231231</Link>
+         			<Link to={'/article/'+this.props.item.id} className="hot-title">{this.props.item.title}</Link>
          			<div className="hot-meta">
          				<span><i><img width="13" height="13" alt="" src={eyeSvg} /></i>{this.props.item.browseSum}</span>
          				<span><i><img width="13" height="13" alt="" src={clockSvg} /></i>{this.props.item.createTimeString}</span>

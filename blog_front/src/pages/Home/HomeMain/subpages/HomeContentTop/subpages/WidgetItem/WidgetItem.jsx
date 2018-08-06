@@ -23,8 +23,8 @@ class WidgetItem extends React.Component {
      				<Link to={'/article/'+this.props.item.id}><img width="128" height="64" alt="" src={global.artImgPrefix+this.props.item.faceCover}></img></Link>
      			</div>
      			<div className="detail">
-     				<Link to={'/article/'+this.props.item.id} className="detail-title">ueh2及历史决定论23哈圣诞节23ueh2及历史决定论23哈圣诞节23就拉省的23就2ueh2及历史决定论23哈圣诞节23就拉省的23就2ueh2及历史决定论23哈圣诞节23就拉省的23就2ueh2及历史决定论23哈圣诞节23就拉省的23就2ueh2及历史决定论23哈圣诞节23就拉省的23就2ueh2及历史决定论23哈圣诞节23就拉省的23就2ueh2及历史决定论23哈圣诞节23就拉省的23就2就拉省的23就23</Link>
-                    <time className="detail-meta">{this.props.item.updateTimeString}</time>&nbsp;
+     				<Link to={'/article/'+this.props.item.id} className="detail-title">{this.props.item.title}</Link>
+                    <time className="detail-meta">{this.props.item.timeAgo}&nbsp;{this.props.item.updateTimeString}</time>&nbsp;
      			</div>
          	</div>
         )
