@@ -54,7 +54,7 @@ public class DynamicInitiateService {
 		}
 		int count = userMapper.countById(userId);
 		if (count == 0) {
-			throw new DynamicException(ResultCode.DYNAMIC_USER_NOTFOUND,"该动态的用户未找到");
+			throw new DynamicException(ResultCode.DYNAMIC_USER_NOTFOUND,"用户不存在");
 		}
 		param.buildSkip();
 		Long total = initiateDynamicMapper.countByInitiateUserId(userId);
@@ -77,7 +77,6 @@ public class DynamicInitiateService {
 		public int compare(DynamicInitiateDto o1, DynamicInitiateDto o2) {
 			return (int) (o1.getCommentDto().getCreateTime().getTime()-o2.getCommentDto().getCreateTime().getTime());
 		}
-		
 	};
 	
 	private List<DynamicInitiateDto> getRootCommentDynamicList(List<UserInitiateDynamic> initiateDynamicList){

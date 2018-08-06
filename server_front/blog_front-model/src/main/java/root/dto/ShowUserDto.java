@@ -24,4 +24,6 @@ public class ShowUserDto {
 	private Integer followsSum;
 	
 	private Long dynamicInitiateSum;
+	
+	private Long dynamicReceiveSum;
 }

@@ -5,9 +5,9 @@ import { withRouter } from 'react-router-dom'
 import InformationNav from '../InformationNav/InformationNav'
 import FollowList from '../FollowList/FollowList'
 import FansList from '../FansList/FansList'
-import SelfInfo from '../SelfInfo/SelfInfo'
-import SelfMessageList from '../SelfMessageList/SelfMessageList'
-import SelfCommentList from '../SelfCommentList/SelfCommentList'
+import UserInfo from '../UserInfo/UserInfo'
+import DynamicReceiveList from '../DynamicReceiveList/DynamicReceiveList'
+import DynamicInitiateList from '../DynamicInitiateList/DynamicInitiateList'
 
 
 import './InformationContent.less'
@@ -41,11 +41,11 @@ class InformationContent extends React.Component {
 			  <InformationNav updateNavTypeFn={this.updateNavType.bind(this)} />
 			  {
 			  	this.state.navType==1
-			  	?<SelfInfo/>
+			  	?<UserInfo/>
 			  	:this.state.navType==2
-			  	?<SelfMessageList />
+			  	?<DynamicReceiveList />
 			  	:this.state.navType==3
-			  	?<SelfCommentList />
+			  	?<DynamicInitiateList />
 			  	:this.state.navType==4
 			  	?<FansList />
 			  	:this.state.navType==5

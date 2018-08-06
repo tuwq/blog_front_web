@@ -6,7 +6,8 @@ var initialState = {
     followStatus: 0,
     fansSum: 0,
     followsSum: 0,
-    dynamicInitiateSum: 0
+    dynamicInitiateSum: 0,
+    dynamicReceiveSum: 0
 }
 
 export default function showInfo (state = initialState, action) {

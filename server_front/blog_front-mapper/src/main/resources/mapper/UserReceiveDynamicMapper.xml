@@ -11,6 +11,31 @@
   <sql id="Base_Column_List" >
     id, initiate_dynamic_id, receive_user_id, create_time, visit
   </sql>
+  
+  <resultMap id="initiateDynamicMap" type="root.model.UserInitiateDynamic" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="action" property="action" jdbcType="INTEGER" />
+    <result column="type_id" property="typeId" jdbcType="INTEGER" />
+    <result column="initiate_user_id" property="initiateUserId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  <select id="countByReceiveUserId" parameterType="map" resultType="long">
+  	SELECT count(1)
+	FROM user_receive_dynamic
+	WHERE receive_user_id = #{receiveUserId}
+  </select>
+  
+  <select id="getInitiateDynamicListByReceiveUserId" parameterType="map" resultMap="initiateDynamicMap">
+  	SELECT ui.id id,ui.type type,ui.action action,ui.type_id type_id,ui.initiate_user_id initiate_user_id,ui.create_time create_time
+	FROM user_receive_dynamic ur
+	LEFT JOIN user_initiate_dynamic ui ON ui.id = ur.initiate_dynamic_id
+	WHERE ur.receive_user_id = #{receiveUserId}
+	ORDER BY ui.create_time desc
+	LIMIT #{skip},#{pageSize}
+  </select>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

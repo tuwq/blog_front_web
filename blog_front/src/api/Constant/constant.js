@@ -33,5 +33,6 @@ global.artHotDiscussQuantity = 3
 global.categroyPageSize = 3
 global.artCommentPageSize = 5
 global.childCommentPageSize = 3
-global.initiatePageSize = 5
+global.dynamicInitiatePageSize = 5
+global.dynamicReceivePageSize = 5
 

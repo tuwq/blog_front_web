@@ -18,6 +18,7 @@ import root.exception.NotFoundException;
 import root.mapper.UserFollowMapper;
 import root.mapper.UserInitiateDynamicMapper;
 import root.mapper.UserMapper;
+import root.mapper.UserReceiveDynamicMapper;
 import root.model.User;
 import root.model.UserFollow;
 import root.util.DtoUtil;
@@ -35,6 +36,8 @@ public class InformartionService {
 	private UserFollowMapper userFollowMapper;
 	@Resource
 	private UserInitiateDynamicMapper userInitiateDynamicMapper;
+	@Resource
+	private UserReceiveDynamicMapper userReceiveDynamicMapper;
 	
 	public JsonResult<ShowUserDto> userinfo(Integer id) {
 		// 检查字段，访问id不存在去404
@@ -65,9 +68,10 @@ public class InformartionService {
 				Integer followsSum = userFollowMapper.countByFromId(id);
 				Integer fansSum = userFollowMapper.countByTargetId(id);
 				Long dynamicInitiateSum = userInitiateDynamicMapper.countByInitiateUserId(id);
+				Long dynamicReceiveSum = userReceiveDynamicMapper.countByReceiveUserId(id);
 				ShowUserDto showUserDto = ShowUserDto.builder().identity(1).userDto(userDto)
 						.followStatus(0).fansSum(fansSum).followsSum(followsSum)
-						.dynamicInitiateSum(dynamicInitiateSum).build();
+						.dynamicInitiateSum(dynamicInitiateSum).dynamicReceiveSum(dynamicReceiveSum).build();
 				return JsonResult.<ShowUserDto>success(showUserDto);
 			} else {
 				User others = userMapper.selectByPrimaryKey(id);
@@ -81,8 +85,10 @@ public class InformartionService {
 				Integer followsSum = userFollowMapper.countByFromId(id);
 				Integer fansSum = userFollowMapper.countByTargetId(id);
 				Long dynamicInitiateSum = userInitiateDynamicMapper.countByInitiateUserId(id);
+				Long dynamicReceiveSum = userReceiveDynamicMapper.countByReceiveUserId(id);
 				ShowUserDto showUserDto = ShowUserDto.builder().identity(2).userDto(userDto)
-						.fansSum(fansSum).followsSum(followsSum).dynamicInitiateSum(dynamicInitiateSum).build();
+						.fansSum(fansSum).followsSum(followsSum)
+						.dynamicInitiateSum(dynamicInitiateSum).dynamicReceiveSum(dynamicReceiveSum).build();
 				UserFollow connection = userFollowMapper.getByFromIdAndTargetId(userId, id);
 				if (connection != null) {
 					showUserDto.setFollowStatus(connection.getFollowStatus());
@@ -103,8 +109,10 @@ public class InformartionService {
 		Integer followsSum = userFollowMapper.countByFromId(id);
 		Integer fansSum = userFollowMapper.countByTargetId(id);
 		Long dynamicInitiateSum = userInitiateDynamicMapper.countByInitiateUserId(id);
+		Long dynamicReceiveSum = userReceiveDynamicMapper.countByReceiveUserId(id);
 		ShowUserDto showUserDto = ShowUserDto.builder().identity(2).userDto(userDto)
-				.fansSum(fansSum).fansSum(fansSum).dynamicInitiateSum(dynamicInitiateSum).build();
+						.fansSum(fansSum).followsSum(followsSum)
+						.dynamicInitiateSum(dynamicInitiateSum).dynamicReceiveSum(dynamicReceiveSum).build();
 		showUserDto.setFollowStatus(0);
 		return JsonResult.<ShowUserDto>success(showUserDto);
 	}
