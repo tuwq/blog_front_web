@@ -55,7 +55,7 @@ class SiderBarSelf extends React.Component {
                   }
          			<div className="SelfName">
          				<Link to={'/user/'+this.state.author.id}>友奈酱</Link>
-         				<span>站长</span>
+         				<span>博主</span>
          			</div>
          			<div className="SelfFllow">
          				<Link to="/user/1">

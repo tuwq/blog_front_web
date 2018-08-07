@@ -83,7 +83,7 @@ public class UserService {
 		}
 		user.setAvatar(avatar);
 		user.setBeforeLoginIp(user.getNowLoginIp());
-		user.setNowLoginIp(IpUtil.getRemoteIp(ThreadUtil.getCurrentRequest()));
+		user.setNowLoginIp(IpUtil.getUserIP(ThreadUtil.getCurrentRequest()));
 		user.setOperateTime(new Date());
 		userMapper.updateByPrimaryKeySelective(user);
 		return JsonResult.<String>success(avatar);
@@ -101,7 +101,7 @@ public class UserService {
 		user.setWebsite(param.getWebsite());
 		user.setDesc(param.getDesc());
 		user.setBeforeLoginIp(user.getNowLoginIp());
-		user.setNowLoginIp(IpUtil.getRemoteIp(ThreadUtil.getCurrentRequest()));
+		user.setNowLoginIp(IpUtil.getUserIP(ThreadUtil.getCurrentRequest()));
 		user.setOperateTime(new Date());
 		userMapper.updateByPrimaryKeySelective(user);
 		if (user.getNickname().equals(param.getNickname())) {
@@ -139,7 +139,7 @@ public class UserService {
 		}
 		user.setPassword(MD5Util.encrypt(param.getPassword()));
 		user.setBeforeLoginIp(user.getNowLoginIp());
-		user.setNowLoginIp(IpUtil.getRemoteIp(ThreadUtil.getCurrentRequest()));
+		user.setNowLoginIp(IpUtil.getUserIP(ThreadUtil.getCurrentRequest()));
 		user.setOperateTime(new Date());
 		userMapper.updateByPrimaryKeySelective(user);
 	}

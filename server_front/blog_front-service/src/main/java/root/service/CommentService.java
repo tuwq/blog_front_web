@@ -2,6 +2,7 @@ package root.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
@@ -11,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.google.common.collect.Lists;
 
 import root.async.CommentedDataHandler;
+import root.async.UserDataHandler;
+import root.beans.JsonResult;
 import root.beans.PageModel;
 import root.beans.PageResult;
 import root.constant.ResultCode;
@@ -40,6 +43,8 @@ public class CommentService {
 	private CommentMapper commentMapper;
 	@Resource
 	private CommentedDataHandler commentedDataHandler;
+	@Resource
+	private UserDataHandler userDataHandler;
 	
 	@Transactional
 	public void rootAdd(RootCommentParam param) {
@@ -76,6 +81,7 @@ public class CommentService {
 		// 记录评论文章的评论数和评论人的评论数
 		// 记录评论人的发起的动态
 		// 文章作者和被评论者接收这条动态，动态发起者和接收者是同一人则不记录
+		// 记录用户操作
 		ValidatorUtil.check(param);
 		if (param.getArticleId() == null) {throw new CheckParamException("文章id","为空");}
 		if (param.getParentId() == null) {throw new CheckParamException("父评论id","为空");}
@@ -95,6 +101,7 @@ public class CommentService {
 					.parentId(param.getParentId()).rootId(param.getRootId())
 					.createTime(new Date()).updateTime(new Date()).build();
 		commentMapper.insertSelective(comment);
+		userDataHandler.recordOpear(userId);
 		commentedDataHandler.childCommentSumIncr(param.getArticleId(), 
 				parentUserId,comment.getId(), userId);
 	}
@@ -180,6 +187,23 @@ public class CommentService {
 		});
 		PageModel pageModel = new PageModel(total,commentDtoList.size(),param.getCurrentPage(),param.getPageSize());
 		return PageResult.<CommentDto>builder().pageModel(pageModel).data(commentDtoList).code(200).build();
+	}
+
+	public JsonResult<List<CommentDto>> newComment(Integer pageSize) {
+		// 检查字段
+		// 获取评论信息和评论的用户信息和文章信息
+		if (pageSize == 0 || pageSize == null) {
+			throw new CheckParamException("分页大小","为空");
+		}
+		List<Comment> data = commentMapper.getWithArtAndUserByPageSize(pageSize);
+		List<CommentDto> commentDtos = Lists.newArrayList();
+		data.forEach(comment -> {
+			CommentDto commentDto = DtoUtil.adapt(new CommentDto(), comment);
+			commentDto.formatNoSecondTime();
+			commentDto.setTimeAgo(TimeAgoUtils.format(commentDto.getUpdateTime()));
+			commentDtos.add(commentDto);
+		});
+		return JsonResult.success(commentDtos);
 	}
 
 }

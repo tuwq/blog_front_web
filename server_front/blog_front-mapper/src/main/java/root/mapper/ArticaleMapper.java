@@ -125,5 +125,10 @@ public interface ArticaleMapper {
 	 * @param articleId
 	 */
 	void browseSumIncr(@Param("id") Integer id);
+	/**
+	 * 文章作者的点赞数增加
+	 * @param articleId
+	 */
+	void authPraiseSumIncr(@Param("articleId") Integer articleId);
 	
 }

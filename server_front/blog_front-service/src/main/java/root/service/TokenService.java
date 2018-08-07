@@ -30,6 +30,9 @@ public class TokenService {
 			Map<String, String> verifyToken = JwtUtil.verifyToken(TOKEN);
 			String userId = verifyToken.get("userId");	
 			String dbToken = redis.get(RedisCode.TOKEN+":"+ userId);
+			if(dbToken == null) {
+				throw new TokenException(ResultCode.TOKEN_TOLOGIN,"token过期");
+			}
 			if(TOKEN.equals(dbToken)) {
 				// 正确的token
 				return Integer.parseInt(userId);

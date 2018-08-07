@@ -30,3 +30,9 @@ export function pageChildCommentApi(currentPage,pageSize,rootId,success) {
 	})
 }
 
+export function newCommentApi(success) {
+	axios.get('/comment/new/'+global.newCommentPageSize)
+	.then((res)=>{
+		success(res)
+	})
+}

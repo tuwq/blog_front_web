@@ -72,6 +72,16 @@
     </collection>
   </resultMap>
   
+  <update id="authPraiseSumIncr" parameterType="map">
+  	UPDATE `user`
+	SET praise = praise + 1
+	WHERE id = (
+		SELECT user_id
+		FROM articale
+		WHERE id = #{articleId}
+	)
+  </update>
+  
   <update id="browseSumIncr" parameterType="map">
  	UPDATE articale
 	SET browse_sum = browse_sum+1

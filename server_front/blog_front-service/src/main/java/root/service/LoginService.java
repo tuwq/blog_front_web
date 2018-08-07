@@ -50,6 +50,8 @@ public class LoginService {
 	private RedisOperator redis;
 	@Value("${mailTimeoutMINUTE}")
 	private Integer mailTimeoutMINUTE;
+	@Value("${tokenTimeout}")
+	private Integer tokenTimeout;
 	@Value("${mailActivationApiName}")
 	private String mailActivationApiName;
 	@Value("${mailMessageUrl}")
@@ -93,7 +95,7 @@ public class LoginService {
 					.password(MD5Util.encrypt(param.getPassword()))
 					.email(param.getEmail())
 					.activationCode(randomKey)
-					.nowLoginIp(IpUtil.getRemoteIp(ThreadUtil.getCurrentRequest()))
+					.nowLoginIp(IpUtil.getUserIP(ThreadUtil.getCurrentRequest()))
 					.createTime(new Date())
 					.operateTime(new Date())
 					.build();
@@ -122,7 +124,7 @@ public class LoginService {
 			String randomKey = MD5Util.encrypt(user.getEmail()+TimeUtil.getSkipTime(Calendar.MINUTE, mailTimeoutMINUTE));
 			redis.set(RedisCode.EMAIL_ACTIVATION_CODE+":"+randomKey, user.getEmail(),mailTimeoutMINUTE*60);
 			user.setBeforeLoginIp(user.getNowLoginIp());
-			user.setNowLoginIp(IpUtil.getRemoteIp(ThreadUtil.getCurrentRequest()));
+			user.setNowLoginIp(IpUtil.getUserIP(ThreadUtil.getCurrentRequest()));
 			user.setOperateTime(new Date());
 			user.setActivationCode(randomKey);
 			userMapper.updateByPrimaryKeySelective(user);
@@ -152,7 +154,7 @@ public class LoginService {
 			}
 			user.setActivationStatus(1);
 			user.setBeforeLoginIp(user.getNowLoginIp());
-			user.setNowLoginIp(IpUtil.getRemoteIp(ThreadUtil.getCurrentRequest()));
+			user.setNowLoginIp(IpUtil.getUserIP(ThreadUtil.getCurrentRequest()));
 			user.setOperateTime(new Date());
 			userMapper.updateByPrimaryKeySelective(user);
 			try {
@@ -185,7 +187,7 @@ public class LoginService {
 			String randomKey = MD5Util.encrypt(user.getEmail()+TimeUtil.getSkipTime(Calendar.MINUTE, mailTimeoutMINUTE));
 			redis.set(RedisCode.EMAIL_ACTIVATION_CODE+":"+randomKey, user.getEmail(),mailTimeoutMINUTE*60);
 			user.setBeforeLoginIp(user.getNowLoginIp());
-			user.setNowLoginIp(IpUtil.getRemoteIp(ThreadUtil.getCurrentRequest()));
+			user.setNowLoginIp(IpUtil.getUserIP(ThreadUtil.getCurrentRequest()));
 			user.setOperateTime(new Date());
 			user.setActivationCode(randomKey);
 			userMapper.updateByPrimaryKeySelective(user);
@@ -202,7 +204,7 @@ public class LoginService {
 		String token = JwtUtil.getToken(ImmutableMap.of(
 				"userId",Integer.toString(user.getId()),
 				"email",user.getEmail()));
-		redis.set(RedisCode.TOKEN+":"+Integer.toString(user.getId()),token);
+		redis.set(RedisCode.TOKEN+":"+Integer.toString(user.getId()),token,tokenTimeout);
 		user.setPassword("");
 		user.setActivationCode("");
 		LoginDto dto = LoginDto.builder().token(token).userDto(DtoUtil.adapt(new UserDto(), user)).build();

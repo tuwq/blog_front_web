@@ -48,12 +48,14 @@ class BasisSetting extends React.Component {
 
 	initData() {
 		userEditInfoApi((res)=>{
-			this.setState({
-				nickname: res.data.result.nickname,
-				website: res.data.result.website,
-				desc: res.data.result.desc,
-				avatar: global.userAvatarPrefix+res.data.result.avatar+'?v='+new Date().getTime()
-			})
+			if (res.data.code == 200) {
+				this.setState({
+					nickname: res.data.result.nickname,
+					website: res.data.result.website,
+					desc: res.data.result.desc,
+					avatar: global.userAvatarPrefix+res.data.result.avatar+'?v='+new Date().getTime()
+				})
+			}
 		})
 	}
 

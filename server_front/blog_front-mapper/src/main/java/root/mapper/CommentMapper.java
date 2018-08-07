@@ -80,5 +80,11 @@ public interface CommentMapper {
 	 * @return
 	 */
 	Articale getArtById(@Param("id") Integer id);
+	/**
+	 * 获得评论的文章信息和用户信息
+	 * @param pageSize
+	 * @return
+	 */
+	List<Comment> getWithArtAndUserByPageSize(@Param("pageSize") Integer pageSize);
 
 }

@@ -20,9 +20,11 @@ class SiderBarCommentList extends React.Component {
 	render() {
 		return (
          	<div id="SiderBarCommentList" className="SiderBarCommentList">
-         		<SiderBarCommentItem />
-         		<SiderBarCommentItem />
-         		<SiderBarCommentItem />
+         	  	{
+         	  		this.props.data.map((item,index)=>{
+         	  			return (<SiderBarCommentItem key={index} item={item} index={index}/>)
+         	  		})
+         	  	}
          	</div>
         )
 	}

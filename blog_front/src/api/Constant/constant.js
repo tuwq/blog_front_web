@@ -30,9 +30,11 @@ global.tutorialCategoryQuantity = 3
 global.shortCodeCategoryQuantity = 4
 global.chatCategoryQuantity = 4
 global.artHotDiscussQuantity = 3
+global.newCommentPageSize = 3
 global.categroyPageSize = 3
 global.artCommentPageSize = 5
 global.childCommentPageSize = 3
 global.dynamicInitiatePageSize = 5
 global.dynamicReceivePageSize = 5
+
 
