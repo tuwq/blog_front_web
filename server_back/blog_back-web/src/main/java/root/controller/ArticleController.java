@@ -60,9 +60,9 @@ public class ArticleController {
 		return JsonResult.<Void>success();
 	}
 	
-	@GetMapping("/search")
-	public PageResult<ArticaleDto> listBySearch(@RequestParam("keyword") String keyword, PageParam param) {
-		return articleService.listByKeyWord(keyword,param);
+	@PostMapping("/search")
+	public PageResult<ArticaleDto> listBySearch(@RequestBody PageParam param) {
+		return articleService.listByKeyWord(param.getKeyword(),param);
 	} 
 	
 	@GetMapping("/{id}")

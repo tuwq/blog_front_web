@@ -39,17 +39,17 @@ public class StatisicService {
 		Long totalArticleSum = articaleMapper.countAll();
 		Long totalCommentSum = commentMapper.countAll();
 		Long totalUserSum = userMapper.countAll();
-		String beforeWeekTime = TimeUtil.format(TimeUtil.getSkipTime(Calendar.DATE, -7));
+		String beforeTime = TimeUtil.format(TimeUtil.getSkipTime(Calendar.MONTH, -1));
 		String nowTime = TimeUtil.format(new Date().getTime());
-		List<EveryDayDto> accessWeekList = accessMapper.everyDayByBettwen(beforeWeekTime,nowTime);
+		List<EveryDayDto> accessList = accessMapper.everyDayByBettwen(beforeTime,nowTime);
 		StatisicDto statisicDto = StatisicDto.builder().accessSum(accessSum).totalArticleSum(totalArticleSum)
 							.totalCommentSum(totalCommentSum).totalUserSum(totalUserSum)
-							.accessWeekList(accessWeekList).build();
+							.accessList(accessList).build();
 		return JsonResult.<StatisicDto>success(statisicDto);
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(TimeUtil.format(TimeUtil.getSkipTime(Calendar.DATE, -7)));
+		System.out.println(TimeUtil.format(TimeUtil.getSkipTime(Calendar.MONTH, -1)));
 		System.out.println(TimeUtil.format(new Date().getTime()));
 	}
 

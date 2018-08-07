@@ -37,8 +37,8 @@ export function updateBatchApi(ids,success) {
 }
 
 export function getSearchListApi(currentPage,pageSize,keyword,success) {
-	axios.get('/sys/article/search',{
-		params: {currentPage,pageSize,keyword}
+	axios.post('/sys/article/search',{
+		currentPage,pageSize,keyword
 	}).then((res)=>{
 		success(res)
 	})

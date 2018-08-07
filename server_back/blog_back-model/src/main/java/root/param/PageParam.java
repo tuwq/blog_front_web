@@ -16,6 +16,8 @@ public class PageParam {
 	private Integer pageSize = 5;
 	// 间隔多少页
 	private Integer skip;
+	// 搜索条件
+	private String keyword;
 	
 	public Integer buildSkip() {
 		this.skip = (currentPage-1)*pageSize;

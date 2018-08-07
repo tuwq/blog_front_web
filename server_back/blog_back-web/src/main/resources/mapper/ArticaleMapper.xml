@@ -93,7 +93,7 @@
 	LEFT JOIN category c on c.id = ac.category_id
 	<where>
 		<if test="keyword!=null and keyword!= ''">
-			and (a.title like '%${keyword}%' or c.name like '%${keyword}%' or a.content like '%${keyword}%')
+			and (a.title like concat('%', #{keyword}, '%') or c.name like concat('%', #{keyword}, '%') or a.content like concat('%', #{keyword}, '%'))
 		</if>
 	</where>
   </select>
@@ -108,7 +108,7 @@
 	LEFT JOIN `user` u on u.id = a.user_id
 	<where>
 		<if test="keyword != null and keyword != ''" >
-			and (a.title like '%${keyword}%' or c.name like '%${keyword}%' or a.content like '%${keyword}%')
+			and (a.title like concat('%', #{keyword}, '%') or c.name like concat('%', #{keyword}, '%') or a.content like concat('%', #{keyword}, '%'))
 		</if>
 	</where>
 	GROUP BY a.id

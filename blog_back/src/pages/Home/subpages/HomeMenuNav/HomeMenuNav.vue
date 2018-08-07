@@ -19,6 +19,12 @@
               <li @click.stop.prevent="showComments">评论列表</li>
             </ul>
           </li>
+          <li class="nav-control"><a @click.stop.prevent="updateNavType(4,$event)"><i class="fa fa-pencil"></i>
+            <span>用户管理</span></a>
+            <ul class="menu-group">
+              <li @click.stop.prevent="showUserManage">用户列表</li>
+            </ul>
+          </li>
         </ul>
      </div>
   </div>
@@ -38,6 +44,10 @@
          $(e.target).addClass('current').siblings().removeClass('current')
          this.$router.replace('/comment')
       },
+      showUserManage() {
+         $(e.target).addClass('current').siblings().removeClass('current')
+         this.$router.replace('/userManage')
+      },
       addArticle(e) {
         $(e.target).addClass('current').siblings().removeClass('current')
         this.$router.replace('/article/add')
@@ -46,7 +56,7 @@
         $('.menu-group').removeClass('show')
         $(e.target).parents('.nav-control').find('.menu-group').toggleClass('show')
         $(e.target).parents('.nav-control').addClass('current').siblings().removeClass('current')
-        let pageName = type==1?'':type==2?'article':'comment'
+        let pageName = type==1?'':type==2?'article':type==3?'comment':'userManage'
         this.$router.replace('/' + pageName)
       }
      }

@@ -29,6 +29,44 @@
     now_login_ip, create_time, operate_time
   </sql>
   
+  <update id="updateBatch" parameterType="map">
+  	UPDATE `user` 
+  	SET status=ABS(status-1)
+  	WHERE id in 
+  	<foreach collection="ids" item="id" separator="," open="(" close=")">
+		#{id}
+	</foreach>
+  </update>
+  
+  <select id="pageByKeyword" parameterType="map" resultMap="BaseResultMap">
+  	SELECT id,nickname,`desc`,comment_sum,avatar,create_time,status
+  	FROM `user`
+  	<where>
+		<if test="keyword != null and keyword != ''" >
+			and (username like concat('%', #{keyword}, '%') or nickname like concat('%', #{keyword}, '%') or `desc` like concat('%', #{keyword}, '%'))
+		</if>
+	</where>
+  	ORDER BY comment_sum desc
+  	LIMIT #{skip},#{pageSize}
+  </select>
+  
+  <select id="countByKeyWord" parameterType="map" resultType="long">
+  	SELECT count(1)
+  	FROM `user`
+  	<where>
+		<if test="keyword != null and keyword != ''" >
+			and (username like concat('%', #{keyword}, '%')  or nickname like concat('%', #{keyword}, '%') or `desc` like concat('%', #{keyword}, '%'))
+		</if>
+	</where>
+  </select>
+  
+  <select id="page" parameterType="map" resultMap="BaseResultMap">
+  	SELECT id,nickname,`desc`,comment_sum,avatar,create_time,status
+  	FROM `user`
+  	ORDER BY comment_sum desc
+  	LIMIT #{skip},#{pageSize}
+  </select>
+  
   <select id="countAll" resultType="long">
   	SELECT count(1)
 	FROM `user`

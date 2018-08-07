@@ -3,10 +3,10 @@
       <div class="header">
       	<h2><i class="fa fa-bar-chart-o"></i>数据统计</h2>
       </div>
-      <div class="main" v-if="accessWeekList.length>0">
+      <div class="main" v-if="accessList">
       	 <DataCard :cardData="cardData"/>
          <div class="chart-list">
-           <VisitCharts :accessWeekList="accessWeekList"/>
+           <VisitCharts :accessList="accessList"/>
            <FlowCharts />
          </div>
       </div>
@@ -27,7 +27,7 @@
     data() {
       return {
         cardData: {},
-        accessWeekList: []
+        accessList: []
       }
     },
     created() {
@@ -43,7 +43,7 @@
                    totalCommentSum: res.data.result.totalCommentSum,
                    totalUserSum: res.data.result.totalUserSum
                  }
-                 this.accessWeekList = res.data.result.accessWeekList
+                 this.accessList = res.data.result.accessList
               }
             })
         }

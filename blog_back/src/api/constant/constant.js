@@ -5,4 +5,5 @@ global.artimgUrl = global.imgServer + 'upload/artimg/'
 global.TOKEN_TIME_DAY = 7
 global.commentPageSize = 5
 global.articlePageSize = 5
+global.userManagePageSize = 5
 

@@ -21,6 +21,6 @@ public class StatisicDto {
 	
 	private Long totalUserSum;
 	
-	private List<EveryDayDto> accessWeekList;
+	private List<EveryDayDto> accessList;
 	
 }

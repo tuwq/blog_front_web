@@ -99,6 +99,7 @@ public class CommentService {
 		List<String>  strList = Splitter.on(",").trimResults().omitEmptyStrings()
 				.splitToList(idsStr);
 		List<Integer> ids = strList.stream().map(str->Integer.parseInt(str)).collect(Collectors.toList());
+		if(ids.size()==0) {throw new CheckParamException("选择id","为空");}
 		commentMapper.delBatch(ids);
 		commentUserMapper.delBatch(ids);
 		List<Integer> initiateIds = initiateDynamicMapper.getIdsByCommentIds(ids);

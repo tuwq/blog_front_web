@@ -63,7 +63,7 @@
 	LEFT JOIN `user` u ON u.id = c.user_id
 	<where>
 		<if test="keyword != null and keyword != ''" >
-			and (c.content like '%${keyword}%' or u.nickname like '%${keyword}%')
+			and (c.content like concat('%', #{keyword}, '%') or u.nickname like concat('%', #{keyword}, '%'))
 		</if>
 	</where>
 	GROUP BY c.id
@@ -90,7 +90,7 @@
 	LEFT JOIN `user` u ON u.id = c.user_id
 	<where>
 		<if test="keyword != null and keyword != ''" >
-			and (c.content like '%${keyword}%' or u.nickname like '%${keyword}%')
+			and (c.content like concat('%', #{keyword}, '%') or u.nickname like concat('%', #{keyword}, '%'))
 		</if>
 	</where>
   </select>

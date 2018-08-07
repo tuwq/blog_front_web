@@ -9,6 +9,7 @@ import AddArticle from '@/pages/Article/subpages/AddArticle/AddArticle'
 import Login from '@/pages/Login/Login'
 import EditArticle from '@/pages/Article/subpages/EditArticle/EditArticle'
 import NotFound from '@/pages/NotFound/NotFound'
+import UserManage from '@/pages/UserManage/UserManage'
 
 Vue.use(Router)
 export default new Router({
@@ -45,6 +46,12 @@ export default new Router({
         },{
         	 path: '/comment',
         	 component: Comments,
+           meta: {
+              requireAuth: true
+           }
+        },{
+           path: '/userManage',
+           component: UserManage,
            meta: {
               requireAuth: true
            }

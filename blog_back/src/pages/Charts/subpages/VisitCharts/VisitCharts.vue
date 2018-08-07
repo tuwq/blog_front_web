@@ -11,7 +11,7 @@
   import { debounce } from 'lodash'
   export default {
   	props: {
-      accessWeekList: {
+      accessList: {
         type: Array,
         default: []
       }
@@ -25,10 +25,10 @@
   		}
   	},
   	created() {
-  		this.xData = this.accessWeekList.map((item,index)=>{
+  		this.xData = this.accessList.map((item,index)=>{
   			return item.timeDay
   		})
-  		this.serverData = this.accessWeekList.map((item,index)=>{
+  		this.serverData = this.accessList.map((item,index)=>{
   			return item.accessCount
   		})
   	},	
