@@ -22,4 +22,9 @@ public interface UserMapper {
      * @param frontId
      */
 	void increaseArtSum(@Param("id") Integer id);
+	/**
+	 * 所有用户的数量
+	 * @return
+	 */
+	Long countAll();
 }

@@ -3,10 +3,10 @@
       <div class="header">
       	<h2><i class="fa fa-bar-chart-o"></i>数据统计</h2>
       </div>
-      <div class="main">
-      	 <DataCard />
+      <div class="main" v-if="accessWeekList.length>0">
+      	 <DataCard :cardData="cardData"/>
          <div class="chart-list">
-           <VisitCharts />
+           <VisitCharts :accessWeekList="accessWeekList"/>
            <FlowCharts />
          </div>
       </div>
@@ -17,11 +17,36 @@
   import DataCard from 'base/general/DataCard/DataCard'
   import VisitCharts from './subpages/VisitCharts/VisitCharts'
   import FlowCharts from './subpages/FlowCharts/FlowCharts'
+  import { statisicApi } from 'api/Statistic/statistic'
   export default {  
     components: {
-    	DataCard,
+      DataCard,
       VisitCharts,
       FlowCharts
+    },
+    data() {
+      return {
+        cardData: {},
+        accessWeekList: []
+      }
+    },
+    created() {
+        this.initData()
+    },
+    methods: {
+        initData() {
+            statisicApi((res)=>{
+              if (res.data.code == 200) {
+                 this.cardData = {
+                   accessSum: res.data.result.accessSum,
+                   totalArticleSum: res.data.result.totalArticleSum,
+                   totalCommentSum: res.data.result.totalCommentSum,
+                   totalUserSum: res.data.result.totalUserSum
+                 }
+                 this.accessWeekList = res.data.result.accessWeekList
+              }
+            })
+        }
     }
   }
 </script>

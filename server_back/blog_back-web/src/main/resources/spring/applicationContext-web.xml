@@ -23,6 +23,8 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/sys/article/**"/>
+			<mvc:mapping path="/sys/comment/**"/>
+			<mvc:mapping path="/sys/user/**"/>
 			<mvc:exclude-mapping path="/sys/login"/>
 			<mvc:exclude-mapping path="/sys/quitlogin"/>
 			<bean class="root.Interceptor.TokenInterceptor"></bean>

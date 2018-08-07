@@ -11,7 +11,7 @@ import 'api/constant/constant'
 import axios from 'axios'
 global.axios = axios
 
-import './router/carry'
+import './router/filter'
 
 import 'font-awesome/css/font-awesome.css'
 import '@/base/style/constant.scss'

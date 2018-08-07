@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="root.mapper.AccessMapper" >
+  <resultMap id="BaseResultMap" type="root.model.Access" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="ip_address" property="ipAddress" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, ip_address, create_time
+  </sql>
+  
+  <resultMap id="everyDayMap" type="root.dto.EveryDayDto" >
+    <result column="timeDay" property="timeDay" jdbcType="VARCHAR" />
+    <result column="accessCount" property="accessCount" jdbcType="INTEGER" />
+  </resultMap>
+  
+  <select id="everyDayByBettwen" parameterType="map" resultMap="everyDayMap">
+  	SELECT
+	DATE_FORMAT(create_time, '%Y-%m-%d') timeDay,
+	COUNT(id) accessCount
+	FROM
+		`access`
+	WHERE
+		create_time BETWEEN #{beforeTime}
+	AND #{toTime}
+	GROUP BY timeday
+	ORDER BY create_time
+  </select>
+  
+  <select id="countAll" resultType="long">
+  	SELECT count(1)
+  	FROM `access`
+  </select>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from access
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from access
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="root.model.Access" >
+    insert into access (id, ip_address, create_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{ipAddress,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="root.model.Access" >
+    insert into access
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="ipAddress != null" >
+        ip_address,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="ipAddress != null" >
+        #{ipAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="root.model.Access" >
+    update access
+    <set >
+      <if test="ipAddress != null" >
+        ip_address = #{ipAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="root.model.Access" >
+    update access
+    set ip_address = #{ipAddress,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

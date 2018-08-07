@@ -8,33 +8,51 @@ import Comments from '@/pages/Comments/Comments'
 import AddArticle from '@/pages/Article/subpages/AddArticle/AddArticle'
 import Login from '@/pages/Login/Login'
 import EditArticle from '@/pages/Article/subpages/EditArticle/EditArticle'
+import NotFound from '@/pages/NotFound/NotFound'
 
 Vue.use(Router)
 export default new Router({
+  // mode: 'history',
   routes: [
     {
       path: '/',
       component: Home,
       children: [{
-      	 path: '',
-      	 component: Charts,
-      },
-      {
-        path: '/article/add',
-        component: AddArticle,
-      },{
-        path: '/article/edit/:id',
-        component: EditArticle
-      },{
-      	 path: '/article',
-         component: Article,
-      },{
-         path: '/login',
-         component: Login
-      },{
-      	 path: '/comments',
-      	 component: Comments
-      }]
+      	  path: '',
+      	  component: Charts,
+        },
+        {
+          path: '/article/add',
+          component: AddArticle,
+          meta: {
+              requireAuth: true
+          }
+        },{
+          path: '/article/edit/:id',
+          component: EditArticle,
+          meta: {
+              requireAuth: true
+          }
+        },{
+        	 path: '/article',
+           component: Article,
+           meta: {
+              requireAuth: true
+           }
+        },{
+           path: '/login',
+           component: Login
+        },{
+        	 path: '/comment',
+        	 component: Comments,
+           meta: {
+              requireAuth: true
+           }
+        }]
+    },
+    {
+      path: '*',
+      component: NotFound
     }
   ]
 })

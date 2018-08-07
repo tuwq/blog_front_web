@@ -11,6 +11,16 @@
   <sql id="Base_Column_List" >
     id, initiate_dynamic_id, receive_user_id, create_time, visit
   </sql>
+  
+  <delete id="delBatchByInitiateIds" parameterType="map">
+  	DELETE 
+  	FROM user_receive_dynamic
+  	WHERE initiate_dynamic_id in 
+  	<foreach collection="initiateIds" item="initiateId" separator="," index="index" open="(" close=")">
+		#{initiateId}
+	</foreach>
+  </delete>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

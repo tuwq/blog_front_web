@@ -1,9 +1,7 @@
-@media screen and (min-width: $pc_width) {
-	.ArticleList {
-		.articleList-inner {
-			display: flex;
-			flex-direction: column;
-			.total {text-align: center;margin-top: 20px;width: 100%;display: block;}
-		}
+.ArticleList {
+	.articleList-inner {
+		display: flex;
+		flex-direction: column;
+		.total {text-align: center;margin-top: 20px;width: 100%;display: block;}
 	}
 }

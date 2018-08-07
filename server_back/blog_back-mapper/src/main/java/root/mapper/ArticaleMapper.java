@@ -63,5 +63,10 @@ public interface ArticaleMapper {
 	 * @return
 	 */
 	int countById(@Param("id") Integer id);
+	/**
+	 * 所有文章的浏览数
+	 * @return
+	 */
+	Long countAllBrowseSum();
 	
 }

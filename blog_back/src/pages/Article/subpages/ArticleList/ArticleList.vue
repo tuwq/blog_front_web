@@ -31,7 +31,7 @@
         maxPageCode: 0,
         total: 0,
         currentPage: 1,
-        pageSize: 5,
+        pageSize: global.articlePageSize,
         isSerch: false,
         keyword: ''
       }
@@ -44,7 +44,7 @@
         if(page) {
            this.currentPage = page
         }
-        getArticleListApi(this.currentPage,this.pageSize,(res)=>{
+        getArticleListApi(this.page,this.pageSize,(res)=>{
           if(res.data.code == 200) {
             this.articleList = res.data.data
             this.maxPageCode = res.data.pageModel.maxPageCode
@@ -64,7 +64,7 @@
               this.total = res.data.pageModel.total
               this.$refs.pagination.currentClass(this.currentPage)
             }
-         })
+        })
       },
       searchByKeyWord(keyword) {
          this.keyword = keyword.trim()

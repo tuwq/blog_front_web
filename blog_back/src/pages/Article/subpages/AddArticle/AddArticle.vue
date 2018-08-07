@@ -73,7 +73,9 @@
         formdata.append('faceCover',file)
         formdata.append("coverImg", this.faceCover)
         getFaceCoverUrlApi(formdata,(res)=>{
-          this.faceCover = res.data.imgNodes[0].path
+          if (res.data.code == 200) {
+            this.faceCover = res.data.imgNodes[0].path
+          }
         })
       },
       // 绑定@imgAdd event
@@ -83,10 +85,9 @@
       },
       $imgDel(file){
           delete this.img_file[file[1]];
-          console.log(file[0])
-          console.log(this.img_file)
       },
       uploadimg($e) {
+        if(JSON.stringify(this.img_file)=="{}"){return;}
         // 第一步.将图片上传到服务器.
         var formdata = new FormData();
         for(var _img in this.img_file){

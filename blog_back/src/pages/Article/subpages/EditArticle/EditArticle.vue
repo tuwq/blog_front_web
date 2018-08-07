@@ -101,6 +101,7 @@
         delete this.img_file[pos]
       },
       uploadimg() {
+        if(JSON.stringify(this.img_file)=="{}"){return;}
         var formdata = new FormData();
         for(var _img in this.img_file){
             formdata.append('fileArray', this.img_file[_img])

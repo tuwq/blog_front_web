@@ -22,6 +22,84 @@
   <sql id="Blob_Column_List" >
     content
   </sql>
+  
+  
+  <resultMap id="commentWithArtAndUserMap" type="root.model.Comment" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="articale_id" property="articaleId" jdbcType="INTEGER" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="root_id" property="rootId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="approval" property="approval" jdbcType="INTEGER" />
+    <result column="oppose" property="oppose" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+    <association property="user" javaType="root.model.User">
+    	<id column="user_id" property="id" jdbcType="INTEGER" />
+    	<result column="user_nickname" property="nickname" jdbcType="VARCHAR" />
+    </association>
+     <association property="articale" javaType="root.model.Articale">
+     	<id column="articale_id" property="id" jdbcType="INTEGER" />
+    	<result column="articale_title" property="title" jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
+  
+  <delete id="delBatch" parameterType="map">
+  	DELETE 
+  	FROM `comment`
+  	WHERE id in 
+  	<foreach collection="ids" item="id" separator="," index="index" open="(" close=")">
+		#{id}
+	</foreach>
+  </delete>
+  
+  <select id="pageWithUserAndArtListByKeyWord" parameterType="map" resultMap="commentWithArtAndUserMap">
+  	SELECT c.id id,c.user_id user_id,c.articale_id articale_id,c.create_time create_time,c.update_time update_time,
+	c.approval approval, c.oppose oppose,c.content content,
+	u.id user_id,u.nickname user_nickname,a.id articale_id,a.title articale_title
+	FROM `comment` c
+	LEFT JOIN articale a ON a.id = c.articale_id
+	LEFT JOIN `user` u ON u.id = c.user_id
+	<where>
+		<if test="keyword != null and keyword != ''" >
+			and (c.content like '%${keyword}%' or u.nickname like '%${keyword}%')
+		</if>
+	</where>
+	GROUP BY c.id
+	ORDER BY c.create_time desc
+	LIMIT #{skip},#{pageSize}
+  </select>
+  
+  <select id="pageWithUserAndArtList" parameterType="map" resultMap="commentWithArtAndUserMap">
+  	SELECT c.id id,c.user_id user_id,c.articale_id articale_id,c.create_time create_time,c.update_time update_time,
+	c.approval approval, c.oppose oppose,c.content content,
+	u.id user_id,u.nickname user_nickname,a.id articale_id,a.title articale_title
+	FROM `comment` c
+	LEFT JOIN articale a ON a.id = c.articale_id
+	LEFT JOIN `user` u ON u.id = c.user_id
+	GROUP BY c.id
+	ORDER BY c.create_time desc
+	LIMIT #{skip},#{pageSize}
+  </select>
+  
+  <select id="countAllByKeyWord" resultType="long" parameterType="map">
+  	SELECT count(1)
+	FROM `comment` c
+	LEFT JOIN articale a ON a.id = c.articale_id
+	LEFT JOIN `user` u ON u.id = c.user_id
+	<where>
+		<if test="keyword != null and keyword != ''" >
+			and (c.content like '%${keyword}%' or u.nickname like '%${keyword}%')
+		</if>
+	</where>
+  </select>
+  
+  <select id="countAll" resultType="long">
+  	SELECT count(1)
+	FROM `comment`
+  </select>
+  
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

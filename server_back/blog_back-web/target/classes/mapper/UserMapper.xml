@@ -29,13 +29,17 @@
     now_login_ip, create_time, operate_time
   </sql>
   
+  <select id="countAll" resultType="long">
+  	SELECT count(1)
+	FROM `user`
+  </select> 
+  
   <update id="increaseArtSum" parameterType="map">
 	  	UPDATE user
 	  	SET articale_sum = articale_sum+1
 	  	WHERE id = #{id}
   </update>
-  
-  
+ 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

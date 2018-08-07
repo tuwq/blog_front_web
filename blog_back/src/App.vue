@@ -15,7 +15,9 @@
   export default {
     created() {
     	getUserInfoApi((res)=>{
-    		this.setNowUserInfo(res.data.result)
+        if (res.data.code == 200) {
+          this.setNowUserInfo(res.data.result)
+        }
     	})
     },
     methods: {

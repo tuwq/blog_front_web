@@ -3,13 +3,21 @@ package root.util;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class TimeUtil {
 	
 	private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	private static Calendar c = new GregorianCalendar();
 	
     public static String format(Long second) {
 		return format.format(second);
+    }
+    
+    public static long getSkipTime(int CalendarType,int timeout) {
+    	c.setTime(new Date());
+    	c.add(CalendarType, timeout);
+    	return c.getTime().getTime();
     }
 	
     public static String nowYear() {

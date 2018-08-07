@@ -9,15 +9,29 @@
 <script type="text/ecmascript-6">
   import echarts from 'echarts'
   import { debounce } from 'lodash'
-  export default {  
+  export default {
+  	props: {
+      accessWeekList: {
+        type: Array,
+        default: []
+      }
+    },  
   	data() {
   		return {
   			visitChart: '',
-  			xData: ['2018-7-21','2018-7-22','2018-7-23','2018-7-24','2018-7-25','2018-7-26','2018-7-27'],
-  			serverData: [20, 30, 66, 8, 7, 1, 20],
+  			xData: [],
+  			serverData: [],
   			chartWidth: 0
   		}
   	},
+  	created() {
+  		this.xData = this.accessWeekList.map((item,index)=>{
+  			return item.timeDay
+  		})
+  		this.serverData = this.accessWeekList.map((item,index)=>{
+  			return item.accessCount
+  		})
+  	},	
     mounted() {
     	this.initChart()
     },

@@ -13,6 +13,12 @@
               <li @click.stop.prevent="addArticle">新增文章</li>
             </ul>
           </li>
+          <li class="nav-control"><a @click.stop.prevent="updateNavType(3,$event)"><i class="fa fa-pencil"></i>
+            <span>评论管理</span></a>
+            <ul class="menu-group">
+              <li @click.stop.prevent="showComments">评论列表</li>
+            </ul>
+          </li>
         </ul>
      </div>
   </div>
@@ -28,6 +34,10 @@
         $(e.target).addClass('current').siblings().removeClass('current')
         this.$router.replace('/article')
       },
+      showComments(e) {
+         $(e.target).addClass('current').siblings().removeClass('current')
+         this.$router.replace('/comment')
+      },
       addArticle(e) {
         $(e.target).addClass('current').siblings().removeClass('current')
         this.$router.replace('/article/add')
@@ -36,7 +46,7 @@
         $('.menu-group').removeClass('show')
         $(e.target).parents('.nav-control').find('.menu-group').toggleClass('show')
         $(e.target).parents('.nav-control').addClass('current').siblings().removeClass('current')
-        let pageName = type==1?'':'article'
+        let pageName = type==1?'':type==2?'article':'comment'
         this.$router.replace('/' + pageName)
       }
      }

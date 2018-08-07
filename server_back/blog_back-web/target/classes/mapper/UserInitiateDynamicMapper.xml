@@ -12,6 +12,26 @@
   <sql id="Base_Column_List" >
     id, type, action, type_id, initiate_user_id, create_time
   </sql>
+ 
+  <delete id="delBatch" parameterType="map">
+  	DELETE 
+  	FROM user_initiate_dynamic
+  	WHERE id in 
+  	<foreach collection="ids" item="id" separator="," index="index" open="(" close=")">
+		#{id}
+	</foreach>
+  </delete>
+ 	
+ 	 
+  <select id="getIdsByCommentIds" parameterType="map" resultType="int">
+  	SELECT id
+	FROM user_initiate_dynamic
+	WHERE type = 1 AND type_id in 
+	<foreach collection="commentIds" item="commentId" open="(" close=")" separator=",">
+       #{commentId}
+    </foreach>
+  </select>
+   
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

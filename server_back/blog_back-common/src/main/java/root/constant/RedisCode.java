@@ -1,7 +1,9 @@
 package root.constant;
 
-public class RedisCode {
+public interface RedisCode {
 	
-	public static final String TOKEN = "__TOKEN__";
-
+	// token的key
+	static final String TOKEN = "__TOKEN__";
+	// 统计访问量的key
+	static final String ACCESS = "ACCESS";
 }

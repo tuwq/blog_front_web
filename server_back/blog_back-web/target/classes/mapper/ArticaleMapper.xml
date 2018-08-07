@@ -49,6 +49,11 @@
     </collection>
   </resultMap>
  
+ <select id="countAllBrowseSum" resultType="long">
+ 	SELECT sum(browse_sum)
+	FROM articale
+ </select>
+ 
   <select id="countAll" resultType="long">
   	SELECT count(1)
   	FROM articale

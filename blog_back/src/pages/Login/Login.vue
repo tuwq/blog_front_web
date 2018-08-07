@@ -12,7 +12,7 @@
       					<input type="text" placeholder="用户名" v-model="username"/>
       				</div>
       				<div class="form-control">
-      					<input type="text" placeholder="密码" v-model="password"/>
+      					<input type="password" placeholder="密码" v-model="password"/>
       				</div>
       				<div class="form-control">
       					<button @click.stop.prevent="login">登录</button>

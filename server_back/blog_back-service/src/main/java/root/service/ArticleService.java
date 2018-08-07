@@ -138,7 +138,7 @@ public class ArticleService {
 			List<Category> cateList = categoryMapper.getArtCategoryListById(ids.get(i));
 			data.get(i).setCategoryList(cateList);
 		}
-		PageModel pageModel = new PageModel(param.getPageSize(),param.getCurrentPage(),total,data.size());
+		PageModel pageModel = new PageModel(total,data.size(),param.getCurrentPage(),param.getPageSize());
 		List<ArticaleDto> dtoData = data.stream().map(item -> 
 			DtoUtil.adapt(new ArticaleDto(), item)
 		).collect(Collectors.toList());
@@ -191,6 +191,9 @@ public class ArticleService {
 			throw new CheckParamException("关键字","不能为空");
 		}
 		Long total = articaleMapper.countAllByKeyWord(keyword);
+		if(total == 0) {
+			return PageResult.<ArticaleDto>builder().data(Lists.newArrayList()).pageModel(new PageModel()).code(200).build();
+		}
 		param.buildSkip();
 		List<Articale> data = articaleMapper.pageByKeyWord(keyword,param.getPageSize(),param.getSkip());
 		List<Integer> ids = data.stream().map(item -> item.getId()).collect(Collectors.toList());
@@ -198,7 +201,7 @@ public class ArticleService {
 			List<Category> cateList = categoryMapper.getArtCategoryListById(ids.get(i));
 			data.get(i).setCategoryList(cateList);
 		}
-		PageModel pageModel = new PageModel(param.getPageSize(),param.getCurrentPage(),total,data.size());
+		PageModel pageModel = new PageModel(total,data.size(),param.getCurrentPage(),param.getPageSize());
 		List<ArticaleDto> dtoData = data.stream().map(item -> 
 		DtoUtil.adapt(new ArticaleDto(), item)
 		).collect(Collectors.toList());

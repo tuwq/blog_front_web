@@ -41,15 +41,16 @@ import { delBatchApi,updateBatchApi } from 'api/Article/article'
     methods: {
       delBatch() {
         if(confirm("确定要删除这些文章吗?")) {
-           var items = $('.opearcheck[type="checkbox"]:checked')
+           var items = $('.ArticleItem .opearcheck[type="checkbox"]:checked')
            if(items.length > 0) {
               var ids = ''
               items.each((index,item)=>{
                 ids += $(item).val() + ','
               })
               delBatchApi(ids,(res)=>{
-                console.log(res)
-                this.$refs.$ArticleList.pageArticle(1)
+                if (res.data.code == 200) {
+                  this.$refs.$ArticleList.pageArticle(1)
+                }
               })
            }
         }
@@ -63,7 +64,9 @@ import { delBatchApi,updateBatchApi } from 'api/Article/article'
                 ids += $(item).val() + ','
               })
               updateBatchApi(ids,(res)=>{
-                this.$refs.$ArticleList.pageArticle(1)
+                if (res.data.code == 200) {
+                   this.$refs.$ArticleList.pageArticle(1)
+                }
               })
           }
         }

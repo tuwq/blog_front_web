@@ -22,6 +22,11 @@ public class Comment {
     private Integer oppose;
 
     private String content;
+    
+    // 评论所属用户
+    private User user;
+    // 评论所属文章
+    private Articale articale;
 
     public Integer getId() {
         return id;
@@ -102,4 +107,20 @@ public class Comment {
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
     }
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Articale getArticale() {
+		return articale;
+	}
+
+	public void setArticale(Articale articale) {
+		this.articale = articale;
+	}
 }

@@ -13,6 +13,16 @@
   <sql id="Base_Column_List" >
     id, comment_id, user_id, visit, vote, create_time, update_time
   </sql>
+  
+  <delete id="delBatch" parameterType="map">
+  	DELETE 
+  	FROM comment_user
+  	WHERE comment_id in 
+  	<foreach collection="ids" item="id" separator="," index="index" open="(" close=")">
+		#{id}
+	</foreach>
+  </delete>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
