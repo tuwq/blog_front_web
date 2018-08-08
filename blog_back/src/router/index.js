@@ -10,6 +10,7 @@ import Login from '@/pages/Login/Login'
 import EditArticle from '@/pages/Article/subpages/EditArticle/EditArticle'
 import NotFound from '@/pages/NotFound/NotFound'
 import UserManage from '@/pages/UserManage/UserManage'
+import ImgConfig from '@/pages/ImgConfig/ImgConfig'
 
 Vue.use(Router)
 export default new Router({
@@ -52,6 +53,12 @@ export default new Router({
         },{
            path: '/userManage',
            component: UserManage,
+           meta: {
+              requireAuth: true
+           }
+        },{
+           path: '/imgConfig',
+           component: ImgConfig,
            meta: {
               requireAuth: true
            }

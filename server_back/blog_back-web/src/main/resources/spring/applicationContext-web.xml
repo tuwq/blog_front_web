@@ -26,6 +26,7 @@
 			<mvc:mapping path="/sys/comment/**"/>
 			<mvc:mapping path="/sys/userManage/**"/>
 			<mvc:mapping path="/sys/category/**"/>
+			<mvc:mapping path="/sys/config/**"/>
 			<mvc:mapping path="/sys/user/**"/>
 			<mvc:exclude-mapping path="/sys/login"/>
 			<mvc:exclude-mapping path="/sys/quitlogin"/>

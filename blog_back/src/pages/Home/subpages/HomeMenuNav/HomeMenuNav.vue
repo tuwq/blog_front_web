@@ -25,6 +25,12 @@
               <li @click.stop.prevent="showUserManage">用户列表</li>
             </ul>
           </li>
+          <li class="nav-control"><a @click.stop.prevent="updateNavType(5,$event)"><i class="fa fa-cog"></i>
+            <span>配置管理</span></a>
+            <ul class="menu-group">
+              <li @click.stop.prevent="showImgConfig">图片配置</li>
+            </ul>
+          </li>
         </ul>
      </div>
   </div>
@@ -48,6 +54,10 @@
          $(e.target).addClass('current').siblings().removeClass('current')
          this.$router.replace('/userManage')
       },
+      showImgConfig(e) {
+         $(e.target).addClass('current').siblings().removeClass('current')
+         this.$router.replace('/imgConfig')
+      },
       addArticle(e) {
         $(e.target).addClass('current').siblings().removeClass('current')
         this.$router.replace('/article/add')
@@ -56,7 +66,8 @@
         $('.menu-group').removeClass('show')
         $(e.target).parents('.nav-control').find('.menu-group').toggleClass('show')
         $(e.target).parents('.nav-control').addClass('current').siblings().removeClass('current')
-        let pageName = type==1?'':type==2?'article':type==3?'comment':'userManage'
+        let pageName = type==1?'':type==2?'article':type==3?'comment':type==4?'userManage':
+                       type==5?'imgConfig':''
         this.$router.replace('/' + pageName)
       }
      }

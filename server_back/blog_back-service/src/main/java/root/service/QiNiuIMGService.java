@@ -38,6 +38,8 @@ public class QiNiuIMGService {
 	private String qiniuImgBucket;
 	@Value("${qiniuArtImgPrefix}")
 	private String qiniuArtImgPrefix;
+	@Value("${qiniuConfigImgPrefix}")
+	private String qiniuConfigImgPrefix;
 	private Configuration cfg = new Configuration(Zone.zone2());
 	private UploadManager uploadManager = new UploadManager(cfg);
 	
@@ -80,7 +82,7 @@ public class QiNiuIMGService {
 		    try {
 		        System.err.println(r.bodyString());
 		    } catch (QiniuException ex2) {
-		        //ignore
+		 
 		    }
 		}
 		return "";
@@ -116,5 +118,33 @@ public class QiNiuIMGService {
 		    System.err.println(ex.code());
 		    System.err.println(ex.response.toString());
 		}
+	}
+	
+	public String uploadConfigImg(MultipartFile file) {
+		// upload/config/286_img.jpg
+		String key = qiniuConfigImgPrefix + file.getOriginalFilename();
+		byte[] uploadBytes = null;
+		try {
+			uploadBytes = file.getBytes();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		Auth auth = Auth.create(qiniuAcKey, qiniuSeKey);
+		String upToken = auth.uploadToken(qiniuImgBucket);
+		try {
+		    Response response = uploadManager.put(uploadBytes, key, upToken);
+		    //解析上传成功的结果
+		    DefaultPutRet putRet = new Gson().fromJson(response.bodyString(), DefaultPutRet.class);
+		    return qiniuImgServer + putRet.key;
+		} catch (QiniuException ex) {
+		    Response r = ex.response;
+		    System.err.println(r.toString());
+		    try {
+		        System.err.println(r.bodyString());
+		    } catch (QiniuException ex2) {
+		        //ignore
+		    }
+		}
+		return "";
 	}
 }

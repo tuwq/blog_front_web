@@ -2,10 +2,12 @@ package root.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import root.model.CommentUser;
 
+@Mapper
 public interface CommentUserMapper {
     int deleteByPrimaryKey(Integer id);
 
