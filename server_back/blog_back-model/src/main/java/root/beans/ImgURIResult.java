@@ -21,5 +21,6 @@ public class ImgURIResult {
 		
 	public ImgURIResult(List<ImgNode> nodes) {
 		this.imgNodes = nodes;
+		this.code = 200;
 	}
 }

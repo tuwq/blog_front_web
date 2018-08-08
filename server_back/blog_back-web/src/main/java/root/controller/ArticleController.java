@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,7 @@ import root.beans.ImgURIResult;
 import root.beans.JsonResult;
 import root.beans.PageResult;
 import root.dto.ArticaleDto;
+import root.exception.CheckParamException;
 import root.model.Articale;
 import root.param.ArticleParam;
 import root.param.PageParam;
@@ -66,13 +68,19 @@ public class ArticleController {
 	} 
 	
 	@GetMapping("/{id}")
-	public JsonResult<ArticaleDto> detail(@PathVariable("id") Integer id) {
-		return articleService.detail(id);
+	public JsonResult<ArticaleDto> detail(@PathVariable("id") String id) {
+		if(!StringUtils.isNumeric(id)) {
+			throw new CheckParamException("文章","不存在");
+		}
+		return articleService.detail(Integer.parseInt(id));
 	}
 	
 	@PutMapping("/{id}")
-	public JsonResult<Void> update(@PathVariable("id") Integer id,@RequestBody ArticleParam param) {
-		return articleService.update(id,param);
+	public JsonResult<Void> update(@PathVariable("id") String id,@RequestBody ArticleParam param) {
+		if(!StringUtils.isNumeric(id)) {
+			throw new CheckParamException("文章","不存在");
+		}
+		return articleService.update(Integer.parseInt(id),param);
 	}
 	
 	@PostMapping(value="/faceCover", headers="content-type=multipart/form-data")

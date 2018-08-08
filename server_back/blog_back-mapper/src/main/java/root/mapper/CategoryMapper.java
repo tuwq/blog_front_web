@@ -25,4 +25,9 @@ public interface CategoryMapper {
      * @return
      */
 	List<Category> getArtCategoryListById(@Param("id") Integer id);
+	/**
+	 * 获得全部的分类
+	 * @return
+	 */
+	List<Category> getAll();
 }

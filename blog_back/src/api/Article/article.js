@@ -44,7 +44,7 @@ export function getSearchListApi(currentPage,pageSize,keyword,success) {
 	})
 }
 
-export function getArticleDetail(id,success) {
+export function getArticleDetailApi(id,success) {
 	axios.get('/sys/article/'+id)
 	.then((res)=>{
 		success(res)

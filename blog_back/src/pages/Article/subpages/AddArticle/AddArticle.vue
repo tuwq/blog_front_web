@@ -1,43 +1,30 @@
 <template>
   <div id="AddArticle" class="AddArticle">
      <div class="wrap">
-     	<div class="content">
-     		<div class="title">
-          <h2>新增文章</h2>
-     			<input v-model="title" type="text" placeholder="文章标题">
-     		</div>
-     		<div class="categroy">
-          封面<input type="file" class="uploadCover" ref="$addCover">
-          <div class="faceCover" v-if="faceCover"><img :src="artimgUrl+faceCover" alt="cover"/></div>
-     			<h2>文章分类</h2>
-     			<div class="checkbox-group">
-	     			<div class="checkbox-control">
-	     				<label for="article">文章</label> 
-	     				<input type="checkbox" id="article" value="1" v-model="categoryNames">
-	     			</div>
-	     			<div class="checkbox-control">
-		     			<label for="tutorial">教程</label>
-						<input type="checkbox" id="checkbox" value="2" v-model="categoryNames">
-					</div>
-					<div class="checkbox-control">
-						<label for="shortCode">短代码</label>
-						<input type="checkbox" id="checkbox" value="3" v-model="categoryNames">
-	     			</div>
-	     			<div class="checkbox-control">
-						<label for="leisure">个人闲谈</label>
-						<input type="checkbox" id="leisure" value="4" v-model="categoryNames">
-	     			</div>
-     			</div>
-     		</div>
      		<div class="markdownEditor" id="editor">
            <button @click="uploadimg" class="uploadBtn">上传图片</button>
-           <button @click="reMounted" class="MountedBtn">重新渲染</button>
            <button @click="finish" class="finishBtn">完成</button>
      			 <mavon-editor style="height: 100%" v-model="content" ref=md @imgAdd="$imgAdd" @imgDel="$imgDel"></mavon-editor>
      		</div>
-     	</div>
+        <ArticleTemplate ref="$addTemplate" :content="content"/>
      </div>
-     <ArticleTemplate ref="$addTemplate" :content="content"/>
+     <div class="info">
+        <div class="title">
+          <h2>新增文章</h2>
+          <input v-model="title" type="text" placeholder="文章标题">
+          封面<input type="file" class="uploadCover" ref="$addCover">
+          <div class="faceCover" v-if="faceCover"><img :src="artimgUrl+faceCover" alt="cover"/></div>
+        </div>
+        <div class="categroy">
+          <h2>文章分类</h2>
+          <div class="checkbox-group" v-if="categoryList">
+            <div class="checkbox-control" v-for="(item,index) in categoryList" :key="item.id">
+              <label for="article">{{item.name}}</label> 
+              <input type="checkbox" id="article" :value="item.id" v-model="categoryNames">
+            </div>
+          </div>
+        </div>
+     </div>
   </div>
 </template>
 
@@ -45,6 +32,7 @@
     import { mavonEditor } from 'mavon-editor'
     import 'mavon-editor/dist/css/index.css'
     import { addArticleApi,getImgURIApi,getFaceCoverUrlApi } from 'api/Article/article'
+    import { getCategoryListApi } from 'api/Category/category'
     import { checkContent } from 'base/js/check'
     import ArticleTemplate from '../ArticleTemplate/ArticleTemplate'
   export default {  
@@ -52,11 +40,19 @@
     	return {
         title: '',
     		categoryNames: [],
+        categoryList: [],
         content: '',
         img_file: {},
         faceCover: '',
         artimgUrl: global.artimgUrl
     	}
+    },
+    created() {
+      getCategoryListApi((res)=>{
+        if (res.data.code == 200) {
+         this.categoryList = res.data.result
+        }
+      })
     },
     mounted() {
       $(this.$refs.$addCover).on('change',()=>{
@@ -103,6 +99,7 @@
         })
       },
       finish() {
+        console.log(this.categoryNames)
         if (checkContent(this.title,this.categoryNames,this.content,this.faceCover)) {
           addArticleApi(this.title,this.categoryNames,this.content,this.faceCover,(res)=>{
             if(res.data.code==200) {
@@ -112,12 +109,14 @@
                 this.content=''
             }
           })
-        } else {
-          alert('不能为空')
         }
-      },
-      reMounted() {
-        this.$refs.$addTemplate.mountedContent()
+      }
+    },
+    watch: {
+      content(oldval,newval) {
+         if(newval!='') {
+          this.$refs.$addTemplate.mountedContent()
+         }
       }
     },
     components: {
@@ -131,3 +130,5 @@
   @import "./AddArticle.scss";
   @import "./MAddArticle.scss";
 </style>
+
+<!--  -->

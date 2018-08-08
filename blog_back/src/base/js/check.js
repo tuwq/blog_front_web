@@ -8,10 +8,11 @@ export function checkLogin(username,password) {
 	return true
 }
 
+export function isNumber(str) {
+	return (/^\d+$/.test(str))
+}
+
 export function checkContent(title,categoryNames,content,cover_img) {
-    
-   
-    
 	if (title == '' || title == undefined || title == null) {
 		alert('标题不能空')
 		return false

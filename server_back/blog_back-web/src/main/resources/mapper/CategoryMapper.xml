@@ -20,6 +20,11 @@
     <result column="comment_sum" property="commentSum" jdbcType="INTEGER" />
   </resultMap>
   
+  <select id="getAll" resultMap="BaseResultMap">
+  	SELECT <include refid="Base_Column_List" />
+    FROM category
+  </select>
+  
   <select id="getArtCategoryListById" parameterType="map" resultMap="categoryMap">
   	SELECT c.id category_id,c.name category_name,c.desc category_desc,c.articale_sum articale_sum,c.comment_sum comment_sum
 	FROM articale_category ac,category c

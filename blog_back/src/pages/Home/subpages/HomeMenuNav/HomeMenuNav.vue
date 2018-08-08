@@ -13,13 +13,13 @@
               <li @click.stop.prevent="addArticle">新增文章</li>
             </ul>
           </li>
-          <li class="nav-control"><a @click.stop.prevent="updateNavType(3,$event)"><i class="fa fa-pencil"></i>
+          <li class="nav-control"><a @click.stop.prevent="updateNavType(3,$event)"><i class="fa fa-commenting"></i>
             <span>评论管理</span></a>
             <ul class="menu-group">
               <li @click.stop.prevent="showComments">评论列表</li>
             </ul>
           </li>
-          <li class="nav-control"><a @click.stop.prevent="updateNavType(4,$event)"><i class="fa fa-pencil"></i>
+          <li class="nav-control"><a @click.stop.prevent="updateNavType(4,$event)"><i class="fa fa-user"></i>
             <span>用户管理</span></a>
             <ul class="menu-group">
               <li @click.stop.prevent="showUserManage">用户列表</li>
@@ -44,7 +44,7 @@
          $(e.target).addClass('current').siblings().removeClass('current')
          this.$router.replace('/comment')
       },
-      showUserManage() {
+      showUserManage(e) {
          $(e.target).addClass('current').siblings().removeClass('current')
          this.$router.replace('/userManage')
       },

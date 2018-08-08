@@ -79,7 +79,7 @@
     },
     components: {
     	ArticleItem,
-      Pagination
+      	Pagination
     }
   }
 </script>
