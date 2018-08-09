@@ -23,7 +23,7 @@ class SiderBarHotItem extends React.Component {
 		return (
          	<div className="SiderBarHotItem">
                <div className="image">
-                  <Link to={'/article/'+this.props.item.id}><img width="200" height="136" alt="" src={global.artImgPrefix+this.props.item.faceCover}/></Link>
+                  <Link to={'/article/'+this.props.item.id}><img width="128" height="64" alt="" src={global.artImgPrefix+this.props.item.faceCover}/></Link>
                </div>
          		<div className="description">
          			<Link to={'/article/'+this.props.item.id} className="hot-title">{this.props.item.title}</Link>

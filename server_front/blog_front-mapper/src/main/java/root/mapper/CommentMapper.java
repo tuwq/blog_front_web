@@ -86,5 +86,13 @@ public interface CommentMapper {
 	 * @return
 	 */
 	List<Comment> getWithArtAndUserByPageSize(@Param("pageSize") Integer pageSize);
+	/**
+	 * 获得根评论的信息文章信息
+	 * @param skip
+	 * @param pageSize
+	 * @param articleId
+	 * @return
+	 */
+	List<Comment> pageRootByArtIdWithUser(@Param("skip") Integer skip,@Param("pageSize") Integer pageSize,@Param("articleId") Integer articleId);
 
 }

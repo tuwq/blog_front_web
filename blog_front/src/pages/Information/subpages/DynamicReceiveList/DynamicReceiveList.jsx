@@ -3,6 +3,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { withRouter } from 'react-router-dom'
 
 import { getReceiveApi } from 'api/Dynamic/dynamic'
+import { isNumber } from 'base/js/check'
 
 import DynamicReceiveItem from '../DynamicReceiveItem/DynamicReceiveItem'
 import LoadMore from 'base/general/LoadMore/LoadMore'
@@ -26,6 +27,9 @@ class DynamicReceiveList extends React.Component {
 	}
 
 	componentDidMount() {
+		if (!isNumber(this.props.match.params.id)) {
+			return
+		}
 		this.initData(1,this.props.match.params.id);
 	}
 
@@ -52,6 +56,9 @@ class DynamicReceiveList extends React.Component {
 	}
 
 	loadMoreData() {
+		if (!isNumber(this.props.match.params.id)) {
+			return
+		}
 		this.initData(this.state.currentPage,this.props.match.params.id)
 	}
 

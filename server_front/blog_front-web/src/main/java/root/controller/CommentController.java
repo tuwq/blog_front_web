@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import root.beans.JsonResult;
 import root.beans.PageResult;
+import root.constant.ResultCode;
 import root.dto.CommentDto;
+import root.exception.CheckParamException;
+import root.exception.CommentException;
+import root.exception.NotFoundException;
 import root.param.ChildCommentParam;
 import root.param.PageParam;
 import root.param.RootCommentParam;
@@ -40,18 +45,35 @@ public class CommentController {
 	}
 	
 	@GetMapping("/pageByArt")
-	public PageResult<CommentDto> pageByArt(PageParam param,@RequestParam("articleId") Integer articleId) {
-		return commentService.pageByArt(param,articleId);
+	public PageResult<CommentDto> pageByArt(PageParam param,@RequestParam("articleId") String articleId) {
+		if (!StringUtils.isNumeric(articleId)) {
+			throw new NotFoundException(ResultCode.ITEM_NOT_FOUND,"访问文章的不存在");
+		}
+		return commentService.pageByArt(param,Integer.parseInt(articleId));
+	}
+	
+	@GetMapping("/pageRootComment")
+	public PageResult<CommentDto> pageRootComment(PageParam param,@RequestParam("articleId") String articleId) {
+		if (!StringUtils.isNumeric(articleId)) {
+			throw new NotFoundException(ResultCode.ITEM_NOT_FOUND,"访问文章的不存在");
+		}
+		return commentService.pageRootComment(param,Integer.parseInt(articleId));
 	}
 		
 	@GetMapping("/pageByRootId")
-	public PageResult<CommentDto> pageByRootId(PageParam param,@RequestParam("rootId") Integer rootId) {
-		return commentService.pageByRootId(param,rootId);
+	public PageResult<CommentDto> pageByRootId(PageParam param,@RequestParam("rootId") String rootId) {
+		if (!StringUtils.isNumeric(rootId)) {
+			throw new CommentException(ResultCode.ITEM_NOT_FOUND,"根评论不存在");
+		}
+		return commentService.pageByRootId(param,Integer.parseInt(rootId));
 	}
 	
 	@GetMapping("/new/{pageSize}")
-	public JsonResult<List<CommentDto>> newComment(@PathVariable("pageSize") Integer pageSize) {
-		return commentService.newComment(pageSize);
+	public JsonResult<List<CommentDto>> newComment(@PathVariable("pageSize") String pageSize) {
+		if (!StringUtils.isNumeric(pageSize)) {
+			throw new CheckParamException("分页大小","为空");
+		}
+		return commentService.newComment(Integer.parseInt(pageSize));
 	}
 }
 

@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as userActions from 'store/actions/user' 
-
+import * as imgConfigActions from 'store/actions/imgConfig'
 
 import {
   HashRouter,
@@ -16,6 +16,7 @@ import {
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 
 import { userInfoApi } from 'api/User/user'
+import { getImgConfigApi } from 'api/Config/config'
 
 import 'base/style/import.css'
 import 'base/style/webkit.css'
@@ -31,6 +32,7 @@ class App extends Component {
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
     this.closeMenu = this.closeMenu.bind(this)
     this.userInfo = this.userInfo.bind(this)
+    this.loadConfig = this.loadConfig.bind(this)
     this.userInfoRefreshSubscribe = this.userInfoRefreshSubscribe.bind(this)
     this.rediectLoginSubscribe = this.rediectLoginSubscribe.bind(this)
     PubSub.subscribe(global.userInfoRefreshSubscribe,this.userInfoRefreshSubscribe)
@@ -50,6 +52,7 @@ class App extends Component {
 
   componentDidMount() {
      this.userInfo()
+     this.loadConfig()
   }
 
   componentWillUnmount() {
@@ -60,6 +63,14 @@ class App extends Component {
       this.setState = (state,callback)=>{
       return
     };
+  }
+
+  loadConfig() {
+    getImgConfigApi((res)=>{
+      if (res.data.code == 200) {
+        this.props.imgConfigActions.save(res.data.result)
+      }
+    })
   }
 
   userInfo() {
@@ -91,7 +102,8 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
     return {
-        userActions: bindActionCreators(userActions, dispatch)
+        userActions: bindActionCreators(userActions, dispatch),
+        imgConfigActions: bindActionCreators(imgConfigActions,dispatch)
     }
 }
 

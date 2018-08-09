@@ -73,11 +73,15 @@ class LoginMain extends React.Component {
 	}
 
 	render() {
+		let imgStyle = {
+		  backgroundImage: 'url(' + this.props.imgConfig.loginImg + ')',
+		};
+
 		return (
-			<div id="LoginMain" className="LoginMain">
+			<div id="LoginMain" className="LoginMain" style={imgStyle}>
 	          <div className="content-wrapper">
 	          	<div className="content">
-	          		<img alt="" src="https://ikmoe.com/logo.png"/>
+	          		<img alt="" src={this.props.imgConfig.logoImg}/>
 	          		<form className="form">
 	          			<div className="form-group">
 	          				{
@@ -111,7 +115,8 @@ class LoginMain extends React.Component {
 function mapStateToProps(state) {
     return {
      // state.modal 对应的reducer注册时的名称
-        user: state.user
+        user: state.user,
+        imgConfig: state.imgConfig
     }
 }
 function mapDispatchToProps(dispatch) {

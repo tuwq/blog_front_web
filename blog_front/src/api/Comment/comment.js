@@ -22,6 +22,14 @@ export function pageArtCommentAllApi(currentPage,pageSize,articleId,success) {
 	})
 }
 
+export function pageAllRootCommentApi(currentPage,pageSize,articleId,success) {
+	axios.get('/comment/pageRootComment',{
+		params: {currentPage,pageSize,articleId}
+	}).then((res)=>{
+		success(res)
+	})
+}
+
 export function pageChildCommentApi(currentPage,pageSize,rootId,success) {
 	axios.get('/comment/pageByRootId',{
 		params: {currentPage,pageSize,rootId}

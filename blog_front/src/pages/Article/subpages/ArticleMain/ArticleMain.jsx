@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 import ContentTitle from '../ContentTitle/ContentTitle'
 import ContentMain from '../ContentMain/ContentMain'
 
 import { articleDetailApi } from 'api/Article/article'
+import { isNumber } from 'base/js/check'
 
 import './ArticleMain.less'
 import './MArticleMain.less'
@@ -23,6 +26,10 @@ class ArticleMain extends React.Component {
 	}
 
 	componentDidMount() {
+		if(!isNumber(this.props.match.params.id)) {
+			this.props.history.replace('/notFound')
+			return
+		}
 		this.initData(this.props.match.params.id)
 	}
 
@@ -33,6 +40,10 @@ class ArticleMain extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
+		if(!isNumber(nextProps.match.params.id)) {
+			this.props.history.replace('/notFound')
+			return
+		}
 		if (this.props.match.params.id != nextProps.match.params.id) {
 				this.setState({
 				data: {}
@@ -53,9 +64,14 @@ class ArticleMain extends React.Component {
 	}
 
 	render() {
+
+		let imgStyle = {
+		  backgroundImage: 'url(' + this.props.imgConfig.artImg + ')',
+		};
+
 		return (
 			<div className="ArticleMain">
-				<div className="Content-Wrapper">
+				<div className="Content-Wrapper" style={imgStyle}>
 					{
 						JSON.stringify(this.state.data)!="{}"&&
 						(<div className="content">
@@ -69,7 +85,21 @@ class ArticleMain extends React.Component {
 	}
 }
 
-export default withRouter(ArticleMain)
+function mapStateToProps(state) {
+    return {
+        imgConfig: state.imgConfig
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+       
+    }
+}
+
+export default withRouter(
+	connect(mapStateToProps, mapDispatchToProps)(ArticleMain)
+)
 
 
 

@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 import CategoryTitle from '../CategoryTitle/CategoryTitle'
 import CategoryCollection from '../CategoryCollection/CategoryCollection'
 import LoadMore from 'base/general/LoadMore/LoadMore'
 
 import { categoryPageApi } from 'api/Category/category'
+import { isNumber } from 'base/js/check'
 
 import './CategoryMain.less'
 import './MCategoryMain.less'
@@ -28,6 +31,10 @@ class CategoryMain extends React.Component {
 	}
 
 	componentDidMount() {
+		if(!isNumber(this.props.match.params.id)) {
+			this.props.history.replace('/notFound')
+			return
+		}
 		this.pageData(1,this.props.match.params.id)
 	}
 
@@ -39,6 +46,10 @@ class CategoryMain extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
+		if(!isNumber(nextProps.match.params.id)) {
+			this.props.history.replace('/notFound')
+			return
+		}
 		if (nextProps.match.params.id != this.props.match.params.id) {
 			this.setState({
 				currentPage: 1,
@@ -71,13 +82,20 @@ class CategoryMain extends React.Component {
 	}
 
 	loadMoreData() {
+		if(!isNumber(this.props.match.params.id)) {
+			this.props.history.replace('/notFound')
+			return
+		}
 		this.pageData(this.state.currentPage,this.props.match.params.id)
 	}
 
 	render() {
+		let imgStyle = {
+		  backgroundImage: 'url(' + this.props.imgConfig.categoryImg + ')',
+		};
 		return (
 			<div className="CategoryMain">
-			  	<div className="Content-Wrapper">
+			  	<div className="Content-Wrapper" style={imgStyle}>
 			  		<div className="content">
 			  	 	{
 			  	 		this.state.data.length>0
@@ -99,6 +117,20 @@ class CategoryMain extends React.Component {
 	}
 }
 
-export default withRouter(CategoryMain)
+function mapStateToProps(state) {
+    return {
+        imgConfig: state.imgConfig
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+       
+    }
+}
+
+export default withRouter(
+	connect(mapStateToProps, mapDispatchToProps)(CategoryMain)
+)
 
 

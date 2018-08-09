@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
+import { withRouter,Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 
 import Slider from 'base/general/Slider/Slider'
@@ -18,16 +21,43 @@ class HomeContentTop extends React.Component {
 	componentDidMount() {
 		
 	}
+
+	componentWillUnmount() {
+	    // 防止异步调用数据
+	    this.setState = (state,callback)=>{
+	      return
+	    };
+	}
 	
 	render() {
 		return (
          	<section id="HomeContentTop" className="HomeContentTop">
-         		<Slider />
-         		<WidgetCollection />
+         	 	{
+         	 		this.props.imgConfig.sliderImgList.length>0
+         	 		?(<React.Fragment>
+         	 			<Slider data={this.props.imgConfig.sliderImgList}/>
+         				<WidgetCollection />
+         	 		  </React.Fragment>)
+         	 		:(<div></div>)
+         	 	}
          	</section>
         )
 	}
 }
 
-export default HomeContentTop
+function mapStateToProps(state) {
+    return {
+        imgConfig: state.imgConfig
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+       
+    }
+}
+
+export default withRouter(
+	connect(mapStateToProps, mapDispatchToProps)(HomeContentTop)
+)
 

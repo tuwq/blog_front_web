@@ -42,10 +42,12 @@ class SiderBarCommentCollection extends React.Component {
 	render() {
 		return (
          	<div id="SiderBarCommentCollection" className="SiderBarCommentCollection">
-         		<h3><span>最新评论</span></h3>
          		{
          			this.state.data.length>0&&
-         			<SiderBarCommentList data={this.state.data}/>
+         			(<React.Fragment>
+	         			<h3><span>最新评论</span></h3>
+	         			<SiderBarCommentList data={this.state.data}/>
+         			</React.Fragment>)
          		}
          	</div>
         )

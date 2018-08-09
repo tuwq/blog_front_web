@@ -1,6 +1,6 @@
 export function pageSearchByKeyWordApi(currentPage,pageSize,keyword,success) {
-	axios.get('/search/page/keyword',{
-		params: {currentPage,pageSize,keyword}
+	axios.post('/search/page/keyword',{
+		currentPage,pageSize,keyword
 	}).then((res)=>{
 		success(res)
 	})

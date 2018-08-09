@@ -43,8 +43,10 @@ class CommentItem extends React.Component {
 						{
 							this.props.item.rootComment
 							?(<button className="dialog" onClick={this.comment.bind(this)}>查看对话</button>)
+							:this.props.item.hasChild
+							?(<button className="floor" onClick={this.comment.bind(this)}>回复楼中楼</button>)
 							:(<button onClick={this.comment.bind(this)}>回复</button>)
-						}
+						}	
 					</div>
 				</div>
         	</div>

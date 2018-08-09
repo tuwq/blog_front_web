@@ -9,6 +9,7 @@ import MeInformation from '../MeInformation/MeInformation'
 import OthersInformation from '../OthersInformation/OthersInformation'
 
 import { userInfoApi } from 'api/Informartion/informartion'
+import { isNumber } from 'base/js/check'
 
 import './InformationMain.less'
 import './MInformationMain.less'
@@ -23,6 +24,10 @@ class InformationMain extends React.Component {
 	}
 
 	componentDidMount() {
+		if(!isNumber(this.props.match.params.id)) {
+			this.props.history.replace('/notFound')
+			return
+		}
 		this.initData(this.props.match.params.id);
 	}
 
@@ -33,6 +38,10 @@ class InformationMain extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
+		if(!isNumber(nextProps.match.params.id)) {
+			this.props.history.replace('/notFound')
+			return
+		}
 		if (this.props.match.params.id != nextProps.match.params.id) {
 			this.initData(nextProps.match.params.id)
 		}

@@ -20,6 +20,9 @@ export function checkmail(mail) {
 	return reg.test(mail)
 }
 
+export function isNumber(str) {
+	return (/^\d+$/.test(str))
+}
 
 export function checkLoginForm(state) {
 	if (state.loginname.trim() == '' || state.loginname == null) {

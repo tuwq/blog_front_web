@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
-import * as RESULT_CODE from 'api/Constant/resultCode'
+import { withRouter,Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
+import * as RESULT_CODE from 'api/Constant/resultCode'
 import qqSvg from 'static/svg/qq.svg'
 import { checkRegistForm } from 'base/js/check'
 import { registApi } from 'api/Login/login'
@@ -86,11 +89,14 @@ class RegistMain extends React.Component {
 	}
 
 	render() {
+		let imgStyle = {
+		  backgroundImage: 'url(' + this.props.imgConfig.loginImg + ')',
+		};
 		return (
-			<div id="RegistMain" className="RegistMain">
+			<div id="RegistMain" className="RegistMain" style={imgStyle}>
 	       		<div className="content-wrapper">
 	       			<div className="content">
-	       				<img alt="" src="https://ikmoe.com/logo.png"/>
+	       				<img alt="" src={this.props.imgConfig.logoImg}/>
 	       				<form className="form">
 	       					<h2 className="title">创建新账号</h2>
 	       					{
@@ -124,6 +130,20 @@ class RegistMain extends React.Component {
 	}
 }
 
-export default RegistMain
+function mapStateToProps(state) {
+    return {
+        imgConfig: state.imgConfig
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+       
+    }
+}
+
+export default withRouter(
+	connect(mapStateToProps, mapDispatchToProps)(RegistMain)
+)
 
 

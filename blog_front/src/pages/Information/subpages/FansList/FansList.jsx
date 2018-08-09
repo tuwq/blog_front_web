@@ -7,6 +7,7 @@ import PubSub from 'pubsub-js'
 import FollowItem from '../FollowItem/FollowItem'
 
 import { userFansApi } from 'api/Informartion/informartion'
+import { isNumber } from 'base/js/check'
 
 import './FansList.less'
 import './MFansList.less'
@@ -26,7 +27,10 @@ class FansList extends React.Component {
 	}
 
 	componentDidMount() {
-		this.initData();
+		if (!isNumber(this.props.match.params.id)) {
+			return
+		}
+		this.initData(this.props.match.params.id);
 	}
 
 	componentWillUnmount() {
@@ -36,8 +40,8 @@ class FansList extends React.Component {
 	   }
 	}
 
-	initData() {
-		userFansApi(this.props.match.params.id,(res)=>{
+	initData(id) {
+		userFansApi(id,(res)=>{
 			if (res.data.code == 200) {
 				this.setState({
 					fansList: res.data.result

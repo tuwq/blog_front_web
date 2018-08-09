@@ -3,6 +3,8 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 import queryString from 'query-string'
 import * as RESULT_CODE from 'api/Constant/resultCode'
 import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 import { pageSearchByKeyWordApi,pageArticleAllApi} from 'api/Search/search'
 
@@ -125,9 +127,12 @@ class SearchMain extends React.Component {
 	}
 
 	render() {
+		let imgStyle = {
+		  backgroundImage: 'url(' + this.props.imgConfig.searchImg + ')',
+		};
 		return (
 			<div className="SearchMain">
-			  	<div className="Content-Wrapper">
+			  	<div className="Content-Wrapper" style={imgStyle}>
 			  		<div className="content">
 			  			{
 			  				this.state.data.length>0
@@ -149,6 +154,20 @@ class SearchMain extends React.Component {
 	}
 }
 
-export default withRouter(SearchMain)
+function mapStateToProps(state) {
+    return {
+        imgConfig: state.imgConfig
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+       
+    }
+}
+
+export default withRouter(
+	connect(mapStateToProps, mapDispatchToProps)(SearchMain)
+)
 
 

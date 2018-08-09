@@ -20,6 +20,7 @@ import root.mapper.ArticaleMapper;
 import root.mapper.CategoryMapper;
 import root.model.Articale;
 import root.model.Category;
+import root.redis.RedisOperator;
 import root.util.DtoUtil;
 import root.util.TimeAgoUtils;
 
@@ -32,6 +33,9 @@ public class ArticaleService {
 	private ArticaleMapper articaleMapper;
 	@Resource
 	private CategoryMapper categoryMapper;
+	@Resource
+	private RedisOperator redis;
+	
 	public JsonResult<ArticaleDto> detail(Integer id) {
 		// 检查字段,访问id不存在去404
 		// 检查资源是否存在,不存在去404
@@ -59,6 +63,4 @@ public class ArticaleService {
 		incrDataHandler.articleBrowseIncr(id);
 		return JsonResult.<ArticaleDto>success(articaleDto);
 	}
-	
-	
 }

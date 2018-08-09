@@ -2,7 +2,6 @@ package root.service;
 
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
@@ -23,7 +22,6 @@ import root.exception.CommentException;
 import root.exception.NotFoundException;
 import root.mapper.ArticaleMapper;
 import root.mapper.CommentMapper;
-import root.model.Articale;
 import root.model.Comment;
 import root.model.User;
 import root.param.ChildCommentParam;
@@ -113,7 +111,7 @@ public class CommentService {
 		// 生成skip
 		// 根据分页查询评论信息和用户信息
 		// 生成分页数据
-		// 返回结果
+		// 返回分页结果
 		// 获得子评论的父评论用户信息和根评论信息
 		ValidatorUtil.check(param);
 		if (articleId == null) {
@@ -124,6 +122,9 @@ public class CommentService {
 			throw new NotFoundException(ResultCode.ITEM_NOT_FOUND,"文章不存在");
 		}
 		Long total = commentMapper.countByArtId(articleId);
+		if (total == 0) {
+			return PageResult.<CommentDto>builder().pageModel(new PageModel()).data(Lists.newArrayList()).code(200).build();
+		}
 		param.buildSkip();
 		List<Comment> commentList = commentMapper.pageByArtIdWithUser(param.getSkip(),param.getPageSize(),articleId);		
 		List<CommentDto> commentDtoList = Lists.newArrayList();
@@ -131,6 +132,12 @@ public class CommentService {
 			CommentDto dto = DtoUtil.adapt(new CommentDto(), comment);
 			dto.setTimeAgo(TimeAgoUtils.format(comment.getCreateTime()));
 			dto.formatNoSecondTime();
+			if (dto.getRootId() == 0) {
+				Long hasChild = commentMapper.countChildByRootId(dto.getId());
+				if (hasChild > 0) {
+					dto.setHasChild(1);
+				}
+			}
 			if (dto.getParentId() != 0) {
 				int parent = commentMapper.countById(dto.getParentId());
 				if (parent != 0) {
@@ -142,7 +149,9 @@ public class CommentService {
 				int root = commentMapper.countById(dto.getRootId());
 				if (root != 0) {
 					Comment rootComment = commentMapper.getByIdWithUser(dto.getRootId());
-					dto.setRootComment(rootComment);
+					CommentDto rootDto = DtoUtil.adapt(new CommentDto(), rootComment);
+					rootDto.setHasChild(1);
+					dto.setRootComment(rootDto);
 				}
 			}
 			commentDtoList.add(dto);
@@ -169,6 +178,9 @@ public class CommentService {
 			throw new CommentException(ResultCode.ITEM_NOT_FOUND,"根评论不存在");
 		}
 		Long total = commentMapper.countChildByRootId(rootId);
+		if(total == 0) {
+			return PageResult.<CommentDto>builder().pageModel(new PageModel()).data(Lists.newArrayList()).code(200).build();
+		}
 		param.buildSkip();
 		List<Comment> commentList = commentMapper.getChildByRootIdWithUser(param.getSkip(),param.getPageSize(),rootId);
 		List<CommentDto> commentDtoList = Lists.newArrayList();
@@ -204,6 +216,42 @@ public class CommentService {
 			commentDtos.add(commentDto);
 		});
 		return JsonResult.success(commentDtos);
+	}
+
+	public PageResult<CommentDto> pageRootComment(PageParam param, Integer articleId) {
+		// 检查字段
+		// 获得评论总数
+		// 生成skip
+		// 获得根评论的用户信息和文章信息
+		// 查看根评论下是否有子评论
+		// 返回分页数据
+		ValidatorUtil.check(param);
+		if (articleId == null) {
+			throw new CheckParamException("文章id","为空");
+		}
+		int count = articaleMapper.countById(articleId);
+		if (count == 0) {
+			throw new NotFoundException(ResultCode.ITEM_NOT_FOUND,"文章不存在");
+		}
+		Long total = commentMapper.countByArtId(articleId);
+		if (total == 0) {
+			return PageResult.<CommentDto>builder().pageModel(new PageModel()).data(Lists.newArrayList()).code(200).build();
+		}
+		param.buildSkip();
+		List<Comment> data = commentMapper.pageRootByArtIdWithUser(param.getSkip(),param.getPageSize(),articleId);
+		List<CommentDto> commentDtoList = Lists.newArrayList();
+		data.forEach(comment -> {
+			CommentDto dto = DtoUtil.adapt(new CommentDto(), comment);
+			dto.setTimeAgo(TimeAgoUtils.format(comment.getCreateTime()));
+			dto.formatNoSecondTime();
+			Long hasChild = commentMapper.countChildByRootId(dto.getId());
+			if (hasChild > 0) {
+				dto.setHasChild(1);
+			}
+			commentDtoList.add(dto);
+		});
+		PageModel pageModel = new PageModel(total,commentDtoList.size(),param.getCurrentPage(),param.getPageSize());
+		return PageResult.<CommentDto>builder().pageModel(pageModel).data(commentDtoList).code(200).build();
 	}
 
 }

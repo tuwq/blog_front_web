@@ -12,7 +12,9 @@ public class CommentDto extends Comment{
 	// 父评论的用户信息
 	private User parentUser;
 	// 根评论的信息
-	private Comment rootComment;
+	private CommentDto rootComment;
+	// 是否是根评论且根评论下有子评论,0:没有,1:有
+	private Integer hasChild;
 	// ..月,日前的时间格式
 	private String timeAgo;
 	

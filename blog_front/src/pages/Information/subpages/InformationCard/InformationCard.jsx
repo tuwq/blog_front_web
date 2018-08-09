@@ -72,9 +72,11 @@ class InformationCard extends React.Component {
                     button = (<button onClick={this.follow.bind(this,this.props.showInfo.userDto.id,1)} className="unfollowed">关注</button>)
                 }
             }
-
+            let imgStyle = {
+              backgroundImage: 'url(' + this.props.imgConfig.userImg + ')',
+            };
             return (
-                <div className="InformationCard">
+                <div className="InformationCard" style={imgStyle}>
                     <div className="container">
                         <div className="avatar-wrap">
                             <img alt="" src={global.userAvatarPrefix+this.props.showInfo.userDto.avatar+'?v='+new Date().getTime()}/>
@@ -91,7 +93,8 @@ class InformationCard extends React.Component {
 function mapStateToProps(state) {
     return {
      // state.modal 对应的reducer注册时的名称
-        showInfo: state.showInfo
+        showInfo: state.showInfo,
+        imgConfig: state.imgConfig
     }
 }
 

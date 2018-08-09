@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
+import { withRouter,Link } from 'react-router-dom'
 
 import './HomeFooter.less'
 import './MHomeFooter.less'
@@ -29,14 +30,14 @@ class HomeFooter extends React.Component {
           		</div>
 	          	<div className="contact">
 	          		<ul className="itemList">
-	          			<li className="item"><a><span><img width="20" height="20" alt="" src={qqSvg}/></span></a></li>
+	          			<li className="item"><a href="tencent://QQMusic/?version==730&&cmd_count==1&&cmd_0==4002&&clienttype_0==0&&uin==1246361002"><span><img width="20" height="20" alt="" src={qqSvg}/></span></a></li>
 	          			<li className="item"><a href="https://github.com/tuwq"><span><img width="20" height="20" alt="" src={githubSvg}/></span></a></li>
 	          		</ul>
 	          	</div>
 	          	<div className="contact">
 	          		<ul className="itemList fontLink">
-	          			<li className="item "><a>@2018</a></li>
-	          			<li className="item "><a>tuwq</a></li>
+	          			<li className="item "><a>@2018 赣ICP备18010202号</a></li>
+	          			<li className="item "><a></a></li>
 	          		</ul>
 	          	</div>
           	</div>
@@ -45,5 +46,5 @@ class HomeFooter extends React.Component {
 	}
 }
 
-export default HomeFooter
+export default withRouter(HomeFooter)
 

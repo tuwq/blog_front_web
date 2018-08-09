@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom'
 import FollowItem from '../FollowItem/FollowItem'
 
 import { userFollowsApi } from 'api/Informartion/informartion'
+import { isNumber } from 'base/js/check'
 
 import './FollowList.less'
 import './MFollowList.less'
@@ -22,7 +23,10 @@ class FollowList extends React.Component {
 	}
 
 	componentDidMount() {
-		this.initData()
+		if (!isNumber(this.props.match.params.id)) {
+			return
+		}
+		this.initData(this.props.match.params.id)
 	}
 
 	componentWillUnmount() {
@@ -31,8 +35,8 @@ class FollowList extends React.Component {
 	   }
 	}
 
-	initData() {
-		userFollowsApi(this.props.match.params.id,(res)=>{
+	initData(id) {
+		userFollowsApi(id,(res)=>{
 			if (res.data.code == 200) {
 				this.setState({
 					followList: res.data.result

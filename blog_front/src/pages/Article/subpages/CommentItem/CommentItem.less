@@ -27,7 +27,7 @@
 		}
 		.reply {
 			button {
-				width: 30px;
+				width: auto;
 				text-align: center;
 				padding: 5px;
 				font-size: 10px;
@@ -36,17 +36,8 @@
 				&.active {
 					background: @black_color;
 				}
-			}
-			.dialog {
-				width: 50px;
-				text-align: center;
-				padding: 5px;
-				font-size: 10px;
-				background: @purple_color;
-				color: #fff;
-				&.active {
-					background: @black_color;
-				}
+				&.dialog { background: @purple_color;}
+				&.floor { background: @red_color; }
 			}
 		}	
 	}

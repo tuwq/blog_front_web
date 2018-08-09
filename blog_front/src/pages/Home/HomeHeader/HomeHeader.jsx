@@ -99,7 +99,7 @@ class HomeHeader extends React.Component {
                 <span className="rightIcon">—</span>
               </div>
           		<Link to="/" className="HomeHeaderLogo">
-          			<img src="http://pcij2jrr4.bkt.clouddn.com//upload/templogo.png" alt="logo" title="大Logo"></img>
+          			<img src={this.props.imgConfig.logoImg} alt="logo" title="大Logo"></img>
           		</Link>
           		<ul className="HomeHeaderItemList" ref={this.$ItemList}>
           			<li className="HomeHeaderItem">
@@ -172,7 +172,8 @@ class HomeHeader extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        user: state.user
+        user: state.user,
+        imgConfig: state.imgConfig
     }
 }
 

@@ -23,8 +23,6 @@ public class TestController {
 	@Value("${mailActivationApiName}")
 	private String mailActivationApiName;
 	
-	
-	
 	@GetMapping("/add")
 	public JsonResult add() {
 		String content = 

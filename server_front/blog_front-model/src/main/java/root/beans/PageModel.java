@@ -17,7 +17,8 @@ public class PageModel {
 	private Integer maxPageCode;
 	
 	public PageModel() {
-		
+		this.total = 0l;
+		this.currentTotal = 0;
 	}
 	
 	public PageModel(Long total,Integer currentTotal,Integer currentPage,Integer pageSize) {

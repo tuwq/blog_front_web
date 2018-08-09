@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
+import { withRouter,Link } from 'react-router-dom'
 
 import rightSvg from 'static/svg/right.svg'
 
@@ -24,7 +25,7 @@ class ModelShortItem extends React.Component {
          	<div className="ModelShortItem">
          		<h2 className="ModelShortItemTitle">
 	     			<span>{this.props.category.name}</span>
-	     			<a>更多<i><img width="12" height="12" alt="" src={rightSvg} /></i></a>
+	     			<Link to={'/category/'+this.props.category.id}>更多<i><img width="12" height="12" alt="" src={rightSvg} /></i></Link>
 	     		</h2>
 	     		<div className="ModelShortItemLinkList">
 	     			{
@@ -38,5 +39,5 @@ class ModelShortItem extends React.Component {
 	}
 }
 
-export default ModelShortItem
+export default withRouter(ModelShortItem)
 

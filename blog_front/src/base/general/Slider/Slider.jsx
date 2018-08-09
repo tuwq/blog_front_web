@@ -71,7 +71,7 @@ class Slider extends React.Component {
 		// debounce节流
 		if (this.screen.current) {
 			this.imgWidth =	this.screen.current.clientWidth
-			this.imageList.current.style.width = this.imgWidth * 3 + 'px'
+			this.imageList.current.style.width = this.imgWidth * this.props.data.length + 'px'
 			$.each(this.imgs,(index,el)=>{
 				el.style.width = this.imgWidth + 'px'
 			})
@@ -83,9 +83,11 @@ class Slider extends React.Component {
          	<div id="Slider" className="Silder" ref={this.silder}>
          		<div className="screen" ref={this.screen}>
          			<ul ref={this.imageList}>
-         				<li><a><img width="" height="" alt="" src="http://pcij2jrr4.bkt.clouddn.com/upload/silider/wp1.png"/></a></li>
-         				<li><a><img width="" height="" alt="" src="http://pcij2jrr4.bkt.clouddn.com/upload/silider/wp2.png"/></a></li>
-         				<li><a><img width="" height="" alt="" src="http://pcij2jrr4.bkt.clouddn.com/upload/silider/wp2.png"/></a></li>
+         				{
+         					this.props.data.map((item,index)=>{
+         						return (<li key={index}><a><img width="" height="" alt="" src={item}/></a></li>)
+         					})
+         				}
          			</ul>
          			<ol ref={this.pointList}></ol>
          		</div>
@@ -151,7 +153,7 @@ class Slider extends React.Component {
 	}
 
 	autoPlay() {
-		this.Autotimer = setInterval(this.leftslide,2000)
+		this.Autotimer = setInterval(this.leftslide,3000)
 		// this.screen = this.screen.current
 		// addEvent(this.screen,()=>{
 		// 	clearInterval(this.Autotimer)

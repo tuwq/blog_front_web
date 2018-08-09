@@ -9,6 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import root.filter.HttpFilter;
+import root.interceptor.AccessInterceptor;
 import root.interceptor.NeedLoginInterceptor;
 
 @Configuration
@@ -30,6 +31,11 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter  {
     }
 
 	@Bean
+	public AccessInterceptor getAccessInterceptor() {
+		return new AccessInterceptor();
+	}
+	
+	@Bean
 	public NeedLoginInterceptor getNeedLoginInterceptor() {
 		return new NeedLoginInterceptor();
 	}
@@ -40,6 +46,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter  {
         registry.addInterceptor(getNeedLoginInterceptor())
         .addPathPatterns("/user/**","/follow/**","/comment/add/**","/dynamic/receive")
         .excludePathPatterns("/user/info");
+        registry.addInterceptor(getAccessInterceptor())
+        .addPathPatterns("/articale/**","/category/praise/**");
         super.addInterceptors(registry);
     }
     

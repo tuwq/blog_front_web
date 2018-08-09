@@ -56,6 +56,7 @@ class ChildCommentListModal extends React.Component {
 	}
 
 	childCommentSubscribe(msg,rootItem) {
+		console.log(rootItem)
 		this.setState({
 			rootItem: rootItem,
 			modalDisplay: true,

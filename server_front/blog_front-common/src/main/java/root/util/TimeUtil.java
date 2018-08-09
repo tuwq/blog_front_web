@@ -40,6 +40,11 @@ public class TimeUtil {
 	public static void main(String[] args) {
 		long skipTime = TimeUtil.getSkipTime(Calendar.MINUTE, 60);
 		System.out.println(skipTime);
+		String beforeTime = TimeUtil.format(TimeUtil.getSkipTime(Calendar.DATE, -1));
+		String nowTime = TimeUtil.format(new Date().getTime());
+		System.out.println(beforeTime);
+		System.out.println(nowTime);
+		
 	}
 
 }

@@ -7,7 +7,7 @@ import CommentList from '../CommentList/CommentList'
 import Pagination from 'base/general/Pagination/Pagination'
 
 import { rootCommentApi,pageArtCommentAllApi } from 'api/Comment/comment'
-import { checkCommentForm } from 'base/js/check'
+import { checkCommentForm,isNumber } from 'base/js/check'
 
 import './CommentCollection.less'
 import './MCommentCollection.less'
@@ -29,6 +29,10 @@ class CommentCollection extends React.Component {
 	}
 
 	componentDidMount() {
+		if(!isNumber(this.props.match.params.id)) {
+			this.props.history.replace('/notFound')
+			return
+		}
 		this.initData(1,this.props.match.params.id)
 	}
 
@@ -51,6 +55,10 @@ class CommentCollection extends React.Component {
 	}
 
 	loadPage(page) {
+		if(!isNumber(this.props.match.params.id)) {
+			this.props.history.replace('/notFound')
+			return
+		}
 		this.initData(page,this.props.match.params.id)
 	}
 

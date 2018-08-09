@@ -25,13 +25,6 @@ import root.exception.TokenException;
 @ControllerAdvice
 public class ExceptionAdvice {
 	
-	// 处理未知异常
-	@ExceptionHandler(RuntimeException.class)
-	public void handlerUnknownException(RuntimeException e) {
-		// TODO 记录异常日志
-		e.printStackTrace();
-	}
-	
 	// 检查参数出错的异常
 	@ExceptionHandler(CheckParamException.class)
 	public ResponseEntity<ParamExceptionResult> handlerParamException(CheckParamException e) {
@@ -80,5 +73,12 @@ public class ExceptionAdvice {
 	@ExceptionHandler(DynamicException.class)
 	public ResponseEntity<DynamicExceptionResult> handlerDynamicException(DynamicException e) {
 		return new ResponseEntity<DynamicExceptionResult>(DynamicExceptionResult.builder().code(e.getResultCode()).msg(e.getMsg()).build(),HttpStatus.OK);
+	}
+	
+	// 处理未知异常
+	@ExceptionHandler(RuntimeException.class)
+	public void handlerUnknownException(RuntimeException e) {
+		// TODO 记录异常日志
+		e.printStackTrace();
 	}
 }
