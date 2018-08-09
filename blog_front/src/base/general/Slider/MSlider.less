@@ -8,14 +8,43 @@
 	.screen {
 		position: relative;
 		width: auto;
-		height: 200px;
+		min-height: 150px;
 		overflow: hidden;
 		ul {
 			position: absolute;
 			left: 0;
+			height: 100%;
 			li {
 				float: left;
+				height: 100%;
 				img{position: relative;left: 0;}
+				a {
+					width: 100%;
+					height: 100%;
+					display: block;
+					position: relative;
+					.content {
+						position: absolute;
+					    left: 0px;
+					    bottom: 0;
+					    background: rgba(0, 0, 0, 0.4);
+					    border-radius: 15px;
+					    transition: all 0.4s;
+					    width: 100%;
+					    padding: 0 30px;
+					    max-height: 50px;
+					    h2 {
+						    color: #fff;
+						    text-align: center;    
+						    max-width: 600px;
+						    overflow: hidden;
+						    margin: 0 auto;
+						    font-size: 15px;
+						    text-overflow: ellipsis;
+						    white-space: nowrap;
+					    }
+					}
+				}
 			}
 		}
 		ol {

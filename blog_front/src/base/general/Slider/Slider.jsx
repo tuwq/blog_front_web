@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
+import { withRouter,Link } from 'react-router-dom'
 import { addEvent,removeEvent } from 'base/js/ie.js'
 import { debounce } from 'lodash'
 
@@ -41,7 +42,7 @@ class Slider extends React.Component {
 		this.listenWindow()
 		this.initEle()
 		this.pointClick()
-		this.autoPlay()
+		// this.autoPlay()
 	}
 	
 	componentWillUnmount() {
@@ -71,7 +72,7 @@ class Slider extends React.Component {
 		// debounce节流
 		if (this.screen.current) {
 			this.imgWidth =	this.screen.current.clientWidth
-			this.imageList.current.style.width = this.imgWidth * this.props.data.length + 'px'
+			this.imageList.current.style.width = this.imgWidth * 3 + 'px'
 			$.each(this.imgs,(index,el)=>{
 				el.style.width = this.imgWidth + 'px'
 			})
@@ -85,7 +86,11 @@ class Slider extends React.Component {
          			<ul ref={this.imageList}>
          				{
          					this.props.data.map((item,index)=>{
-         						return (<li key={index}><a><img width="" height="" alt="" src={item}/></a></li>)
+         						return (<li key={index}><a><img width="" height="" alt="" src={global.artImgPrefix+item.faceCover}/>
+         								<div className="content">
+         									<h2>{item.title}</h2>
+         								</div>
+         							</a></li>)
          					})
          				}
          			</ul>
@@ -211,5 +216,5 @@ class Slider extends React.Component {
 	}
 }
 
-export default Slider
+export default withRouter(Slider)
 

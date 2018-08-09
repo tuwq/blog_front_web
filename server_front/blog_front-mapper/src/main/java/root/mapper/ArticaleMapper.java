@@ -130,5 +130,17 @@ public interface ArticaleMapper {
 	 * @param articleId
 	 */
 	void authPraiseSumIncr(@Param("articleId") Integer articleId);
+	/**
+	 * 根据weight获得指定数量的文章
+	 * @param quantity
+	 * @return
+	 */
+	List<Articale> weightByQuantity(@Param("quantity") Integer quantity);
+	/**
+	 * 根据创建时间获得最新的文章
+	 * @param quantity
+	 * @return
+	 */
+	List<Articale> createTimeByQuantity(@Param("quantity") Integer quantity);
 	
 }

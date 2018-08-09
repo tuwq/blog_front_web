@@ -190,4 +190,36 @@ public class CategoryService {
 		ShowCategoryArticleDto showCADto = ShowCategoryArticleDto.builder().category(category).articaleList(articaleDtoList).build();
 		return JsonResult.<ShowCategoryArticleDto>success(showCADto);
 	}
+
+	public JsonResult<List<ArticaleDto>> weight(Integer quantity) {
+		// 根据权重和更新时间
+		if (quantity == null) {
+			throw new CheckParamException("数量","未指定");
+		}
+		List<Articale> praiseList = articaleMapper.weightByQuantity(quantity);
+		List<ArticaleDto> articaleDtoList = Lists.newArrayList();
+		praiseList.forEach(articale -> {
+			ArticaleDto articaleDto = DtoUtil.adapt(new ArticaleDto(), articale);
+			articaleDto.setTimeAgo(TimeAgoUtils.format(articaleDto.getUpdateTime()));
+			articaleDto.formatNoSecondTime();
+			articaleDtoList.add(articaleDto);
+		});
+		return JsonResult.<List<ArticaleDto>>success(articaleDtoList);
+	}
+
+	public JsonResult<List<ArticaleDto>> newTime(Integer quantity) {
+		// 根据创建时间
+		if (quantity == null) {
+			throw new CheckParamException("数量","未指定");
+		}
+		List<Articale> praiseList = articaleMapper.createTimeByQuantity(quantity);
+		List<ArticaleDto> articaleDtoList = Lists.newArrayList();
+		praiseList.forEach(articale -> {
+			ArticaleDto articaleDto = DtoUtil.adapt(new ArticaleDto(), articale);
+			articaleDto.setTimeAgo(TimeAgoUtils.format(articaleDto.getUpdateTime()));
+			articaleDto.formatNoSecondTime();
+			articaleDtoList.add(articaleDto);
+		});
+		return JsonResult.<List<ArticaleDto>>success(articaleDtoList);
+	}
 }

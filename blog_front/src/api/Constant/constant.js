@@ -25,6 +25,8 @@ global.childCommentSubscribe = 'childCommentSubscribe'
 global.artPraiseKey = 'artPraiseKey'
 // 首页火热文章获取数
 global.articalePraiseQuantity = 4
+global.artNewTimeQuantity = 4 
+global.artWeightQuantity = 3
 global.articaleCategoryQuantity = 5
 global.tutorialCategoryQuantity = 3
 global.shortCodeCategoryQuantity = 4

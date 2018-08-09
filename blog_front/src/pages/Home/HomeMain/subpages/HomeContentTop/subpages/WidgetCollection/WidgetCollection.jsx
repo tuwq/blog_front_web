@@ -3,7 +3,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 
 import WidgetList from '../WidgetList/WidgetList'
 
-import { artPraiseApi } from 'api/Category/category'
+import { artNewTimeApi } from 'api/Category/category'
 
 import './WidgetCollection.less'
 import './MWidgetCollection.less'
@@ -30,7 +30,7 @@ class WidgetCollection extends React.Component {
 	}
 
 	initData() {
-		artPraiseApi((res)=>{
+		artNewTimeApi((res)=>{
 			if (res.data.code == 200) {
 				this.setState({
 					praiseList: res.data.result

@@ -72,6 +72,20 @@
     </collection>
   </resultMap>
   
+  <select id="createTimeByQuantity" parameterType="map" resultMap="BaseResultMap">
+  	SELECT <include refid="Base_Column_List" />
+	FROM articale
+	ORDER BY create_time desc,update_time desc
+	LIMIT 0,#{quantity}
+  </select>
+  
+  <select id="weightByQuantity" parameterType="map" resultMap="BaseResultMap">
+  	SELECT <include refid="Base_Column_List" />
+	FROM articale
+	ORDER BY weight desc,update_time desc
+	LIMIT 0,#{quantity}
+  </select>
+  
   <update id="authPraiseSumIncr" parameterType="map">
   	UPDATE `user`
 	SET praise = praise + 1
@@ -226,7 +240,7 @@
   <select id="praiseByQuantity" parameterType="map" resultMap="BaseResultMap">
   	SELECT <include refid="Base_Column_List" />
 	FROM articale
-	GROUP BY praise desc,update_time desc
+	ORDER BY a.praise DESC,a.update_time DESC
 	LIMIT 0,#{quantity}
   </select>
   

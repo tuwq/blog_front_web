@@ -6,6 +6,20 @@ export function categoryPageApi(currentPage,pageSize,categoryId,success) {
 	})
 }
 
+export function artWeightApi(success) {
+	axios.get('/category/artWeight/'+global.artWeightQuantity)
+	.then((res)=>{
+		success(res)
+	})
+}
+
+export function artNewTimeApi(success) {
+	axios.get('/category/newTime/'+global.artNewTimeQuantity)
+	.then((res)=>{
+		success(res)
+	})
+}
+
 export function artPraiseApi(success) {
 	axios.get('/category/praise/'+global.articalePraiseQuantity)
 	.then((res)=>{

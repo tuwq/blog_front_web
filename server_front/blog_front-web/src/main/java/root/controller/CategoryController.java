@@ -36,12 +36,28 @@ public class CategoryController {
 		return categoryService.categoryList(param, Integer.parseInt(categoryId));
 	}
 
+	@GetMapping("/artWeight/{quantity}")
+	public JsonResult<List<ArticaleDto>> weight(@PathVariable("quantity") String quantity) {
+		if (!StringUtils.isNumeric(quantity)) {
+			throw new CheckParamException("数量","未指定");
+		}
+		return categoryService.weight(Integer.parseInt(quantity));
+	}
+	
 	@GetMapping("/praise/{quantity}")
 	public JsonResult<List<ArticaleDto>> praise(@PathVariable("quantity") String quantity) {
 		if (!StringUtils.isNumeric(quantity)) {
 			throw new CheckParamException("数量","未指定");
 		}
 		return categoryService.praise(Integer.parseInt(quantity));
+	}
+	
+	@GetMapping("/newTime/{quantity}")
+	public JsonResult<List<ArticaleDto>> newTime(@PathVariable("quantity") String quantity) {
+		if (!StringUtils.isNumeric(quantity)) {
+			throw new CheckParamException("数量","未指定");
+		}
+		return categoryService.newTime(Integer.parseInt(quantity));
 	}
 
 	@GetMapping("/articaleCategory/{quantity}")

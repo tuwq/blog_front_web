@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { withRouter,Link } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-
 
 import Slider from 'base/general/Slider/Slider'
 import WidgetCollection from './subpages/WidgetCollection/WidgetCollection'
+
+import { artWeightApi } from 'api/Category/category'
 
 import './HomeContentTop.less'
 import './MHomeContentTop.less'
@@ -16,10 +15,24 @@ class HomeContentTop extends React.Component {
 	constructor(props,context) {
 		super(props,context)
 		this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+		this.initData = this.initData.bind(this)
+		this.state = {
+			data: []
+		}
 	}
 
 	componentDidMount() {
-		
+		this.initData()
+	}
+
+	initData() {
+		artWeightApi((res)=>{
+			if (res.data.code == 200) {
+				this.setState({
+					data: res.data.result
+				})
+			}
+		})
 	}
 
 	componentWillUnmount() {
@@ -33,31 +46,15 @@ class HomeContentTop extends React.Component {
 		return (
          	<section id="HomeContentTop" className="HomeContentTop">
          	 	{
-         	 		this.props.imgConfig.sliderImgList.length>0
-         	 		?(<React.Fragment>
-         	 			<Slider data={this.props.imgConfig.sliderImgList}/>
-         				<WidgetCollection />
-         	 		  </React.Fragment>)
-         	 		:(<div></div>)
+         	 		this.state.data.length>0&&
+         	 		(<Slider data={this.state.data}/>)
          	 	}
+         	 	<WidgetCollection />
          	</section>
         )
 	}
 }
 
-function mapStateToProps(state) {
-    return {
-        imgConfig: state.imgConfig
-    }
-}
+export default withRouter(HomeContentTop)
 
-function mapDispatchToProps(dispatch) {
-    return {
-       
-    }
-}
-
-export default withRouter(
-	connect(mapStateToProps, mapDispatchToProps)(HomeContentTop)
-)
 

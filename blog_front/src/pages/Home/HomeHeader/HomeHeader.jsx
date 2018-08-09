@@ -121,8 +121,7 @@ class HomeHeader extends React.Component {
           			<li className="HomeHeaderItem">
           				<a className="ItemLink">收藏</a> 
                   <ul className="ItemMenu">
-                       <li><a onClick={this.undone.bind(this)}>相册</a></li>
-                       <li><a onClick={this.undone.bind(this)}>歌单</a></li>
+                      <li><a onClick={this.undone.bind(this)}>歌单</a></li>
                   </ul>
           			</li>
           		</ul>
