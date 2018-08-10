@@ -68,12 +68,12 @@ public class CategoryController {
 		return categoryService.categoryArticale(Integer.parseInt(quantity));
 	}
 
-	@GetMapping("/tutorialCategory/{quantity}")
-	public JsonResult<ShowCategoryArticleDto> categoryTutorial(@PathVariable("quantity") String quantity) {
+	@GetMapping("/nodeCategory/{quantity}")
+	public JsonResult<ShowCategoryArticleDto> categoryNode(@PathVariable("quantity") String quantity) {
 		if (!StringUtils.isNumeric(quantity)) {
 			throw new CheckParamException("数量","未指定");
 		}
-		return categoryService.categoryTutorial(Integer.parseInt(quantity));
+		return categoryService.categoryNode(Integer.parseInt(quantity));
 	}
 
 	@GetMapping("/shortCodeCategory/{quantity}")

@@ -34,8 +34,8 @@ export function articaleCategoryApi(success) {
 	})
 }
 
-export function tutorialCategoryApi(success) {
-	axios.get('/category/tutorialCategory/'+global.tutorialCategoryQuantity)
+export function nodeCategoryApi(success) {
+	axios.get('/category/nodeCategory/'+global.nodeCategoryQuantity)
 	.then((res)=>{
 		success(res)
 	})

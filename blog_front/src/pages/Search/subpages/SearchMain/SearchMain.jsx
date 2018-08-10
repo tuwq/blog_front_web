@@ -51,18 +51,22 @@ class SearchMain extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		let query = queryString.parse(nextProps.location.search)
-		this.setState({
-			keyword: query.keyword,
-			currentPage: 1,
-			pageSize: global.categroyPageSize,
-			data: [],
-			pageModel: {},
-			pend: false,
-			isSearch: false,
-			noResult: false
-		})
-		this.searchByKeyWord(query.keyword)
+		let query = queryString.parse(this.props.location.search)
+		let newquery = queryString.parse(nextProps.location.search)
+		if (query.keyword != newquery.keyword ) {
+			this.setState({
+				keyword: newquery.keyword,
+				currentPage: 1,
+				pageSize: global.categroyPageSize,
+				data: [],
+				pageModel: {},
+				pend: false,
+				isSearch: false,
+				noResult: false
+			},()=>{
+				this.searchByKeyWord(newquery.keyword)
+			})		
+		}
 	}
 
 	searchByKeyWord(keyword) {

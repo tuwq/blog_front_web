@@ -33,4 +33,9 @@ public class MD5Util {
             return null;
         }
     }
+    
+    public static void main(String[] args) {
+		String encrypt = MD5Util.encrypt("blogauthwozuiniubi454192");
+		System.out.println(encrypt);
+	}
 }

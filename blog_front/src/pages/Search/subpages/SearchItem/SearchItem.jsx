@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { withRouter,Link } from 'react-router-dom'
+import marked from 'marked'
 
 import './SearchItem.less'
 import './MSearchItem.less'
@@ -10,11 +11,13 @@ class SearchItem extends React.Component {
 	constructor(props,context) {
 		super(props,context)
 		this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
-		
+		this.$content = React.createRef()
 	}
 
 	componentDidMount() {
-		
+		let ht = marked(this.props.item.content)
+	    let text = $(ht).text()
+	    $(this.$content.current).text(text)
 	}
 
 	render() {
@@ -29,7 +32,7 @@ class SearchItem extends React.Component {
 			   </div>
 			   <div className="content">
 			   	  <h2><Link to={'/article/'+this.props.item.id}>{this.props.item.title}</Link></h2>
-			   	  <p>{this.props.item.content}</p>
+			   	  <p ref={this.$content}></p>
 			  	  <div className="line"></div>
 			  	  <div className="meta">
 			  	  	<span><i><svg viewBox="0 0 1024 1024" width="13" height="13"><path fill="#fffff" d="M164.655 68.977l0 0 0 0zM866.321 769.149q0 59.804-36.377 94.437t-96.684 34.632l-435.544 0q-60.293 0-96.684-34.632t-36.377-94.437q0-26.414 1.744-51.573t6.977-54.321 13.2-54.069 21.432-48.586 30.892-40.367 42.614-26.665 55.563-9.963q4.479 0 20.931 10.717t37.131 23.916 53.819 23.916 66.531 10.717 66.531-10.717 53.819-23.916 37.131-23.916 20.931-10.717q30.405 0 55.563 9.963t42.614 26.665 30.893 40.367 21.432 48.586 13.2 54.069 6.977 54.321 1.744 51.573zM706.846 324.131q0 79.242-56.065 135.292t-135.293 56.065-135.293-56.065-56.065-135.292 56.065-135.293 135.293-56.065 135.293 56.065 56.065 135.293z"></path></svg></i>

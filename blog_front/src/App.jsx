@@ -23,6 +23,7 @@ import 'base/style/webkit.css'
 import 'base/style/input.css'
 import 'base/style/short.css'
 import 'base/style/base.css'
+import 'font-awesome/css/font-awesome.css'
 
 
 class App extends Component {

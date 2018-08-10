@@ -3,6 +3,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { withRouter } from 'react-router-dom'
 import marked from 'marked'
 import hljs from 'highlight.js'
+import 'highlight.js/styles/atelier-cave-light.css'
 
 import { _saveStorage,_loadStorage } from 'base/js/cache'
 import { artPraiseIncrApi } from 'api/Praise/praise'
@@ -84,7 +85,7 @@ class ArticleContent extends React.Component {
 						<div className="content-footer">
 							<div className="date"><i></i>
 							<span>最后修改: {this.props.data.updateTimeString}&nbsp;{this.props.data.timeAgo}</span></div>
-							<div className="statement"><span>© 著作权归作者所有</span></div>
+							<div className="statement"><span>© 著作权归作者所有,如需转载请注明出处</span></div>
 						</div>
 					</div>
 					<div  className="support">

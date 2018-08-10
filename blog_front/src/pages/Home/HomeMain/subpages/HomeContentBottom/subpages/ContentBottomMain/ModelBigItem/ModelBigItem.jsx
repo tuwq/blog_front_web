@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { withRouter,Link } from 'react-router-dom'
+import marked from 'marked'
 
 import clockSvg from 'static/svg/clock.svg'
 import eyeSvg from 'static/svg/eye.svg'
@@ -14,10 +15,13 @@ class ModelBigItem extends React.Component {
 	constructor(props,context) {
 		super(props,context)
 		this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
+      this.$content = React.createRef()
 	}
 
 	componentDidMount() {
-		
+		let ht = marked(this.props.item.content)
+      let text = $(ht).text()
+      $(this.$content.current).text(text)
 	}
 
 	render() {
@@ -33,7 +37,7 @@ class ModelBigItem extends React.Component {
          				<span><i><img width="14" height="14" alt="" src={eyeSvg}/></i>{this.props.item.browseSum}(阅读)</span>
          				<span><i><img width="14" height="14" alt="" src={commentSvg}/></i>{this.props.item.commentSum}(评论)</span>
          			</div>
-         			<div className="content">{this.props.item.content}</div>
+         			<div className="content" ref={this.$content}></div>
          		</div>
          	</div>
         )

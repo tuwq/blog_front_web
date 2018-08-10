@@ -42,7 +42,7 @@ class Slider extends React.Component {
 		this.listenWindow()
 		this.initEle()
 		this.pointClick()
-		// this.autoPlay()
+		this.autoPlay()
 	}
 	
 	componentWillUnmount() {
@@ -86,11 +86,11 @@ class Slider extends React.Component {
          			<ul ref={this.imageList}>
          				{
          					this.props.data.map((item,index)=>{
-         						return (<li key={index}><a><img width="" height="" alt="" src={global.artImgPrefix+item.faceCover}/>
+         						return (<li key={index}><Link to={'/article/'+item.id}><img width="" height="" alt="" src={global.artImgPrefix+item.faceCover}/>
          								<div className="content">
          									<h2>{item.title}</h2>
          								</div>
-         							</a></li>)
+         							</Link></li>)
          					})
          				}
          			</ul>

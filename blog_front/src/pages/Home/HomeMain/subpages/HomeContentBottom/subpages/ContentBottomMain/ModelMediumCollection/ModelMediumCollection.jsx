@@ -55,7 +55,7 @@ class ModelMediumCollection extends React.Component {
 		return (
          	<div className="ModelMediumCollection">
          		{
-         			this.state.articleList.length>0&&
+         			JSON.stringify(this.state.articleBigItem)!="{}"&&
          			(
          				<React.Fragment>
          					<ModelMediumTitle category={this.state.category}/>

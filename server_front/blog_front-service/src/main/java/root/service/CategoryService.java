@@ -35,8 +35,8 @@ public class CategoryService {
 	private ArticaleMapper articaleMapper;
 	@Value("${categoryArticleId}")
 	private Integer categoryArticleId;
-	@Value("${categoryTutorialId}")
-	private Integer categoryTutorialId;
+	@Value("${categoryNodeId}")
+	private Integer categoryNodeId;
 	@Value("${categoryShortCodeId}")
 	private Integer categoryShortCodeId;
 	@Value("${categoryChatId}")
@@ -114,11 +114,11 @@ public class CategoryService {
 		return JsonResult.<ShowCategoryArticleDto>success(showCADto);
 	}
 
-	public JsonResult<ShowCategoryArticleDto> categoryTutorial(Integer quantity) {
+	public JsonResult<ShowCategoryArticleDto> categoryNode(Integer quantity) {
 		if (quantity == null) {
 			throw new CheckParamException("数量","未指定");
 		}
-		List<Articale> articaleList = articaleMapper.categoryArticale(categoryTutorialId,quantity);
+		List<Articale> articaleList = articaleMapper.categoryArticale(categoryNodeId,quantity);
 		List<ArticaleDto> articaleDtoList = Lists.newArrayList();
 		articaleList.forEach(articale -> {
 			ArticaleDto articaleDto = DtoUtil.adapt(new ArticaleDto(), articale);
@@ -126,7 +126,7 @@ public class CategoryService {
 			articaleDto.formatNoSecondTime();
 			articaleDtoList.add(articaleDto);
 		});
-		Category category = categoryMapper.selectByPrimaryKey(categoryTutorialId);
+		Category category = categoryMapper.selectByPrimaryKey(categoryNodeId);
 		if (category == null) {
 			throw new CheckParamException("分类","不存在");
 		}

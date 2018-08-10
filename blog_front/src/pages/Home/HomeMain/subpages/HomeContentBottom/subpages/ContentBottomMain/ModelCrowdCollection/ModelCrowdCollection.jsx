@@ -4,7 +4,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 import ModelMediumTitle from 'base/general/ModelMediumTitle/ModelMediumTitle'
 import ModelCrowdList from '../ModelCrowdList/ModelCrowdList'
 
-import { tutorialCategoryApi } from 'api/Category/category'
+import { nodeCategoryApi } from 'api/Category/category'
 
 import './ModelCrowdCollection.less'
 import './MModelCrowdCollection.less'
@@ -16,7 +16,7 @@ class ModelCrowdCollection extends React.Component {
 		this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
 		this.initData = this.initData.bind(this)
 		this.state = {
-			tutorialList: [],
+			data: [],
 			category: {}
 		}
 	}
@@ -32,11 +32,11 @@ class ModelCrowdCollection extends React.Component {
 	}
 
 	initData() {
-		tutorialCategoryApi((res)=>{
+		nodeCategoryApi((res)=>{
 			if (res.data.code == 200) {
 				this.setState({
 					category: res.data.result.category,
-					tutorialList: res.data.result.articaleList
+					data: res.data.result.articaleList
 				})
 			}
 		})
@@ -46,12 +46,12 @@ class ModelCrowdCollection extends React.Component {
 		return (
          	<div className="ModelCrowdCollection">
          		{
-         			this.state.tutorialList.length>0&&
+         			this.state.data.length>0&&
          			(
          			<React.Fragment>
          				<ModelMediumTitle category={this.state.category}/>
 		         		<div className="ModelCrowdWarrper">
-			         		<ModelCrowdList tutorialList={this.state.tutorialList}/>
+			         		<ModelCrowdList data={this.state.data}/>
 		         		</div>
 		         	</React.Fragment>
 	         		)

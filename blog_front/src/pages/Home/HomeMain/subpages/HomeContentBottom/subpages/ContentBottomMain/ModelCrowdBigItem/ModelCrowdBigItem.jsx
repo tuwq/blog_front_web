@@ -37,7 +37,7 @@ class ModelCrowdBigItem extends React.Component {
                      <span><i><img width="" height="" alt="" src={eyeSvg}/></i>{this.props.item.browseSum}阅读</span>
                      <span><i><img width="" height="" alt="" src={commentSvg}/></i>{this.props.item.commentSum}(评论)</span>
                   </div>
-                  <div className="content" ref={this.$content}>{this.props.item.content}</div>                  
+                  <div className="content" ref={this.$content}></div>                  
                </div>
          	</div>
         )
