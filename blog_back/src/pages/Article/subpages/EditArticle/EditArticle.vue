@@ -2,7 +2,7 @@
   <div id="EditArticle" class="EditArticle">
       <div class="wrap">
      		<div class="markdownEditor" id="editor">
-           <button @click="uploadimg" class="uploadBtn">上传图片</button>
+           <button @click="uploadimg" class="uploadBtn">替换图片地址</button>
            <button @click="finish" class="finishBtn">完成修改</button>
      			 <mavon-editor style="height: 100%" v-model="content" ref=updatemd @imgAdd="$imgAdd" @imgDel="$imgDel"></mavon-editor>
      		</div>
@@ -23,6 +23,7 @@
               <input type="checkbox" id="article" :value="item.id" v-model="categoryNames">
             </div>
           </div>
+          <div><input type="number" v-model="weight" placeholder="权重"></div>
         </div>
       </div>
   </div>
@@ -43,6 +44,7 @@
 	        content: '',
 	        img_file: {},
           title: '',
+          weight: 0,
           faceCover: '',
           artimgUrl: global.artimgUrl
     	}
@@ -62,6 +64,7 @@
       getArticleDetailApi(this.$route.params.id,(res)=>{
         if (res.data.code==200) {
             this.title = res.data.result.title
+            this.weight = res.data.result.weight
             this.content = res.data.result.content
             this.categoryNames = res.data.result.categoryIds
             this.faceCover = res.data.result.faceCover
@@ -86,7 +89,8 @@
         })
       },
       finish() {
-        updateArticleApi(this.$route.params.id,this.title,this.categoryNames,this.content,this.faceCover,(res)=>{
+        updateArticleApi(this.$route.params.id,this.title,this.weight,this.categoryNames,this.content,this.faceCover,
+          (res)=>{
            if (res.data.code==200) {
             alert('修改成功了')
            }

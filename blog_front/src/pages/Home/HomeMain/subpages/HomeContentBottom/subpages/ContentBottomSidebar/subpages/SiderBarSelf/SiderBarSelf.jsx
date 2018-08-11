@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { withRouter,Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 import followSvg from 'static/svg/follow.svg'
 import mailSvg from 'static/svg/mail.svg'
@@ -44,10 +46,13 @@ class SiderBarSelf extends React.Component {
    }
 
 	render() {
+      let imgStyle = {
+        backgroundImage: 'url(' + this.props.imgConfig.userImg + ')',
+      };
 
 		return (
          	<div id="SiderBarSelf" className="SiderBarSelf">
-         		<div className="SelfBg"><a><img alt=""/></a></div>
+         		<div className="SelfBg" style={imgStyle}><a></a></div>
          		<div className="SelfMsg">
                   {
                      this.state.author.avatar&&
@@ -79,5 +84,19 @@ class SiderBarSelf extends React.Component {
 	}
 }
 
-export default withRouter(SiderBarSelf)
+function mapStateToProps(state) {
+    return {
+        imgConfig: state.imgConfig
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+       
+    }
+}
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(SiderBarSelf)
+)
 

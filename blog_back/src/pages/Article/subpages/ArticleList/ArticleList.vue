@@ -44,7 +44,7 @@
         if(page) {
            this.currentPage = page
         }
-        getArticleListApi(this.page,this.pageSize,(res)=>{
+        getArticleListApi(this.currentPage,this.pageSize,(res)=>{
           if(res.data.code == 200) {
             this.articleList = res.data.data
             this.maxPageCode = res.data.pageModel.maxPageCode

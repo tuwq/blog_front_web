@@ -31,13 +31,4 @@ public class MD5Util {
             return null;
         }
     }
-
-	public static void main(String[] args) {
-		try {
-			String md5 = MD5Util.encryPassword("qwe4561002568");
-			System.out.println(md5);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 }

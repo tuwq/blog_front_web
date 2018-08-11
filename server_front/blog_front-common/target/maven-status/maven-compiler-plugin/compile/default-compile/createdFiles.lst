@@ -1,4 +1,5 @@
 root\exception\TokenException.class
+root\constant\SecretKey.class
 root\exception\ActivationException.class
 root\util\ApplicationContextUtil.class
 root\filter\ThreadRequestFilter.class
@@ -8,10 +9,12 @@ root\exception\NotFoundException.class
 root\util\TimeAgoUtils.class
 root\util\IpUtil.class
 root\exception\WebException.class
+root\exception\SearchNoResultException.class
 root\util\MD5Util.class
 root\util\RegExUtil.class
 root\constant\RedisCode.class
 root\redis\RedisOperator.class
+root\exception\CommentException.class
 root\exception\FileUploadException.class
 root\util\DtoUtil.class
 root\filter\FilterConfig.class
@@ -19,6 +22,7 @@ root\util\DefaultValueUtil.class
 root\exception\CheckParamException.class
 root\util\TimeUtil.class
 root\util\ThreadUtil.class
+root\exception\DynamicException.class
 root\filter\HttpFilter.class
 root\constant\ResultCode.class
 root\util\JwtUtil.class

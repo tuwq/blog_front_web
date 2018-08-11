@@ -3,6 +3,7 @@ package root.param;
 import java.util.Set;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import lombok.Getter;
@@ -17,7 +18,8 @@ public class ArticleParam {
 	
 	@Size(min=1,message = "分类不可以为空")
 	private Set<Integer> categoryNames;
-	
+	@NotNull
+	private Integer weight;
 	@NotBlank(message = "内容不可以为空")
 	private String content;
 	

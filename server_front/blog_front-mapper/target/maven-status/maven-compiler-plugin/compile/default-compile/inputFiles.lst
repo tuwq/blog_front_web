@@ -2,9 +2,12 @@ D:\eclipse-workspace\blog_front\blog_front-mapper\src\main\java\root\mapper\Arti
 D:\eclipse-workspace\blog_front\blog_front-mapper\src\main\java\root\mapper\CategoryMapper.java
 D:\eclipse-workspace\blog_front\blog_front-mapper\src\main\java\root\mapper\CommentUserMapper.java
 D:\eclipse-workspace\blog_front\blog_front-mapper\src\main\java\root\mapper\UserFollowMapper.java
+D:\eclipse-workspace\blog_front\blog_front-mapper\src\main\java\root\mapper\FrontImgConfigMapper.java
 D:\eclipse-workspace\blog_front\blog_front-mapper\src\main\java\root\mapper\CommentMapper.java
+D:\eclipse-workspace\blog_front\blog_front-mapper\src\main\java\root\mapper\UserInitiateDynamicMapper.java
+D:\eclipse-workspace\blog_front\blog_front-mapper\src\main\java\root\mapper\UserReceiveDynamicMapper.java
+D:\eclipse-workspace\blog_front\blog_front-mapper\src\main\java\root\mapper\AccessMapper.java
 D:\eclipse-workspace\blog_front\blog_front-mapper\src\main\java\root\mapper\SysUserMapper.java
 D:\eclipse-workspace\blog_front\blog_front-mapper\src\main\java\root\mapper\UserMapper.java
-D:\eclipse-workspace\blog_front\blog_front-mapper\src\main\java\root\mapper\UserDynamicMapper.java
 D:\eclipse-workspace\blog_front\blog_front-mapper\src\main\java\root\mapper\ArticaleCategoryMapper.java
 D:\eclipse-workspace\blog_front\blog_front-mapper\src\main\java\root\mapper\ArticaleUserMapper.java

@@ -20,6 +20,7 @@ import com.qiniu.storage.Configuration;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.storage.model.DefaultPutRet;
 import com.qiniu.util.Auth;
+import com.qiniu.util.StringMap;
 
 import root.beans.ImgNode;
 import root.beans.ImgURIResult;
@@ -130,7 +131,8 @@ public class QiNiuIMGService {
 			e.printStackTrace();
 		}
 		Auth auth = Auth.create(qiniuAcKey, qiniuSeKey);
-		String upToken = auth.uploadToken(qiniuImgBucket);
+		long expireSeconds = 3600;
+		String upToken = auth.uploadToken(qiniuImgBucket,key, expireSeconds, new StringMap().put("insertOnly",0));
 		try {
 		    Response response = uploadManager.put(uploadBytes, key, upToken);
 		    //解析上传成功的结果

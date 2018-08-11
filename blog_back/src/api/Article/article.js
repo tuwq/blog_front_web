@@ -1,6 +1,6 @@
-export function addArticleApi(title,categoryNames,content,coverImg,success) {
+export function addArticleApi(title,weight,categoryNames,content,coverImg,success) {
 	axios.post('/sys/article/add',{
-		title,categoryNames,content,coverImg
+		title,weight,categoryNames,content,coverImg
 	}).then((res)=>{
 		success(res)
 	})
@@ -51,9 +51,9 @@ export function getArticleDetailApi(id,success) {
 	})
 }
 
-export function updateArticleApi(id,title,categoryNames,content,coverImg,success) {
+export function updateArticleApi(id,title,weight,categoryNames,content,coverImg,success) {
 	axios.put('/sys/article/'+id,{
-		title,categoryNames,content,coverImg
+		title,weight,categoryNames,content,coverImg
 	}).then((res)=>{
 		success(res)
 	})

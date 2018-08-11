@@ -2,7 +2,7 @@
   <div id="AddArticle" class="AddArticle">
      <div class="wrap">
      		<div class="markdownEditor" id="editor">
-           <button @click="uploadimg" class="uploadBtn">上传图片</button>
+           <button @click="uploadimg" class="uploadBtn">替换图片地址</button>
            <button @click="finish" class="finishBtn">完成</button>
      			 <mavon-editor style="height: 100%" v-model="content" ref=md @imgAdd="$imgAdd" @imgDel="$imgDel"></mavon-editor>
      		</div>
@@ -23,6 +23,7 @@
               <input type="checkbox" id="article" :value="item.id" v-model="categoryNames">
             </div>
           </div>
+          <div><input type="number" v-model="weight" placeholder="权重"></div>
         </div>
      </div>
   </div>
@@ -39,6 +40,7 @@
     data() {
     	return {
         title: '',
+        weight: 0,
     		categoryNames: [],
         categoryList: [],
         content: '',
@@ -99,9 +101,9 @@
         })
       },
       finish() {
-        console.log(this.categoryNames)
+        console.log(this.weight)
         if (checkContent(this.title,this.categoryNames,this.content,this.faceCover)) {
-          addArticleApi(this.title,this.categoryNames,this.content,this.faceCover,(res)=>{
+          addArticleApi(this.title,this.weight,this.categoryNames,this.content,this.faceCover,(res)=>{
             if(res.data.code==200) {
                 alert('发表成功了')
                 this.title = ''

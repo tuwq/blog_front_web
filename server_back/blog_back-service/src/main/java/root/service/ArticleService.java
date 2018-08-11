@@ -91,6 +91,7 @@ public class ArticleService {
 		Articale articale = Articale.builder()
 		.userId(frontId)
 		.title(param.getTitle())
+		.weight(param.getWeight())
 		.faceCover(param.getCoverImg())
 		.content(param.getContent())
 		.createTime(new Date())
@@ -258,6 +259,7 @@ public class ArticleService {
 		}
 		Articale articale = articaleMapper.selectByPrimaryKey(id);
 		articale.setTitle(param.getTitle());
+		articale.setWeight(param.getWeight());
 		articale.setFaceCover(param.getCoverImg());
 		articale.setContent(param.getContent());
 		articale.setUpdateTime(new Date());

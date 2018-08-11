@@ -14,6 +14,7 @@
 <script type="text/ecmascript-6">
   import marked from 'marked'
   import hljs from 'highlight.js'
+  import 'highlight.js/styles/atelier-cave-light.css'
   export default {  
     props: {
       content: {
