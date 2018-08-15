@@ -29,7 +29,12 @@ class CommentItem extends React.Component {
 				</a>
 				<div className="content-wrapper">
 					<div className="meta">
-						<Link to={'/user/'+this.props.item.user.id}>{this.props.item.user.nickname}</Link>
+						<Link to={'/user/'+this.props.item.user.id}>{this.props.item.user.nickname}
+							{
+								this.props.item.user.id==1&&
+								(<button className="master">博主</button>)
+							}
+						</Link>
 						{
 							this.props.item.parentUser&&
 							(<Link to={'/user/'+this.props.item.parentUser.id}>&nbsp;回复&nbsp;{this.props.item.parentUser.nickname}</Link>)

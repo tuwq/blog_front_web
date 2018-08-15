@@ -1,5 +1,5 @@
 export function getImgConfigApi(success) {
-	axios.get('/config/img')
+	axios.get(global.serverUrl+'/config/img')
 	.then((res)=>{
 		success(res)
 	})

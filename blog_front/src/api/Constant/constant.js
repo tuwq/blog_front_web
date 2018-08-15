@@ -1,10 +1,11 @@
 // 上线服务器的地址
-global.serverUrl = '127.0.0.1:8000'
+global.serverUrl = '/api'
 // 图片存储服务器的地址
 global.imgServerUrl = 'http://img.twenq.com/'
 // 用户头像地址的前缀
 global.userAvatarPrefix = global.imgServerUrl + 'upload/user/avatar/'
 global.artImgPrefix = global.imgServerUrl + 'upload/artimg/'
+global.firendAvatarPrefix = global.imgServerUrl + 'upload/firend/avatar/'
 // token的过期时间
 global.TOKEN_TIME_DAY = 7
 // 用户下拉菜单的订阅key
@@ -32,6 +33,7 @@ global.nodeCategoryQuantity = 3
 global.shortCodeCategoryQuantity = 4
 global.chatCategoryQuantity = 4
 global.artHotDiscussQuantity = 3
+
 global.newCommentPageSize = 3
 global.categroyPageSize = 3
 global.artCommentPageSize = 5

@@ -1,6 +1,6 @@
 import cookies from 'js-cookie'
 
-const TOKEN_KEY = '__TOKEN__'
+const TOKEN_KEY = 'securityToken'
 
 export function _setToken(token) {
 	cookies.set(TOKEN_KEY,token,{ expires: global.TOKEN_TIME_DAY })

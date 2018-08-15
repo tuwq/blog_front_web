@@ -66,6 +66,7 @@ fieldset, img, input, button {
     padding: 0;
     margin: 0;
     outline-style: none;
+    text-decoration: none;
 }
 s, i, em {
     font-style: normal;

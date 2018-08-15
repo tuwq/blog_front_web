@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter as Router, Route,Switch } from 'react-router-dom';
+import {  HashRouter as Router, Route,Switch } from 'react-router-dom';
 // BrowserRouter
 import App from '@/App.jsx'
 import HFMainRouter from './HFMainRouter'

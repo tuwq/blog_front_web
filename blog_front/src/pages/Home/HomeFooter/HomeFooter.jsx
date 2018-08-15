@@ -30,8 +30,7 @@ class HomeFooter extends React.Component {
           		</div>
 	          	<div className="contact">
 	          		<ul className="itemList">
-	          			<li className="item"><a href="tencent://QQMusic/?version==730&&cmd_count==1&&cmd_0==4002&&clienttype_0==0&&uin==1246361002"><span><img width="20" height="20" alt="" src={qqSvg}/></span></a></li>
-	          			<li className="item"><a href="https://github.com/tuwq"><span><img width="20" height="20" alt="" src={githubSvg}/></span></a></li>
+	          			<li className="item"><a href="tencent://message/?uin=1246361002&Site=&Menu=yes"><span><img width="20" height="20" alt="" src={qqSvg}/></span></a></li>
 	          		</ul>
 	          	</div>
 	          	<div className="contact">

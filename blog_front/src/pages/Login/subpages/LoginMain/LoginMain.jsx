@@ -63,6 +63,12 @@ class LoginMain extends React.Component {
 					this.setState({
 						error: res.data.msg
 					})
+				} else if (res.data.code == RESULT_CODE.EMAIL_MATURITY) {
+					this.setState({
+						loginname: '',
+						password: '',
+						error: res.data.msg
+					})
 				}
 			})
 		} else {

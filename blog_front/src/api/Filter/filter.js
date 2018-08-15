@@ -4,11 +4,13 @@ import { _getToken,_removeToken } from 'base/js/cookie'
 import * as userActions from '@/store/actions/user'
 import {createBrowserHistory, createHashHistory} from 'history'
 import PubSub from 'pubsub-js'
+
+axios.defaults.withCredentials = true;
 // 每次请求携带LOGIN_TOKEN
 axios.interceptors.request.use(
     config => {
         if (_getToken()) {  // 判断是否存在token，如果存在的话，则每个http header都加上token
-            config.headers.__TOKEN__  = _getToken();
+            config.headers.securityToken = _getToken();
         }
         return config;
     },

@@ -105,9 +105,8 @@ class HomeHeader extends React.Component {
           			<li className="HomeHeaderItem">
           				<a className="ItemLink">我</a>
                     <ul className="ItemMenu">
-                         <li><a>给我留言</a></li>
+                         <li><Link to="/article/1">给我留言</Link></li>
                          <li><a onClick={this.goCategory.bind(this,4)}>个人闲谈</a></li>
-                         <li><a onClick={this.undone.bind(this)}>申请友链</a></li>
                     </ul>
           			</li>
           			<li className="HomeHeaderItem">
@@ -124,6 +123,13 @@ class HomeHeader extends React.Component {
                       <li><a onClick={this.undone.bind(this)}>歌单</a></li>
                   </ul>
           			</li>
+                <li className="HomeHeaderItem">
+                  <a className="ItemLink">友链</a> 
+                   <ul className="ItemMenu">
+                      <li><Link to="/firend">友情链接</Link></li>
+                      <li><a onClick={this.undone.bind(this)}>申请友链</a></li>
+                  </ul>
+                </li>
           		</ul>
           		<ul className="HomeHeaderItemListRight">
           			<li className="HomeHeaderItemRight">
