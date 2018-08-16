@@ -24,6 +24,12 @@ class FindPass extends React.Component {
 		
 	}
 
+	componentWillUnmount() {
+	   this.setState = (state,callback)=>{
+	     return
+	   }
+	}
+
 	keypress(e) {
 		// 选择提交
 		if (e.which === 13) {

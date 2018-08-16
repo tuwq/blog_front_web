@@ -1,0 +1,1 @@
+.MusicCategoryList{display:flex;flex-direction:column}.MusicCategoryList .MusicCategoryItem{position:relative;transition:all .3s ease-out;overflow:hidden}.MusicCategoryList .MusicCategoryItem:hover{background:rgba(230,244,250,.5)}.MusicCategoryList .MusicCategoryItem .name{display:block;font-size:15px;text-align:center;padding:10px}

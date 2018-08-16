@@ -19,8 +19,10 @@ import UserRouter from './subrouters/UserRouter'
 import SearchRouter from './subrouters/SearchRouter'
 import CategoryRouter from './subrouters/CategoryRouter'
 import ArticleRouter from './subrouters/ArticleRouter'
+import MusicRouter from './subrouters/MusicRouter'
 import NotFound from '@/pages/NotFound/NotFound'
 import Firend from '@/pages/Firend/Firend'
+
 
 class Main extends Component {
 
@@ -42,6 +44,7 @@ class Main extends Component {
             <Route path="/search" component={SearchRouter} />
             <Route path="/category" component={CategoryRouter} />
             <Route path="/article" component={ArticleRouter} />
+            <Route path="/music" component={MusicRouter} />
             <Route path="/firend" component={Firend} />
             <Route path="*" component={NotFound} />
           </Switch>

@@ -22,6 +22,8 @@ global.fansListrefreshSubscribe = 'fansListrefreshSubscribe'
 global.artGoCommentListSubscribe = 'artGoCommentListSubscribe'
 // 打开子评论模态框
 global.childCommentSubscribe = 'childCommentSubscribe'
+// 打开歌单列表侧边栏
+global.MusicSiderSubscribe = 'MusicSiderSubscribe'
 // 文章点赞的密钥
 global.artPraiseKey = 'artPraiseKey'
 // 首页火热文章获取数

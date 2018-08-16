@@ -1,0 +1,47 @@
+@import url("../../../../base/style/constant.less");
+@media screen and (min-width: @pc_width) {
+.MusicList {
+	display: flex;
+	flex-wrap: wrap;
+	.MusicItem {
+		flex: 0 1 25%;
+		max-width: 25%;
+		position: relative;
+		transition: all .3s ease-out;
+		list-style: none;
+	    overflow: hidden;
+	    margin-bottom: 20px;
+		&:hover {
+	    	background: rgba(230,244,250,.5);
+	    }
+		.wrap {
+			padding: 0 20px;
+			display: flex;
+			.coverImg {
+				width: 60px;
+	    		height: 60px;
+	    		border-radius: 50%;
+	    		margin-right: 10px;
+			}
+			.info {
+				display: flex;
+				flex-direction: column;
+	    		overflow: hidden;
+	    		.songName {
+					font-size: 18px;
+					margin-bottom: 7px;
+					white-space: nowrap;
+	    			text-overflow: ellipsis;
+	    			overflow: hidden;
+		    	}
+		    	.singer {
+		    		color: #7f8c8d;
+					margin-bottom: 12px;
+					white-space: nowrap;
+	    			text-overflow: ellipsis;
+	    			overflow: hidden;
+		    	}
+			}
+		}
+	}
+}}

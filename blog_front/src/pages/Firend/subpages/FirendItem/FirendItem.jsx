@@ -18,7 +18,7 @@ class FirendItem extends React.Component {
 
 	render() {
 		return (
-			<a className="FirendItem">
+			<a href={this.props.item.website} className="FirendItem">
 			 	<div className="box">
 			 		<img className="avatar" alt="" src={global.firendAvatarPrefix+this.props.item.avatar}/>
 					<div className="info">

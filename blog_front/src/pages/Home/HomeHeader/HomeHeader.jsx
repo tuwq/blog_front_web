@@ -120,7 +120,7 @@ class HomeHeader extends React.Component {
           			<li className="HomeHeaderItem">
           				<a className="ItemLink">收藏</a> 
                   <ul className="ItemMenu">
-                      <li><a onClick={this.undone.bind(this)}>歌单</a></li>
+                      <li><Link to="/music">歌单</Link></li>
                   </ul>
           			</li>
                 <li className="HomeHeaderItem">

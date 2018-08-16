@@ -1,0 +1,18 @@
+.MusicCategoryList {
+	display: flex;
+	flex-direction: column;
+	.MusicCategoryItem {
+		position: relative;
+		transition: all .3s ease-out;
+		overflow: hidden;
+		&:hover {
+	    	background: rgba(230,244,250,.5);
+	    }
+		.name {
+			display: block;
+			font-size: 15px;
+			text-align: center;
+			padding: 10px;
+		}
+	}
+}

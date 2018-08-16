@@ -1,6 +1,6 @@
 import React from 'react';
-import {  HashRouter as Router, Route,Switch } from 'react-router-dom';
-// BrowserRouter
+import { HashRouter  as Router, Route,Switch } from 'react-router-dom';
+// HashRouter BrowserRouter
 import App from '@/App.jsx'
 import HFMainRouter from './HFMainRouter'
 import JustFooterRouter from './JustFooterRouter'
