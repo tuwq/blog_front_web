@@ -121,6 +121,46 @@
             -webkit-font-smoothing: antialiased;
         }
     }
+    table {
+        border: 1px solid #ffffff;
+        color: rgb(0,0,0);
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        background-color: rgb(255,255,255);
+        width: 100%;
+        overflow: auto;
+        display: table;
+        font-size: 14px;
+        border-spacing: 0;
+        border-collapse: collapse;
+        word-break: normal;
+        word-wrap: normal;
+        margin-bottom: 1px;
+        thead {
+        
+        }
+        tbody {
+            display: table-row-group;
+            vertical-align: middle;
+            border-color: inherit;
+            color: rgb(0,0,0);
+            font-family: Verdana, Arial, Helvetica, sans-serif;
+            font-size: 14px;
+        }
+        tr {
+            border-top: 1px solid #ccc;
+            background-color: #fff;
+        }
+        table tr:nth-child(2n) {
+            background-color: #f8f8f8;
+        }
+        td,th {
+            border-color: #C0C0C0;
+            border-collapse: collapse;
+            padding: 3px;
+            border: 1px solid #ddd;
+        }
+    }
     button {
         margin-bottom: 5px;
         color: #fff !important;

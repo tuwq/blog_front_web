@@ -72,6 +72,9 @@
         default: false
       }
     },
+    mounted() {
+      this.currentClass(1)
+    },
     methods: {
       pageList(page) {
         if(this.isSerch) {

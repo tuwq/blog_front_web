@@ -25,7 +25,21 @@
               <li @click.stop.prevent="showUserManage">用户列表</li>
             </ul>
           </li>
-          <li class="nav-control"><a @click.stop.prevent="updateNavType(5,$event)"><i class="fa fa-cog"></i>
+          <li class="nav-control"><a @click.stop.prevent="updateNavType(5,$event)"><i class="fa fa-link"></i>
+            <span>友链管理</span></a>
+            <ul class="menu-group">
+              <li @click.stop.prevent="showFirends">友链列表</li>
+              <li @click.stop.prevent="addFirend">添加友链</li>
+            </ul>
+          </li>
+          <li class="nav-control"><a @click.stop.prevent="updateNavType(6,$event)"><i class="fa fa-music"></i>
+            <span>音乐管理</span></a>
+            <ul class="menu-group">
+              <li @click.stop.prevent="showMusics">歌单列表</li>
+              <li @click.stop.prevent="addMusic">添加音乐</li>
+            </ul>
+          </li>
+          <li class="nav-control"><a @click.stop.prevent="updateNavType(7,$event)"><i class="fa fa-cog"></i>
             <span>配置管理</span></a>
             <ul class="menu-group">
               <li @click.stop.prevent="showImgConfig">图片配置</li>
@@ -58,16 +72,32 @@
          $(e.target).addClass('current').siblings().removeClass('current')
          this.$router.replace('/imgConfig')
       },
+      showFirends(e) {
+         $(e.target).addClass('current').siblings().removeClass('current')
+         this.$router.replace('/firend')
+      },
+      showMusics(e){
+         $(e.target).addClass('current').siblings().removeClass('current')
+         this.$router.replace('/music')
+      },
       addArticle(e) {
         $(e.target).addClass('current').siblings().removeClass('current')
         this.$router.replace('/article/add')
+      },
+      addFirend(e) {
+        $(e.target).addClass('current').siblings().removeClass('current')
+        this.$router.replace('/firend/add')
+      },
+      addMusic(e) {
+        $(e.target).addClass('current').siblings().removeClass('current')
+        this.$router.replace('/music/add')
       },
       updateNavType(type,e) {
         $('.menu-group').removeClass('show')
         $(e.target).parents('.nav-control').find('.menu-group').toggleClass('show')
         $(e.target).parents('.nav-control').addClass('current').siblings().removeClass('current')
         let pageName = type==1?'':type==2?'article':type==3?'comment':type==4?'userManage':
-                       type==5?'imgConfig':''
+                       type==5?'firend':type==6?'music':type==7?'imgConfig':''
         this.$router.replace('/' + pageName)
       }
      }

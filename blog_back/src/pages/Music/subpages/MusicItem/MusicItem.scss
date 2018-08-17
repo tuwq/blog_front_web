@@ -1,0 +1,20 @@
+.MusicItem {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 10px;
+	&:hover {background: $pink_color;}
+	span {
+		flex: 1;
+		overflow: hidden;
+		max-height: 80px;
+		padding: 10px;
+		&.image {
+			padding: 0px;
+			display: flex;
+			button {@include common-btn;background: $green_color;margin-left: 10px;z-index: 2;}
+			input[type="file"] {display: none;}
+		}
+		input[type="checkbox"] {-webkit-appearance: checkbox;z-index: 2;font-size: 30px;}
+	}
+}

@@ -11,6 +11,12 @@ import EditArticle from '@/pages/Article/subpages/EditArticle/EditArticle'
 import NotFound from '@/pages/NotFound/NotFound'
 import UserManage from '@/pages/UserManage/UserManage'
 import ImgConfig from '@/pages/ImgConfig/ImgConfig'
+import Firend from '@/pages/Firend/Firend'
+import AddFirend from '@/pages/Firend/subpages/AddFirend/AddFirend'
+import EditFirend from '@/pages/Firend/subpages/EditFirend/EditFirend'
+import Music from '@/pages/Music/Music'
+import AddMusic from '@/pages/Music/subpages/AddMusic/AddMusic'
+import EditMusic from '@/pages/Music/subpages/EditMusic/EditMusic'
 
 Vue.use(Router)
 export default new Router({
@@ -59,6 +65,42 @@ export default new Router({
         },{
            path: '/imgConfig',
            component: ImgConfig,
+           meta: {
+              requireAuth: true
+           }
+        },{
+           path: '/firend',
+           component: Firend,
+           meta: {
+              requireAuth: true
+           }
+        },{
+           path: '/firend/add',
+           component: AddFirend,
+           meta: {
+              requireAuth: true
+           }
+        },{
+           path: '/firend/edit/:id',
+           component: EditFirend,
+           meta: {
+              requireAuth: true
+           }
+        },{
+           path: '/music',
+           component: Music,
+           meta: {
+              requireAuth: true
+           }
+        },{
+           path: '/music/add',
+           component: AddMusic,
+           meta: {
+              requireAuth: true
+           }
+        },{
+           path: '/music/edit/:id',
+           component: EditMusic,
            meta: {
               requireAuth: true
            }

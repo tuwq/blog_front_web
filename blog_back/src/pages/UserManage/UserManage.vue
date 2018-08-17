@@ -6,7 +6,7 @@
       		<div class="search-wrap">
       			<input class="" placeholder="请输入搜索条件" v-model="keyword"/>
       		</div>
-  			<button class="searchBtn" @click.stop.prevent="searchByKeyWord">查询</button>
+  			  <button class="searchBtn" @click.stop.prevent="searchByKeyWord">查询</button>
       	</div>
       	<div class="data-list-wrapper">
       		<ul class="meta">

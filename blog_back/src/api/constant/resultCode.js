@@ -4,6 +4,8 @@ export const TOKEN_TOLOGIN = 1000
 export const TOKEN_NOTUSER = 1001
 // TOKEN过期了但不需要回登陆页,依旧是成功的,不过没有数据返回
 export const TOKEN_MATURITY = 260
+// 文件上传失败了
+export const FILE_UPLOAD_FAIL = 301;
 // 请求参数不正确
 export const PARAM_ERROR_CODE = 1100
 // 请求期间的错误

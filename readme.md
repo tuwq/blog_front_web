@@ -1,4 +1,4 @@
-# 我的博客
+# 我的博客 https://twenq.com
 # 技术栈
 ## 前台展示
 	前端:	Less + React + Redux + jQuery + marked + highlight
@@ -7,7 +7,6 @@
 
 	数据库:	MySql + Redis + MongoDB
 
-	分布式: SpringCloud + SpringRestTemplate
 ## 后台管理
 	前端:	Sass + Vue + Vuex + jQuery + Echarts + MavonEditor
 
@@ -15,4 +14,3 @@
 
 	数据库:	MySql + Redis + HBase
 
-	分布式:	ZooKeeper + Dubbo

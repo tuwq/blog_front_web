@@ -29,6 +29,9 @@
         this.updateImg()
       })  
     },
+    destroyed() {
+      $(this.$refs.$fileInput).off('change')
+    },
     methods: {
       updateImg() {
         var file = $(this.$refs.$fileInput)[0].files[0]
