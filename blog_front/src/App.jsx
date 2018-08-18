@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as userActions from 'store/actions/user' 
 import * as imgConfigActions from 'store/actions/imgConfig'
+import Player from 'base/general/Player/Player'
 
 import {
   HashRouter,
@@ -45,9 +46,10 @@ class App extends Component {
   render() {
     return (
       <div onClick={this.closeMenu}>
-      {
-      	this.props.children
-      }  
+          {
+            this.props.children
+          }
+          <Player />
       </div>
     );
   }
