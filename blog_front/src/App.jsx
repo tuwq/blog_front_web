@@ -14,6 +14,7 @@ import {
   Switch
 } from 'react-router-dom';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
+import { _setImgConfigItem,_getImgConfigItem } from 'base/js/sessionCache'
 
 import { userInfoApi } from 'api/User/user'
 import { getImgConfigApi } from 'api/Config/config'
@@ -67,8 +68,14 @@ class App extends Component {
   }
 
   loadConfig() {
+    if (_getImgConfigItem()) {
+      let config = JSON.parse(_getImgConfigItem())
+      this.props.imgConfigActions.save(config)
+      return
+    }
     getImgConfigApi((res)=>{
       if (res.data.code == 200) {
+        _setImgConfigItem(JSON.stringify(res.data.result))
         this.props.imgConfigActions.save(res.data.result)
       }
     })

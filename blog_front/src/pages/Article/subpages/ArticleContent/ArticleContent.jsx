@@ -5,7 +5,7 @@ import marked from 'marked'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/atelier-cave-light.css'
 
-import { _saveStorage,_loadStorage } from 'base/js/cache'
+import { _saveStorage,_loadStorage } from 'base/js/localCache'
 import { artPraiseIncrApi } from 'api/Praise/praise'
 import { isNumber } from 'base/js/check'
 

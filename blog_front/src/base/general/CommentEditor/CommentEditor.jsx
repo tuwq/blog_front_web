@@ -95,10 +95,10 @@ class CommentEditor extends React.Component {
 						!token
 						?(<div className="user">
 							<div className="user-control">
-								<input name="loginname" value={this.state.loginname} onChange={this.inputChange.bind(this)} type="text" placeholder="用户名或邮箱" />
+								<input name="loginname" value={this.state.loginname} onChange={this.inputChange.bind(this)} type="text" placeholder="用户名或邮箱" autoComplete="new-password"/>
 							</div>
 							<div className="user-control">
-								<input name="password" value={this.state.password} onChange={this.inputChange.bind(this)} type="password" placeholder="密码" />
+								<input name="password" value={this.state.password} onChange={this.inputChange.bind(this)} type="password" placeholder="密码" autoComplete="new-password"/>
 							</div>
 							<div className="user-control">
 								<button onClick={this.login.bind(this)}>登录</button>

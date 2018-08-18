@@ -24,7 +24,7 @@ class HomeFooter extends React.Component {
           	<div className="HomeFooter-wapper">
           		<div className="contact">
           			<ul className="itemList fontLink">
-          				<li className="item "><a>友情链接</a></li>
+          				<li className="item "><Link to="/firend">友情链接</Link></li>
           				<li className="item"><a>联系我</a></li>
           			</ul>
           		</div>

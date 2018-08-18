@@ -20,10 +20,11 @@ class MusicCategoryList extends React.Component {
 	render() {
 		return (
 			<div className="MusicCategoryList">
-				<MusicCategoryItem />
-				<MusicCategoryItem />
-				<MusicCategoryItem />
-				<MusicCategoryItem />
+			  	{
+			  		this.props.data.map((item,index)=>{
+			  			return (<MusicCategoryItem item={item} index={index} key={index}/>)
+			  		})
+			  	}
         	</div>
         )
 	}

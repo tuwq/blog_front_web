@@ -6,6 +6,8 @@ global.imgServerUrl = 'http://img.twenq.com/'
 global.userAvatarPrefix = global.imgServerUrl + 'upload/user/avatar/'
 global.artImgPrefix = global.imgServerUrl + 'upload/artimg/'
 global.firendAvatarPrefix = global.imgServerUrl + 'upload/firend/avatar/'
+global.musicCoverPrefix = global.imgServerUrl + 'upload/music/cover/'
+global.musicResourcePrefix = global.imgServerUrl + 'upload/music/resource/'
 // token的过期时间
 global.TOKEN_TIME_DAY = 7
 // 用户下拉菜单的订阅key
@@ -24,6 +26,10 @@ global.artGoCommentListSubscribe = 'artGoCommentListSubscribe'
 global.childCommentSubscribe = 'childCommentSubscribe'
 // 打开歌单列表侧边栏
 global.MusicSiderSubscribe = 'MusicSiderSubscribe'
+// 更改歌曲分类列表
+global.MusicCategoryChangeSubscribe = 'MusicCategoryChangeSubscribe'
+// 搜索歌曲
+global.MusicSearchSubscribe = 'MusicSearchSubscribe'
 // 文章点赞的密钥
 global.artPraiseKey = 'artPraiseKey'
 // 首页火热文章获取数
@@ -42,5 +48,5 @@ global.artCommentPageSize = 5
 global.childCommentPageSize = 3
 global.dynamicInitiatePageSize = 5
 global.dynamicReceivePageSize = 5
-
+global.musicSongPageSize = 20
 

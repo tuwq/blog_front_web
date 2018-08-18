@@ -10,10 +10,24 @@ class MusicSearch extends React.Component {
 
 	constructor(props,context) {
 		super(props,context)
+		this.state = {
+			keyword: ''
+		}
 	}
 
 	componentDidMount() {
 	  
+	}
+
+	startSearch() {
+		PubSub.publish(global.MusicSearchSubscribe,this.state.keyword);
+	}
+
+	inputChange(e) {
+		const name = e.target.name
+		this.setState({
+			[name]: e.target.value
+		})
 	}
 
 	siderOpen() {
@@ -26,10 +40,10 @@ class MusicSearch extends React.Component {
 				<div className="search-warp">
 					<div className="search-group">
 						<div className="search-control">
-							<input type="text" placeholder="歌曲关键字:歌名,歌手,分类"/>
+							<input type="text" name="keyword" onChange={this.inputChange.bind(this)} placeholder="歌曲关键字:歌名,歌手,分类"/>
 						</div>
 						<div className="search-control">
-							<button>搜索</button>
+							<button onClick={this.startSearch.bind(this)}>搜索</button>
 						</div>
 						<div className="search-control siderOpen" onClick={this.siderOpen.bind(this)}>
 							<i className="fa fa-tag" style={{lineHeight: '40px'}}></i>

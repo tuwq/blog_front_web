@@ -19,10 +19,10 @@ class MusicItem extends React.Component {
 		return (
 			<div className="MusicItem">
 				<div className="wrap">
-					<img className="coverImg" alt="" src="http://p1.music.126.net/5gNt0nW6l-2hSAtJAnaNCw==/4450823069239492.jpg?param=130y130"/>
+					<img className="coverImg" alt="" src={global.musicCoverPrefix+this.props.item.cover+'?v='+new Date().getTime()}/>
 					<div className="info">
-						<h4 className="songName">Back to You</h4>
-						<p className="singer">美剧 十三个原因第二季插曲</p>
+						<h4 className="songName">{this.props.item.songName}</h4>
+						<p className="singer">{this.props.item.singer}</p>
 					</div>
 				</div>
         	</div>

@@ -20,26 +20,11 @@ class MusicList extends React.Component {
 	render() {
 		return (
 			<div className="MusicList">
-				<MusicItem />
-				<MusicItem />
-				<MusicItem />
-				<MusicItem />
-				<MusicItem />
-				<MusicItem />
-				<MusicItem />
-				<MusicItem />
-				<MusicItem />
-				<MusicItem />
-				<MusicItem />
-				<MusicItem />
-				<MusicItem />
-				<MusicItem />
-				<MusicItem />
-				<MusicItem />
-				<MusicItem />
-				<MusicItem />
-				<MusicItem />
-				<MusicItem />
+				{
+					this.props.data.map((item,index)=>{
+						return (<MusicItem item={item} index={index} key={index}/>)
+					})
+				}
         	</div>
         )
 	}
