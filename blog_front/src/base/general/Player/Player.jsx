@@ -5,6 +5,9 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as songsActions from 'store/actions/songs' 
 import * as playerActions from 'store/actions/player' 
+import { playModel } from 'store/constants/songModel'
+
+import { shuffle } from 'base/js/util'
 
 import ProgressBar from 'base/general/ProgressBar/ProgressBar'
 import ProgressCircle from 'base/general/ProgressCircle/ProgressCircle'
@@ -19,6 +22,8 @@ class Player extends React.Component {
 		this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
 		this.watchCurrentSong = this.watchCurrentSong.bind(this)
 		this.watchPalying = this.watchPalying.bind(this)
+		this.resetCurrentIndex = this.resetCurrentIndex.bind(this)
+		this.loop = this.loop.bind(this)
 		this.format = this.format.bind(this)
 		this._pad = this._pad.bind(this)
 		this.$audio = React.createRef()
@@ -42,6 +47,46 @@ class Player extends React.Component {
     	if (this.props.player.palyering != nextProps.player.palyering) {
     		this.watchPalying(this.props.player.palyering,nextProps.player.palyering)
     	} 
+    }
+
+    end() {
+    	if (this.props.player.model == playModel.loop) {
+    		this.loop()
+    	} else {
+    		this.next()
+    	}
+    }
+
+    loop() {
+    	this.$audio.current.currentTime = 0
+    	this.$audio.current.play()
+    }
+
+    changeModel() {
+    	const model = (this.props.player.model + 1)%3
+    	this.props.playerActions.savePlayData({
+    		model: model
+    	})
+    	let list = null
+    	if (model == playModel.random) {
+    		list = shuffle(this.props.songs.sequenceList)
+    	} else {
+    		list = this.props.songs.sequenceList
+    	}
+    	this.props.songsActions.saveSongs({
+			songList: list
+		})
+		this.resetCurrentIndex(list)
+    }
+
+    resetCurrentIndex(list) {
+    	let index = list.findIndex((item)=>{
+    		return item.id === this.props.songs.currentSong.id
+    	})
+    	if (index < 0) {return}
+    	this.props.songsActions.saveSongs({
+			currentIndex: index
+		})
     }
 
     updateTime(e) {
@@ -129,6 +174,7 @@ class Player extends React.Component {
     }
 
     watchCurrentSong(oldval,newval) {
+    	if(oldval.id === newval.id){return}
     	this.setState({
     		watchSong: newval
     	},()=>{
@@ -195,7 +241,8 @@ class Player extends React.Component {
 								</div>
 								<div className="bottom">
 									<div className="icon-wrap">
-										<div><i className="fa fa-exchange"></i></div>
+										<div><i onClick={this.changeModel.bind(this)} className={this.props.player.model==playModel.sequence?'fa fa-exchange':
+														this.props.player.model==playModel.loop?'fa fa-refresh':'fa fa-random'}></i></div>
 										<div><i className={this.state.songReady?'fa fa-step-backward':'fa fa-step-backward disable'} onClick={this.prev.bind(this)}></i></div>
 										<div><i className={(this.props.player.palyering?'fa fa-pause':'fa fa-play')+(this.state.songReady?'':' disable')} onClick={this.togglePalying.bind(this)}></i></div>
 										<div><i className={this.state.songReady?'fa fa-step-forward':'fa fa-step-forward disable'} onClick={this.next.bind(this)}></i></div>
@@ -235,7 +282,8 @@ class Player extends React.Component {
 				{ player }
 				<audio ref={this.$audio} src={global.musicResourcePrefix+this.props.songs.currentSong.url} 
 					onCanPlay={this.ready.bind(this)} onError={this.error.bind(this)}
-					onTimeUpdate={this.updateTime.bind(this)}/>
+					onTimeUpdate={this.updateTime.bind(this)}
+					onEnded={this.end.bind(this)}/>
         	</div>
         )
 	}
