@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import * as songsActions from 'store/actions/songs' 
 import PubSub from 'pubsub-js'
 
 import MusicList from '../MusicList/MusicList'
@@ -52,6 +55,10 @@ class MusicCollection extends React.Component {
 						data: res.data.data,
 						pageModel: res.data.pageModel
 					})
+					this.props.songsActions.saveSongs({
+						songList: res.data.data,
+						sequenceList: res.data.data
+					})
 				}
 			})
 	}
@@ -63,6 +70,10 @@ class MusicCollection extends React.Component {
 					this.setState({
 						data: res.data.data,
 						pageModel: res.data.pageModel
+					})
+					this.props.songsActions.saveSongs({
+						songList: res.data.data,
+						sequenceList: res.data.data
 					})
 				}
 			})
@@ -120,6 +131,20 @@ class MusicCollection extends React.Component {
 	}
 }
 
-export default withRouter(MusicCollection)
+
+function mapStateToProps(state) {
+    return {
+       
+    }
+}
+function mapDispatchToProps(dispatch) {
+    return {
+        songsActions: bindActionCreators(songsActions, dispatch),
+    }
+}
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(MusicCollection)
+)
 
 

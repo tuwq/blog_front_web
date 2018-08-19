@@ -3,7 +3,8 @@ import rootReducer from './reducers/index.js'
 import createLogger from 'redux-logger';
 
 export default function configureStore(initialState) {
-    const store = createStore(rootReducer, initialState)
+    const store = createStore(rootReducer, initialState,applyMiddleware(createLogger),
+    	window.devToolsExtension ? window.devToolsExtension() : undefined)
     return store
 }
 

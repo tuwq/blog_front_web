@@ -15,9 +15,13 @@ class MusicItem extends React.Component {
 	  
 	}
 
+	selectItem() {
+		this.props.selectItemFn(this.props.item,this.props.index);
+	}
+
 	render() {
 		return (
-			<div className="MusicItem">
+			<div className="MusicItem" onClick={this.selectItem.bind(this)}>
 				<div className="wrap">
 					<img className="coverImg" alt="" src={global.musicCoverPrefix+this.props.item.cover+'?v='+new Date().getTime()}/>
 					<div className="info">

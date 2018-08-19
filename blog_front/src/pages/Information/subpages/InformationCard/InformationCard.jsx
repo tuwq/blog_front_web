@@ -29,7 +29,7 @@ class InformationCard extends React.Component {
            }
         }
 
-        componentwillreceiveprops(nextProps) {
+        componentWillReceiveProps(nextProps) {
             
         }
 

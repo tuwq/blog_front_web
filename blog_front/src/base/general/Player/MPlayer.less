@@ -1,4 +1,5 @@
 @import url("../../../base/style/constant.less");
+@import url("../../../base/style/an.less");
 @media screen and (max-width: @mobile_width) {
 .Player {
 	.full-player {
@@ -87,6 +88,23 @@
 					margin: 0 auto;
 					border-radius: 50%;
 				}
+				&.play {
+					.cdRotate;
+				}
+				&.pause {
+					animation-play-state: paused;
+				}
+			}
+		}
+		.Progress {
+			display: flex;
+			width: 80%;
+			margin: 0 auto;
+			.progress-bar-wrapper {
+				flex: 1;
+			}
+			span {
+				padding: 5px;
 			}
 		}
 		.bottom {
@@ -122,11 +140,17 @@
       	display: flex;
 		.left {
 			display: flex;
-			.cover {
+			.cd {
 				img {
 					max-width: 40px;
 					max-height: 40px;
 					border-radius: 50%;
+				}
+				&.play {
+					.cdRotate;
+				}
+				&.pause {
+					animation-play-state: paused;
 				}
 			}
 			.info {
@@ -153,9 +177,24 @@
 			display: flex;
 			justify-content: flex-end;
 			align-self: center;
-			div {
-				font-size: 20px;
-				padding: 10px;
+			position: relative;
+			.control {
+				font-size: 18px;
+				flex: 0 0 30px;
+		        width: 30px;
+		        z-index: 2000;
+		        text-align: center;
+		        margin: 0 10px;
+			}
+			.icon-mini {
+				width: 32px;
+				height: 32px;
+				line-height: 32px;
+				display: block;
+				text-align: center;
+				position: absolute;
+			    top: 0;
+			    left: 0;
 			}
 		}
       }

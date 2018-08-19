@@ -49,7 +49,10 @@ class App extends Component {
           {
             this.props.children
           }
-          <Player />
+          {
+            (this.props.player.palyStatus&&this.props.songs.songList.length>0)&&
+            (<Player />)
+          }
       </div>
     );
   }
@@ -107,7 +110,9 @@ class App extends Component {
 function mapStateToProps(state) {
     return {
      // state.modal 对应的reducer注册时的名称
-        user: state.user
+        user: state.user,
+        player: state.player,
+        songs: state.songs
     }
 }
 function mapDispatchToProps(dispatch) {

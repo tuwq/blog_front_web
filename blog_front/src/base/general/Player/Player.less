@@ -1,4 +1,5 @@
 @import url("../../../base/style/constant.less");
+@import url("../../../base/style/an.less");
 @media screen and (min-width: @pc_width) {
 .Player {
 	.full-wrap {
@@ -60,6 +61,35 @@
 					height: 200px;
 					border-radius: 50%;
 				}
+				&.play {
+					.cdRotate;
+				}
+				&.pause {
+					animation-play-state: paused;
+				}
+			}
+		}
+		.Progress {
+			display: flex;
+			width: 80%;
+			margin: 0 auto;
+			align-items: center;
+			.progress-bar-wrapper {
+				flex: 1;
+			}
+			.time {
+				padding: 5px;
+				color: #fff;
+				font-size: 12px;
+				line-height: 30px;
+				flex: 0 0 30px;
+				width: 30px;
+				&.time-l {
+					text-align: left;
+				}
+				&.time-r {
+					text-align: right;
+				}
 			}
 		}
 		.bottom {
@@ -68,8 +98,12 @@
 				justify-content: center;
 				overflow: hidden;
 				div {
+					flex: 1;
 					padding: 20px;
 					font-size: 25px;
+					i.disable {
+						color: rgba(255, 205, 49, 0.5);
+					}
 				}
 			}
 		}
@@ -92,12 +126,18 @@
       	display: flex;
 		.left {
 			display: flex;
-			.cover {
+			.cd {
 				img {
 					display: block;
 					max-width: 40px;
 					max-height: 40px;
 					border-radius: 50%;
+				}
+				&.play {
+					.cdRotate;
+				}
+				&.pause {
+					animation-play-state: paused;
 				}
 			}
 			.info {
@@ -124,9 +164,24 @@
 			display: flex;
 			justify-content: flex-end;
 			align-self: center;
-			div {
-				font-size: 20px;
-				padding: 10px;
+			position: relative;
+			.control {
+				font-size: 18px;
+				flex: 0 0 30px;
+		        width: 30px;
+		        z-index: 2000;
+		        text-align: center;
+		        margin: 0 10px;
+			}
+			.icon-mini {
+				width: 32px;
+				height: 32px;
+				line-height: 32px;
+				display: block;
+				text-align: center;
+				position: absolute;
+			    top: 0;
+			    left: 0;
 			}
 		}
       }
