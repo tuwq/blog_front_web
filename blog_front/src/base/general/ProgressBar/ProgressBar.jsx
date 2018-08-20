@@ -42,6 +42,7 @@ class ProgressBar extends React.Component {
 	}
 
 	progressClick(e) {
+		e.stopPropagation()
         const rect = this.progressBar.current.getBoundingClientRect()
         const offsetWidth = e.pageX - rect.left
         this._offset(offsetWidth)
@@ -49,6 +50,7 @@ class ProgressBar extends React.Component {
 	}
 
 	progressTouchStart(e) {
+		e.stopPropagation()
 		e.preventDefault()
 		this.touch.initiated = true
 		this.touch.startX = e.touches[0].pageX
@@ -56,6 +58,7 @@ class ProgressBar extends React.Component {
 	}
 
 	progressTouchMove(e) {
+		e.stopPropagation()
 		e.preventDefault()
 		if (!this.touch.initiated) {return}
 		const deltaX = e.touches[0].pageX - this.touch.startX
@@ -64,6 +67,31 @@ class ProgressBar extends React.Component {
 	}
 
 	progressTouchEnd(e) {
+		e.stopPropagation()
+		e.preventDefault()
+		this.touch.initiated = false
+		this._triggerPercent()
+	}
+
+	progressMouseStart(e) {
+		e.stopPropagation()
+		e.preventDefault()
+		this.touch.initiated = true
+		this.touch.startX = e.pageX
+		this.touch.left = this.progress.current.clientWidth
+	}
+
+	progressMouseMove(e) {
+		e.stopPropagation()
+		e.preventDefault()
+		if (!this.touch.initiated) {return}
+		const deltaX = e.pageX - this.touch.startX
+		const offsetWidth = Math.min(this.progressBar.current.clientWidth-this.state.progressBtnWidth,Math.max(0,this.touch.left+deltaX))
+		this._offset(offsetWidth)
+	}
+
+	progressMouseEnd(e) {
+		e.stopPropagation()
 		e.preventDefault()
 		this.touch.initiated = false
 		this._triggerPercent()
@@ -97,6 +125,9 @@ class ProgressBar extends React.Component {
 			      	onTouchStart={this.progressTouchStart.bind(this)} 
 			      	onTouchMove={this.progressTouchMove.bind(this)} 
 			      	onTouchEnd={this.progressTouchEnd.bind(this)}
+			      	onMouseDown={this.progressMouseStart.bind(this)}
+			      	onMouseMove={this.progressMouseMove.bind(this)}
+			      	onMouseUp={this.progressMouseEnd.bind(this)}
 			      >
 			        <div className="progress-btn"></div>
 			      </div>

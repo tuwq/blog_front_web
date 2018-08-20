@@ -3,122 +3,207 @@
 @media screen and (max-width: @mobile_width) {
 .Player {
 	.full-player {
-		position: fixed;
-		top: 0;
+		background: rgba(87,81,105,.8);
 		bottom: 0;
-		right: 0;
 		left: 0;
-		z-index: @modal_index;
+		font-size: 13px;
+		transition: height .5s;
+		text-align: left;
+		color: #38343e;
+		width: 100%;
+		height: 181px;
+		position: fixed;
+		box-shadow: 0 0 5px 5px rgba(0,0,0,0.2);
+	    border-radius: 5px;
+	    z-index: 5000;
+    	& * {
+			box-sizing: content-box;
+    		list-style-type: none;
+    	}
+	}
+	.switch-palyer {
 		display: flex;
+		flex-direction: row-reverse;
 		justify-content: center;
-		overflow-x: hidden;
-		overflow-y: auto;
-		.background {
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			left: 0;
-			right: 0;
-			z-index: 0;
-			background-color: rgba(0,0,0,.4);
+		color: #0237ff;
+		position: absolute;
+		top: -25px;
+		right: 0;
+		width: 100%;
+		text-shadow: none;
+		border-radius: 0 5px 5px 0;
+		font-size: 10px;
+		text-align: center;
+		.switch-control {
+			width: 20px;
+			padding: 5px;
+			background: rgba(168, 158, 152, 0.3);
+			margin-bottom: 10px;
+			box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.3);
 		}
 	}
 	.full-wrap {
-		position: absolute;
-		display: flex;
-		flex-direction: column;
-		top: 0;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		background: rgba(0, 0, 0,.7);
-		z-index:  @modal_index+1;
-		color: #fff;
-		.top {
-			padding: 10px;
-			margin-bottom: 10px;
-			overflow: hidden;
-			max-height: 50px;
-			.top-wrap {
-				display: flex;
-				overflow: hidden;
-			}
-			.back,.quit {
-				padding: 5px;
-				font-size: 20px;
-			}
-			.info {
-				flex: 1;
-				h3 {
-					text-align: center;
-					max-width: 300px;
-					margin: 0 auto;
-					font-size: 15px;
-					white-space: nowrap;
-	    			text-overflow: ellipsis;
-	    			overflow: hidden;
-				}
-				p {
-					text-align: center;
-					max-width: 300px;
-					margin: 0 auto;
-					color: #7f8c8d;
-					font-size: 12px;
-					white-space: nowrap;
-	    			text-overflow: ellipsis;
-	    			overflow: hidden;
-				}
+		cursor: move;
+		position: relative;
+		overflow: hidden;
+		text-shadow: none;
+	    background-color: rgba(0,0,0,0.1);
+	    height: 180px;
+	    border-radius: 5px 5px 0 0;
+		.background {
+			width: 100%;
+			height: 155px;
+			position: absolute;
+			img {
+				position: relative;
+				top: 0px;
+				width: 100%;
+				height: 155px;
+				filter: blur(20px);
+				max-width: 100%;
+				vertical-align: middle;
 			}
 		}
-		.middle {
-	        width: 100%;
-	        top: 80px;
-	        height: auto;
-	        white-space: nowrap;
-	        font-size: 0;
-			.cd-wrap {
-				padding: 20px;
-				overflow: hidden;
+		.infos {
+			position: absolute;
+			top: 15px;
+			left: 10px;
+			color: #fff;
+			text-shadow: 1px 1px 1px #000;
+    		font-weight: bolder;
+    		span {
+    			padding: 0 2px;
+    			max-width: 90px;
+    			overflow: hidden;
+    			white-space: nowrap;
+	    		text-overflow: ellipsis;
+    		}
+    		.songStyle {
+				
+    		}
+    		.timeStyle {
+				font-size: 12px;
+				margin-left: 255px;
+				margin-top: -20px;
+    		}
+    		.artiststyle {
+				margin-top: 15px;
+				.moshi {
+					float: right;
+				}
+    		}
+		}
+		.control {
+			user-select: none;
+			bottom: -100px;
+			left: 10px;
+			position: relative;
+			z-index: 999;
+			font-size: 24px;
+			color: #fff;
+			text-shadow: 1px 1px 1px #000;
+			i.current {
+				color: #0DD0FF;
 			}
-			.cd {
-				display: flex;
-				img {
-					width: 80%;
-					height: 80%;
-					margin: 0 auto;
+			.status {
+				position: relative;
+				display: inline-block;
+				vertical-align: middle;
+				bottom: 43px;
+				left: 53px;
+				width: 44px;
+				height: 44px;
+				overflow: hidden;
+				border-radius: 50%;
+				background-color: #34A0FF;
+			    background-image: linear-gradient(90deg,#6c6971 50%,transparent 50%,transparent),linear-gradient(90deg,#34A0FF 50%,#6c6971 50%,#6c6971);
+				margin-right: 26px;
+				opacity: .3;
+				transition: all 1s ease 0s;
+				&:hover {opacity: 1;}
+				b {
+					box-sizing: content-box;
+					position: absolute;
+					width: 40px;
+					height: 40px;
+					text-align: center;
+					border: solid #0089ff 2px;
+					top: 0;
+					left: 0;
 					border-radius: 50%;
-				}
-				&.play {
-					.cdRotate;
-				}
-				&.pause {
-					animation-play-state: paused;
+					background: #2c2a30;
+					display: inline-block;
+					overflow: hidden;
+					.play {
+						color: #0382b5;
+						transition: all .2s ease;
+						&.hide {transform: translate3d(0,-40px,0)}
+					}
+					.pause {
+						color: red;
+						transition: all .2s ease;
+						&.show {transform: translate3d(0,-40px,0)}
+					}
+					.fa {
+						transition: .5s;
+						display: block;
+						width: 40px;
+						height: 40px;
+						line-height: 40px;
+					}
 				}
 			}
-		}
-		.Progress {
-			display: flex;
-			width: 80%;
-			margin: 0 auto;
-			.progress-bar-wrapper {
-				flex: 1;
-			}
-			span {
-				padding: 5px;
-			}
+			.palytype {width: 25px;text-align: center;left: 10px;margin-right: 26px;cursor: pointer;}
+			.prev {left: 10px;margin-right: 26px;cursor: pointer;}
+			.next {position: relative;display: inline-block;vertical-align: middle;left: 80px;margin-right: 26px;cursor: pointer;}
+			.search {position: relative;display: inline-block;vertical-align: middle;left: 80px;cursor: pointer;}
 		}
 		.bottom {
+			user-select: none;
 			position: absolute;
-	        bottom: 50px;
-	        width: 100%;
-			.icon-wrap {
-				display: flex;
-				justify-content: space-around;
-				overflow: hidden;
-				div {
-					font-size: 25px;
-				}
+			background: #fff;
+			text-shadow: none;
+			height: 25px;
+			width: 100%;
+			left: 0;
+			bottom: 0;
+			line-height: 25px;
+			z-index: 999999;
+			.palyer-progress {
+				margin-left: 15px;
+				margin-right: 15px;
+				width: 100%;
 			}
+		}
+		.cover {
+			user-select: none;
+			position: absolute;
+			background: #fff;
+			border: 5px #fff solid;
+			width: 110px;
+			height: 110px;
+			top: 20px;
+			left: 125px;
+			border-radius: 50%;
+			box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    		box-sizing: content-box;
+    		&.play {
+				.cdRotate;
+			}
+			&.pause {
+				animation-play-state: paused;
+			}
+    		img {
+    			transition: .5s;
+    			border-radius: 50%;
+    			border: 5px solid #fff;
+    			width: 113px;
+				height: 113px;
+				top: -5px;
+				left: -5px;
+				position: relative;
+				z-index: 10;
+    		}
 		}
 	}
 	.mini-player {
