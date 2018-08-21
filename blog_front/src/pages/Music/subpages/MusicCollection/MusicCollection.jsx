@@ -58,7 +58,7 @@ class MusicCollection extends React.Component {
 					})
 					this.props.songsActions.saveSongs({
 						songList: res.data.data,
-						sequenceList: res.data.data
+						defaultList: res.data.data
 					})
 				}
 			})
@@ -74,7 +74,7 @@ class MusicCollection extends React.Component {
 					})
 					this.props.songsActions.saveSongs({
 						songList: res.data.data,
-						sequenceList: res.data.data
+						searchList: res.data.data
 					})
 					if (res.data.data.length<1) {
 						this.setState({error: '没有找到符合条件的结果'})

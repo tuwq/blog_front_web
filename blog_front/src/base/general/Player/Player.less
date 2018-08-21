@@ -17,6 +17,14 @@
 		box-shadow: 0 0 5px 5px rgba(0,0,0,0.2);
 	    border-radius: 5px;
 	    z-index: 100;
+	    transition: height .3s;
+	    &.showlist {
+	    	height: 531px;
+	    	.PlayerList {opacity: 1;}
+	    }
+	    &.showSearch {
+	    	.PlayerSearch {opacity: 1;}
+	    }
     	& * {
 			box-sizing: content-box;
     		list-style-type: none;
@@ -28,7 +36,6 @@
 		top: 10px;
 		right: -25px;
 		width: 25px;
-		height: 120px;
 		line-height: 68px;
 		text-shadow: none;
 		border-radius: 0 5px 5px 0;
@@ -190,6 +197,7 @@
 					cursor: pointer;
 					min-width: 15px;
 					&:hover {color: #8adced;}
+					i.active {color: #8adced;}
 				}
 			}
 		}
@@ -305,106 +313,3 @@
       }
 	}
 }}
-/* .full-wrap {
-		position: fixed;
-		left: 0;
-		bottom: 0;
-		display: flex;
-		flex-direction: column;
-		width: 365px;
-		background: rgba(0, 0, 0,.6);
-		z-index:  @modal_index;
-		color: #fff;
-		.top {
-			padding: 10px;
-			margin-bottom: 10px;
-			overflow: hidden;
-			max-height: 50px;
-			.top-wrap {
-				display: flex;
-				overflow: hidden;
-			}
-			.back,.quit {
-				font-size: 20px;
-			}
-			.info {
-				flex: 1;
-				h3 {
-					text-align: center;
-					max-width: 200px;
-					margin: 0 auto;
-					font-size: 15px;
-					white-space: nowrap;
-	    			text-overflow: ellipsis;
-	    			overflow: hidden;
-				}
-				p {
-					text-align: center;
-					max-width: 200px;
-					margin: 0 auto;
-					font-size: 12px;
-					white-space: nowrap;
-	    			text-overflow: ellipsis;
-	    			overflow: hidden;
-				}
-			}
-		}
-		.middle {
-			flex: 1;
-			.cd-wrap {
-				display: flex;
-				padding: 20px;
-				overflow: hidden;
-			}
-			.cd {
-				margin: 0 auto;
-				img {
-					border-radius: 50%;
-				}
-				&.play {
-					.cdRotate;
-				}
-				&.pause {
-					animation-play-state: paused;
-				}
-			}
-		}
-		.Progress {
-			display: flex;
-			width: 80%;
-			margin: 0 auto;
-			align-items: center;
-			.progress-bar-wrapper {
-				flex: 1;
-			}
-			.time {
-				padding: 5px;
-				color: #fff;
-				font-size: 12px;
-				line-height: 30px;
-				flex: 0 0 30px;
-				width: 30px;
-				&.time-l {
-					text-align: left;
-				}
-				&.time-r {
-					text-align: right;
-				}
-			}
-		}
-		.bottom {
-			.icon-wrap {
-				display: flex;
-				justify-content: center;
-				overflow: hidden;
-				div {
-					flex: 1;
-					padding: 20px;
-					font-size: 25px;
-					i.disable {
-						color: rgba(255, 205, 49, 0.5);
-					}
-				}
-			}
-		}
-	} */

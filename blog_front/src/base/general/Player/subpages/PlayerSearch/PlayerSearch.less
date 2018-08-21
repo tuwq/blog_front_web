@@ -1,0 +1,73 @@
+.Player {
+	.PlayerSearch {
+		position: absolute;
+	    top: 184px;
+	    height: 37px;
+	    width: 192px;
+	    left: 171px;
+	    opacity: 0;
+	    transition: opacity .2s;
+		background: rgba(87,81,105,.8);
+		display: block;
+    	border: 1px solid rgba(255,255,255,0.5);
+    	&.showresult {
+    		height: 289px;
+    	}
+    	input {
+    		position: absolute;
+		    left: 5px;
+		    top: 6px;
+		    height: 25px;
+		    width: 163px;
+		    font-family: 微软雅黑;
+		    color: rgb(255, 255, 255);
+		    font-size: inherit;
+		    line-height: inherit;
+		    box-shadow: none;
+		    background: rgba(255, 255, 255, 0);
+		    border-width: 1px;
+		    border-color: rgb(255, 255, 255);
+		    border-image: initial;
+		    border-style: none none solid;
+		    outline: none;
+		    padding: initial;
+		    border-radius: initial;
+		    transition: initial;
+    	}
+		.delSearchList {
+			font-size: 1.8em;
+		    position: absolute;
+		    color: #0DD0FF;
+		    left: 169px;
+		    top: 10px;
+		    text-shadow: 1px 1px 1px #000;
+		    cursor: pointer;
+		}
+		.searchlist-box {
+			display: none;
+		    color: #fff;
+		    position: absolute;
+		    top: 41px;
+		    transition: .5s;
+		    user-select: none;
+		    height: 247px;
+		    width: 207px;
+		    transform-origin: 50% 100px;
+			.searchlist-wrap {
+				position: relative;
+			    height: 100%;
+			    max-width: 100%;
+			    overflow: auto;
+				.container {
+					position: relative;
+					top: 0;
+					ul {
+						background: rgba(87,81,105,.8);
+						margin-right: 15px;	
+					}
+				}
+			}
+		}
+	}
+}
+

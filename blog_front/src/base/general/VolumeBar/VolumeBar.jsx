@@ -100,7 +100,7 @@ class VolumeBar extends React.Component {
 		const percent = this.progress.current.clientHeight/barHeight
 		this.props.volumeChangeFn(percent)
 	}
-
+	
 	render() {
 		return (
 			<div className="VolumeBar" ref={this.progressBar}>

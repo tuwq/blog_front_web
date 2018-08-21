@@ -22,16 +22,35 @@ class MusicList extends React.Component {
 	  
 	}
 
-	selectItemFn(item,index) {
-		this.props.songsActions.saveSongs({
-			currentIndex: index,
-			currentSong: this.props.data[index]
+	selectItemFn(selectItem,selectIndex) {
+		let index = this.props.songs.songList.findIndex((item)=>{
+			return item.id === selectItem.id
 		})
-		this.props.playerActions.savePlayData({
-			palyStatus: true,
-			palyering: true,
-			fullScreen: true
-		})
+		if (index<0) {
+			let list = this.props.songs.songList.slice()
+			list.push(selectItem)
+			this.props.songsActions.saveSongs({
+				songList: list,
+				currentIndex: list.length-1,
+				currentSong: list[list.length-1]
+			})
+		} else {
+			this.props.songsActions.saveSongs({
+				currentIndex: index,
+				currentSong: this.props.songs.songList[index]
+			})
+		}
+		if (this.props.player.palyStatus && !this.props.player.fullScreen) {
+			this.props.playerActions.savePlayData({
+				palyering: true,
+			})
+		} else {
+			this.props.playerActions.savePlayData({
+				palyStatus: true,
+				palyering: true,
+				fullScreen: true
+			})
+		}
 	}
 
 	render() {
@@ -49,7 +68,8 @@ class MusicList extends React.Component {
 
 function mapStateToProps(state) {
     return {
-       
+       songs: state.songs,
+	   player: state.player
     }
 }
 function mapDispatchToProps(dispatch) {

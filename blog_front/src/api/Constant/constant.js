@@ -30,6 +30,8 @@ global.MusicSiderSubscribe = 'MusicSiderSubscribe'
 global.MusicCategoryChangeSubscribe = 'MusicCategoryChangeSubscribe'
 // 搜索歌曲
 global.MusicSearchSubscribe = 'MusicSearchSubscribe'
+// 播放器搜索歌曲
+global.PlaySearchReadySubscribe = 'PlaySearchReadySubscribe'
 // 文章点赞的密钥
 global.artPraiseKey = 'artPraiseKey'
 // 首页火热文章获取数

@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { withRouter } from 'react-router-dom'
 
-import './PlayItem.less'
+import './PlayerSearchItem.less'
 
-class PlayItem extends React.Component {
+class PlayerSearchItem extends React.Component {
 
 	constructor(props,context) {
 		super(props,context)
@@ -17,14 +17,14 @@ class PlayItem extends React.Component {
 
 	render() {
 		return (
-			<li className="PlayItem" onClick={this.props.selectItemFn.bind(this,this.props.item,this.props.index)}>
-				<span className="index">{this.props.index+1}</span>
-				{this.props.item.songName} - {this.props.item.singer}
+			<li className="PlayerSearchItem">
+				<span className="index">1</span>
+				小林未郁 - Before my body is dry
         	</li>
         )
 	}
 }
 
-export default withRouter(PlayItem)
+export default withRouter(PlayerSearchItem)
 
 

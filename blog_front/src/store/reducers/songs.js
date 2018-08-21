@@ -2,7 +2,8 @@ import * as actionTypes from '../constants/constant'
 
 var initialState = {
 	songList: [],
-	sequenceList: [],
+	defaultList: [],
+    searchList: [],
 	currentIndex: -1,
 	currentSong: {}
 }
@@ -17,3 +18,6 @@ export default function songs (state = initialState, action) {
             return state
     }
 }
+/*
+sequenceList
+*/

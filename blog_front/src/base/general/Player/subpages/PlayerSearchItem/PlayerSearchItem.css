@@ -1,0 +1,1 @@
+.PlayerSearch .PlayerSearchItem{overflow:hidden;width:calc(100%);text-overflow:ellipsis;white-space:nowrap;transition:.3s;cursor:pointer;height:30px;line-height:30px;border-bottom:solid #eee 1px;background-color:rgba(0,0,0,.1)}.PlayerSearch .PlayerSearchItem .index{opacity:.3;padding:0 10px}

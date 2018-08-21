@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux'
 import * as songsActions from 'store/actions/songs' 
 import * as playerActions from 'store/actions/player' 
 import { playModel } from 'store/constants/songModel'
+import PubSub from 'pubsub-js'
 
 import { shuffle } from 'base/js/util'
 import { scroll } from 'base/js/ie'
@@ -14,6 +15,7 @@ import ProgressBar from 'base/general/ProgressBar/ProgressBar'
 import ProgressCircle from 'base/general/ProgressCircle/ProgressCircle'
 import VolumeBar from 'base/general/VolumeBar/VolumeBar' 
 import PlayerList from './subpages/PlayerList/PlayerList'
+import PlayerSearch from './subpages/PlayerSearch/PlayerSearch'
 
 import './Player.less'
 import './MPlayer.less'
@@ -31,6 +33,7 @@ class Player extends React.Component {
 		this._pad = this._pad.bind(this)
 		this.$audio = React.createRef()
         this.$fullPlayer = React.createRef()
+        this.$barIcon = React.createRef()
 		this.state = {
 			watchSong: {},
 			watchPlaying: true,
@@ -75,9 +78,9 @@ class Player extends React.Component {
     	})
     	let list = null
     	if (model == playModel.random) {
-    		list = shuffle(this.props.songs.sequenceList)
+    		list = shuffle(this.props.songs.defaultList)
     	} else {
-    		list = this.props.songs.sequenceList
+    		list = this.props.songs.defaultList
     	}
     	this.props.songsActions.saveSongs({
 			songList: list
@@ -199,8 +202,8 @@ class Player extends React.Component {
     	this.props.playerActions.savePlayData({
 			palyering: !this.props.player.palyering
 		})
-        $('.play').toggleClass('hide')
-        $('.pause').toggleClass('show')
+        $('.status .play').toggleClass('hide')
+        $('.status .pause').toggleClass('show')
     }
 
 	quit() {
@@ -261,11 +264,31 @@ class Player extends React.Component {
        this.$audio.current.volume = 1 * percent
     }
 
+    search() {
+      let $fullPlayer = $(this.$fullPlayer.current)
+      PubSub.publish(global.PlaySearchReadySubscribe,()=>{
+        $fullPlayer.toggleClass('showSearch')
+        if(!$fullPlayer.hasClass('showlist')){
+            $fullPlayer.toggleClass('showlist')
+            $(this.$barIcon.current).toggleClass('active')
+        }
+      });
+    }
+
+    bars() {
+        let $fullPlayer = $(this.$fullPlayer.current)
+        $fullPlayer.toggleClass('showlist')
+        $(this.$barIcon.current).toggleClass('active')
+        if ($fullPlayer.hasClass('showSearch')) {
+            $fullPlayer.toggleClass('showSearch')
+        }
+    }
+
 	render() {
 
 		let player = null
 		if (this.props.player.fullScreen) {
-			player = (<div className="full-player" ref={this.$fullPlayer}>
+			player = (<div className="full-player" ref={this.$fullPlayer}>  
 							<div className="full-wrap" 
                                 onMouseDown={this.dragStart.bind(this)}
                                 onMouseUp={this.dragEnd.bind(this)}>
@@ -315,7 +338,7 @@ class Player extends React.Component {
                                         </b>
                                     </div>
                                     <i className="next fa fa-forward" data-tooltip="下一首" onClick={this.next.bind(this)}></i>
-                                    <i className="search fa fa-search" data-tooltip="搜索歌曲"></i>
+                                    <i className="search fa fa-search" data-tooltip="搜索歌曲" onClick={this.search.bind(this)}></i>
                                 </div>
                                 <div className="bottom cleafix">
                                     <div className="palyer-progress">
@@ -327,7 +350,7 @@ class Player extends React.Component {
                                             <VolumeBar volumeChangeFn={this.volumeChangeFn.bind(this)}/>
                                         </li>
                                         <li className="switch-playlist">
-                                            <i className="fa fa-bars"></i>
+                                            <i ref={this.$barIcon} className="fa fa-bars" onClick={this.bars.bind(this)}></i>
                                         </li>
                                     </ul>
                                     <div style={{clear: 'both'}}></div>
@@ -344,6 +367,8 @@ class Player extends React.Component {
                                      <i className="fa fa-close" onClick={this.quit.bind(this)}></i>
                                 </div>
                             </div>
+                            <PlayerList />
+                            <PlayerSearch />
 						</div>)
 		} else if (!this.props.player.fullScreen) {
 			player = (<div className="mini-player" onClick={this.enlarge.bind(this)}>
@@ -369,7 +394,7 @@ class Player extends React.Component {
 
 		}
 		return (
-			<div className="Player">
+			<div className="Player" id="Player">
 				{ player }
 				<audio ref={this.$audio} src={global.musicResourcePrefix+this.props.songs.currentSong.url} 
 					onCanPlay={this.ready.bind(this)} onError={this.error.bind(this)}
@@ -396,41 +421,3 @@ function mapDispatchToProps(dispatch) {
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(Player)
 )
-
-/*(<div className="full-player">
-                            <div className="background"></div>
-                            <div className="full-wrap">
-                                <div className="top">
-                                    <div className="top-wrap">
-                                        <div className="quit" onClick={this.quit.bind(this)}><i className="fa fa-close"></i></div>
-                                        <div className="info">
-                                            <h3>{this.props.songs.currentSong.songName}</h3>
-                                            <p>{this.props.songs.currentSong.singer}</p>
-                                        </div>
-                                        <div className="back" onClick={this.back.bind(this)}><i className="fa fa-angle-down"></i></div>
-                                    </div>
-                                </div>
-                                <div className="middle">
-                                    <div className="cd-wrap">
-                                        <div className={this.props.player.palyering?'cd play':'cd play pause'}><img alt="" src={global.musicCoverPrefix+this.props.songs.currentSong.cover}/></div>
-                                    </div>
-                                </div>
-                                <div className="Progress">
-                                    <span className="time time-l">{this.format(this.state.currentTime)}</span>
-                                    <div className="progress-bar-wrapper">
-                                        <ProgressBar percent={this.state.percent} percentChangeFn={this.percentChangeFn.bind(this)}/>
-                                    </div>
-                                    <span className="time time-r">{this.format(this.props.songs.currentSong.duration)}</span>
-                                </div>
-                                <div className="bottom">
-                                    <div className="icon-wrap">
-                                        <div><i onClick={this.changeModel.bind(this)} className={this.props.player.model==playModel.sequence?'fa fa-exchange':
-                                                        this.props.player.model==playModel.loop?'fa fa-refresh':'fa fa-random'}></i></div>
-                                        <div><i className={this.state.songReady?'fa fa-step-backward':'fa fa-step-backward disable'} onClick={this.prev.bind(this)}></i></div>
-                                        <div><i className={(this.props.player.palyering?'fa fa-pause':'fa fa-play')+(this.state.songReady?'':' disable')} onClick={this.togglePalying.bind(this)}></i></div>
-                                        <div><i className={this.state.songReady?'fa fa-step-forward':'fa fa-step-forward disable'} onClick={this.next.bind(this)}></i></div>
-                                        <div><i className="fa fa-outdent"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>)*/

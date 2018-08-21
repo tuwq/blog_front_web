@@ -95,7 +95,7 @@ class App extends Component {
   }
 
   closeMenu() {
-    PubSub.publish(global.userMenuSubscribe,false);
+    PubSub.publish(global.userMenuSubscribe);
   }
 
   userInfoRefreshSubscribe(msg,data) {

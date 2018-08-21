@@ -91,6 +91,15 @@
 	transform-origin: center center;
 	animation: imagecenterscale .3s  linear;
 }
+.scrollshow {
+	animation: scrollshow .3s;
+}
+@keyframes scrollshow {
+	0%{right: 0;opacity: .3}
+	50% {right: 32px;opacity: .7;}
+	100%{right: 30px;opacity: 1;}
+}
+
 @keyframes imagecenterscale {
 	0%{transform: scale(0);}
 	100%{transform: scale(1);}
