@@ -7,7 +7,6 @@
 		bottom: 0;
 		left: 0;
 		font-size: 13px;
-		transition: height .5s;
 		text-align: left;
 		color: #38343e;
 		width: 100%;
@@ -72,11 +71,13 @@
 			text-shadow: 1px 1px 1px #000;
     		font-weight: bolder;
     		span {
+    			display: inline-block;
+    			vertical-align: top;
+    			overflow: hidden;
+				white-space: nowrap;
+	    		text-overflow: ellipsis;
     			padding: 0 2px;
     			max-width: 90px;
-    			overflow: hidden;
-    			white-space: nowrap;
-	    		text-overflow: ellipsis;
     		}
     		.songStyle {
 				
@@ -170,9 +171,27 @@
 			line-height: 25px;
 			z-index: 999999;
 			.palyer-progress {
+				display: inline-block;
 				margin-left: 15px;
 				margin-right: 15px;
-				width: 100%;
+				width: calc(100% - 133px);
+			}
+			.bottom-right {
+				float: right;
+				text-align: center;
+				.volume-control {&:hover {.VolumeBar {display: block;}}}
+				li {
+					position: relative;
+					float: left;
+					line-height: 25px;
+					height: 25px;
+					margin-right: 10px;
+					padding: 0;
+					z-index: 100001;
+					cursor: pointer;
+					min-width: 15px;
+					&:hover {color: #8adced;}
+				}
 			}
 		}
 		.cover {
@@ -210,8 +229,9 @@
 	  display: flex;
       align-items: center;
       position: fixed;
-      left: 0;
-      bottom: 0;
+      top: initial !important;
+      left: initial !important;
+      bottom: 0 !important;
       z-index: 180;
       width: 100%;
       height: 60px;

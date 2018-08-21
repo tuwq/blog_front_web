@@ -31,7 +31,8 @@ class MusicCollection extends React.Component {
 			data: [],
 			pageModel: {},
 			isSearch: false,
-			keyword: ''
+			keyword: '',
+			error: '加载中'
 		}
 	}
 
@@ -75,6 +76,9 @@ class MusicCollection extends React.Component {
 						songList: res.data.data,
 						sequenceList: res.data.data
 					})
+					if (res.data.data.length<1) {
+						this.setState({error: '没有找到符合条件的结果'})
+					}
 				}
 			})
 	}
@@ -119,11 +123,12 @@ class MusicCollection extends React.Component {
 		return (
 			<div className="MusicCollection">
 				{
-					this.state.data.length>0&&
-					(<React.Fragment>
+					this.state.data.length>0
+					?(<React.Fragment>
 						<MusicList data={this.state.data}/>
 						<Pagination pageModel={this.state.pageModel} loadPageFn={this.loadPage.bind(this)}/>
 					</React.Fragment>)
+					:(<div style={{textAlign: 'center'}}>{this.state.error}</div>)
 
 				}
         	</div>

@@ -17,6 +17,7 @@ class DynamicReceiveItem extends React.Component {
 	}
 
 	render() {
+		console.log(this.props.item.commentDto)
 
 		let dynamic = null
 		if (this.props.item.userInitiateDynamic.type == 1 && this.props.item.userInitiateDynamic.action == 1) {

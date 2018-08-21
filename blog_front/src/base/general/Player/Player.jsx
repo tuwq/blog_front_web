@@ -12,6 +12,8 @@ import { scroll } from 'base/js/ie'
 
 import ProgressBar from 'base/general/ProgressBar/ProgressBar'
 import ProgressCircle from 'base/general/ProgressCircle/ProgressCircle'
+import VolumeBar from 'base/general/VolumeBar/VolumeBar' 
+import PlayerList from './subpages/PlayerList/PlayerList'
 
 import './Player.less'
 import './MPlayer.less'
@@ -34,12 +36,14 @@ class Player extends React.Component {
 			watchPlaying: true,
 			songReady: false,
 			currentTime: 0,
-			percent: 0
+			percent: 0,
+            muted: false
 		}
 	}
 
 	componentDidMount() {
 	  this.$audio.current.play()
+      this.$audio.current.volume = 1
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -244,6 +248,19 @@ class Player extends React.Component {
         document.onmousemove = null
     }
 
+    muted() {
+        let audio = this.$audio.current
+        this.setState({
+            muted: !audio.muted
+        },()=>{
+            audio.muted = !audio.muted 
+        })
+    }
+
+    volumeChangeFn(percent) {
+       this.$audio.current.volume = 1 * percent
+    }
+
 	render() {
 
 		let player = null
@@ -287,23 +304,33 @@ class Player extends React.Component {
                                     </div>
                                 </div>
                                 <div className="control">
-                                    <i  title="切换模式" onClick={this.changeModel.bind(this)} 
+                                    <i  data-tooltip="切换模式" onClick={this.changeModel.bind(this)} 
                                         className={(this.props.player.model==playModel.sequence?'fa fa-retweet':
                                                         this.props.player.model==playModel.loop?'fa fa-refresh':'fa fa-random')+' palytype current'}></i>
-                                    <i className="prev fa fa-backward" title="上一首" onClick={this.prev.bind(this)}></i>
+                                    <i className="prev fa fa-backward" data-tooltip="上一首" onClick={this.prev.bind(this)}></i>
                                     <div className="status">
                                         <b>
-                                            <i className="pause fa fa-pause" title="暂停" onClick={this.togglePalying.bind(this)}></i>
-                                            <i className="play fa fa-play" title="播放" onClick={this.togglePalying.bind(this)}></i>
+                                            <i className="pause fa fa-pause" data-tooltip="暂停" onClick={this.togglePalying.bind(this)}></i>
+                                            <i className="play fa fa-play" data-tooltip="播放" onClick={this.togglePalying.bind(this)}></i>
                                         </b>
                                     </div>
-                                    <i className="next fa fa-forward" title="下一首" onClick={this.next.bind(this)}></i>
-                                    <i className="search fa fa-search" title="搜索歌曲"></i>
+                                    <i className="next fa fa-forward" data-tooltip="下一首" onClick={this.next.bind(this)}></i>
+                                    <i className="search fa fa-search" data-tooltip="搜索歌曲"></i>
                                 </div>
                                 <div className="bottom cleafix">
                                     <div className="palyer-progress">
                                         <ProgressBar percent={this.state.percent} percentChangeFn={this.percentChangeFn.bind(this)}/>
                                     </div>
+                                    <ul className="bottom-right">
+                                        <li className="volume-control">
+                                            <div onClick={this.muted.bind(this)} className={(this.state.muted?'fa fa-volume-off':'fa fa-volume-up')+' volume'}></div>
+                                            <VolumeBar volumeChangeFn={this.volumeChangeFn.bind(this)}/>
+                                        </li>
+                                        <li className="switch-playlist">
+                                            <i className="fa fa-bars"></i>
+                                        </li>
+                                    </ul>
+                                    <div style={{clear: 'both'}}></div>
                                 </div>
                                 <div className={this.props.player.palyering?'cover play':'cover play pause'}>
                                     <img src={global.musicCoverPrefix+this.props.songs.currentSong.cover}/>
@@ -336,12 +363,9 @@ class Player extends React.Component {
 											<i className={(this.props.player.palyering?'fa fa-pause':'fa fa-play')+' icon-mini'}></i>
 										</ProgressCircle>
 									</div>
-									<div className="control">
-										<i className="fa fa-outdent"></i>
-									</div>
 								</div>
 							</div>
-					  </div>)
+					   </div>)
 
 		}
 		return (

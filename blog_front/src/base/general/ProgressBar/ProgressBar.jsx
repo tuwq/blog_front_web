@@ -26,7 +26,7 @@ class ProgressBar extends React.Component {
 	}
 
 	componentDidMount() {
-
+		
 	}
 
 	componentWillReceiveProps(nextProps) {
