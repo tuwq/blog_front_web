@@ -3,8 +3,12 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import PubSub from 'pubsub-js'
 import * as songsActions from 'store/actions/songs' 
 import * as playerActions from 'store/actions/player' 
+
+import { _saveSearchSongs,_loadSearchSongs,_removeSearchSongs } from 'base/js/localCache'
+import { uniqueById } from 'base/js/util'
 
 import MusicItem from '../MusicItem/MusicItem'
 
@@ -23,22 +27,10 @@ class MusicList extends React.Component {
 	}
 
 	selectItemFn(selectItem,selectIndex) {
-		let index = this.props.songs.songList.findIndex((item)=>{
-			return item.id === selectItem.id
-		})
-		if (index<0) {
-			let list = this.props.songs.songList.slice()
-			list.push(selectItem)
-			this.props.songsActions.saveSongs({
-				songList: list,
-				currentIndex: list.length-1,
-				currentSong: list[list.length-1]
-			})
+		if (this.props.isSearch) {
+			this.loadLocalSearchList(selectItem)
 		} else {
-			this.props.songsActions.saveSongs({
-				currentIndex: index,
-				currentSong: this.props.songs.songList[index]
-			})
+			this.loadDefaultList(selectIndex)
 		}
 		if (this.props.player.palyStatus && !this.props.player.fullScreen) {
 			this.props.playerActions.savePlayData({
@@ -51,6 +43,46 @@ class MusicList extends React.Component {
 				fullScreen: true
 			})
 		}
+	}
+
+	loadDefaultList(selectIndex) {
+		this.props.songsActions.saveSongs({
+			songList: this.props.data,
+			defaultList: this.props.data,
+			currentIndex: selectIndex,
+			currentSong: this.props.data[selectIndex]
+		})
+	}
+
+	loadLocalSearchList(selectItem) {
+		let local = _loadSearchSongs()
+		let localSongs
+		if(local) {
+			localSongs = JSON.parse(local)
+			localSongs.unshift(selectItem)
+			uniqueById(localSongs)
+			this.props.songsActions.saveSongs({
+				songList: localSongs,
+				searchList: localSongs,
+				currentIndex: 0,
+				currentSong: localSongs[0]
+			})
+			_saveSearchSongs(JSON.stringify(localSongs))
+		} else {
+			localSongs = []
+			localSongs.push(selectItem)
+			this.props.songsActions.saveSongs({
+				songList: localSongs,
+				searchList: localSongs,
+				currentIndex: 0,
+				currentSong: localSongs[0]
+			})
+			_saveSearchSongs(JSON.stringify(localSongs))
+		}
+		this.setState({
+			showResult: false
+		})
+		PubSub.publish(global.AddLocalSearchSongSubscribe,localSongs.length)
 	}
 
 	render() {

@@ -44,7 +44,8 @@
 		    cursor: pointer;
 		}
 		.searchlist-box {
-			display: none;
+			opacity: 0;
+			display: block;
 		    color: #fff;
 		    position: absolute;
 		    top: 41px;
@@ -53,6 +54,8 @@
 		    height: 247px;
 		    width: 207px;
 		    transform-origin: 50% 100px;
+		    transition: opacity .2s ease;
+		    &.show {opacity: 1;}
 			.searchlist-wrap {
 				position: relative;
 			    height: 100%;

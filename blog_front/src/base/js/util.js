@@ -12,3 +12,14 @@ export function shuffle(arr) {
 function getRandomInt(min,max) {
 	return Math.floor(Math.random() * (max - min + 1) + min) 
 }
+
+
+export function uniqueById(data) {
+	for(var i=0; i < data.length; i++) {
+	  for(var j=i+1; j < data.length; j++) {
+	   if(data[i].id == data[j].id) {
+	     data.splice(j,1);
+	   }
+	  }
+	}
+}

@@ -32,6 +32,12 @@ global.MusicCategoryChangeSubscribe = 'MusicCategoryChangeSubscribe'
 global.MusicSearchSubscribe = 'MusicSearchSubscribe'
 // 播放器搜索歌曲
 global.PlaySearchReadySubscribe = 'PlaySearchReadySubscribe'
+// 搜索歌曲添加后
+global.AddLocalSearchSongSubscribe = 'AddLocalSearchSongSubscribe'
+// 搜索歌曲清除后
+global.clearLocalSearchSongSubscribe = 'clearLocalSearchSongSubscribe'
+// 清除歌单页面搜索关键字
+global.clearMusicKeywordSubscribe = 'clearMusicKeywordSubscribe'
 // 文章点赞的密钥
 global.artPraiseKey = 'artPraiseKey'
 // 首页火热文章获取数

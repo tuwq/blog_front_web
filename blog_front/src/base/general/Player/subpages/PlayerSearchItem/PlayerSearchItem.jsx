@@ -17,9 +17,9 @@ class PlayerSearchItem extends React.Component {
 
 	render() {
 		return (
-			<li className="PlayerSearchItem">
-				<span className="index">1</span>
-				小林未郁 - Before my body is dry
+			<li className="PlayerSearchItem" onClick={this.props.selectItemFn.bind(this,this.props.item,this.props.index)}>
+				<span className="index">{this.props.index+1}</span>
+				{this.props.item.songName} - {this.props.item.singer}
         	</li>
         )
 	}

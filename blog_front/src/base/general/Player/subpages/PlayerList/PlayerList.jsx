@@ -6,7 +6,9 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as songsActions from 'store/actions/songs' 
 
+import { _saveSearchSongs,_loadSearchSongs } from 'base/js/localCache'
 import { scroll } from 'base/js/ie'
+import { uniqueById } from 'base/js/util'
 
 import './PlayerList.less'
 
@@ -19,12 +21,19 @@ class PlayerList extends React.Component {
 		super(props,context)
 		this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
 		this.initAlbum = this.initAlbum.bind(this)
+		this.initLocalSongs = this.initLocalSongs.bind(this)
 		this.tranList = this.tranList.bind(this)
 		this.PlaySearchReadySubscribe = this.PlaySearchReadySubscribe.bind(this)
+		this.AddLocalSearchSongSubscribe = this.AddLocalSearchSongSubscribe.bind(this)
+		this.clearLocalSearchSongSubscribe = this.clearLocalSearchSongSubscribe.bind(this)
+		this.showDefaultList = this.showDefaultList.bind(this)
+		this.showSearchList = this.showSearchList.bind(this)
 		this.$albumList = React.createRef() 
 		this.$songList = React.createRef()
 		this.$rightIcon = React.createRef()
 		PubSub.subscribe(global.PlaySearchReadySubscribe,this.PlaySearchReadySubscribe)
+		PubSub.subscribe(global.AddLocalSearchSongSubscribe,this.AddLocalSearchSongSubscribe)
+		PubSub.subscribe(global.clearLocalSearchSongSubscribe,this.clearLocalSearchSongSubscribe)
 		this.state = {
 			AlbumItemList: [],
 			data: [],
@@ -34,10 +43,13 @@ class PlayerList extends React.Component {
 
 	componentDidMount() {
 		this.initAlbum()
+		this.initLocalSongs()
 	}
 
 	componentWillUnmount() {
 	    PubSub.unsubscribe(this.PlaySearchReadySubscribe)
+	    PubSub.unsubscribe(this.AddLocalSearchSongSubscribe)
+	    PubSub.unsubscribe(this.clearLocalSearchSongSubscribe)
 	    this.setState = (state,callback)=>{
 	      return
 	    };
@@ -47,34 +59,67 @@ class PlayerList extends React.Component {
 		let albums = this.state.AlbumItemList.slice()
 		albums.push({
 			txt: '默认歌单列表',
-			sum: this.props.songs.songList.length
+			sum: this.props.songs.defaultList.length
 		})
+		let localData = _loadSearchSongs()
+		let localSongs
+		let sum = 0
+		if (localData) {
+			localSongs = JSON.parse(localData)
+			uniqueById(localSongs)
+			sum = localSongs.length
+		}
 		albums.push({
 			txt: '搜索列表',
-			sum: 0
+			sum: sum
 		})
 		this.setState({
 			AlbumItemList: albums
 		})
 	}
 
+	initLocalSongs() {
+		let localData = _loadSearchSongs()
+		if (localData) {
+			let localSongs = JSON.parse(localData)
+			uniqueById(localSongs)
+			this.props.songsActions.saveSongs({
+				searchList: localSongs	
+			})
+		}
+	}
+
 	chooseFn(index) {
 		if (index == 0) {
-			this.setState({
-				data: this.props.songs.songList,
-				meta: this.state.AlbumItemList[0]
-			},()=>{
-				this.tranList()
-			})
+			this.showDefaultList()
 		} else if(index == 1) {
-
+			this.showSearchList()
 		}
+	}
+
+	showDefaultList() {
+		this.setState({
+			data: this.props.songs.defaultList,
+			meta: this.state.AlbumItemList[0]
+		},()=>{
+			this.tranList()
+		})
+	}
+
+	showSearchList() {
+		this.setState({
+			data: this.props.songs.searchList,
+			meta: this.state.AlbumItemList[1]
+		},()=>{
+			this.tranList()
+		})
 	}
 
 	tranList() {
 		$(this.$albumList.current).toggleClass('tran')
 		$(this.$songList.current).toggleClass('tran')
 		$(this.$rightIcon.current).toggleClass('rotate')
+		this.props.cancleSearchFn()
 	}
 
 	selectItemFn(chooseItem,index) {
@@ -83,17 +128,38 @@ class PlayerList extends React.Component {
 			songList: this.state.data,
 			currentSong: chooseItem
 		})
-	}
+	}	
 
 	PlaySearchReadySubscribe(msg,callback) {
 		this.setState({
-			data: this.props.songs.songList,
+			data: this.props.songs.searchList,
 			meta: this.state.AlbumItemList[1]
 		},()=>{
 			$(this.$albumList.current).removeClass('tran')
 			$(this.$songList.current).removeClass('tran')
 			$(this.$rightIcon.current).toggleClass('rotate')
 			callback()
+		})
+	}
+
+	AddLocalSearchSongSubscribe(msg,length) {
+		let itemList = this.state.AlbumItemList.slice()
+		itemList[1].sum = length
+		this.setState({
+			data: this.props.songs.searchList,
+			AlbumItemList: itemList
+		})
+	}
+
+	clearLocalSearchSongSubscribe(msg,data) {
+		let itemList = this.state.AlbumItemList.slice()
+		itemList[1].sum = 0
+		this.props.songsActions.saveSongs({
+			searchList: []
+		})
+		this.setState({
+			data: [],
+			AlbumItemList: itemList
 		})
 	}
 

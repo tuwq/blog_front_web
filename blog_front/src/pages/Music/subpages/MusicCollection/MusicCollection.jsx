@@ -56,10 +56,6 @@ class MusicCollection extends React.Component {
 						data: res.data.data,
 						pageModel: res.data.pageModel
 					})
-					this.props.songsActions.saveSongs({
-						songList: res.data.data,
-						defaultList: res.data.data
-					})
 				}
 			})
 	}
@@ -71,10 +67,6 @@ class MusicCollection extends React.Component {
 					this.setState({
 						data: res.data.data,
 						pageModel: res.data.pageModel
-					})
-					this.props.songsActions.saveSongs({
-						songList: res.data.data,
-						searchList: res.data.data
 					})
 					if (res.data.data.length<1) {
 						this.setState({error: '没有找到符合条件的结果'})
@@ -96,8 +88,11 @@ class MusicCollection extends React.Component {
 		if (categoryId == this.state.categoryId) {
 			return
 		} 
-		this.setState({categoryId: categoryId},
-			()=>{
+		this.setState({
+			categoryId: categoryId,
+			isSearch: false
+		},()=>{
+			PubSub.publish(global.clearMusicKeywordSubscribe)
 			this.loadData(1,categoryId)
 		})
 	}
@@ -125,7 +120,7 @@ class MusicCollection extends React.Component {
 				{
 					this.state.data.length>0
 					?(<React.Fragment>
-						<MusicList data={this.state.data}/>
+						<MusicList data={this.state.data} isSearch={this.state.isSearch} />
 						<Pagination pageModel={this.state.pageModel} loadPageFn={this.loadPage.bind(this)}/>
 					</React.Fragment>)
 					:(<div style={{textAlign: 'center'}}>{this.state.error}</div>)

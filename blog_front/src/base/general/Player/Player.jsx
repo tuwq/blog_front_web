@@ -78,9 +78,9 @@ class Player extends React.Component {
     	})
     	let list = null
     	if (model == playModel.random) {
-    		list = shuffle(this.props.songs.defaultList)
+    		list = shuffle(this.props.songs.songList)
     	} else {
-    		list = this.props.songs.defaultList
+    		list = this.props.songs.songList
     	}
     	this.props.songsActions.saveSongs({
 			songList: list
@@ -275,6 +275,10 @@ class Player extends React.Component {
       });
     }
 
+    cancleSearchFn() {
+        $(this.$fullPlayer.current).removeClass('showSearch')
+    }
+
     bars() {
         let $fullPlayer = $(this.$fullPlayer.current)
         $fullPlayer.toggleClass('showlist')
@@ -367,7 +371,7 @@ class Player extends React.Component {
                                      <i className="fa fa-close" onClick={this.quit.bind(this)}></i>
                                 </div>
                             </div>
-                            <PlayerList />
+                            <PlayerList cancleSearchFn={this.cancleSearchFn.bind(this)}/>
                             <PlayerSearch />
 						</div>)
 		} else if (!this.props.player.fullScreen) {
