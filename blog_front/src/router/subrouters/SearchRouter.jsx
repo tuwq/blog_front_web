@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route,Switch  } from 'react-router-dom';
+import { Route,Switch,Redirect  } from 'react-router-dom';
 
 import Search from '@/pages/Search/Search'
 import NotFound from '@/pages/NotFound/NotFound'
@@ -10,7 +10,7 @@ class SearchRouter extends React.Component {
         return (
             <Switch>
             	<Route exact path="/search" component={Search} />
-        		<Route path="/search/*" component={NotFound} />
+        		<Redirect from="/search/*" to="/notFound" />
             </Switch>
         )
     }

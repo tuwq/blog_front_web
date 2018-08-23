@@ -67,10 +67,10 @@ class SiderBarSelf extends React.Component {
          					<i><img alt="" width="14" height="14" src={followSvg}/></i>
          					<span>关注</span>
          				</Link>
-         				<a>
+         				<Link to="/extra/secretLetter">
          					<i><img alt="" width="14" height="14" src={mailSvg}/></i>
          					<span>私信</span>
-         				</a>
+         				</Link>
          			</div>
          			<div className="SelfStats">
          				<span className="stateItem">{this.state.author.articaleSum}<span>文章</span></span>

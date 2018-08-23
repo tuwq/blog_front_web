@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route,Switch  } from 'react-router-dom';
+import { Route,Switch,Redirect  } from 'react-router-dom';
 
 import Music from '@/pages/Music/Music'
 
@@ -8,7 +8,6 @@ class MusicRouter extends React.Component {
         return (
             <Switch>
             	<Route exact path="/music" component={Music} />
-            	<Route exact path="/music/category/:id" component={Music} />
             </Switch>
         )
     }

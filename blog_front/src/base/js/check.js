@@ -70,3 +70,24 @@ export function checkCommentForm(content) {
 	return true
 }
 
+export function checkSecretLetterForm(state) {
+	if (state.contact.trim() == '' || state.contact == null) {
+		return '联系方式不能为空'
+	}
+	if (!checkmail(state.contact) && !checkQQNumber(state.contact)) {
+		return '联系方式必须为qq或邮箱'
+	}
+	if (state.content.trim() == '' || state.content == null) {
+		return '私信内容不能为空'
+	}
+	if (state.content.trim().length < 10 || state.content.length > 200) {
+		return '私信内容长度保持在10-200之间'
+	}
+	return true
+}
+
+export function checkQQNumber(number) {
+	// qq号验证规则  
+	var reg = /^[1-9][0-9]{4,}$/;
+	return reg.test(number)
+}

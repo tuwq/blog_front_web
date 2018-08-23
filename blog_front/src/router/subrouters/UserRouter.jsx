@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route,Switch  } from 'react-router-dom';
+import { Route,Switch,Redirect  } from 'react-router-dom';
 
 import Login from '@/pages/Login/Login'
 import FindPass from '@/pages/FindPass/FindPass'
@@ -13,10 +13,10 @@ class UserRouter extends React.Component {
     render() {
         return (
             <Switch>
-            	<Route exact path="/user" component={NotFound} />
+            	<Redirect exact from="/user" to="/notFound" />
         		<LoginRoute exact path="/user/setting" component={Setting} />
                 <Route exact path="/user/:id" component={Information} />
-                <Route path="/user/*" component={NotFound} />
+                <Redirect from="/user/*" to="/notFound" />
             </Switch>
         )
     }
