@@ -1,7 +1,9 @@
 package root.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,7 +35,11 @@ public class LoginController {
 	}
 	
 	@GetMapping("/activationEmail")
-	public void activationEmail(@RequestParam("key") String key) {
+	public void activationEmail(HttpServletRequest request) {
+		String key = request.getParameter("key");
+		if (StringUtils.isBlank(key)) {
+			return;
+		}
 		loginService.activation(key);
 	}
 	

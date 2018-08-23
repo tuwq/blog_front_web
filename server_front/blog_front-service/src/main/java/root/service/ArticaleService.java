@@ -12,6 +12,7 @@ import com.google.common.collect.Lists;
 
 import root.async.IncrDataHandler;
 import root.beans.JsonResult;
+import root.constant.RedisCode;
 import root.constant.ResultCode;
 import root.dto.ArticaleDto;
 import root.exception.CheckParamException;
@@ -22,6 +23,7 @@ import root.model.Articale;
 import root.model.Category;
 import root.redis.RedisOperator;
 import root.util.DtoUtil;
+import root.util.JsonUtils;
 import root.util.TimeAgoUtils;
 
 @Service
@@ -35,6 +37,8 @@ public class ArticaleService {
 	private CategoryMapper categoryMapper;
 	@Resource
 	private RedisOperator redis;
+	@Value("${articleInfoTimeout}")
+	private Long articleInfoTimeout;
 	
 	public JsonResult<ArticaleDto> detail(Integer id) {
 		// 检查字段,访问id不存在去404
@@ -50,6 +54,12 @@ public class ArticaleService {
 		if (count == 0) {
 			throw new NotFoundException(ResultCode.ITEM_NOT_FOUND,"访问文章的不存在");
 		}
+		String artDtoJson = redis.get(RedisCode.ARTICLE_INFO_CACHE+":"+id);
+		if (artDtoJson != null) {
+			ArticaleDto cacheDto = JsonUtils.jsonToPojo(artDtoJson, ArticaleDto.class);
+			incrDataHandler.articleBrowseIncr(id);
+			return JsonResult.<ArticaleDto>success(cacheDto);
+		}
 		Articale articale = articaleMapper.getByIdWithUser(id);
 		List<Category> categoryList = categoryMapper.getArtCategoryListById(id);
 		articale.setCategoryList(categoryList);
@@ -60,6 +70,7 @@ public class ArticaleService {
 		articaleDto.setNext(next);
 		articaleDto.setTimeAgo(TimeAgoUtils.format(articaleDto.getUpdateTime()));
 		articaleDto.formatNoSecondTime();
+		redis.set(RedisCode.ARTICLE_INFO_CACHE+":"+id,JsonUtils.objectToJson(articaleDto),articleInfoTimeout);
 		incrDataHandler.articleBrowseIncr(id);
 		return JsonResult.<ArticaleDto>success(articaleDto);
 	}

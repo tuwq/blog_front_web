@@ -158,7 +158,6 @@ public class LoginService {
 			user.setOperateTime(new Date());
 			userMapper.updateByPrimaryKeySelective(user);
 			try {
-				redis.del(RedisCode.EMAIL_ACTIVATION_CODE+":"+key);
 				response.sendRedirect(mailMessageUrl
 							+ "?message="+URLEncoder.encode("激活成功2秒后跳转到登陆页","UTF-8")+"&flag=1");
 			} catch (IOException e) {throw new ActivationException("激活邮件重定向失败");}

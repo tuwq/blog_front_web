@@ -11,11 +11,17 @@ public class RegExUtil {
 		Matcher matcher = pattern.matcher(mail);
 		return matcher.matches(); 
 	}
+	
+	public static boolean RegQQNumber(String number) {
+		String regEx = "^[1-9]\\d{4,10}$";;
+		Pattern pattern = Pattern.compile(regEx);
+		Matcher matcher = pattern.matcher(number);
+		return matcher.matches(); 
+	}
 
 	
 	public static void main(String[] args) {
-		boolean flag = RegExUtil.RegExMail("1246361002@qq.com");
-		System.out.println(flag);
+		
 	}
 	
 }

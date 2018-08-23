@@ -11,6 +11,7 @@ root\model\Access$AccessBuilder.class
 root\dto\CommentDto.class
 root\param\RootCommentParam.class
 root\dto\ShowFollowDto.class
+root\param\SecretLetterParam$SecretLetterParamBuilder.class
 root\beans\SearchNoResultExceptionResult.class
 root\param\BasisSettingParam.class
 root\param\FollowParam.class
@@ -27,6 +28,7 @@ root\beans\TokenExceptionResult.class
 root\dto\ImgConfigDto.class
 root\dto\LoginDto$LoginDtoBuilder.class
 root\model\FrontImgConfig.class
+root\param\SecretLetterParam.class
 root\model\UserInitiateDynamic$UserInitiateDynamicBuilder.class
 root\beans\PageResult$PageResultBuilder.class
 root\beans\NotFoundExceptionResult.class
@@ -36,9 +38,12 @@ root\dto\ShowCategoryArticleDto$ShowCategoryArticleDtoBuilder.class
 root\beans\DynamicExceptionResult$DynamicExceptionResultBuilder.class
 root\dto\DynamicReceiveDto.class
 root\beans\JsonResult.class
+root\model\SongBindCategory.class
 root\beans\DynamicExceptionResult.class
+root\model\Song.class
 root\model\SysUser.class
 root\model\Articale.class
+root\model\SongBindCategory$SongBindCategoryBuilder.class
 root\model\UserFollow.class
 root\dto\ShowCategoryArticleDto.class
 root\beans\JsonResult$JsonResultBuilder.class
@@ -48,7 +53,9 @@ root\beans\FileUploadExceptionResult$FileUploadExceptionResultBuilder.class
 root\beans\FileUploadExceptionResult.class
 root\beans\ParamExceptionResult.class
 root\model\Comment.class
+root\model\SongCategory.class
 root\param\RegistParam.class
+root\model\Song$SongBuilder.class
 root\model\Comment$CommentBuilder.class
 root\param\ChildCommentParam.class
 root\param\PageParam.class
@@ -60,5 +67,6 @@ root\model\ArticaleUser.class
 root\model\ArticaleCategory.class
 root\model\Articale$ArticaleBuilder.class
 root\beans\TokenExceptionResult$TokenExceptionResultBuilder.class
+root\model\Firend.class
 root\dto\ArticaleDto.class
 root\param\UpdatePassParam.class

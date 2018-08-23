@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
-
 import root.beans.JsonResult;
 import root.beans.PageModel;
 import root.beans.PageResult;
+import root.constant.RedisCode;
 import root.constant.ResultCode;
 import root.dto.ArticaleDto;
 import root.dto.ShowCategoryArticleDto;
@@ -22,7 +22,9 @@ import root.mapper.CategoryMapper;
 import root.model.Articale;
 import root.model.Category;
 import root.param.PageParam;
+import root.redis.RedisOperator;
 import root.util.DtoUtil;
+import root.util.JsonUtils;
 import root.util.TimeAgoUtils;
 import root.util.ValidatorUtil;
 
@@ -41,6 +43,10 @@ public class CategoryService {
 	private Integer categoryShortCodeId;
 	@Value("${categoryChatId}")
 	private Integer categoryChatId;
+	@Resource
+	private RedisOperator redis;
+	@Value("${articleListIndexTimeout}")
+	private Long articleListIndexTimeout;
 	
 	public PageResult<ArticaleDto> categoryList(PageParam param, Integer id) {
 		// 检查字段
@@ -81,6 +87,10 @@ public class CategoryService {
 		if (quantity == null) {
 			throw new CheckParamException("数量","未指定");
 		}
+		String cacheList = redis.get(RedisCode.ARTICLE_LIST_PRAISE_CACHE);
+		if (cacheList != null) {
+			return JsonResult.<List<ArticaleDto>>success(JsonUtils.jsonToList(cacheList, ArticaleDto.class));
+		}
 		List<Articale> praiseList = articaleMapper.praiseByQuantity(quantity);
 		List<ArticaleDto> articaleDtoList = Lists.newArrayList();
 		praiseList.forEach(articale -> {
@@ -89,6 +99,7 @@ public class CategoryService {
 			articaleDto.formatNoSecondTime();
 			articaleDtoList.add(articaleDto);
 		});
+		redis.set(RedisCode.ARTICLE_LIST_PRAISE_CACHE, JsonUtils.objectToJson(articaleDtoList),articleListIndexTimeout);
 		return JsonResult.<List<ArticaleDto>>success(articaleDtoList);
 	}
 
@@ -97,6 +108,10 @@ public class CategoryService {
 		// 查找分类名称
 		if (quantity == null) {
 			throw new CheckParamException("数量","未指定");
+		}
+		String cacheDto = redis.get(RedisCode.ARTICLE_CATEGORY_CACHE+":"+categoryArticleId);
+		if (cacheDto != null) {
+			return JsonResult.<ShowCategoryArticleDto>success(JsonUtils.jsonToPojo(cacheDto, ShowCategoryArticleDto.class));
 		}
 		List<Articale> articaleList = articaleMapper.categoryArticale(categoryArticleId,quantity);
 		List<ArticaleDto> articaleDtoList = Lists.newArrayList();
@@ -111,12 +126,17 @@ public class CategoryService {
 			throw new CheckParamException("分类","不存在");
 		}
 		ShowCategoryArticleDto showCADto = ShowCategoryArticleDto.builder().category(category).articaleList(articaleDtoList).build();
+		redis.set(RedisCode.ARTICLE_CATEGORY_CACHE+":"+categoryArticleId, JsonUtils.objectToJson(showCADto),articleListIndexTimeout);
 		return JsonResult.<ShowCategoryArticleDto>success(showCADto);
 	}
 
 	public JsonResult<ShowCategoryArticleDto> categoryNode(Integer quantity) {
 		if (quantity == null) {
 			throw new CheckParamException("数量","未指定");
+		}
+		String cacheDto = redis.get(RedisCode.ARTICLE_CATEGORY_CACHE+":"+categoryNodeId);
+		if (cacheDto != null) {
+			return JsonResult.<ShowCategoryArticleDto>success(JsonUtils.jsonToPojo(cacheDto, ShowCategoryArticleDto.class));
 		}
 		List<Articale> articaleList = articaleMapper.categoryArticale(categoryNodeId,quantity);
 		List<ArticaleDto> articaleDtoList = Lists.newArrayList();
@@ -131,12 +151,17 @@ public class CategoryService {
 			throw new CheckParamException("分类","不存在");
 		}
 		ShowCategoryArticleDto showCADto = ShowCategoryArticleDto.builder().category(category).articaleList(articaleDtoList).build();
+		redis.set(RedisCode.ARTICLE_CATEGORY_CACHE+":"+categoryNodeId, JsonUtils.objectToJson(showCADto),articleListIndexTimeout);
 		return JsonResult.<ShowCategoryArticleDto>success(showCADto);
 	}
 	
 	public JsonResult<ShowCategoryArticleDto> categoryShortCode(Integer quantity) {
 		if (quantity == null) {
 			throw new CheckParamException("数量","未指定");
+		}
+		String cacheDto = redis.get(RedisCode.ARTICLE_CATEGORY_CACHE+":"+categoryShortCodeId);
+		if (cacheDto != null) {
+			return JsonResult.<ShowCategoryArticleDto>success(JsonUtils.jsonToPojo(cacheDto, ShowCategoryArticleDto.class));
 		}
 		List<Articale> articaleList = articaleMapper.categoryArticale(categoryShortCodeId,quantity);
 		List<ArticaleDto> articaleDtoList = Lists.newArrayList();
@@ -151,12 +176,17 @@ public class CategoryService {
 			throw new CheckParamException("分类","不存在");
 		}
 		ShowCategoryArticleDto showCADto = ShowCategoryArticleDto.builder().category(category).articaleList(articaleDtoList).build();
+		redis.set(RedisCode.ARTICLE_CATEGORY_CACHE+":"+categoryShortCodeId, JsonUtils.objectToJson(showCADto),articleListIndexTimeout);
 		return JsonResult.<ShowCategoryArticleDto>success(showCADto);
 	}
 
 	public JsonResult<ShowCategoryArticleDto> categoryChat(Integer quantity) {
 		if (quantity == null) {
 			throw new CheckParamException("数量","未指定");
+		}
+		String cacheDto = redis.get(RedisCode.ARTICLE_CATEGORY_CACHE+":"+categoryChatId);
+		if (cacheDto != null) {
+			return JsonResult.<ShowCategoryArticleDto>success(JsonUtils.jsonToPojo(cacheDto, ShowCategoryArticleDto.class));
 		}
 		List<Articale> articaleList = articaleMapper.categoryArticale(categoryChatId,quantity);
 		List<ArticaleDto> articaleDtoList = Lists.newArrayList();
@@ -171,12 +201,17 @@ public class CategoryService {
 			throw new CheckParamException("分类","不存在");
 		}
 		ShowCategoryArticleDto showCADto = ShowCategoryArticleDto.builder().category(category).articaleList(articaleDtoList).build();
+		redis.set(RedisCode.ARTICLE_CATEGORY_CACHE+":"+categoryChatId, JsonUtils.objectToJson(showCADto),articleListIndexTimeout);
 		return JsonResult.<ShowCategoryArticleDto>success(showCADto);
 	}
 
 	public JsonResult<ShowCategoryArticleDto> hotDiscuss(Integer quantity) {
 		if (quantity == null) {
 			throw new CheckParamException("数量","未指定");
+		}
+		String cacheDto = redis.get(RedisCode.ARTICLE_LIST_COMMENT_CACHE);
+		if (cacheDto != null) {
+			return JsonResult.<ShowCategoryArticleDto>success(JsonUtils.jsonToPojo(cacheDto, ShowCategoryArticleDto.class));
 		}
 		List<Articale> articaleList = articaleMapper.hotDiscuss(quantity);
 		List<ArticaleDto> articaleDtoList = Lists.newArrayList();
@@ -188,6 +223,7 @@ public class CategoryService {
 		});
 		Category category = new Category();category.setName("热评文章");
 		ShowCategoryArticleDto showCADto = ShowCategoryArticleDto.builder().category(category).articaleList(articaleDtoList).build();
+		redis.set(RedisCode.ARTICLE_LIST_COMMENT_CACHE, JsonUtils.objectToJson(showCADto),articleListIndexTimeout);
 		return JsonResult.<ShowCategoryArticleDto>success(showCADto);
 	}
 
@@ -195,6 +231,10 @@ public class CategoryService {
 		// 根据权重和更新时间
 		if (quantity == null) {
 			throw new CheckParamException("数量","未指定");
+		}
+		String cacheDtoList = redis.get(RedisCode.ARTICLE_LIST_WEIGHT_CACHE);
+		if (cacheDtoList != null) {
+			return JsonResult.<List<ArticaleDto>>success(JsonUtils.jsonToList(cacheDtoList, ArticaleDto.class));
 		}
 		List<Articale> praiseList = articaleMapper.weightByQuantity(quantity);
 		List<ArticaleDto> articaleDtoList = Lists.newArrayList();
@@ -204,6 +244,7 @@ public class CategoryService {
 			articaleDto.formatNoSecondTime();
 			articaleDtoList.add(articaleDto);
 		});
+		redis.set(RedisCode.ARTICLE_LIST_WEIGHT_CACHE, JsonUtils.objectToJson(articaleDtoList),articleListIndexTimeout);
 		return JsonResult.<List<ArticaleDto>>success(articaleDtoList);
 	}
 

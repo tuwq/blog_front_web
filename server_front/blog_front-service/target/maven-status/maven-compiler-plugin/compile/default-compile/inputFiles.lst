@@ -9,12 +9,16 @@ D:\eclipse-workspace\blog_front\blog_front-service\src\main\java\root\service\Co
 D:\eclipse-workspace\blog_front\blog_front-service\src\main\java\root\async\UserDataHandler.java
 D:\eclipse-workspace\blog_front\blog_front-service\src\main\java\root\service\DynamicReceiveService.java
 D:\eclipse-workspace\blog_front\blog_front-service\src\main\java\root\service\ConfigService.java
+D:\eclipse-workspace\blog_front\blog_front-service\src\main\java\root\service\SecretLetterService.java
 D:\eclipse-workspace\blog_front\blog_front-service\src\main\java\root\service\MailService.java
 D:\eclipse-workspace\blog_front\blog_front-service\src\main\java\root\async\AccessDataHandler.java
 D:\eclipse-workspace\blog_front\blog_front-service\src\main\java\root\service\SearchService.java
+D:\eclipse-workspace\blog_front\blog_front-service\src\main\java\root\service\FirendService.java
 D:\eclipse-workspace\blog_front\blog_front-service\src\main\java\root\async\CommentedDataHandler.java
 D:\eclipse-workspace\blog_front\blog_front-service\src\main\java\root\service\InformartionService.java
+D:\eclipse-workspace\blog_front\blog_front-service\src\main\java\root\service\MusicCateogyrService.java
 D:\eclipse-workspace\blog_front\blog_front-service\src\main\java\root\service\FollowService.java
 D:\eclipse-workspace\blog_front\blog_front-service\src\main\java\root\service\QiNiuService.java
 D:\eclipse-workspace\blog_front\blog_front-service\src\main\java\root\service\ArticaleService.java
 D:\eclipse-workspace\blog_front\blog_front-service\src\main\java\root\service\LoginService.java
+D:\eclipse-workspace\blog_front\blog_front-service\src\main\java\root\service\MusicService.java

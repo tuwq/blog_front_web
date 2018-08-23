@@ -48,7 +48,6 @@ public class QiNiuService {
 		long expireSeconds = 3600;
 		String upToken = auth.uploadToken(qiniuImgBucket, key, expireSeconds, new StringMap().put("insertOnly",0));
 		try {
-			System.out.println(key);
 		    Response response = uploadManager.put(uploadBytes, key, upToken);
 		    //解析上传成功的结果
 		    DefaultPutRet putRet = new Gson().fromJson(response.bodyString(), DefaultPutRet.class);

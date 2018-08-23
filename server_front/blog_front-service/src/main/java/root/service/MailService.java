@@ -15,6 +15,8 @@ public class MailService {
 	private JavaMailSender mailSender;
 	@Value("${spring.mail.username}")
 	private String from;
+	@Value("${myMail}")
+	private String myMail;
 
 	@Async
 	public void sendSimpleMail(String subject,String content,String toEmail){
@@ -22,6 +24,16 @@ public class MailService {
 	    SimpleMailMessage message = new SimpleMailMessage();
 	    message.setFrom(from);
 	    message.setTo(toEmail);
+	    message.setSubject(subject);
+	    message.setText(content);
+	    mailSender.send(message);
+	}
+
+	@Async
+	public void sendSecretLetter(String subject, String content) {
+		SimpleMailMessage message = new SimpleMailMessage();
+	    message.setFrom(from);
+	    message.setTo(myMail);
 	    message.setSubject(subject);
 	    message.setText(content);
 	    mailSender.send(message);

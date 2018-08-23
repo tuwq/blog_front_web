@@ -19,13 +19,13 @@ public class UserDataHandler {
 	private UserMapper userMapper;
 	
 	@Async
-	public void recordOpear(Integer userId) {
+	public void recordOpear(Integer userId,String ip) {
 		// 记录用户操作
 		User user = userMapper.selectByPrimaryKey(userId);
 		user.setOperateTime(new Date());
 		user.setBeforeLoginIp(user.getNowLoginIp());
-		user.setNowLoginIp(IpUtil.getUserIP(ThreadUtil.getCurrentRequest()));
-		userMapper.insertSelective(user);
+		user.setNowLoginIp(ip);
+		userMapper.updateByPrimaryKeySelective(user);
 	}
 
 }

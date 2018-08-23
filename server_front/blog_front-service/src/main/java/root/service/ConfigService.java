@@ -5,24 +5,36 @@ import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
 
 import root.beans.JsonResult;
+import root.constant.RedisCode;
 import root.dto.ImgConfigDto;
 import root.mapper.FrontImgConfigMapper;
 import root.model.FrontImgConfig;
+import root.redis.RedisOperator;
 import root.util.DtoUtil;
+import root.util.JsonUtils;
 
 @Service
 public class ConfigService {
 
 	@Resource
 	private FrontImgConfigMapper frontImgConfigMapper;
+	@Resource
+	private RedisOperator redis;
+	@Value("${configImgTimeout}")
+	private Long configImgTimeout;
 	
 	
 	public JsonResult<ImgConfigDto> img() {
+		String cacheImgDto = redis.get(RedisCode.CONFIG_IMG_CACHE);
+		if (cacheImgDto != null) {
+			return JsonResult.<ImgConfigDto>success(JsonUtils.jsonToPojo(cacheImgDto, ImgConfigDto.class));
+		}
 		List<FrontImgConfig> data = frontImgConfigMapper.getAll();
 		ImgConfigDto configDto = new ImgConfigDto();
 		List<String> sliderImgList = Lists.newArrayList();
@@ -50,6 +62,7 @@ public class ConfigService {
 			}
 		});
 		configDto.setSliderImgList(sliderImgList);
+		redis.set(RedisCode.CONFIG_IMG_CACHE, JsonUtils.objectToJson(configDto),configImgTimeout);
 		return JsonResult.<ImgConfigDto>success(configDto);
 	}
 

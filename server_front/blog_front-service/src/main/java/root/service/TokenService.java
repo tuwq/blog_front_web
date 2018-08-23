@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import root.constant.RedisCode;
@@ -19,13 +20,15 @@ public class TokenService {
 	
 	@Resource
 	private RedisOperator redis;
+	@Value("${tokenHeadName}")
+	private String tokenHeadName;
 	
 	public Integer checkToken() {
 		// 取出token,是否为空
 		// 解析token,是否伪造不存在
 		// 获得userId，获得redis中的token，是否一致
 		// 返回userId
-		String TOKEN = ThreadUtil.getCurrentRequest().getHeader("__TOKEN__");
+		String TOKEN = ThreadUtil.getCurrentRequest().getHeader(tokenHeadName);
 		if (StringUtils.isNotBlank(TOKEN)) {
 			Map<String, String> verifyToken = JwtUtil.verifyToken(TOKEN);
 			String userId = verifyToken.get("userId");	

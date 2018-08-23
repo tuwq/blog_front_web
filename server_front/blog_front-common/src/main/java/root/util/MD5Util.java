@@ -8,9 +8,12 @@ import java.security.MessageDigest;
 @Slf4j
 public class MD5Util {
 
+	private static String SALT = "QIANYUE_BLOG";
+	
     public final static String encrypt(String s) {
         char hexDigits[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
         try {
+        	s += SALT;
             byte[] btInput = s.getBytes();
             // 获得MD5摘要算法的 MessageDigest 对象
             MessageDigest mdInst = MessageDigest.getInstance("MD5");
@@ -32,5 +35,5 @@ public class MD5Util {
             log.error("generate md5 error, {}", s, e);
             return null;
         }
-    }
+    }   
 }

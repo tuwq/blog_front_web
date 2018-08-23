@@ -1,12 +1,16 @@
+root\mapper\FirendMapper.class
 root\mapper\CategoryMapper.class
 root\mapper\ArticaleCategoryMapper.class
 root\mapper\UserReceiveDynamicMapper.class
 root\mapper\UserFollowMapper.class
 root\mapper\ArticaleMapper.class
+root\mapper\SongBindCategoryMapper.class
+root\mapper\SongMapper.class
 root\mapper\SysUserMapper.class
 root\mapper\ArticaleUserMapper.class
 root\mapper\AccessMapper.class
 root\mapper\UserInitiateDynamicMapper.class
+root\mapper\SongCategoryMapper.class
 root\mapper\FrontImgConfigMapper.class
 root\mapper\CommentUserMapper.class
 root\mapper\CommentMapper.class

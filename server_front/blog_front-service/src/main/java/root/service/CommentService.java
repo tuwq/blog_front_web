@@ -28,6 +28,7 @@ import root.param.ChildCommentParam;
 import root.param.PageParam;
 import root.param.RootCommentParam;
 import root.util.DtoUtil;
+import root.util.IpUtil;
 import root.util.ThreadUtil;
 import root.util.TimeAgoUtils;
 import root.util.ValidatorUtil;
@@ -99,7 +100,7 @@ public class CommentService {
 					.parentId(param.getParentId()).rootId(param.getRootId())
 					.createTime(new Date()).updateTime(new Date()).build();
 		commentMapper.insertSelective(comment);
-		userDataHandler.recordOpear(userId);
+		userDataHandler.recordOpear(userId,IpUtil.getIpAddress(ThreadUtil.getCurrentRequest()));
 		commentedDataHandler.childCommentSumIncr(param.getArticleId(), 
 				parentUserId,comment.getId(), userId);
 	}

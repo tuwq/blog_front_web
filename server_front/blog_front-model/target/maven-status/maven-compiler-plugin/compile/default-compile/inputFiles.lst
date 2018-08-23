@@ -2,6 +2,7 @@ D:\eclipse-workspace\blog_front\blog_front-model\src\main\java\root\beans\Search
 D:\eclipse-workspace\blog_front\blog_front-model\src\main\java\root\model\UserFollow.java
 D:\eclipse-workspace\blog_front\blog_front-model\src\main\java\root\dto\ShowUserDto.java
 D:\eclipse-workspace\blog_front\blog_front-model\src\main\java\root\beans\TokenExceptionResult.java
+D:\eclipse-workspace\blog_front\blog_front-model\src\main\java\root\param\SecretLetterParam.java
 D:\eclipse-workspace\blog_front\blog_front-model\src\main\java\root\model\Access.java
 D:\eclipse-workspace\blog_front\blog_front-model\src\main\java\root\model\Category.java
 D:\eclipse-workspace\blog_front\blog_front-model\src\main\java\root\param\LoginParam.java
@@ -13,6 +14,7 @@ D:\eclipse-workspace\blog_front\blog_front-model\src\main\java\root\beans\JsonRe
 D:\eclipse-workspace\blog_front\blog_front-model\src\main\java\root\beans\DynamicExceptionResult.java
 D:\eclipse-workspace\blog_front\blog_front-model\src\main\java\root\beans\ParamExceptionResult.java
 D:\eclipse-workspace\blog_front\blog_front-model\src\main\java\root\param\PageParam.java
+D:\eclipse-workspace\blog_front\blog_front-model\src\main\java\root\model\Firend.java
 D:\eclipse-workspace\blog_front\blog_front-model\src\main\java\root\param\ChildCommentParam.java
 D:\eclipse-workspace\blog_front\blog_front-model\src\main\java\root\dto\DynamicInitiateDto.java
 D:\eclipse-workspace\blog_front\blog_front-model\src\main\java\root\beans\PageModel.java
@@ -26,6 +28,7 @@ D:\eclipse-workspace\blog_front\blog_front-model\src\main\java\root\param\RootCo
 D:\eclipse-workspace\blog_front\blog_front-model\src\main\java\root\dto\UserDto.java
 D:\eclipse-workspace\blog_front\blog_front-model\src\main\java\root\model\Articale.java
 D:\eclipse-workspace\blog_front\blog_front-model\src\main\java\root\beans\PageResult.java
+D:\eclipse-workspace\blog_front\blog_front-model\src\main\java\root\model\Song.java
 D:\eclipse-workspace\blog_front\blog_front-model\src\main\java\root\model\FrontImgConfig.java
 D:\eclipse-workspace\blog_front\blog_front-model\src\main\java\root\model\UserReceiveDynamic.java
 D:\eclipse-workspace\blog_front\blog_front-model\src\main\java\root\model\UserInitiateDynamic.java
@@ -33,7 +36,9 @@ D:\eclipse-workspace\blog_front\blog_front-model\src\main\java\root\dto\CommentD
 D:\eclipse-workspace\blog_front\blog_front-model\src\main\java\root\param\RegistParam.java
 D:\eclipse-workspace\blog_front\blog_front-model\src\main\java\root\param\BasisSettingParam.java
 D:\eclipse-workspace\blog_front\blog_front-model\src\main\java\root\dto\ImgConfigDto.java
+D:\eclipse-workspace\blog_front\blog_front-model\src\main\java\root\model\SongCategory.java
 D:\eclipse-workspace\blog_front\blog_front-model\src\main\java\root\beans\FileUploadExceptionResult.java
+D:\eclipse-workspace\blog_front\blog_front-model\src\main\java\root\model\SongBindCategory.java
 D:\eclipse-workspace\blog_front\blog_front-model\src\main\java\root\beans\CommentExceptionResult.java
 D:\eclipse-workspace\blog_front\blog_front-model\src\main\java\root\dto\ArticaleDto.java
 D:\eclipse-workspace\blog_front\blog_front-model\src\main\java\root\model\ArticaleUser.java
