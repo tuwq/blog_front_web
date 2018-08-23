@@ -1,4 +1,4 @@
-# 我的博客 https://twenq.com
+# 全栈我的博客 https://twenq.com
 # 技术栈
 ## 前台展示
 	前端:	Less + React + Redux + jQuery + marked + highlight

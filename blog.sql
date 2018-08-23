@@ -10,10 +10,21 @@ Target Server Type    : MYSQL
 Target Server Version : 80011
 File Encoding         : 65001
 
-Date: 2018-08-04 22:44:45
+Date: 2018-08-23 14:48:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for access
+-- ----------------------------
+DROP TABLE IF EXISTS `access`;
+CREATE TABLE `access` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ip_address` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '用户的ip地址',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='访问表,用于记录访问量';
 
 -- ----------------------------
 -- Table structure for articale
@@ -35,7 +46,7 @@ CREATE TABLE `articale` (
   `approval` int(11) NOT NULL DEFAULT '0' COMMENT '文章的赞数',
   `oppose` int(11) NOT NULL DEFAULT '0' COMMENT '文章的踩数',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=107 DEFAULT CHARSET=utf8 COMMENT='文章的数据表';
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='文章的数据表';
 
 -- ----------------------------
 -- Table structure for articale_category
@@ -46,7 +57,7 @@ CREATE TABLE `articale_category` (
   `articale_id` int(11) NOT NULL COMMENT '文章id',
   `category_id` int(11) NOT NULL COMMENT '分类id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=176 DEFAULT CHARSET=utf8 COMMENT='处理分类与文章关系的数据表,文章需要通过该表获得分类信息';
+) ENGINE=InnoDB AUTO_INCREMENT=234 DEFAULT CHARSET=utf8 COMMENT='处理分类与文章关系的数据表,文章需要通过该表获得分类信息';
 
 -- ----------------------------
 -- Table structure for articale_user
@@ -61,7 +72,7 @@ CREATE TABLE `articale_user` (
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建关系的时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新关系的时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='文章用户关系的数据表,扩展后可添加点赞之类的字段';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文章用户关系的数据表,扩展后可添加点赞之类的字段';
 
 -- ----------------------------
 -- Table structure for category
@@ -74,7 +85,7 @@ CREATE TABLE `category` (
   `articale_sum` int(10) NOT NULL DEFAULT '0' COMMENT '该分类的文章数量,由消息队列更新',
   `comment_sum` int(10) NOT NULL DEFAULT '0' COMMENT '分类的评论数量,由定时任务进行更新',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='分类的数据表,描述分类的信息';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='分类的数据表,描述分类的信息';
 
 -- ----------------------------
 -- Table structure for comment
@@ -108,6 +119,81 @@ CREATE TABLE `comment_user` (
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新关系的时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='评论用户关系的数据表,,扩展后可添加点赞之类的字段';
+
+-- ----------------------------
+-- Table structure for firend
+-- ----------------------------
+DROP TABLE IF EXISTS `firend`;
+CREATE TABLE `firend` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '友链主键id',
+  `nickname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '昵称',
+  `website` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '网站',
+  `avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '头像',
+  `desc` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '描述',
+  `weight` int(11) NOT NULL DEFAULT '0' COMMENT '权重',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for front_img_config
+-- ----------------------------
+DROP TABLE IF EXISTS `front_img_config`;
+CREATE TABLE `front_img_config` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '前台图片配置主键id',
+  `belong` int(11) NOT NULL DEFAULT '0' COMMENT '属于的位置:1.分类页面,2.搜索页面,3,文章页面,4.用户页面,5.登录页面,6.个人logo,7.轮播页面',
+  `desc` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '类型的描述',
+  `img` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '图片的地址',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建的时间',
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新的时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='前台页面配置表，方便更换背景图片等信息';
+
+-- ----------------------------
+-- Table structure for song
+-- ----------------------------
+DROP TABLE IF EXISTS `song`;
+CREATE TABLE `song` (
+  `id` int(255) unsigned NOT NULL AUTO_INCREMENT COMMENT '歌曲主键',
+  `song_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '歌名',
+  `singer` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '歌手',
+  `lyric` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '歌词',
+  `cover` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '歌曲封面',
+  `url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '歌曲地址',
+  `load_sum` int(11) NOT NULL DEFAULT '0' COMMENT '下载数量',
+  `praise` int(11) NOT NULL DEFAULT '0' COMMENT '喜欢数',
+  `weight` int(11) NOT NULL DEFAULT '0' COMMENT '权重',
+  `duration` double(11,0) NOT NULL DEFAULT '0' COMMENT '播放时间长度',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for song_bind_category
+-- ----------------------------
+DROP TABLE IF EXISTS `song_bind_category`;
+CREATE TABLE `song_bind_category` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `song_id` int(11) NOT NULL,
+  `song_category_id` int(11) NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for song_category
+-- ----------------------------
+DROP TABLE IF EXISTS `song_category`;
+CREATE TABLE `song_category` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '歌曲分类主键id',
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '分类名称',
+  `desc` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '分类描述',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -151,7 +237,7 @@ CREATE TABLE `user` (
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '用户创建的时间',
   `operate_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '用户最后一次操作的时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COMMENT='用户的数据表';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='用户的数据表';
 
 -- ----------------------------
 -- Table structure for user_follow
@@ -163,7 +249,7 @@ CREATE TABLE `user_follow` (
   `target_id` int(11) NOT NULL COMMENT '目标的id',
   `follow_status` int(10) NOT NULL DEFAULT '0' COMMENT '关注的状态.1:关注,2:不关注',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='用户关注关系的数据表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户关注关系的数据表';
 
 -- ----------------------------
 -- Table structure for user_initiate_dynamic
@@ -172,12 +258,12 @@ DROP TABLE IF EXISTS `user_initiate_dynamic`;
 CREATE TABLE `user_initiate_dynamic` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '动态发起主键id',
   `type` int(5) NOT NULL DEFAULT '0' COMMENT '动态类型.1:评论相关,2:文章相关',
-  `action` int(11) NOT NULL DEFAULT '0' COMMENT '动态动作.1:提出',
+  `action` int(11) NOT NULL DEFAULT '0' COMMENT '动态动作.1:提出,2回复另一个评论',
   `type_id` int(11) NOT NULL COMMENT '动态类型的id,可能是文章或者是评论,取决于type字段',
   `initiate_user_id` int(11) NOT NULL COMMENT '动态发起者的id',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建动态的时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='动态数据表.用于监视用户的动作';
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='动态数据表.用于监视用户的动作';
 
 -- ----------------------------
 -- Table structure for user_receive_dynamic
