@@ -7,7 +7,7 @@
             <span style="color: #d55050;">{{error}}</span>
           </div>
           <div class="form-control">
-            <input type="text" placeholder="歌名" v-model="songnName"/>
+            <input type="text" placeholder="歌名" v-model="songName"/>
           </div>
           <div class="form-control">
             <input type="text" placeholder="歌手" v-model="singer"/>
@@ -54,7 +54,7 @@
     data() {
       return {
         error: '',
-        songnName: '',
+        songName: '',
         singer: '',
         lyric: '',
         weight: 0,
@@ -106,15 +106,20 @@
         })
       },
       finish() {
+        if (this.$refs.$coverFile.files[0]==undefined || this.$refs.$musicFile.files[0]==undefined) {
+          this.error = '未选择文件'
+          return
+        }
         var formdata = new FormData()
         formdata.append('cover',this.$refs.$coverFile.files[0])
         formdata.append('music',this.$refs.$musicFile.files[0])
-        formdata.append('songnName',this.songName)
+        formdata.append('songName',this.songName)
         formdata.append('singer',this.singer)
         formdata.append('lyric',this.lyric)
         formdata.append('weight',this.weight)
         formdata.append('duration',this.$refs.$audio.duration)
         formdata.append('categoryNames',this.categoryNames)
+        this.error = '正在添加...'
         addMusicApi(formdata,(res)=>{
           if (res.data.code == 200) {
             this.error = '添加成功' 

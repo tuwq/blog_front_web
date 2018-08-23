@@ -58,6 +58,7 @@
         songName: '',
         singer: '',
         lyric: '',
+        duration: 0,
         weight: 0,
         categoryNames: [],
         categoryList: [],
@@ -76,6 +77,7 @@
     destroyed() {
       $(this.$refs.$coverFile).off('change')
       $(this.$refs.$musicFile).off('change')
+      this.$refs.$audio.oncanplay = null
     },
     methods: {
       readyCover() {
@@ -101,6 +103,18 @@
             this.error = '音乐修改成功'
           }
         })
+
+        var freader = new FileReader();  
+        freader.readAsDataURL(file);  
+        var self = this
+        freader.onload = function(e) {  
+          $(self.$refs.$audio).attr("src",e.target.result);
+          self.$refs.$audio.load()
+          self.$refs.$audio.oncanplay = function() {
+            self.duration = self.$refs.$audio.duration
+            self.finish()
+          }
+        }
       },
       chooseCover() {
         this.$refs.$coverFile.click()
@@ -123,6 +137,7 @@
             this.singer = res.data.result.singer
             this.lyric = res.data.result.lyric
             this.weight = res.data.result.weight
+            this.duration = res.data.result.duration
             this.categoryNames = res.data.result.categoryIds
             this.coverResource = global.musicCoverUrl + res.data.result.cover+'?v='+new Date().getTime()
             this.musicResource = global.musicResourceUrl + res.data.result.url+'?v='+new Date().getTime()
