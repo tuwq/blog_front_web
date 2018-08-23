@@ -125,6 +125,19 @@ public class QiNiuIMGService {
 		}
 	}
 	
+	public void delFirendAvatar(String coverImg) {
+		String key = qiniuFirendAvatarPrefix + coverImg;		
+		Auth auth = Auth.create(qiniuAcKey, qiniuSeKey);
+		BucketManager bucketManager = new BucketManager(auth, cfg);
+		try {
+		    bucketManager.delete(qiniuImgBucket, key);
+		} catch (QiniuException ex) {
+		    //如果遇到异常，说明删除失败
+		    System.err.println(ex.code());
+		    System.err.println(ex.response.toString());
+		}
+	}
+	
 	public String uploadConfigImg(MultipartFile file) {
 		// upload/config/286_img.jpg
 		String key = qiniuConfigImgPrefix + file.getOriginalFilename();

@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import com.qiniu.common.QiniuException;
 import com.qiniu.common.Zone;
 import com.qiniu.http.Response;
+import com.qiniu.storage.BucketManager;
 import com.qiniu.storage.Configuration;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.storage.model.DefaultPutRet;
@@ -88,6 +89,34 @@ public class QiNiuMusicService {
 		    } catch (QiniuException ex2) {
 		    	throw new FileUploadException(ResultCode.FILE_UPLOAD_FAIL,"上传文件至七牛云失败");
 		    }
+		}
+	}
+
+	public void delCover(String cover) {
+		// 删除封面
+		String key = musicCoverPrefix + cover;		
+		Auth auth = Auth.create(qiniuAcKey, qiniuSeKey);
+		BucketManager bucketManager = new BucketManager(auth, cfg);
+		try {
+		    bucketManager.delete(qiniuImgBucket, key);
+		} catch (QiniuException ex) {
+		    //如果遇到异常，说明删除失败
+		    System.err.println(ex.code());
+		    System.err.println(ex.response.toString());
+		}
+	}
+
+	public void delMusic(String url) {
+		// 删除音乐
+		String key = musicResourcePrefix + url;		
+		Auth auth = Auth.create(qiniuAcKey, qiniuSeKey);
+		BucketManager bucketManager = new BucketManager(auth, cfg);
+		try {
+		    bucketManager.delete(qiniuImgBucket, key);
+		} catch (QiniuException ex) {
+		    //如果遇到异常，说明删除失败
+		    System.err.println(ex.code());
+		    System.err.println(ex.response.toString());
 		}
 	}
 }

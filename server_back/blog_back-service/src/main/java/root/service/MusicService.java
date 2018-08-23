@@ -80,8 +80,8 @@ public class MusicService {
 		Integer fid = song.getId();
 		String coverName = cover.getOriginalFilename();
 		String musicName = music.getOriginalFilename();
-		String coverPath = MD5Util.encryPassword(Integer.toString(fid)) + coverName.substring(coverName.lastIndexOf("."));
-		String musicPath = MD5Util.encryPassword(Integer.toString(fid)) + musicName.substring(musicName.lastIndexOf("."));
+		String coverPath = MD5Util.encryPassword(Integer.toString(fid)) + "_"+coverName;
+		String musicPath = MD5Util.encryPassword(Integer.toString(fid)) + "_"+musicName;
 		qiNiuMusicService.cover(cover,coverPath);
 		qiNiuMusicService.music(music,musicPath);
 		song.setCover(coverPath);
@@ -116,8 +116,10 @@ public class MusicService {
 		return PageResult.<SongDto>builder().data(dtos).pageModel(pageModel).code(200).build();
 	}
 
+	@Transactional
 	public void delBatch(String idsStr) {
-		// 批量删除友链
+		// 批量删除歌曲
+		// 删除七牛中的文件
 		if (StringUtils.isBlank(idsStr)) {
 			throw new CheckParamException("选择的id","是空的");
 		}
@@ -125,6 +127,11 @@ public class MusicService {
 				.splitToList(idsStr);
 		List<Integer> ids = strList.stream().map(str->Integer.parseInt(str)).collect(Collectors.toList());
 		if(ids.size()==0) {throw new CheckParamException("选择id","为空");}
+		ids.stream().forEach(id -> {
+			Song song = songMapper.selectByPrimaryKey(id);
+			qiNiuMusicService.delCover(song.getCover());
+			qiNiuMusicService.delMusic(song.getUrl());
+		});
 		songMapper.delBatch(ids);
 		songBindCategoryMapper.delBatch(ids);
 	}
@@ -179,6 +186,7 @@ public class MusicService {
 		songBindCategoryMapper.insertBatch(sbinList);
 	}
 
+	@Transactional
 	public void updateCover(Integer id, MultipartFile cover) {
 		// 检查字段
 		// 覆盖文件
@@ -188,11 +196,23 @@ public class MusicService {
 		if (!cover.getContentType().equals("image/jpeg") && !cover.getContentType().equals("image/png")) {
 			throw new CheckParamException("文件类型错误","请上传jpg或png文件类型的封面");
 		}
+		if (id == null) {
+			throw new CheckParamException("id","为空");
+		}
+		int count = songMapper.countById(id);
+		if (count==0) {
+			throw new CheckParamException("歌曲","不存在");
+		}
+		Song song = songMapper.selectByPrimaryKey(id);
+		qiNiuMusicService.delCover(song.getCover());
 		String coverName = cover.getOriginalFilename();
-		String coverPath = MD5Util.encryPassword(Integer.toString(id)) + coverName.substring(coverName.lastIndexOf("."));
+		String coverPath = MD5Util.encryPassword(Integer.toString(id)) + "_"+coverName;
 		qiNiuMusicService.cover(cover,coverPath);
+		song.setCover(coverPath);
+		songMapper.updateByPrimaryKeySelective(song);
 	}
 
+	@Transactional
 	public void updateMusic(Integer id, MultipartFile music) {
 		// 检查字段
 		// 覆盖文件
@@ -202,9 +222,20 @@ public class MusicService {
 		if (!music.getContentType().equals("audio/mp3")) {
 			throw new CheckParamException("文件类型错误","请上传mp3文件类型的音乐文件");
 		}
+		if (id == null) {
+			throw new CheckParamException("id","为空");
+		}
+		int count = songMapper.countById(id);
+		if (count==0) {
+			throw new CheckParamException("歌曲","不存在");
+		}
+		Song song = songMapper.selectByPrimaryKey(id);
+		qiNiuMusicService.delMusic(song.getUrl());
 		String musicName = music.getOriginalFilename();		
-		String musicPath = MD5Util.encryPassword(Integer.toString(id)) + musicName.substring(musicName.lastIndexOf("."));
+		String musicPath = MD5Util.encryPassword(Integer.toString(id)) + "_"+musicName;
 		qiNiuMusicService.music(music,musicPath);
+		song.setUrl(musicPath);
+		songMapper.updateByPrimaryKeySelective(song);
 	}
 
 	public PageResult<SongDto> search(PageParam param) {

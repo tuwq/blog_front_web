@@ -111,6 +111,10 @@ public class FirendService {
 				.splitToList(idsStr);
 		List<Integer> ids = strList.stream().map(str->Integer.parseInt(str)).collect(Collectors.toList());
 		if(ids.size()==0) {throw new CheckParamException("选择id","为空");}
+		ids.stream().forEach(id -> {
+			Firend firend = firendMapper.selectByPrimaryKey(id);
+			qiNiuIMGService.delFirendAvatar(firend.getAvatar());
+		});
 		firendMapper.delBatch(ids);
 	}
 
