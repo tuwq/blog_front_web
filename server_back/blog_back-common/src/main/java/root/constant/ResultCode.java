@@ -10,6 +10,8 @@ public interface ResultCode {
 	static int TOKEN_NOTUSER = 1001;
 	// TOKEN是伪造的,token存在，且可以解析,但与redis中用户对应的token不符
 	static int TOKEN_REDIS_NOT_MATCH = 1002;
+	// 文件上传失败了
+	static int FILE_UPLOAD_FAIL = 301;
 	// 请求参数不正确
 	static int PARAM_ERROR = 1100;
 	// 请求期间的错误

@@ -20,6 +20,7 @@ import root.beans.ImgURIResult;
 import root.beans.JsonResult;
 import root.beans.PageModel;
 import root.beans.PageResult;
+import root.constant.RedisCode;
 import root.constant.ResultCode;
 import root.dto.ArticaleDto;
 import root.exception.CheckParamException;
@@ -36,6 +37,7 @@ import root.model.Category;
 import root.model.User;
 import root.param.ArticleParam;
 import root.param.PageParam;
+import root.redis.RedisOperator;
 import root.util.DtoUtil;
 import root.util.RandomUtil;
 import root.util.TimeAgoUtils;
@@ -62,6 +64,8 @@ public class ArticleService {
 	private UserMapper userMapper;
 	@Resource
 	private SysUserMapper sysUserMapper; 
+	@Resource
+	private RedisOperator redis;
 	
 	@Transactional
 	public void add(ArticleParam param) {
@@ -139,7 +143,6 @@ public class ArticleService {
 			List<Category> cateList = categoryMapper.getArtCategoryListById(ids.get(i));
 			data.get(i).setCategoryList(cateList);
 		}
-		PageModel pageModel = new PageModel(total,data.size(),param.getCurrentPage(),param.getPageSize());
 		List<ArticaleDto> dtoData = data.stream().map(item -> 
 			DtoUtil.adapt(new ArticaleDto(), item)
 		).collect(Collectors.toList());
@@ -150,6 +153,7 @@ public class ArticleService {
 			dto.setTimeAgo(TimeAgoUtils.format(dto.getUpdateTime()));
 			dto.formatTime();
 		});
+		PageModel pageModel = new PageModel(total,data.size(),param.getCurrentPage(),param.getPageSize());
 		return PageResult.<ArticaleDto>builder().data(dtoData).pageModel(pageModel).code(200).build();
 	}
 	
@@ -272,6 +276,7 @@ public class ArticleService {
 			.build()
 		).collect(Collectors.toList());
 		articaleCategoryMapper.insertBatch(collect);
+		redis.del(RedisCode.ARTICLE_INFO_CACHE+":"+id);
 		return JsonResult.<Void>success();
 	}
 

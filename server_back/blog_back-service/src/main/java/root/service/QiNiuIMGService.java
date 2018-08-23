@@ -24,6 +24,8 @@ import com.qiniu.util.StringMap;
 
 import root.beans.ImgNode;
 import root.beans.ImgURIResult;
+import root.constant.ResultCode;
+import root.exception.FileUploadException;
 import root.util.TimeUtil;
 
 @Service
@@ -41,6 +43,8 @@ public class QiNiuIMGService {
 	private String qiniuArtImgPrefix;
 	@Value("${qiniuConfigImgPrefix}")
 	private String qiniuConfigImgPrefix;
+	@Value("${qiniuFirendAvatarPrefix}")
+	private String qiniuFirendAvatarPrefix;
 	private Configuration cfg = new Configuration(Zone.zone2());
 	private UploadManager uploadManager = new UploadManager(cfg);
 	
@@ -148,5 +152,32 @@ public class QiNiuIMGService {
 		    }
 		}
 		return "";
+	}
+	
+	public void uploadFirendAvatar(MultipartFile file, String fileName) {
+		// 覆盖上传头像至七牛云
+		String key = qiniuFirendAvatarPrefix + fileName;
+		byte[] uploadBytes = null;
+		try {
+			uploadBytes = file.getBytes();
+		} catch (IOException e) {
+			throw new FileUploadException(ResultCode.FILE_UPLOAD_FAIL,"读取文件字节失败");
+		}
+		Auth auth = Auth.create(qiniuAcKey, qiniuSeKey);
+		long expireSeconds = 3600;
+		String upToken = auth.uploadToken(qiniuImgBucket, key, expireSeconds, new StringMap().put("insertOnly",0));
+		try {
+		    Response response = uploadManager.put(uploadBytes, key, upToken);
+		    //解析上传成功的结果
+		    DefaultPutRet putRet = new Gson().fromJson(response.bodyString(), DefaultPutRet.class);
+		} catch (QiniuException ex) {
+		    Response r = ex.response;
+		    System.err.println(r.toString());
+		    try {
+		        System.err.println(r.bodyString());
+		    } catch (QiniuException ex2) {
+		    	throw new FileUploadException(ResultCode.FILE_UPLOAD_FAIL,"上传文件至七牛云失败");
+		    }
+		}
 	}
 }

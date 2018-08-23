@@ -12,10 +12,12 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.common.collect.Lists;
 
 import root.beans.JsonResult;
+import root.constant.RedisCode;
 import root.dto.FrontImgConfigDto;
 import root.exception.CheckParamException;
 import root.mapper.FrontImgConfigMapper;
 import root.model.FrontImgConfig;
+import root.redis.RedisOperator;
 import root.util.DtoUtil;
 import root.util.ThreadUtil;
 
@@ -26,6 +28,8 @@ public class ConfigService {
 	private FrontImgConfigMapper frontImgConfigMapper;
 	@Resource
 	private QiNiuIMGService qiNiuIMGService;
+	@Resource
+	private RedisOperator redis;
 	
 	
 	public JsonResult<List<FrontImgConfigDto>> img() {
@@ -58,6 +62,7 @@ public class ConfigService {
 		config.setImg(path);
 		config.setUpdateTime(new Date());
 		frontImgConfigMapper.updateByPrimaryKeySelective(config);
+		redis.del(RedisCode.CONFIG_IMG_CACHE);
 		return JsonResult.<String>success(path);
 	}
 

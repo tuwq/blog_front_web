@@ -7,16 +7,16 @@
   </parent>
   <artifactId>blog_back-model</artifactId>
   <dependencies>
-  <dependency>
-  	<groupId>root</groupId>
-  	<artifactId>blog_back-common</artifactId>
-  	<version>0.0.1-SNAPSHOT</version>
-  </dependency>
-  <dependency>
+	  <dependency>
+	  	<groupId>root</groupId>
+	  	<artifactId>blog_back-common</artifactId>
+	  	<version>0.0.1-SNAPSHOT</version>
+	  </dependency>
+	  <dependency>
 		<groupId>org.projectlombok</groupId>
 		<artifactId>lombok</artifactId>
 		<optional>true</optional>
 		<version>1.16.22</version>
- 	</dependency>
+	 </dependency>
   </dependencies>
 </project>

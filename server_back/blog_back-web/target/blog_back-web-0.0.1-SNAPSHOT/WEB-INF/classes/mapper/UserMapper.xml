@@ -10,6 +10,7 @@
     <result column="desc" property="desc" jdbcType="VARCHAR" />
     <result column="website" property="website" jdbcType="VARCHAR" />
     <result column="avatar" property="avatar" jdbcType="VARCHAR" />
+    <result column="praise" property="praise" jdbcType="INTEGER" />
     <result column="status" property="status" jdbcType="INTEGER" />
     <result column="activation_code" property="activationCode" jdbcType="VARCHAR" />
     <result column="activation_status" property="activationStatus" jdbcType="INTEGER" />
@@ -23,10 +24,60 @@
     <result column="operate_time" property="operateTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, username, email, `password`, nickname, `desc`, website, avatar, `status`, activation_code, 
+    id, username, email, `password`, nickname, `desc`, website, avatar, praise, `status`, activation_code, 
     activation_status, follower_sum, fans_sum, comment_sum, articale_sum, before_login_ip, 
     now_login_ip, create_time, operate_time
   </sql>
+  
+  <update id="updateBatch" parameterType="map">
+  	UPDATE `user` 
+  	SET status=ABS(status-1)
+  	WHERE id in 
+  	<foreach collection="ids" item="id" separator="," open="(" close=")">
+		#{id}
+	</foreach>
+  </update>
+  
+  <select id="pageByKeyword" parameterType="map" resultMap="BaseResultMap">
+  	SELECT id,nickname,`desc`,comment_sum,avatar,create_time,status
+  	FROM `user`
+  	<where>
+		<if test="keyword != null and keyword != ''" >
+			and (username like concat('%', #{keyword}, '%') or nickname like concat('%', #{keyword}, '%') or `desc` like concat('%', #{keyword}, '%'))
+		</if>
+	</where>
+  	ORDER BY comment_sum desc
+  	LIMIT #{skip},#{pageSize}
+  </select>
+  
+  <select id="countByKeyWord" parameterType="map" resultType="long">
+  	SELECT count(1)
+  	FROM `user`
+  	<where>
+		<if test="keyword != null and keyword != ''" >
+			and (username like concat('%', #{keyword}, '%')  or nickname like concat('%', #{keyword}, '%') or `desc` like concat('%', #{keyword}, '%'))
+		</if>
+	</where>
+  </select>
+  
+  <select id="page" parameterType="map" resultMap="BaseResultMap">
+  	SELECT id,nickname,`desc`,comment_sum,avatar,create_time,status
+  	FROM `user`
+  	ORDER BY comment_sum desc
+  	LIMIT #{skip},#{pageSize}
+  </select>
+  
+  <select id="countAll" resultType="long">
+  	SELECT count(1)
+	FROM `user`
+  </select> 
+  
+  <update id="increaseArtSum" parameterType="map">
+	  	UPDATE user
+	  	SET articale_sum = articale_sum+1
+	  	WHERE id = #{id}
+  </update>
+ 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -39,19 +90,19 @@
   </delete>
   <insert id="insert" parameterType="root.model.User" >
     insert into user (id, username, email, 
-      password, nickname, desc, 
-      website, avatar, status, 
-      activation_code, activation_status, follower_sum, 
-      fans_sum, comment_sum, articale_sum, 
-      before_login_ip, now_login_ip, create_time, 
-      operate_time)
+      `password`, nickname, `desc`, 
+      website, avatar, praise, 
+      `status`, activation_code, activation_status, 
+      follower_sum, fans_sum, comment_sum, 
+      articale_sum, before_login_ip, now_login_ip, 
+      create_time, operate_time)
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR}, 
-      #{website,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
-      #{activationCode,jdbcType=VARCHAR}, #{activationStatus,jdbcType=INTEGER}, #{followerSum,jdbcType=INTEGER}, 
-      #{fansSum,jdbcType=INTEGER}, #{commentSum,jdbcType=INTEGER}, #{articaleSum,jdbcType=INTEGER}, 
-      #{beforeLoginIp,jdbcType=VARCHAR}, #{nowLoginIp,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{operateTime,jdbcType=TIMESTAMP})
+      #{website,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, #{praise,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{activationCode,jdbcType=VARCHAR}, #{activationStatus,jdbcType=INTEGER}, 
+      #{followerSum,jdbcType=INTEGER}, #{fansSum,jdbcType=INTEGER}, #{commentSum,jdbcType=INTEGER}, 
+      #{articaleSum,jdbcType=INTEGER}, #{beforeLoginIp,jdbcType=VARCHAR}, #{nowLoginIp,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{operateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="root.model.User" >
     insert into user
@@ -66,13 +117,13 @@
         email,
       </if>
       <if test="password != null" >
-        password,
+        `password`,
       </if>
       <if test="nickname != null" >
         nickname,
       </if>
       <if test="desc != null" >
-        desc,
+        `desc`,
       </if>
       <if test="website != null" >
         website,
@@ -80,8 +131,11 @@
       <if test="avatar != null" >
         avatar,
       </if>
+      <if test="praise != null" >
+        praise,
+      </if>
       <if test="status != null" >
-        status,
+        `status`,
       </if>
       <if test="activationCode != null" >
         activation_code,
@@ -139,6 +193,9 @@
       <if test="avatar != null" >
         #{avatar,jdbcType=VARCHAR},
       </if>
+      <if test="praise != null" >
+        #{praise,jdbcType=INTEGER},
+      </if>
       <if test="status != null" >
         #{status,jdbcType=INTEGER},
       </if>
@@ -184,13 +241,13 @@
         email = #{email,jdbcType=VARCHAR},
       </if>
       <if test="password != null" >
-        password = #{password,jdbcType=VARCHAR},
+        `password` = #{password,jdbcType=VARCHAR},
       </if>
       <if test="nickname != null" >
         nickname = #{nickname,jdbcType=VARCHAR},
       </if>
       <if test="desc != null" >
-        desc = #{desc,jdbcType=VARCHAR},
+        `desc` = #{desc,jdbcType=VARCHAR},
       </if>
       <if test="website != null" >
         website = #{website,jdbcType=VARCHAR},
@@ -198,8 +255,11 @@
       <if test="avatar != null" >
         avatar = #{avatar,jdbcType=VARCHAR},
       </if>
+      <if test="praise != null" >
+        praise = #{praise,jdbcType=INTEGER},
+      </if>
       <if test="status != null" >
-        status = #{status,jdbcType=INTEGER},
+        `status` = #{status,jdbcType=INTEGER},
       </if>
       <if test="activationCode != null" >
         activation_code = #{activationCode,jdbcType=VARCHAR},
@@ -238,12 +298,13 @@
     update user
     set username = #{username,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
+      `password` = #{password,jdbcType=VARCHAR},
       nickname = #{nickname,jdbcType=VARCHAR},
-      desc = #{desc,jdbcType=VARCHAR},
+      `desc` = #{desc,jdbcType=VARCHAR},
       website = #{website,jdbcType=VARCHAR},
       avatar = #{avatar,jdbcType=VARCHAR},
-      status = #{status,jdbcType=INTEGER},
+      praise = #{praise,jdbcType=INTEGER},
+      `status` = #{status,jdbcType=INTEGER},
       activation_code = #{activationCode,jdbcType=VARCHAR},
       activation_status = #{activationStatus,jdbcType=INTEGER},
       follower_sum = #{followerSum,jdbcType=INTEGER},
@@ -256,10 +317,4 @@
       operate_time = #{operateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  
-    <update id="increaseArtSum" parameterType="map">
-	  	UPDATE user
-	  	SET articale_sum = articale_sum+1
-	  	WHERE id = #{id}
-	</update>
 </mapper>

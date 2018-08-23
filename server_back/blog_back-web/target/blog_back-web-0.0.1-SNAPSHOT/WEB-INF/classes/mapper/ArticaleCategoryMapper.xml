@@ -9,6 +9,22 @@
   <sql id="Base_Column_List" >
     id, articale_id, category_id
   </sql>
+  
+   <insert id="insertBatch" parameterType="map">
+  	insert into articale_category(articale_id,category_id) values
+	<foreach collection="list" item="item" separator=",">
+		(#{item.articaleId},#{item.categoryId})
+	</foreach>
+  </insert>
+  
+  <delete id="delBatch" parameterType="map">
+  	DELETE FROM articale_category
+  	WHERE articale_id in 
+  	<foreach collection="ids" item="id" separator="," index="no" open="(" close=")">
+		#{id}
+	</foreach>
+  </delete>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -68,18 +84,5 @@
       category_id = #{categoryId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  
-  <insert id="insertBatch">
-  	insert into articale_category(articale_id,category_id) values
-	<foreach collection="list" item="item" separator=",">
-		(#{item.articaleId},#{item.categoryId})
-	</foreach>
-  </insert>
-  <delete id="delBatch" parameterType="map">
-  	DELETE FROM articale_category
-  	WHERE articale_id in 
-  	<foreach collection="ids" item="id" separator="," index="no" open="(" close=")">
-		#{id}
-	</foreach>
-  </delete>
+
 </mapper>

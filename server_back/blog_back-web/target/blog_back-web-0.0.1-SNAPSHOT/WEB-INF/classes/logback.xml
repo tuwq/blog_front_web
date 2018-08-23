@@ -24,4 +24,5 @@
         <level value="${log.level}" />
         <appender-ref ref="${log.appender.ref}" />
     </root>
+
 </configuration>

@@ -13,7 +13,7 @@
 
     <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig"></bean>
    
-      <bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"  p:host-name="127.0.0.1" p:port="6379" p:pool-config-ref="poolConfig"/>  
+     <bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"  p:host-name="127.0.0.1" p:database="1" p:port="6379" p:pool-config-ref="poolConfig"/>
      
       <bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">  
         <property name="connectionFactory"   ref="connectionFactory" />  
