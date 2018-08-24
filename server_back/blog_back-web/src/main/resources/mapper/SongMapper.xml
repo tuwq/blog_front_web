@@ -38,7 +38,7 @@
 		</if>
 	</where>
 	GROUP BY s.id
-	ORDER BY s.weight desc,s.praise desc
+	ORDER BY s.weight desc,s.create_time desc,s.praise desc
 	LIMIT #{skip},#{pageSize}
   </select>
   
@@ -78,7 +78,7 @@
   	SELECT <include refid="Base_Column_List" />
   	FROM song
   	GROUP BY id
-  	ORDER BY weight desc,praise desc
+  	ORDER BY weight desc, create_time desc,praise desc
   	LIMIT #{skip},#{pageSize}
   </select>
   

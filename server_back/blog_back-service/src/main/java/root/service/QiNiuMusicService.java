@@ -27,10 +27,8 @@ public class QiNiuMusicService {
 	private String qiniuAcKey;
 	@Value("${qiniuSeKey}")
 	private String qiniuSeKey;
-	@Value("${qiniuImgServer}")
-	private String qiniuImgServer;
-	@Value("${qiniuImgBucket}")
-	private String qiniuImgBucket;
+	@Value("${qiniuMusicBucket}")
+	private String qiniuMusicBucket;
 	@Value("${musicCoverPrefix}")
 	private String musicCoverPrefix;
 	@Value("${musicResourcePrefix}")
@@ -49,7 +47,7 @@ public class QiNiuMusicService {
 		}
 		Auth auth = Auth.create(qiniuAcKey, qiniuSeKey);
 		long expireSeconds = 3600;
-		String upToken = auth.uploadToken(qiniuImgBucket, key, expireSeconds, new StringMap().put("insertOnly",0));
+		String upToken = auth.uploadToken(qiniuMusicBucket, key, expireSeconds, new StringMap().put("insertOnly",0));
 		try {
 		    Response response = uploadManager.put(uploadBytes, key, upToken);
 		    //解析上传成功的结果
@@ -76,7 +74,7 @@ public class QiNiuMusicService {
 		}
 		Auth auth = Auth.create(qiniuAcKey, qiniuSeKey);
 		long expireSeconds = 3600;
-		String upToken = auth.uploadToken(qiniuImgBucket, key, expireSeconds, new StringMap().put("insertOnly",0));
+		String upToken = auth.uploadToken(qiniuMusicBucket, key, expireSeconds, new StringMap().put("insertOnly",0));
 		try {
 		    Response response = uploadManager.put(uploadBytes, key, upToken);
 		    //解析上传成功的结果
@@ -98,7 +96,7 @@ public class QiNiuMusicService {
 		Auth auth = Auth.create(qiniuAcKey, qiniuSeKey);
 		BucketManager bucketManager = new BucketManager(auth, cfg);
 		try {
-		    bucketManager.delete(qiniuImgBucket, key);
+		    bucketManager.delete(qiniuMusicBucket, key);
 		} catch (QiniuException ex) {
 		    //如果遇到异常，说明删除失败
 		    System.err.println(ex.code());
@@ -112,7 +110,7 @@ public class QiNiuMusicService {
 		Auth auth = Auth.create(qiniuAcKey, qiniuSeKey);
 		BucketManager bucketManager = new BucketManager(auth, cfg);
 		try {
-		    bucketManager.delete(qiniuImgBucket, key);
+		    bucketManager.delete(qiniuMusicBucket, key);
 		} catch (QiniuException ex) {
 		    //如果遇到异常，说明删除失败
 		    System.err.println(ex.code());

@@ -25,7 +25,7 @@ public class MusicParam {
 	private String songName;
 	@NotBlank
 	private String singer;
-	@NotBlank
+	
 	private String lyric;
 	@NotNull
 	private Integer weight;
