@@ -39,10 +39,10 @@
   export default {  
     data() {
     	return {
-	    	  categoryNames: [],
+	   	  categoryNames: [],
           categoryList: [],
-	        content: '',
-	        img_file: {},
+	      content: '',
+	      img_file: {},
           title: '',
           weight: 0,
           faceCover: '',

@@ -127,7 +127,7 @@ class HomeHeader extends React.Component {
                   <a className="ItemLink">友链</a> 
                    <ul className="ItemMenu">
                       <li><Link to="/firend">友情链接</Link></li>
-                      <li><a onClick={this.undone.bind(this)}>申请友链</a></li>
+                      <li><Link to="/article/16">申请友链</Link></li>
                   </ul>
                 </li>
           		</ul>

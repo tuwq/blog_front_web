@@ -39,7 +39,7 @@
           this.$refs.$musicList.searchByKeyWord(this.keyword)
       },
     	delBatch() {
-        if(confirm("确定要删除这些友链吗?")) {
+        if(confirm("确定要删除这些音乐吗?")) {
            var items = $('.Music .opearcheck[type="checkbox"]:checked')
            if(items.length > 0) {
               var ids = ''

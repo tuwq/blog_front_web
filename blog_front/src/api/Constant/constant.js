@@ -6,8 +6,10 @@ global.imgServerUrl = 'http://img.twenq.com/'
 global.userAvatarPrefix = global.imgServerUrl + 'upload/user/avatar/'
 global.artImgPrefix = global.imgServerUrl + 'upload/artimg/'
 global.firendAvatarPrefix = global.imgServerUrl + 'upload/firend/avatar/'
-global.musicCoverPrefix = global.imgServerUrl + 'upload/music/cover/'
-global.musicResourcePrefix = global.imgServerUrl + 'upload/music/resource/'
+// 音乐存储服务器的地址
+global.musicServerUrl = 'http://music.twenq.com/'
+global.musicCoverPrefix = global.musicServerUrl + 'upload/music/cover/'
+global.musicResourcePrefix = global.musicServerUrl + 'upload/music/resource/'
 // token的过期时间
 global.TOKEN_TIME_DAY = 7
 // 用户下拉菜单的订阅key

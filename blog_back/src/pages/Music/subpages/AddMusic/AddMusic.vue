@@ -22,6 +22,7 @@
               <div v-for="(item,index) in categoryList" :key="item.id">
                 <label for="song_category">{{item.name}}</label> 
                 <input type="checkbox" id="song_category" :value="item.id" v-model="categoryNames">
+                &nbsp;
               </div>
           </div>
           <div class="form-control">
@@ -123,6 +124,9 @@
         addMusicApi(formdata,(res)=>{
           if (res.data.code == 200) {
             this.error = '添加成功' 
+            this.songName = ''
+            this.singer = ''
+            this.lyric = ''
           } else {
             this.error = res.data.msg
           }
