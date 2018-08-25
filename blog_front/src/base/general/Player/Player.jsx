@@ -80,7 +80,8 @@ class Player extends React.Component {
     	if (model == playModel.random) {
     		list = shuffle(this.props.songs.songList)
     	} else {
-    		list = this.props.songs.songList
+            let PreList = this.props.songs.listType==1?this.props.songs.defaultList:this.props.songs.searchList
+    		list = PreList
     	}
     	this.props.songsActions.saveSongs({
 			songList: list

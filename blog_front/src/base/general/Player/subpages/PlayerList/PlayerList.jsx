@@ -59,7 +59,8 @@ class PlayerList extends React.Component {
 		let albums = this.state.AlbumItemList.slice()
 		albums.push({
 			txt: '默认歌单列表',
-			sum: this.props.songs.defaultList.length
+			sum: this.props.songs.defaultList.length,
+			type: 1
 		})
 		let localData = _loadSearchSongs()
 		let localSongs
@@ -71,7 +72,8 @@ class PlayerList extends React.Component {
 		}
 		albums.push({
 			txt: '搜索列表',
-			sum: sum
+			sum: sum,
+			type: 2
 		})
 		this.setState({
 			AlbumItemList: albums
@@ -126,7 +128,8 @@ class PlayerList extends React.Component {
 		this.props.songsActions.saveSongs({
 			currentIndex: index,
 			songList: this.state.data,
-			currentSong: chooseItem
+			currentSong: chooseItem,
+			listType: this.state.meta.type
 		})
 	}	
 

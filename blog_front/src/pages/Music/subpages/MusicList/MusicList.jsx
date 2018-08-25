@@ -50,7 +50,8 @@ class MusicList extends React.Component {
 			songList: this.props.data,
 			defaultList: this.props.data,
 			currentIndex: selectIndex,
-			currentSong: this.props.data[selectIndex]
+			currentSong: this.props.data[selectIndex],
+			listType: 1
 		})
 	}
 
@@ -65,7 +66,8 @@ class MusicList extends React.Component {
 				songList: localSongs,
 				searchList: localSongs,
 				currentIndex: 0,
-				currentSong: localSongs[0]
+				currentSong: localSongs[0],
+				listTypp: 2
 			})
 			_saveSearchSongs(JSON.stringify(localSongs))
 		} else {
@@ -75,7 +77,8 @@ class MusicList extends React.Component {
 				songList: localSongs,
 				searchList: localSongs,
 				currentIndex: 0,
-				currentSong: localSongs[0]
+				currentSong: localSongs[0],
+				listType: 2
 			})
 			_saveSearchSongs(JSON.stringify(localSongs))
 		}

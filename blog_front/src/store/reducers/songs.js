@@ -4,6 +4,7 @@ var initialState = {
 	songList: [],
 	defaultList: [],
     searchList: [],
+    listType: 1,
 	currentIndex: -1,
 	currentSong: {}
 }

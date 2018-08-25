@@ -61,7 +61,8 @@ class PlayerSearch extends React.Component {
 				songList: localSongs,
 				searchList: localSongs,
 				currentIndex: 0,
-				currentSong: localSongs[0]
+				currentSong: localSongs[0],
+				listType: 2
 			})
 			_saveSearchSongs(JSON.stringify(localSongs))
 		} else {
@@ -71,7 +72,8 @@ class PlayerSearch extends React.Component {
 				songList: localSongs,
 				searchList: localSongs,
 				currentIndex: 0,
-				currentSong: localSongs[0]
+				currentSong: localSongs[0],
+				listType: 2
 			})
 			_saveSearchSongs(JSON.stringify(localSongs))
 		}

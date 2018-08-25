@@ -96,7 +96,9 @@ class RegistMain extends React.Component {
 			<div id="RegistMain" className="RegistMain" style={imgStyle}>
 	       		<div className="content-wrapper">
 	       			<div className="content">
+	       				<Link to="/" style={{textAlign: 'center'}}>
 	       				<img alt="" src={this.props.imgConfig.logoImg}/>
+	       				</Link>
 	       				<form className="form">
 	       					<h2 className="title">创建新账号</h2>
 	       					{

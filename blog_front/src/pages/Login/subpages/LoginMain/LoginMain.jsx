@@ -87,7 +87,9 @@ class LoginMain extends React.Component {
 			<div id="LoginMain" className="LoginMain" style={imgStyle}>
 	          <div className="content-wrapper">
 	          	<div className="content">
+	          		<Link to="/" style={{textAlign: 'center'}}>
 	          		<img alt="" src={this.props.imgConfig.logoImg}/>
+	          		</Link>
 	          		<form className="form">
 	          			<div className="form-group">
 	          				{
