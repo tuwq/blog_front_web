@@ -35,5 +35,5 @@ public class MD5Util {
             log.error("generate md5 error, {}", s, e);
             return null;
         }
-    }   
+    }      
 }
