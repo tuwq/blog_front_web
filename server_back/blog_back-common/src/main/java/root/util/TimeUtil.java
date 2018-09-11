@@ -7,9 +7,9 @@ import java.util.GregorianCalendar;
 
 public class TimeUtil {
 	
-	private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	private static SimpleDateFormat formatNoSecond = new SimpleDateFormat("yyyy-MM-dd");
-	private static Calendar c = new GregorianCalendar();
+	private final static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	private final static SimpleDateFormat formatNoSecond = new SimpleDateFormat("yyyy-MM-dd");
+	private final static Calendar c = new GregorianCalendar();
 	
     public static String format(Long second) {
 		return format.format(second);
