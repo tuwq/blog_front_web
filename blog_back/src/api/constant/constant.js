@@ -1,4 +1,4 @@
-global.serverUrl = 'http://127.0.0.1:9000'
+global.serverUrl = '/api'
 global.imgServer = 'http://img.twenq.com/'
 global.faceUrl = global.imgServer + 'upload/user/avatar/'
 global.artimgUrl = global.imgServer + 'upload/artimg/'

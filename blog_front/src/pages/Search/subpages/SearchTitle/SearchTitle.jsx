@@ -32,8 +32,6 @@ class SearchTitle extends React.Component {
 			<div className="SearchTitle">
 				{ title }
 			  	<h2>找到{this.props.pageModel.total}条匹配结果</h2>
-			  	<p>我相信所有被我遗忘的美好·一定还在这世上的某个角落
-			  	<br/>也相信总有一天·走过很长的生命·遇见美好·春暖花开</p>
         	</div>
         )
 	}

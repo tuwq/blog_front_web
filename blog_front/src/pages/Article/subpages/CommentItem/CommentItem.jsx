@@ -25,7 +25,7 @@ class CommentItem extends React.Component {
 		return (
 			<div className="CommentItem">
 				<a className="avatar">
-					<img width="40" height="40" alt="" src={global.userAvatarPrefix+this.props.item.user.avatar+'?v='+new Date().getTime()} />
+					<img width="40" height="40" alt="" src={global.userAvatarPrefix+this.props.item.user.avatar} />
 				</a>
 				<div className="content-wrapper">
 					<div className="meta">

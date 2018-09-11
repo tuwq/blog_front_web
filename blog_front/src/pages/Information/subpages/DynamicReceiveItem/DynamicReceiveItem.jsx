@@ -31,7 +31,7 @@ class DynamicReceiveItem extends React.Component {
 						  	<Link className="title" to={'/article/'+this.props.item.articaleDto.id}>{this.props.item.articaleDto.title}</Link>
 					  		<div className="meta">
 					  			<div className="avatar">
-					  				<img width="40" height="40" alt="" src={global.userAvatarPrefix+this.props.item.commentDto.user.avatar+'?v='+new Date().getTime()}/>
+					  				<img width="40" height="40" alt="" src={global.userAvatarPrefix+this.props.item.commentDto.user.avatar}/>
 					  			</div>
 				  				<div className="name">
 				  					<Link to={'/user/'+this.props.item.commentDto.user.id}>{this.props.item.commentDto.user.nickname}</Link>

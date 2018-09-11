@@ -1,19 +1,19 @@
 export function getMusicCategoryApi(success) {
-	axios.get('/sys/music/category/list')
+	axios.get(global.serverUrl+'/sys/music/category/list')
 	.then((res)=>{
 		success(res)
 	})
 }
 
 export function getSongInfo(id,success) {
-	axios.get('/sys/music/'+id)
+	axios.get(global.serverUrl+'/sys/music/'+id)
 	.then((res)=>{
 		success(res)
 	})
 }
 
 export function pageSongApi(currentPage,pageSize,success) {
-	axios.get('/sys/music/page',{
+	axios.get(global.serverUrl+'/sys/music/page',{
 		params: {currentPage,pageSize}
 	}).then((res)=>{
 		success(res)
@@ -21,7 +21,7 @@ export function pageSongApi(currentPage,pageSize,success) {
 }
 
 export function pageSearchApi(currentPage,pageSize,keyword,success) {
-	axios.post('/sys/music/search',{
+	axios.post(global.serverUrl+'/sys/music/search',{
 		currentPage,pageSize,keyword
 	}).then((res)=>{
 		success(res)
@@ -29,7 +29,7 @@ export function pageSearchApi(currentPage,pageSize,keyword,success) {
 }
 
 export function addMusicApi(formdata,success) {
-	axios.post('/sys/music/add',formdata,{
+	axios.post(global.serverUrl+'/sys/music/add',formdata,{
 		headers:{'Content-Type':'multipart/form-data'}
 	}).then((res)=>{
 		success(res)
@@ -43,7 +43,7 @@ export function editMusicApi(id,state,success) {
 	let lyric = state.lyric
 	let weight = state.weight
 	let duration = state.duration
-	axios.post('/sys/music/edit',{
+	axios.post(global.serverUrl+'/sys/music/edit',{
 		id,categoryNames,songName,singer,lyric,weight,duration
 	}).then((res)=>{
 		success(res)
@@ -51,14 +51,14 @@ export function editMusicApi(id,state,success) {
 }
 
 export function delBatchApi(ids,success) {
-	axios.delete('/sys/music/delBatch/'+ids)
+	axios.delete(global.serverUrl+'/sys/music/delBatch/'+ids)
 	.then((res)=>{
 		success(res)
 	})
 }
 
 export function updateCoverApi(formdata,success) {
-	axios.post('/sys/music/update/cover',formdata,{
+	axios.post(global.serverUrl+'/sys/music/update/cover',formdata,{
 		headers:{'Content-Type':'multipart/form-data'}
 	}).then((res)=>{
 		success(res)
@@ -66,7 +66,7 @@ export function updateCoverApi(formdata,success) {
 }
 
 export function updateMusicApi(formdata,success) {
-	axios.post('/sys/music/update/music',formdata,{
+	axios.post(global.serverUrl+'/sys/music/update/music',formdata,{
 		headers:{'Content-Type':'multipart/form-data'}
 	}).then((res)=>{
 		success(res)

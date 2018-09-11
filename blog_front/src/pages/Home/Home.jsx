@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { withRouter } from 'react-router-dom'
+import DocumentTitle from 'react-document-title'
 
 import HomeMain from './HomeMain/HomeMain'
 
@@ -22,7 +23,9 @@ class Home extends React.Component {
 	render() {
 		return (
 			<div id="Home" className="Home">
-	           <HomeMain />
+				<DocumentTitle title="仟月的博客">
+	           		<HomeMain />
+	           </DocumentTitle>
         	</div>
         )
 	}

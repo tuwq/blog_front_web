@@ -1,5 +1,5 @@
 export function addArticleApi(title,weight,categoryNames,content,coverImg,success) {
-	axios.post('/sys/article/add',{
+	axios.post(global.serverUrl+'/sys/article/add',{
 		title,weight,categoryNames,content,coverImg
 	}).then((res)=>{
 		success(res)
@@ -7,7 +7,7 @@ export function addArticleApi(title,weight,categoryNames,content,coverImg,succes
 } 
 
 export function getImgURIApi(formdata,success) {
-	axios.post('/sys/article/getImgURI',formdata,{
+	axios.post(global.serverUrl+'/sys/article/getImgURI',formdata,{
 		headers:{'Content-Type':'multipart/form-data'}
 	}).then((res)=>{
 		success(res)
@@ -15,7 +15,7 @@ export function getImgURIApi(formdata,success) {
 }
 
 export function getArticleListApi(currentPage,pageSize,success) {
-	axios.get('/sys/article/list',{
+	axios.get(global.serverUrl+'/sys/article/list',{
 		params: {currentPage,pageSize}
 	}).then((res)=>{
 		success(res)
@@ -23,21 +23,21 @@ export function getArticleListApi(currentPage,pageSize,success) {
 }
 
 export function delBatchApi(ids,success) {
-	axios.delete('/sys/article/delBatch/'+ids)
+	axios.delete(global.serverUrl+'/sys/article/delBatch/'+ids)
 	.then((res)=>{
 		success(res)
 	})
 }
 
 export function updateBatchApi(ids,success) {
-	axios.put('/sys/article/updateBatch/'+ids)
+	axios.put(global.serverUrl+'/sys/article/updateBatch/'+ids)
 	.then((res)=>{
 		success(res)
 	})
 }
 
 export function getSearchListApi(currentPage,pageSize,keyword,success) {
-	axios.post('/sys/article/search',{
+	axios.post(global.serverUrl+'/sys/article/search',{
 		currentPage,pageSize,keyword
 	}).then((res)=>{
 		success(res)
@@ -45,14 +45,14 @@ export function getSearchListApi(currentPage,pageSize,keyword,success) {
 }
 
 export function getArticleDetailApi(id,success) {
-	axios.get('/sys/article/'+id)
+	axios.get(global.serverUrl+'/sys/article/'+id)
 	.then((res)=>{
 		success(res)
 	})
 }
 
 export function updateArticleApi(id,title,weight,categoryNames,content,coverImg,success) {
-	axios.put('/sys/article/'+id,{
+	axios.put(global.serverUrl+'/sys/article/'+id,{
 		title,weight,categoryNames,content,coverImg
 	}).then((res)=>{
 		success(res)
@@ -60,7 +60,7 @@ export function updateArticleApi(id,title,weight,categoryNames,content,coverImg,
 }
 
 export function getFaceCoverUrlApi(formdata,success) {
-	axios.post('/sys/article/faceCover',formdata,{
+	axios.post(global.serverUrl+'/sys/article/faceCover',formdata,{
 		headers:{'Content-Type':'multipart/form-data'}
 	}).then((res)=>{
 		success(res)

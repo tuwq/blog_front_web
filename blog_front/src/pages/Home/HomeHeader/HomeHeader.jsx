@@ -141,7 +141,7 @@ class HomeHeader extends React.Component {
                   JSON.stringify(this.props.user)!="{}"
                   ? (<li className="HomeHeaderItemRight UserLink" ref={this.$userLink}>
                       <a className="ItemLinkRight"><img width="32" height="32" onClick={this.userMenu.bind(this)} alt="" 
-                      src={global.userAvatarPrefix+this.props.user.avatar+'?v='+new Date().getTime()}/>
+                      src={global.userAvatarPrefix+this.props.user.avatar}/>
                         {newremind}
                       </a>
                       <ul className="user-menu" ref={this.$userMenu}>

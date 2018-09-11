@@ -63,7 +63,7 @@ class FollowItem extends React.Component {
 		return (
 			<div className="follow-group">
 			 	<div className="avatar">
-			 		<img width="50" height="50" alt="" src={global.userAvatarPrefix+this.props.data.userDto.avatar+'?v='+new Date().getTime()}/>
+			 		<img width="50" height="50" alt="" src={global.userAvatarPrefix+this.props.data.userDto.avatar}/>
 			 	</div>
 			 	<div className="meta">
 			 		<h2 className="name"><Link to={'/user/'+this.props.data.userDto.id}>

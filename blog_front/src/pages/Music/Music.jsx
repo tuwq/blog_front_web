@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { withRouter } from 'react-router-dom'
+import DocumentTitle from 'react-document-title'
 
 import MusicSide from './subpages/MusicSide/MusicSide'
 import MusicContent from './subpages/MusicContent/MusicContent'
@@ -21,14 +22,16 @@ class Music extends React.Component {
 	render() {
 		return (
 			<div className="Music">
-				<div className="Music-Padding">
-					<div className="Music-Wrapper">
-						<div className="Music-Inner">
-							<MusicSide />
-							<MusicContent />
+				<DocumentTitle title="仟月的歌单">
+					<div className="Music-Padding">
+						<div className="Music-Wrapper">
+							<div className="Music-Inner">
+								<MusicSide />
+								<MusicContent />
+							</div>
 						</div>
 					</div>
-				</div>
+				</DocumentTitle>
         	</div>
         )
 	}

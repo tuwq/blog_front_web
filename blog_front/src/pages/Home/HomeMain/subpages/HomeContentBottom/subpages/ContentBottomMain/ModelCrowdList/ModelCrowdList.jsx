@@ -21,16 +21,11 @@ class ModelCrowdList extends React.Component {
 	render() {
 		return (
          	<div className="ModelCrowdList">
-         		<div className="BigItemList">
          			{
          				this.props.data.map((item,index)=>{
          					return (<ModelCrowdBigItem key={index} item={item} index={index}/>)
          				})
          			}
-         		</div>
-         		<div className="ItemList">
-	         		
-         		</div>
          	</div>
         )
 	}

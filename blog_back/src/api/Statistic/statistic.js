@@ -1,5 +1,5 @@
 export function statisicApi(success) {
-	axios.get('/statisic/all')
+	axios.get(global.serverUrl+'/statisic/all')
 	.then((res)=>{
 		success(res)
 	})

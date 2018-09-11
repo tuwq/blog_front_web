@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { withRouter } from 'react-router-dom'
+import DocumentTitle from 'react-document-title'
 
 import FirendList from './subpages/FirendList/FirendList'
 import FirendTitle from './subpages/FirendTitle/FirendTitle'
@@ -45,15 +46,17 @@ class Firend extends React.Component {
 	render() {
 		return (
 			<div className="Firend">
-				<div className="Firend-Wrapper">
-					<div className="Firend-Inner">
-						<FirendTitle />
-						{
-							this.state.data.length>0&&
-							(<FirendList data={this.state.data}/>)
-						}		
+				<DocumentTitle title="仟月的友链">
+					<div className="Firend-Wrapper">
+						<div className="Firend-Inner">
+							<FirendTitle />
+							{
+								this.state.data.length>0&&
+								(<FirendList data={this.state.data}/>)
+							}		
+						</div>
 					</div>
-				</div>
+				</DocumentTitle>
         	</div>
         )
 	}

@@ -1,5 +1,5 @@
 export function addFirendApi(formdata,success) {
-	axios.post('/sys/firend/add',formdata,{
+	axios.post(global.serverUrl+'/sys/firend/add',formdata,{
 		headers:{'Content-Type':'multipart/form-data'}
 	}).then((res)=>{
 		success(res)
@@ -10,7 +10,7 @@ export function EditFirendApi(id,state,success) {
 	let nickname = state.nickname
 	let desc = state.desc
 	let website = state.website
-	axios.put('/sys/firend/edit',{
+	axios.put(global.serverUrl+'/sys/firend/edit',{
 		id,nickname,desc,website
 	}).then((res)=>{
 		success(res)
@@ -18,14 +18,14 @@ export function EditFirendApi(id,state,success) {
 }
 
 export function getFirendInfoApi(id,success) {
-	axios.get('/sys/firend/info/'+id)
+	axios.get(global.serverUrl+'/sys/firend/info/'+id)
 	.then((res)=>{
 		success(res)
 	})
 }
 
 export function pageFirendApi(currentPage,pageSize,success) {
-	axios.get('/sys/firend/page',{
+	axios.get(global.serverUrl+'/sys/firend/page',{
 		params: {currentPage,pageSize}
 	}).then((res)=>{
 		success(res)
@@ -33,7 +33,7 @@ export function pageFirendApi(currentPage,pageSize,success) {
 }
 
 export function updateAvatarApi(formdata,success) {
-	axios.post('/sys/firend/update/avatar',formdata,{
+	axios.post(global.serverUrl+'/sys/firend/update/avatar',formdata,{
 		headers:{'Content-Type':'multipart/form-data'}
 	}).then((res)=>{
 		success(res)
@@ -41,7 +41,7 @@ export function updateAvatarApi(formdata,success) {
 }
 
 export function delBatchApi(ids,success) {
-	axios.delete('/sys/firend/delBatch/'+ids)
+	axios.delete(global.serverUrl+'/sys/firend/delBatch/'+ids)
 	.then((res)=>{
 		success(res)
 	})

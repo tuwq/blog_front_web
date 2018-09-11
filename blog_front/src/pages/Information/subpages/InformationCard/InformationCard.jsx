@@ -79,7 +79,7 @@ class InformationCard extends React.Component {
                 <div className="InformationCard" style={imgStyle}>
                     <div className="container">
                         <div className="avatar-wrap">
-                            <img alt="" src={global.userAvatarPrefix+this.props.showInfo.userDto.avatar+'?v='+new Date().getTime()}/>
+                            <img alt="" src={global.userAvatarPrefix+this.props.showInfo.userDto.avatar}/>
                         </div>
                         <h2>{this.props.showInfo.userDto.nickname}<a><i></i></a></h2>
                         <p className="bio">{this.props.showInfo.userDto.desc}</p>

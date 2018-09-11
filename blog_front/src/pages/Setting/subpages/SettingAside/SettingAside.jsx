@@ -25,7 +25,7 @@ class SettingAside extends React.Component {
 					<div className="avatar">
 						{
 							JSON.stringify(this.props.user) != "{}" &&
-							(<img alt="" src={global.userAvatarPrefix+this.props.user.avatar+'?v='+new Date().getTime()}/>)
+							(<img alt="" src={global.userAvatarPrefix+this.props.user.avatar}/>)
 						}
 						<a>{this.props.user.nickname}</a>
 					</div>
