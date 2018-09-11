@@ -76,7 +76,7 @@ public class UserService {
 		Integer userId = ThreadUtil.getCurrentUserId();
 		qiNiuService.avatar(file,MD5Util.encrypt(Integer.toString(userId)));
 		String originName = file.getOriginalFilename();
-		String avatar = MD5Util.encrypt(Integer.toString(userId))+originName.substring(originName.lastIndexOf("."));
+		String avatar = MD5Util.encrypt(Integer.toString(userId))+originName.substring(originName.lastIndexOf("."))+"?v="+new Date().getTime();
 		User user = userMapper.selectByPrimaryKey(userId);
 		if(user == null) {
 			throw new TokenException(ResultCode.TOKEN_NOTUSER,"token和reids解析到的用户不存在");

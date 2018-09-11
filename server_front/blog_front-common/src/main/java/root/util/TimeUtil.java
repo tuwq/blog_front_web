@@ -7,12 +7,15 @@ import java.util.GregorianCalendar;
 
 public class TimeUtil {
 	
-	private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	private static SimpleDateFormat formatNoSecond = new SimpleDateFormat("yyyy-MM-dd");
-	private static Calendar c = new GregorianCalendar();
+	// simpleDateFormat线程不安全
+	private final static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	private final static SimpleDateFormat formatNoSecond = new SimpleDateFormat("yyyy-MM-dd");
+	private final static Calendar c = new GregorianCalendar();
+	// private static DateTimeFormatter format = DateTimeFormat.forPattern("yyyyMMdd");
+	// private static DateTimeFormatter formatNoSecond = DateTimeFormat.forPattern("yyyyMMdd");
 	
     public static String format(Long second) {
-		return format.format(second);
+    	return format.format(second);
     }
     
     public static String formatNoSecond(Long second) {
@@ -44,7 +47,6 @@ public class TimeUtil {
 		String nowTime = TimeUtil.format(new Date().getTime());
 		System.out.println(beforeTime);
 		System.out.println(nowTime);
-		
 	}
 
 }
