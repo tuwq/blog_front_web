@@ -4,7 +4,7 @@
       <span>{{item.singer}}</span>
       <span>{{item.categoryName}}</span>
       <span class="image">
-        <img width="50" height="50" alt="" :src="musicCoverPrefix+item.cover+'?v='+new Date().getTime()"/>
+        <img width="50" height="50" alt="" :src="musicCoverPrefix+item.cover"/>
       </span>
       <span @click.stop><input class="opearcheck" @click.stop type="checkbox" :value="item.id"></span>
   </div>

@@ -89,7 +89,7 @@
          formdata.append("id", this.$route.params.id)
          updateAvatarApi(formdata,(res)=>{
            if(res.data.code == 200) {
-             this.avatar = global.firendAvatarimgUrl + res.data.result+'?v='+new Date().getTime()
+             this.avatar = global.firendAvatarimgUrl + res.data.result
            }
          })
       }

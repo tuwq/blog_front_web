@@ -2,7 +2,7 @@
   <div class="FirendItem" @click.stop.prevent="goEdit">
       <span>{{item.nickname}}</span>
       <span class="image">
-        <img alt="" width="100" height="100" alt="" :src="avatarPrefix+item.avatar+'?v='+new Date().getTime()"/>
+        <img alt="" width="100" height="100" alt="" :src="avatarPrefix+item.avatar"/>
         <button @click.stop="chooseAvatar">更换图片</button>
         <input type="file" ref="$fileInput"/>
       </span>

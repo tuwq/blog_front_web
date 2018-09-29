@@ -23,7 +23,7 @@ class MusicItem extends React.Component {
 		return (
 			<div className="MusicItem" onClick={this.selectItem.bind(this)}>
 				<div className="wrap">
-					<img className="coverImg" alt="" src={global.musicCoverPrefix+this.props.item.cover+'?v='+new Date().getTime()}/>
+					<img className="coverImg" alt="" src={global.musicCoverPrefix+this.props.item.cover}/>
 					<div className="info">
 						<h4 className="songName">{this.props.item.songName}</h4>
 						<p className="singer">{this.props.item.singer}</p>

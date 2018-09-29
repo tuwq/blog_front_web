@@ -140,8 +140,8 @@
             this.weight = res.data.result.weight
             this.duration = res.data.result.duration
             this.categoryNames = res.data.result.categoryIds
-            this.coverResource = global.musicCoverUrl + res.data.result.cover+'?v='+new Date().getTime()
-            this.musicResource = global.musicResourceUrl + res.data.result.url+'?v='+new Date().getTime()
+            this.coverResource = global.musicCoverUrl + res.data.result.cover
+            this.musicResource = global.musicResourceUrl + res.data.result.url
           }
         })
       }, 
