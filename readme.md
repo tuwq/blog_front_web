@@ -1,6 +1,6 @@
 # 全栈我的博客 https://twenq.com
 # 技术栈
-## 前台展示
+## 前台展示,兼容chrome,firefox,edge.支持响应式
 	前端:	Less + React + Redux + jQuery
 
 	后端: 	SpringBoot + MyBatis
