@@ -8,15 +8,18 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import root.configConstant.BlogConfigProperties;
+
 @Service
 public class MailService {
 
 	@Resource
 	private JavaMailSender mailSender;
+	@Resource
+	private BlogConfigProperties blogConfigProperties;
 	@Value("${spring.mail.username}")
 	private String from;
-	@Value("${myMail}")
-	private String myMail;
+	
 
 	@Async
 	public void sendSimpleMail(String subject,String content,String toEmail){
@@ -33,7 +36,10 @@ public class MailService {
 	public void sendSecretLetter(String subject, String content) {
 		SimpleMailMessage message = new SimpleMailMessage();
 	    message.setFrom(from);
-	    message.setTo(myMail);
+	    
+	    System.out.println(blogConfigProperties.getFront().getMyMail());
+	    
+	    message.setTo(blogConfigProperties.getFront().getMyMail());
 	    message.setSubject(subject);
 	    message.setText(content);
 	    mailSender.send(message);

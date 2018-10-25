@@ -1,0 +1,42 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "root.configConstant.BlogConfigProperties",
+      "name": "blog.config",
+      "type": "root.configConstant.BlogConfigProperties"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "root.configConstant.BlogConfigProperties",
+      "name": "blog.config.cache",
+      "type": "root.configConstant.CacheProperties"
+    },
+    {
+      "sourceType": "root.configConstant.BlogConfigProperties",
+      "name": "blog.config.category",
+      "type": "root.configConstant.CategoryProperties"
+    },
+    {
+      "sourceType": "root.configConstant.BlogConfigProperties",
+      "name": "blog.config.front",
+      "type": "root.configConstant.FrontProperties"
+    },
+    {
+      "sourceType": "root.configConstant.BlogConfigProperties",
+      "name": "blog.config.mail",
+      "type": "root.configConstant.MailProperties"
+    },
+    {
+      "sourceType": "root.configConstant.BlogConfigProperties",
+      "name": "blog.config.qiniu",
+      "type": "root.configConstant.QiniuProperties"
+    },
+    {
+      "sourceType": "root.configConstant.BlogConfigProperties",
+      "name": "blog.config.token",
+      "type": "root.configConstant.TokenProperties"
+    }
+  ]
+}

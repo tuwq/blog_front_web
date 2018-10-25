@@ -26,10 +26,10 @@ public class ThreadRequestFilter implements Filter{
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		HttpServletRequest req = (HttpServletRequest)request;
-		HttpServletResponse resp = (HttpServletResponse)response;
-		ThreadUtil.add(req);
-		ThreadUtil.add(resp);
+//		HttpServletRequest req = (HttpServletRequest)request;
+//		HttpServletResponse resp = (HttpServletResponse)response;
+//		ThreadUtil.add(req);
+//		ThreadUtil.add(resp);
 		chain.doFilter(request, response);
 		return;
 	}

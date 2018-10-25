@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.google.common.collect.Lists;
 
 import root.beans.JsonResult;
+import root.configConstant.BlogConfigProperties;
 import root.constant.RedisCode;
 import root.dto.ImgConfigDto;
 import root.mapper.FrontImgConfigMapper;
@@ -26,9 +27,8 @@ public class ConfigService {
 	private FrontImgConfigMapper frontImgConfigMapper;
 	@Resource
 	private RedisOperator redis;
-	@Value("${configImgTimeout}")
-	private Long configImgTimeout;
-	
+	@Resource
+	private BlogConfigProperties blogConfigProperties;
 	
 	public JsonResult<ImgConfigDto> img() {
 		String cacheImgDto = redis.get(RedisCode.CONFIG_IMG_CACHE);
@@ -62,7 +62,7 @@ public class ConfigService {
 			}
 		});
 		configDto.setSliderImgList(sliderImgList);
-		redis.set(RedisCode.CONFIG_IMG_CACHE, JsonUtils.objectToJson(configDto),configImgTimeout);
+		redis.set(RedisCode.CONFIG_IMG_CACHE, JsonUtils.objectToJson(configDto),blogConfigProperties.getCache().getConfigImgTimeout());
 		return JsonResult.<ImgConfigDto>success(configDto);
 	}
 

@@ -67,6 +67,7 @@ public class CommentService {
 				.userId(userId).articaleId(param.getArticleId())
 				.parentId(0).rootId(0).createTime(new Date()).updateTime(new Date()).build();
 		commentMapper.insertSelective(comment);
+		userDataHandler.recordOpear(userId,IpUtil.getIpAddress(ThreadUtil.getCurrentRequest()));
 		commentedDataHandler.rootCommentSumIncr(param.getArticleId(), comment.getId(),userId);
 	}
 	

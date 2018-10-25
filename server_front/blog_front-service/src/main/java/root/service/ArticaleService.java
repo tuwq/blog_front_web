@@ -12,6 +12,7 @@ import com.google.common.collect.Lists;
 
 import root.async.IncrDataHandler;
 import root.beans.JsonResult;
+import root.configConstant.BlogConfigProperties;
 import root.constant.RedisCode;
 import root.constant.ResultCode;
 import root.dto.ArticaleDto;
@@ -37,8 +38,8 @@ public class ArticaleService {
 	private CategoryMapper categoryMapper;
 	@Resource
 	private RedisOperator redis;
-	@Value("${articleInfoTimeout}")
-	private Long articleInfoTimeout;
+	@Resource
+	private BlogConfigProperties blogConfigProperties;
 	
 	public JsonResult<ArticaleDto> detail(Integer id) {
 		// 检查字段,访问id不存在去404
@@ -70,7 +71,7 @@ public class ArticaleService {
 		articaleDto.setNext(next);
 		articaleDto.setTimeAgo(TimeAgoUtils.format(articaleDto.getUpdateTime()));
 		articaleDto.formatNoSecondTime();
-		redis.set(RedisCode.ARTICLE_INFO_CACHE+":"+id,JsonUtils.objectToJson(articaleDto),articleInfoTimeout);
+		redis.set(RedisCode.ARTICLE_INFO_CACHE+":"+id,JsonUtils.objectToJson(articaleDto),blogConfigProperties.getCache().getArticleInfoTimeout());
 		incrDataHandler.articleBrowseIncr(id);
 		return JsonResult.<ArticaleDto>success(articaleDto);
 	}

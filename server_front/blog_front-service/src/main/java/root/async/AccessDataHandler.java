@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-
+import root.configConstant.BlogConfigProperties;
 import root.constant.RedisCode;
 import root.model.Access;
 import root.redis.RedisOperator;
@@ -19,10 +19,10 @@ import root.util.JsonUtils;
 @Service
 public class AccessDataHandler {
 
-	@Value("${redisIpTimeout}")
-	private Integer redisIpTimeout;
 	@Resource
 	private RedisOperator redis;
+	@Resource
+	private BlogConfigProperties blogConfigProperties;
 	
 	@Async
 	public void saveIp(HttpServletRequest request) {

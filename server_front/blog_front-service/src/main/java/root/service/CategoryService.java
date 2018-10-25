@@ -11,6 +11,7 @@ import com.google.common.collect.Lists;
 import root.beans.JsonResult;
 import root.beans.PageModel;
 import root.beans.PageResult;
+import root.configConstant.BlogConfigProperties;
 import root.constant.RedisCode;
 import root.constant.ResultCode;
 import root.dto.ArticaleDto;
@@ -35,18 +36,10 @@ public class CategoryService {
 	private CategoryMapper categoryMapper;
 	@Resource
 	private ArticaleMapper articaleMapper;
-	@Value("${categoryArticleId}")
-	private Integer categoryArticleId;
-	@Value("${categoryNodeId}")
-	private Integer categoryNodeId;
-	@Value("${categoryShortCodeId}")
-	private Integer categoryShortCodeId;
-	@Value("${categoryChatId}")
-	private Integer categoryChatId;
+	@Resource
+	private BlogConfigProperties blogConfigProperties;
 	@Resource
 	private RedisOperator redis;
-	@Value("${articleListIndexTimeout}")
-	private Long articleListIndexTimeout;
 	
 	public PageResult<ArticaleDto> categoryList(PageParam param, Integer id) {
 		// 检查字段
@@ -99,7 +92,7 @@ public class CategoryService {
 			articaleDto.formatNoSecondTime();
 			articaleDtoList.add(articaleDto);
 		});
-		redis.set(RedisCode.ARTICLE_LIST_PRAISE_CACHE, JsonUtils.objectToJson(articaleDtoList),articleListIndexTimeout);
+		redis.set(RedisCode.ARTICLE_LIST_PRAISE_CACHE, JsonUtils.objectToJson(articaleDtoList),blogConfigProperties.getCache().getArticleListIndexTimeout());
 		return JsonResult.<List<ArticaleDto>>success(articaleDtoList);
 	}
 
@@ -109,11 +102,11 @@ public class CategoryService {
 		if (quantity == null) {
 			throw new CheckParamException("数量","未指定");
 		}
-		String cacheDto = redis.get(RedisCode.ARTICLE_CATEGORY_CACHE+":"+categoryArticleId);
+		String cacheDto = redis.get(RedisCode.ARTICLE_CATEGORY_CACHE+":"+blogConfigProperties.getCategory().getArticleId());
 		if (cacheDto != null) {
 			return JsonResult.<ShowCategoryArticleDto>success(JsonUtils.jsonToPojo(cacheDto, ShowCategoryArticleDto.class));
 		}
-		List<Articale> articaleList = articaleMapper.categoryArticale(categoryArticleId,quantity);
+		List<Articale> articaleList = articaleMapper.categoryArticale(blogConfigProperties.getCategory().getArticleId(),quantity);
 		List<ArticaleDto> articaleDtoList = Lists.newArrayList();
 		articaleList.forEach(articale -> {
 			ArticaleDto articaleDto = DtoUtil.adapt(new ArticaleDto(), articale);
@@ -121,12 +114,12 @@ public class CategoryService {
 			articaleDto.formatNoSecondTime();
 			articaleDtoList.add(articaleDto);
 		});
-		Category category = categoryMapper.selectByPrimaryKey(categoryArticleId);
+		Category category = categoryMapper.selectByPrimaryKey(blogConfigProperties.getCategory().getArticleId());
 		if (category == null) {
 			throw new CheckParamException("分类","不存在");
 		}
 		ShowCategoryArticleDto showCADto = ShowCategoryArticleDto.builder().category(category).articaleList(articaleDtoList).build();
-		redis.set(RedisCode.ARTICLE_CATEGORY_CACHE+":"+categoryArticleId, JsonUtils.objectToJson(showCADto),articleListIndexTimeout);
+		redis.set(RedisCode.ARTICLE_CATEGORY_CACHE+":"+blogConfigProperties.getCategory().getArticleId(), JsonUtils.objectToJson(showCADto),blogConfigProperties.getCache().getArticleListIndexTimeout());
 		return JsonResult.<ShowCategoryArticleDto>success(showCADto);
 	}
 
@@ -134,11 +127,11 @@ public class CategoryService {
 		if (quantity == null) {
 			throw new CheckParamException("数量","未指定");
 		}
-		String cacheDto = redis.get(RedisCode.ARTICLE_CATEGORY_CACHE+":"+categoryNodeId);
+		String cacheDto = redis.get(RedisCode.ARTICLE_CATEGORY_CACHE+":"+blogConfigProperties.getCategory().getNodeId());
 		if (cacheDto != null) {
 			return JsonResult.<ShowCategoryArticleDto>success(JsonUtils.jsonToPojo(cacheDto, ShowCategoryArticleDto.class));
 		}
-		List<Articale> articaleList = articaleMapper.categoryArticale(categoryNodeId,quantity);
+		List<Articale> articaleList = articaleMapper.categoryArticale(blogConfigProperties.getCategory().getNodeId(),quantity);
 		List<ArticaleDto> articaleDtoList = Lists.newArrayList();
 		articaleList.forEach(articale -> {
 			ArticaleDto articaleDto = DtoUtil.adapt(new ArticaleDto(), articale);
@@ -146,12 +139,12 @@ public class CategoryService {
 			articaleDto.formatNoSecondTime();
 			articaleDtoList.add(articaleDto);
 		});
-		Category category = categoryMapper.selectByPrimaryKey(categoryNodeId);
+		Category category = categoryMapper.selectByPrimaryKey(blogConfigProperties.getCategory().getNodeId());
 		if (category == null) {
 			throw new CheckParamException("分类","不存在");
 		}
 		ShowCategoryArticleDto showCADto = ShowCategoryArticleDto.builder().category(category).articaleList(articaleDtoList).build();
-		redis.set(RedisCode.ARTICLE_CATEGORY_CACHE+":"+categoryNodeId, JsonUtils.objectToJson(showCADto),articleListIndexTimeout);
+		redis.set(RedisCode.ARTICLE_CATEGORY_CACHE+":"+blogConfigProperties.getCategory().getNodeId(), JsonUtils.objectToJson(showCADto),blogConfigProperties.getCache().getArticleListIndexTimeout());
 		return JsonResult.<ShowCategoryArticleDto>success(showCADto);
 	}
 	
@@ -159,11 +152,11 @@ public class CategoryService {
 		if (quantity == null) {
 			throw new CheckParamException("数量","未指定");
 		}
-		String cacheDto = redis.get(RedisCode.ARTICLE_CATEGORY_CACHE+":"+categoryShortCodeId);
+		String cacheDto = redis.get(RedisCode.ARTICLE_CATEGORY_CACHE+":"+blogConfigProperties.getCategory().getShortCodeId());
 		if (cacheDto != null) {
 			return JsonResult.<ShowCategoryArticleDto>success(JsonUtils.jsonToPojo(cacheDto, ShowCategoryArticleDto.class));
 		}
-		List<Articale> articaleList = articaleMapper.categoryArticale(categoryShortCodeId,quantity);
+		List<Articale> articaleList = articaleMapper.categoryArticale(blogConfigProperties.getCategory().getShortCodeId(),quantity);
 		List<ArticaleDto> articaleDtoList = Lists.newArrayList();
 		articaleList.forEach(articale -> {
 			ArticaleDto articaleDto = DtoUtil.adapt(new ArticaleDto(), articale);
@@ -171,12 +164,12 @@ public class CategoryService {
 			articaleDto.formatNoSecondTime();
 			articaleDtoList.add(articaleDto);
 		});
-		Category category = categoryMapper.selectByPrimaryKey(categoryShortCodeId);
+		Category category = categoryMapper.selectByPrimaryKey(blogConfigProperties.getCategory().getShortCodeId());
 		if (category == null) {
 			throw new CheckParamException("分类","不存在");
 		}
 		ShowCategoryArticleDto showCADto = ShowCategoryArticleDto.builder().category(category).articaleList(articaleDtoList).build();
-		redis.set(RedisCode.ARTICLE_CATEGORY_CACHE+":"+categoryShortCodeId, JsonUtils.objectToJson(showCADto),articleListIndexTimeout);
+		redis.set(RedisCode.ARTICLE_CATEGORY_CACHE+":"+blogConfigProperties.getCategory().getShortCodeId(), JsonUtils.objectToJson(showCADto),blogConfigProperties.getCache().getArticleListIndexTimeout());
 		return JsonResult.<ShowCategoryArticleDto>success(showCADto);
 	}
 
@@ -184,11 +177,11 @@ public class CategoryService {
 		if (quantity == null) {
 			throw new CheckParamException("数量","未指定");
 		}
-		String cacheDto = redis.get(RedisCode.ARTICLE_CATEGORY_CACHE+":"+categoryChatId);
+		String cacheDto = redis.get(RedisCode.ARTICLE_CATEGORY_CACHE+":"+blogConfigProperties.getCategory().getChatId());
 		if (cacheDto != null) {
 			return JsonResult.<ShowCategoryArticleDto>success(JsonUtils.jsonToPojo(cacheDto, ShowCategoryArticleDto.class));
 		}
-		List<Articale> articaleList = articaleMapper.categoryArticale(categoryChatId,quantity);
+		List<Articale> articaleList = articaleMapper.categoryArticale(blogConfigProperties.getCategory().getChatId(),quantity);
 		List<ArticaleDto> articaleDtoList = Lists.newArrayList();
 		articaleList.forEach(articale -> {
 			ArticaleDto articaleDto = DtoUtil.adapt(new ArticaleDto(), articale);
@@ -196,12 +189,12 @@ public class CategoryService {
 			articaleDto.formatNoSecondTime();
 			articaleDtoList.add(articaleDto);
 		});
-		Category category = categoryMapper.selectByPrimaryKey(categoryChatId);
+		Category category = categoryMapper.selectByPrimaryKey(blogConfigProperties.getCategory().getChatId());
 		if (category == null) {
 			throw new CheckParamException("分类","不存在");
 		}
 		ShowCategoryArticleDto showCADto = ShowCategoryArticleDto.builder().category(category).articaleList(articaleDtoList).build();
-		redis.set(RedisCode.ARTICLE_CATEGORY_CACHE+":"+categoryChatId, JsonUtils.objectToJson(showCADto),articleListIndexTimeout);
+		redis.set(RedisCode.ARTICLE_CATEGORY_CACHE+":"+blogConfigProperties.getCategory().getChatId(), JsonUtils.objectToJson(showCADto),blogConfigProperties.getCache().getArticleListIndexTimeout());
 		return JsonResult.<ShowCategoryArticleDto>success(showCADto);
 	}
 
@@ -223,7 +216,7 @@ public class CategoryService {
 		});
 		Category category = new Category();category.setName("热评文章");
 		ShowCategoryArticleDto showCADto = ShowCategoryArticleDto.builder().category(category).articaleList(articaleDtoList).build();
-		redis.set(RedisCode.ARTICLE_LIST_COMMENT_CACHE, JsonUtils.objectToJson(showCADto),articleListIndexTimeout);
+		redis.set(RedisCode.ARTICLE_LIST_COMMENT_CACHE, JsonUtils.objectToJson(showCADto),blogConfigProperties.getCache().getArticleListIndexTimeout());
 		return JsonResult.<ShowCategoryArticleDto>success(showCADto);
 	}
 
@@ -244,7 +237,7 @@ public class CategoryService {
 			articaleDto.formatNoSecondTime();
 			articaleDtoList.add(articaleDto);
 		});
-		redis.set(RedisCode.ARTICLE_LIST_WEIGHT_CACHE, JsonUtils.objectToJson(articaleDtoList),articleListIndexTimeout);
+		redis.set(RedisCode.ARTICLE_LIST_WEIGHT_CACHE, JsonUtils.objectToJson(articaleDtoList),blogConfigProperties.getCache().getArticleListIndexTimeout());
 		return JsonResult.<List<ArticaleDto>>success(articaleDtoList);
 	}
 
