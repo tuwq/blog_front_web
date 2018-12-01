@@ -43,18 +43,19 @@ public class FollowService {
 		if (userId == param.getFollowId()) {
 			throw new CheckParamException("关注错误","你不能关注你自己");
 		}
-		int connectionCount = userFollowMapper.countByFromIdAndTargetId(userId,param.getFollowId());
-		if (connectionCount != 0) {
-			UserFollow connection = userFollowMapper.getByFromIdAndTargetId(userId,param.getFollowId());
-			connection.setFollowStatus(param.getFollowAction());
-			userFollowMapper.updateByPrimaryKeySelective(connection);
+		UserFollow connection = userFollowMapper.getByFromIdAndTargetId(userId,param.getFollowId());
+		if (connection != null) {
+			if (!connection.getFollowStatus().equals(param.getFollowAction())) {
+				connection.setFollowStatus(param.getFollowAction());
+				userFollowMapper.updateByPrimaryKeySelective(connection);
+			}
 		} else {
-			UserFollow connection = UserFollow.builder()
+			UserFollow newConnection = UserFollow.builder()
 			.fromId(userId)
 			.targetId(param.getFollowId())
 			.followStatus(param.getFollowAction())
 			.build();
-			userFollowMapper.insertSelective(connection);
+			userFollowMapper.insertSelective(newConnection);
 		}
 		User user = userMapper.selectByPrimaryKey(userId);
 		user.setBeforeLoginIp(user.getNowLoginIp());
