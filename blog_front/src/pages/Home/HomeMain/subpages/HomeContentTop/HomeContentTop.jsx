@@ -3,6 +3,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { withRouter,Link } from 'react-router-dom'
 
 import Slider from 'base/general/Slider/Slider'
+import HomeReactSwipe from 'base/general/HomeReactSwipe/HomeReactSwipe'
 import WidgetCollection from './subpages/WidgetCollection/WidgetCollection'
 
 import { artWeightApi } from 'api/Category/category'
@@ -45,10 +46,10 @@ class HomeContentTop extends React.Component {
 	render() {
 		return (
          	<section id="HomeContentTop" className="HomeContentTop">
-         	 	{
-         	 		this.state.data.length>0&&
-         	 		(<Slider data={this.state.data}/>)
-         	 	}
+         		{
+					this.state.data.length>0&&
+					(<Slider data={this.state.data}/>)
+				}
          	 	<WidgetCollection />
          	</section>
         )
@@ -58,3 +59,9 @@ class HomeContentTop extends React.Component {
 export default withRouter(HomeContentTop)
 
 
+/*
+/*{
+	this.state.data.length>0&&
+	(<Slider data={this.state.data}/>)
+}
+*/

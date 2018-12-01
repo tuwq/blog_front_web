@@ -144,7 +144,7 @@ class Slider extends React.Component {
 		this.pend = true
 		// 改变left滑动,需要元素添加绝对定位属性
 		clearInterval(this.Movetimer);
-		var speed = target > ele.offsetLeft?20:-20
+		var speed = target > ele.offsetLeft?100:-100
 		this.Movetimer = setInterval(()=>{
 			var val = target - ele.offsetLeft
             ele.style.left = ele.offsetLeft + speed + "px"

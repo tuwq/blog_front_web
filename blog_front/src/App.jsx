@@ -6,7 +6,10 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as userActions from 'store/actions/user' 
 import * as imgConfigActions from 'store/actions/imgConfig'
+import * as songsActions from 'store/actions/songs' 
+import * as playerActions from 'store/actions/player' 
 import Player from 'base/general/Player/Player'
+import Live2DModel from 'base/general/Live2DModel/Live2DModel'
 
 import {
   HashRouter,
@@ -19,6 +22,7 @@ import { _saveCacheConfig,_loadCacheConfig } from 'base/js/localCache'
 
 import { userInfoApi } from 'api/User/user'
 import { getImgConfigApi } from 'api/Config/config'
+import { pageSongByCategoryApi } from 'api/Music/music'
 
 import 'base/style/import.css'
 import 'base/style/webkit.css'
@@ -26,7 +30,6 @@ import 'base/style/input.css'
 import 'base/style/short.css'
 import 'base/style/base.css'
 import 'font-awesome/css/font-awesome.css'
-
 
 class App extends Component {
 
@@ -40,7 +43,6 @@ class App extends Component {
     this.rediectLoginSubscribe = this.rediectLoginSubscribe.bind(this)
     PubSub.subscribe(global.userInfoRefreshSubscribe,this.userInfoRefreshSubscribe)
     PubSub.subscribe(global.rediectLoginSubscribe,this.rediectLoginSubscribe)
-
   }
 
   render() {
@@ -52,6 +54,11 @@ class App extends Component {
           {
             (this.props.player.palyStatus&&this.props.songs.songList.length>0)&&
             (<Player />)
+          }
+          {
+            <Live2DModel modelUrl="https://twenq.com/static/live2d/xuexiaoban/model.json" 
+              goHomeFn={this.goHomeFn.bind(this)}
+              openMusicFn={this.openMusicFn.bind(this)}/>
           }
       </div>
     );
@@ -106,6 +113,33 @@ class App extends Component {
   rediectLoginSubscribe(msg,pathname) {
     this.props.history.replace({ pathname:'/extra/login',state:{from : pathname } })
   }
+
+  goHomeFn() {
+    this.props.history.replace('/')
+  }
+
+  openMusicFn() {
+    if (this.props.player.palyStatus&&this.props.songs.songList.length>0) {
+      return
+    }
+    pageSongByCategoryApi(1,20,1,(res)=>{
+        if (res.data.code == 200) {
+          let result = res.data.data
+          this.props.songsActions.saveSongs({
+            songList: result,
+            defaultList: result,
+            currentIndex: 1,
+            currentSong: result[0],
+            listType: 1
+          })
+          this.props.playerActions.savePlayData({
+            palyStatus: true,
+            palyering: true,
+            fullScreen: true
+          })
+        }
+      })
+  }
 }
 
 function mapStateToProps(state) {
@@ -119,7 +153,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         userActions: bindActionCreators(userActions, dispatch),
-        imgConfigActions: bindActionCreators(imgConfigActions,dispatch)
+        imgConfigActions: bindActionCreators(imgConfigActions,dispatch),
+        songsActions: bindActionCreators(songsActions, dispatch),
+        playerActions: bindActionCreators(playerActions, dispatch)
     }
 }
 
@@ -127,3 +163,17 @@ function mapDispatchToProps(dispatch) {
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(App)
 )
+/*
+  {
+    this.props.children
+  }
+  {
+    (this.props.player.palyStatus&&this.props.songs.songList.length>0)&&
+    (<Player />)
+  }
+  {
+    <Live2DModel modelUrl="http://img.twenq.com/live2d/xuexiaoban/model.json" 
+      goHomeFn={this.goHomeFn.bind(this)}
+      openMusicFn={this.openMusicFn.bind(this)}/>
+  }
+*/

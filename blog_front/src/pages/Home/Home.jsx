@@ -23,7 +23,7 @@ class Home extends React.Component {
 	render() {
 		return (
 			<div id="Home" className="Home">
-				<DocumentTitle title="仟月的博客">
+				<DocumentTitle title="纤月的博客">
 	           		<HomeMain />
 	           </DocumentTitle>
         	</div>

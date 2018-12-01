@@ -52,7 +52,7 @@ class FixControl extends React.Component {
 			clearInterval(this.Bottomtimer)
 			let Toptarget = 0
 	        this.Toptimer = setInterval(()=>{
-	            let Topstep = (Toptarget - this.Topleader) / 5
+	            let Topstep = (Toptarget - this.Topleader) / 3
 	            Topstep = Topstep > 0 ?Math.ceil(Topstep):Math.floor(Topstep)
 	            this.Topleader = this.Topleader + Topstep
 	            window.scrollTo(0,this.Topleader)
@@ -70,7 +70,7 @@ class FixControl extends React.Component {
 			clearInterval(this.Bottomtimer)
 			this.Bottomtimer = setInterval(() => {
 				// 每次移动1/5
-				let BottomStep = this.Bottomleader / 5
+				let BottomStep = this.Bottomleader / 3
 				BottomStep = BottomStep > 0 ?Math.ceil(BottomStep):Math.floor(BottomStep)
 				this.Topleader = this.Topleader + BottomStep
 				window.scrollTo(0,this.Topleader)
