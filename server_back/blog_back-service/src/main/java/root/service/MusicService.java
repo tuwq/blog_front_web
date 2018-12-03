@@ -84,8 +84,8 @@ public class MusicService {
 		String musicPath = MD5Util.encryPassword(Integer.toString(fid)) + "_"+musicName;
 		qiNiuMusicService.cover(cover,coverPath);
 		qiNiuMusicService.music(music,musicPath);
-		song.setCover(coverPath);
-		song.setUrl(musicPath);
+		song.setCover(coverPath+"?v="+new Date().getTime());
+		song.setUrl(musicPath+"?v="+new Date().getTime());
 		songMapper.updateByPrimaryKeySelective(song);
 	}
 
@@ -208,7 +208,7 @@ public class MusicService {
 		String coverName = cover.getOriginalFilename();
 		String coverPath = MD5Util.encryPassword(Integer.toString(id)) + "_"+coverName;
 		qiNiuMusicService.cover(cover,coverPath);
-		song.setCover(coverPath);
+		song.setCover(coverPath+"?v="+new Date().getTime());
 		songMapper.updateByPrimaryKeySelective(song);
 	}
 
@@ -234,7 +234,7 @@ public class MusicService {
 		String musicName = music.getOriginalFilename();		
 		String musicPath = MD5Util.encryPassword(Integer.toString(id)) + "_"+musicName;
 		qiNiuMusicService.music(music,musicPath);
-		song.setUrl(musicPath);
+		song.setUrl(musicPath+"?v="+new Date().getTime());
 		songMapper.updateByPrimaryKeySelective(song);
 	}
 

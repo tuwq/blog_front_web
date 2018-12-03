@@ -41,8 +41,10 @@ class App extends Component {
     this.loadConfig = this.loadConfig.bind(this)
     this.userInfoRefreshSubscribe = this.userInfoRefreshSubscribe.bind(this)
     this.rediectLoginSubscribe = this.rediectLoginSubscribe.bind(this)
+    this.isPC = this.isPC.bind(this)
     PubSub.subscribe(global.userInfoRefreshSubscribe,this.userInfoRefreshSubscribe)
     PubSub.subscribe(global.rediectLoginSubscribe,this.rediectLoginSubscribe)
+    this.PCFlag = false
   }
 
   render() {
@@ -56,9 +58,10 @@ class App extends Component {
             (<Player />)
           }
           {
-            <Live2DModel modelUrl="https://twenq.com/static/live2d/xuexiaoban/model.json" 
+            this.PCFlag&&
+            (<Live2DModel modelUrl="https://twenq.com/static/live2d/xuexiaoban/model.json" 
               goHomeFn={this.goHomeFn.bind(this)}
-              openMusicFn={this.openMusicFn.bind(this)}/>
+              openMusicFn={this.openMusicFn.bind(this)}/>)
           }
       </div>
     );
@@ -67,6 +70,7 @@ class App extends Component {
   componentDidMount() {
      this.userInfo()
      this.loadConfig()
+     this.PCFlag = this.isPC()
   }
 
   componentWillUnmount() {
@@ -104,6 +108,24 @@ class App extends Component {
 
   closeMenu() {
     PubSub.publish(global.userMenuSubscribe);
+  }
+
+  isPC() {
+    var userAgentInfo = navigator.userAgent
+    var mobileAgents = [ "Android", "iPhone", "SymbianOS", "Windows Phone", "iPad","iPod"];
+    //根据userAgent判断是否是手机
+    for (var v = 0; v < mobileAgents.length; v++) {
+        if (userAgentInfo.indexOf(mobileAgents[v]) > 0) {
+            return false
+        }
+    }
+    var screen_width = window.screen.width;
+    var screen_height = window.screen.height;
+    //根据屏幕分辨率判断是否是手机
+    if(screen_width < 800 && screen_height < 800){
+       return false
+    }   
+    return true
   }
 
   userInfoRefreshSubscribe(msg,data) {

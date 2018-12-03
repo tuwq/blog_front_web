@@ -93,6 +93,12 @@ class Live2DModel extends React.Component {
 
 	initLive2d() {
 		var self = this
+		var $live_ico_box = $('.Live2DModel .live_ico_box')
+		$('.Live2DModel #landlord').hover(function(){
+			$live_ico_box.fadeIn(200)
+		},function(){
+			$live_ico_box.fadeOut(200)
+		})
 		$('#live2d-hideButton').on('click', function(){
 			if (self.settingData.AIFadeFlag) {
 				return false

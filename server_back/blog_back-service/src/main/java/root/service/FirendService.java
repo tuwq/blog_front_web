@@ -60,7 +60,7 @@ public class FirendService {
 		// fid.jpg
 		String avatar = MD5Util.encryPassword(Integer.toString(fid)) + originName.substring(originName.lastIndexOf("."));
 		qiNiuIMGService.uploadFirendAvatar(file,avatar);
-		firend.setAvatar(avatar);
+		firend.setAvatar(avatar+"?v="+new Date().getTime());
 		firendMapper.updateByPrimaryKeySelective(firend);
 	}
 
@@ -98,7 +98,10 @@ public class FirendService {
 		String originName = file.getOriginalFilename();
 		String avatar = MD5Util.encryPassword(Integer.toString(id)) + originName.substring(originName.lastIndexOf("."));
 		qiNiuIMGService.uploadFirendAvatar(file,avatar);
-		return JsonResult.<String>success(avatar);
+		Firend friend = firendMapper.selectByPrimaryKey(id);
+		friend.setAvatar(avatar+"?v="+new Date().getTime());
+		firendMapper.updateByPrimaryKeySelective(friend);
+		return JsonResult.<String>success(avatar+"?v="+new Date().getTime());
 	}
 
 	@Transactional
@@ -113,7 +116,7 @@ public class FirendService {
 		if(ids.size()==0) {throw new CheckParamException("选择id","为空");}
 		ids.stream().forEach(id -> {
 			Firend firend = firendMapper.selectByPrimaryKey(id);
-			qiNiuIMGService.delFirendAvatar(firend.getAvatar());
+			// qiNiuIMGService.delFirendAvatar(firend.getAvatar());
 		});
 		firendMapper.delBatch(ids);
 	}

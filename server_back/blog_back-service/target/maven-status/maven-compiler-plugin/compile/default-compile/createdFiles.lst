@@ -1,0 +1,15 @@
+root\service\QiNiuMusicService.class
+root\service\FirendService.class
+root\service\QiNiuIMGService.class
+root\service\SysUserService.class
+root\service\CategoryService.class
+root\service\TokenService.class
+root\service\ArticleService.class
+root\service\StatisicService.class
+root\service\LoginService.class
+root\service\MusicService.class
+root\service\CommentService.class
+root\service\ConfigService.class
+root\service\MusicCategoryService.class
+root\service\UserManageService.class
+root\service\FileService.class

@@ -108,9 +108,6 @@ class Player extends React.Component {
 
     percentChangeFn(percent) {
     	this.$audio.current.currentTime = this.props.songs.currentSong.duration * percent
-    	if (!this.props.player.palyering) {
-    		this.togglePalying()
-    	}
     }
 
     format(interval) {
