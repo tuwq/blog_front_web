@@ -11,20 +11,38 @@
         overflow: hidden;
     }
     h2 {
-        display: inline;
+        width: 100%;
+        display: inline-block;
         margin: 7px 0 7px -5px;
         padding: 0 28px 0 10px;
         height: 34px;
-        background: #F57;
+        background: rgba(255,85,119,1);
         color: #fff;
         font-size: 18px;
         line-height: 33px;
+        text-align: center;
     }
     h3 {
-        font-size: 15px;
-        color:#7266ba;
+        font-size: 18px;
+        color: #fff;
+        background: rgba(178,34,34,.6);
+        padding: 10px 20px;
     }
     h4 {
+        color:#7266ba;
+        font-size: 16px;
+    }
+    h5 {
+        font-size: 14px;
+        border-color: #69bbea;
+        line-height: 16px;
+        border-left: 2px solid #69bbea;
+        background: rgba(105,187,234,.06);
+        color: #555;
+        padding: 10px 20px;
+        margin-bottom: 5px;
+    }
+    /* h5 {
         font-size: 15px;
         color: #34495e;
         margin-left: 5px;
@@ -45,9 +63,9 @@
             transition: all .24s;
             -webkit-font-smoothing: antialiased;
         }
-    }
-    h5 {
-        font-size: 13px;
+    } */
+    h6 {
+        font-size: 14px;
         color: #f05050;
         margin-left: 10px;
         margin-bottom: 5px;
@@ -68,13 +86,23 @@
             -webkit-font-smoothing: antialiased;
         }
     }
+    p {
+        margin: 18px 0;
+        font-size: 17px;
+        color: #34495e;
+    }
     em {
         color: #f05050;
-        font-style: italic;
+        font-style: bold;
+    }
+    img {
+        padding: 2px;
+        margin: 10px auto;
+        max-width: 100%;
     }
     ol {
         display: block;
-        margin: 0 0 18px 0px;
+        margin: 0 0 8px 0px;
         list-style: disc;
         li:before {
            color: #f57;
@@ -82,24 +110,25 @@
     }
     ul {
         display: block;
-        margin: 0 0 18px 0px;
+        margin: 0 0 8px 0px;
         list-style: disc;
         li:before {
            color: #16A085;
         }
     }
     li {
-        font-size: 15px;
-        margin-bottom: 6px;
+        font-size: 14px;
         border-bottom: 1px dashed #eaeaea;
         display: list-item;
         text-align: -webkit-match-parent;
+        padding: 10px 10px;
+        background: rgba(255,69,0,.06);
         &:before {
             margin: 0 8px;
             padding: 0 3px;
             border-radius: 50%;
             color: #F57;
-            content: "\f089";
+            content: "\F105";
             text-transform: none;
             font: normal normal normal 14px/1 FontAwesome;
             font-weight: 400;
@@ -111,19 +140,45 @@
             -webkit-font-smoothing: antialiased;
         }
     }
-    hr {
+    table {
+        border: 1px solid #ffffff;
+        color: rgb(0,0,0);
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        background-color: rgb(255,255,255);
         width: 100%;
-        border-bottom: 1px solid #e36209;
-    }
-    p {
-        margin: 1.5rem 0;
-        font-size: 16px;
-        color: #34495e;
-    }
-    img {
-        padding: 2px;
-        margin: 10px auto;
-        max-width: 100%;
+        overflow: auto;
+        display: table;
+        font-size: 14px;
+        border-spacing: 0;
+        border-collapse: collapse;
+        word-break: normal;
+        word-wrap: normal;
+        margin-bottom: 1px;
+        thead {
+        
+        }
+        tbody {
+            display: table-row-group;
+            vertical-align: middle;
+            border-color: inherit;
+            color: rgb(0,0,0);
+            font-family: Verdana, Arial, Helvetica, sans-serif;
+            font-size: 14px;
+        }
+        tr {
+            border-top: 1px solid #ccc;
+            background-color: #fff;
+        }
+        table tr:nth-child(2n) {
+            background-color: #f8f8f8;
+        }
+        td,th {
+            border-color: #C0C0C0;
+            border-collapse: collapse;
+            padding: 3px;
+            border: 1px solid #ddd;
+        }
     }
     button {
         margin-bottom: 5px;
