@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 127.0.0.1
-Source Server Version : 80011
-Source Host           : localhost:3306
+Source Server         : 94.191.102.101
+Source Server Version : 50724
+Source Host           : 94.191.102.101:3306
 Source Database       : blog
 
 Target Server Type    : MYSQL
-Target Server Version : 80011
+Target Server Version : 50724
 File Encoding         : 65001
 
-Date: 2018-08-23 14:48:16
+Date: 2018-12-20 12:41:26
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -21,10 +21,10 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `access`;
 CREATE TABLE `access` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `ip_address` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '用户的ip地址',
+  `ip_address` varchar(50) NOT NULL DEFAULT '' COMMENT '用户的ip地址',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='访问表,用于记录访问量';
+) ENGINE=InnoDB AUTO_INCREMENT=399 DEFAULT CHARSET=utf8 COMMENT='访问表,用于记录访问量';
 
 -- ----------------------------
 -- Table structure for articale
@@ -34,8 +34,8 @@ CREATE TABLE `articale` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '文章主键id',
   `user_id` int(11) NOT NULL COMMENT '文章属于的前台用户id',
   `title` varchar(50) NOT NULL DEFAULT '' COMMENT '文章的标题',
-  `face_cover` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '文章的封面',
-  `content` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '文章的内容,存放markdown内容',
+  `face_cover` varchar(255) NOT NULL DEFAULT '' COMMENT '文章的封面',
+  `content` text NOT NULL COMMENT '文章的内容,存放markdown内容',
   `praise` int(10) NOT NULL DEFAULT '0' COMMENT '文章的网络点赞数,游客也可以点赞',
   `comment_sum` int(5) NOT NULL DEFAULT '0' COMMENT '文章评论数量,用户评论后由消息队列进行更新',
   `browse_sum` int(10) NOT NULL DEFAULT '0' COMMENT '文章访问数量,查看文章后由消息队列进行更新',
@@ -46,7 +46,7 @@ CREATE TABLE `articale` (
   `approval` int(11) NOT NULL DEFAULT '0' COMMENT '文章的赞数',
   `oppose` int(11) NOT NULL DEFAULT '0' COMMENT '文章的踩数',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='文章的数据表';
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8 COMMENT='文章的数据表';
 
 -- ----------------------------
 -- Table structure for articale_category
@@ -57,7 +57,7 @@ CREATE TABLE `articale_category` (
   `articale_id` int(11) NOT NULL COMMENT '文章id',
   `category_id` int(11) NOT NULL COMMENT '分类id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=234 DEFAULT CHARSET=utf8 COMMENT='处理分类与文章关系的数据表,文章需要通过该表获得分类信息';
+) ENGINE=InnoDB AUTO_INCREMENT=1486 DEFAULT CHARSET=utf8 COMMENT='处理分类与文章关系的数据表,文章需要通过该表获得分类信息';
 
 -- ----------------------------
 -- Table structure for articale_user
@@ -81,7 +81,7 @@ DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '分类主键id',
   `name` varchar(20) NOT NULL DEFAULT '' COMMENT '分类的名称',
-  `desc` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '分类的描述',
+  `desc` varchar(255) NOT NULL DEFAULT '' COMMENT '分类的描述',
   `articale_sum` int(10) NOT NULL DEFAULT '0' COMMENT '该分类的文章数量,由消息队列更新',
   `comment_sum` int(10) NOT NULL DEFAULT '0' COMMENT '分类的评论数量,由定时任务进行更新',
   PRIMARY KEY (`id`)
@@ -93,7 +93,7 @@ CREATE TABLE `category` (
 DROP TABLE IF EXISTS `comment`;
 CREATE TABLE `comment` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '评论主键id',
-  `content` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '评论的内容,直接存放的文本,后续可以使用markdown',
+  `content` text NOT NULL COMMENT '评论的内容,直接存放的文本,后续可以使用markdown',
   `user_id` int(11) NOT NULL COMMENT '评论用户id',
   `articale_id` int(11) NOT NULL COMMENT '评论文章id',
   `parent_id` int(11) NOT NULL DEFAULT '0' COMMENT '父评论id,是否评论嵌套,评论哪个评论',
@@ -103,7 +103,7 @@ CREATE TABLE `comment` (
   `approval` int(20) NOT NULL DEFAULT '0' COMMENT '评论的赞数',
   `oppose` int(20) NOT NULL DEFAULT '0' COMMENT '评论的踩数',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='评论的数据表,添加parent_id和root_id字段使其支持评论嵌套';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='评论的数据表,添加parent_id和root_id字段使其支持评论嵌套';
 
 -- ----------------------------
 -- Table structure for comment_user
@@ -126,15 +126,15 @@ CREATE TABLE `comment_user` (
 DROP TABLE IF EXISTS `firend`;
 CREATE TABLE `firend` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '友链主键id',
-  `nickname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '昵称',
-  `website` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '网站',
-  `avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '头像',
-  `desc` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '描述',
+  `nickname` varchar(255) NOT NULL DEFAULT '' COMMENT '昵称',
+  `website` varchar(255) NOT NULL DEFAULT '' COMMENT '网站',
+  `avatar` varchar(255) NOT NULL DEFAULT '' COMMENT '头像',
+  `desc` varchar(255) NOT NULL DEFAULT '' COMMENT '描述',
   `weight` int(11) NOT NULL DEFAULT '0' COMMENT '权重',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for front_img_config
@@ -143,8 +143,8 @@ DROP TABLE IF EXISTS `front_img_config`;
 CREATE TABLE `front_img_config` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '前台图片配置主键id',
   `belong` int(11) NOT NULL DEFAULT '0' COMMENT '属于的位置:1.分类页面,2.搜索页面,3,文章页面,4.用户页面,5.登录页面,6.个人logo,7.轮播页面',
-  `desc` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '类型的描述',
-  `img` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '图片的地址',
+  `desc` varchar(255) NOT NULL DEFAULT '' COMMENT '类型的描述',
+  `img` varchar(255) NOT NULL DEFAULT '' COMMENT '图片的地址',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建的时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新的时间',
   PRIMARY KEY (`id`)
@@ -156,11 +156,11 @@ CREATE TABLE `front_img_config` (
 DROP TABLE IF EXISTS `song`;
 CREATE TABLE `song` (
   `id` int(255) unsigned NOT NULL AUTO_INCREMENT COMMENT '歌曲主键',
-  `song_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '歌名',
-  `singer` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '歌手',
-  `lyric` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '歌词',
-  `cover` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '歌曲封面',
-  `url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '歌曲地址',
+  `song_name` varchar(255) NOT NULL DEFAULT '' COMMENT '歌名',
+  `singer` varchar(255) NOT NULL DEFAULT '' COMMENT '歌手',
+  `lyric` text NOT NULL COMMENT '歌词',
+  `cover` varchar(255) NOT NULL DEFAULT '' COMMENT '歌曲封面',
+  `url` varchar(255) NOT NULL DEFAULT '' COMMENT '歌曲地址',
   `load_sum` int(11) NOT NULL DEFAULT '0' COMMENT '下载数量',
   `praise` int(11) NOT NULL DEFAULT '0' COMMENT '喜欢数',
   `weight` int(11) NOT NULL DEFAULT '0' COMMENT '权重',
@@ -168,7 +168,7 @@ CREATE TABLE `song` (
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=163 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for song_bind_category
@@ -181,7 +181,7 @@ CREATE TABLE `song_bind_category` (
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=424 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for song_category
@@ -189,11 +189,11 @@ CREATE TABLE `song_bind_category` (
 DROP TABLE IF EXISTS `song_category`;
 CREATE TABLE `song_category` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '歌曲分类主键id',
-  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '分类名称',
-  `desc` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '分类描述',
+  `name` varchar(255) NOT NULL COMMENT '分类名称',
+  `desc` varchar(255) NOT NULL DEFAULT '' COMMENT '分类描述',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -202,11 +202,11 @@ DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '后台用户主键id',
   `user_id` int(11) NOT NULL COMMENT '前台的用户id',
-  `username` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '用户名称,用于登陆,后台用户没有昵称',
-  `password` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '用户密码',
+  `username` varchar(20) NOT NULL DEFAULT '' COMMENT '用户名称,用于登陆,后台用户没有昵称',
+  `password` varchar(50) NOT NULL DEFAULT '' COMMENT '用户密码',
   `avatar` varchar(100) NOT NULL DEFAULT '' COMMENT '后台用户的头像',
   `operate_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '最后一次操作的时间',
-  `operate_ip` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '最后一次操作的ip',
+  `operate_ip` varchar(50) NOT NULL DEFAULT '' COMMENT '最后一次操作的ip',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '用户创建的时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='后台用户的数据表';
@@ -217,27 +217,27 @@ CREATE TABLE `sys_user` (
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户主键id',
-  `username` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '用户登陆名称',
-  `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '用户登陆,找回密码,激活状态的邮箱',
-  `password` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '用户登陆密码',
-  `nickname` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '用户昵称,第一次为用户注册时的登陆名称',
-  `desc` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '用户个人描述',
-  `website` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '用户的网站',
-  `avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '用户的头像地址',
+  `username` varchar(20) NOT NULL DEFAULT '' COMMENT '用户登陆名称',
+  `email` varchar(50) NOT NULL DEFAULT '' COMMENT '用户登陆,找回密码,激活状态的邮箱',
+  `password` varchar(50) NOT NULL DEFAULT '' COMMENT '用户登陆密码',
+  `nickname` varchar(20) NOT NULL DEFAULT '' COMMENT '用户昵称,第一次为用户注册时的登陆名称',
+  `desc` varchar(255) NOT NULL DEFAULT '' COMMENT '用户个人描述',
+  `website` varchar(50) NOT NULL DEFAULT '' COMMENT '用户的网站',
+  `avatar` varchar(255) NOT NULL DEFAULT '' COMMENT '用户的头像地址',
   `praise` int(255) NOT NULL DEFAULT '0' COMMENT '用户被赞数,游客也可以点击',
   `status` int(5) NOT NULL DEFAULT '0' COMMENT '用户的状态.0:正常,1:被禁封',
-  `activation_code` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '邮件激活的密钥',
+  `activation_code` varchar(255) NOT NULL DEFAULT '' COMMENT '邮件激活的密钥',
   `activation_status` int(5) NOT NULL DEFAULT '0' COMMENT '用户注册后的激活状态.0:未激活,1:激活',
   `follower_sum` int(100) NOT NULL DEFAULT '0' COMMENT '用户的关注数量,通过user_follow数据表获得',
   `fans_sum` int(100) NOT NULL DEFAULT '0' COMMENT '用户的粉丝数量,通过user_follow数据表获得',
   `comment_sum` int(100) NOT NULL DEFAULT '0' COMMENT '用户的评论数量,评论后由消息队列进行更新',
   `articale_sum` int(100) unsigned NOT NULL DEFAULT '0' COMMENT '用户的文章数量,添加文章后更新',
-  `before_login_ip` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '用户上次登陆的ip',
-  `now_login_ip` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '用户本次登陆的ip',
+  `before_login_ip` varchar(20) NOT NULL DEFAULT '' COMMENT '用户上次登陆的ip',
+  `now_login_ip` varchar(20) NOT NULL DEFAULT '' COMMENT '用户本次登陆的ip',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '用户创建的时间',
   `operate_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '用户最后一次操作的时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='用户的数据表';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='用户的数据表';
 
 -- ----------------------------
 -- Table structure for user_follow
@@ -249,7 +249,7 @@ CREATE TABLE `user_follow` (
   `target_id` int(11) NOT NULL COMMENT '目标的id',
   `follow_status` int(10) NOT NULL DEFAULT '0' COMMENT '关注的状态.1:关注,2:不关注',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户关注关系的数据表';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='用户关注关系的数据表';
 
 -- ----------------------------
 -- Table structure for user_initiate_dynamic
@@ -263,7 +263,7 @@ CREATE TABLE `user_initiate_dynamic` (
   `initiate_user_id` int(11) NOT NULL COMMENT '动态发起者的id',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建动态的时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='动态数据表.用于监视用户的动作';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='动态数据表.用于监视用户的动作';
 
 -- ----------------------------
 -- Table structure for user_receive_dynamic
@@ -276,4 +276,4 @@ CREATE TABLE `user_receive_dynamic` (
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建动态的时间',
   `visit` int(11) NOT NULL DEFAULT '0' COMMENT '用户是否看过这条动态,0:没看过,1:看过',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
