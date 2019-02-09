@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 94.191.102.101
-Source Server Version : 50724
-Source Host           : 94.191.102.101:3306
+Source Server         : 127.0.0.1
+Source Server Version : 80011
+Source Host           : localhost:3306
 Source Database       : blog
 
 Target Server Type    : MYSQL
-Target Server Version : 50724
+Target Server Version : 80011
 File Encoding         : 65001
 
-Date: 2018-12-20 12:41:26
+Date: 2019-02-09 19:33:05
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -24,7 +24,7 @@ CREATE TABLE `access` (
   `ip_address` varchar(50) NOT NULL DEFAULT '' COMMENT '用户的ip地址',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=399 DEFAULT CHARSET=utf8 COMMENT='访问表,用于记录访问量';
+) ENGINE=InnoDB AUTO_INCREMENT=446 DEFAULT CHARSET=utf8 COMMENT='访问表,用于记录访问量';
 
 -- ----------------------------
 -- Table structure for articale
@@ -57,7 +57,7 @@ CREATE TABLE `articale_category` (
   `articale_id` int(11) NOT NULL COMMENT '文章id',
   `category_id` int(11) NOT NULL COMMENT '分类id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1486 DEFAULT CHARSET=utf8 COMMENT='处理分类与文章关系的数据表,文章需要通过该表获得分类信息';
+) ENGINE=InnoDB AUTO_INCREMENT=1516 DEFAULT CHARSET=utf8 COMMENT='处理分类与文章关系的数据表,文章需要通过该表获得分类信息';
 
 -- ----------------------------
 -- Table structure for articale_user
@@ -73,6 +73,31 @@ CREATE TABLE `articale_user` (
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新关系的时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文章用户关系的数据表,扩展后可添加点赞之类的字段';
+
+-- ----------------------------
+-- Table structure for article_bind_article_tag
+-- ----------------------------
+DROP TABLE IF EXISTS `article_bind_article_tag`;
+CREATE TABLE `article_bind_article_tag` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '文章与文章标签绑定的id',
+  `article_tag_id` int(11) NOT NULL COMMENT '文章标签的id',
+  `article_id` int(11) NOT NULL COMMENT '文章的id',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for article_tag
+-- ----------------------------
+DROP TABLE IF EXISTS `article_tag`;
+CREATE TABLE `article_tag` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '文章标签的名称',
+  `desc` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '文章标签的描述',
+  `article_sum` int(11) NOT NULL COMMENT '文章标签的文章数量',
+  `comment_sum` int(11) NOT NULL COMMENT '文章标签的评论数量',
+  `weight` int(11) NOT NULL COMMENT '文章标签的排序权重',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='文章标签表';
 
 -- ----------------------------
 -- Table structure for category
