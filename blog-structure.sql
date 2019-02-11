@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80011
 File Encoding         : 65001
 
-Date: 2019-02-10 22:46:11
+Date: 2019-02-11 22:59:10
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -124,7 +124,7 @@ CREATE TABLE `comment` (
   `approval` int(20) NOT NULL DEFAULT '0' COMMENT '评论的赞数',
   `oppose` int(20) NOT NULL DEFAULT '0' COMMENT '评论的踩数',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='评论的数据表,添加parent_id和root_id字段使其支持评论嵌套';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='评论的数据表,添加parent_id和root_id字段使其支持评论嵌套';
 
 -- ----------------------------
 -- Table structure for friend
@@ -237,7 +237,7 @@ CREATE TABLE `user` (
   `follower_sum` int(100) NOT NULL DEFAULT '0' COMMENT '用户的关注数量,通过user_follow数据表获得',
   `fans_sum` int(100) NOT NULL DEFAULT '0' COMMENT '用户的粉丝数量,通过user_follow数据表获得',
   `comment_sum` int(100) NOT NULL DEFAULT '0' COMMENT '用户的评论数量,评论后由消息队列进行更新',
-  `articale_sum` int(100) unsigned NOT NULL DEFAULT '0' COMMENT '用户的文章数量,添加文章后更新',
+  `article_sum` int(100) unsigned NOT NULL DEFAULT '0' COMMENT '用户的文章数量,添加文章后更新',
   `before_login_ip` varchar(20) NOT NULL DEFAULT '' COMMENT '用户上次登陆的ip',
   `now_login_ip` varchar(20) NOT NULL DEFAULT '' COMMENT '用户本次登陆的ip',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '用户创建的时间',
@@ -269,7 +269,7 @@ CREATE TABLE `user_initiate_dynamic` (
   `initiate_user_id` int(11) NOT NULL COMMENT '动态发起者的id',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建动态的时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='动态数据表.用于监视用户的动作';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='动态数据表.用于监视用户的动作';
 
 -- ----------------------------
 -- Table structure for user_receive_dynamic
