@@ -3,11 +3,11 @@ package root.dto;
 import java.util.List;
 
 import lombok.Data;
-import root.model.Articale;
+import root.model.Article;
 import root.util.TimeUtil;
 
 @Data
-public class ArticaleDto extends Articale{
+public class ArticaleDto extends Article{
 	// 分类
 	private String categoryName;
 	// 分类id数组

@@ -30,8 +30,8 @@
   	s.load_sum load_sum,s.praise praise,s.weight weight,s.duration duration,s.create_time create_time,
   	s.update_time update_time
 	FROM song s
-	LEFT JOIN song_bind_category sbc ON sbc.song_id = s.id
-	LEFT JOIN song_category sc ON sc.id = sbc.song_category_id
+	LEFT JOIN song_bind_song_category sbsc ON sbsc.song_id = s.id
+	LEFT JOIN song_category sc ON sc.id = sbsc.song_category_id
 	<where>
 		<if test="keyword!=null and keyword!= ''">
 			and (s.song_name like concat('%', #{keyword}, '%') or s.singer like concat('%', #{keyword}, '%') or sc.`name` like concat('%', #{keyword}, '%'))
@@ -45,8 +45,8 @@
   <select id="countByKeyword" parameterType="map" resultType="long">
   	SELECT count(DISTINCT(s.id))
 	FROM song s
-	LEFT JOIN song_bind_category sbc ON sbc.song_id = s.id
-	LEFT JOIN song_category sc ON sc.id = sbc.song_category_id
+	LEFT JOIN song_bind_song_category sbsc ON sbsc.song_id = s.id
+	LEFT JOIN song_category sc ON sc.id = sbsc.song_category_id
 	<where>
 		<if test="keyword!=null and keyword!= ''">
 			and (s.song_name like concat('%', #{keyword}, '%') or s.singer like concat('%', #{keyword}, '%') or sc.`name` like concat('%', #{keyword}, '%'))

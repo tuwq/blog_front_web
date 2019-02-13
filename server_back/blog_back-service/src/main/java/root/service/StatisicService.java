@@ -13,7 +13,7 @@ import root.constant.RedisCode;
 import root.dto.EveryDayDto;
 import root.dto.StatisicDto;
 import root.mapper.AccessMapper;
-import root.mapper.ArticaleMapper;
+import root.mapper.ArticleMapper;
 import root.mapper.CommentMapper;
 import root.mapper.UserMapper;
 import root.redis.RedisOperator;
@@ -23,7 +23,7 @@ import root.util.TimeUtil;
 public class StatisicService {
 	
 	@Resource
-	private ArticaleMapper articaleMapper;
+	private ArticleMapper articaleMapper;
 	@Resource
 	private CommentMapper commentMapper;
 	@Resource

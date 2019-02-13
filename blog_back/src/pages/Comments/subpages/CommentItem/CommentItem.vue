@@ -1,6 +1,6 @@
 <template>
   <div class="CommentItem">
-      <span>{{item.articale.title}}</span>
+      <span>{{item.article.title}}</span>
       <span>{{item.user.nickname}}</span>
       <span>{{item.content}}</span>
       <span>{{item.createTimeString}}</span>

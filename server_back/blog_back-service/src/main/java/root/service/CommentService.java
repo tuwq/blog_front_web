@@ -14,11 +14,9 @@ import com.google.common.collect.Lists;
 
 import root.beans.PageModel;
 import root.beans.PageResult;
-import root.dto.ArticaleDto;
 import root.dto.CommentDto;
 import root.exception.CheckParamException;
 import root.mapper.CommentMapper;
-import root.mapper.CommentUserMapper;
 import root.mapper.UserInitiateDynamicMapper;
 import root.mapper.UserReceiveDynamicMapper;
 import root.model.Comment;
@@ -32,8 +30,6 @@ public class CommentService {
 
 	@Resource
 	private CommentMapper commentMapper;
-	@Resource
-	private CommentUserMapper commentUserMapper;
 	@Resource
 	private UserInitiateDynamicMapper initiateDynamicMapper;
 	@Resource
@@ -101,7 +97,6 @@ public class CommentService {
 		List<Integer> ids = strList.stream().map(str->Integer.parseInt(str)).collect(Collectors.toList());
 		if(ids.size()==0) {throw new CheckParamException("选择id","为空");}
 		commentMapper.delBatch(ids);
-		commentUserMapper.delBatch(ids);
 		List<Integer> initiateIds = initiateDynamicMapper.getIdsByCommentIds(ids);
 		initiateDynamicMapper.delBatch(initiateIds);
 		receiveDynamicMapper.delBatchByInitiateIds(initiateIds);

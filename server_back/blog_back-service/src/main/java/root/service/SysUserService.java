@@ -9,8 +9,8 @@ import root.dto.ArticaleDto;
 import root.dto.SysUserDto;
 import root.exception.TokenException;
 import root.mapper.SysUserMapper;
-import root.model.Articale;
-import root.model.Category;
+import root.model.Article;
+import root.model.ArticleCategory;
 import root.model.SysUser;
 import root.util.DtoUtil;
 

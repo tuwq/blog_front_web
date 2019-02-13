@@ -4,8 +4,7 @@ import java.util.List;
 
 
 import lombok.Data;
-import root.model.Articale;
-import root.model.Articale.ArticaleBuilder;
+import root.model.Article;
 
 @Data
 public class PageModel {

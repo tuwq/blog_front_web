@@ -21,12 +21,12 @@ import root.dto.ArticaleDto;
 import root.dto.FirendDto;
 import root.dto.SongDto;
 import root.exception.CheckParamException;
-import root.mapper.SongBindCategoryMapper;
+import root.mapper.SongBindSongCategoryMapper;
 import root.mapper.SongCategoryMapper;
 import root.mapper.SongMapper;
-import root.model.Category;
+import root.model.ArticleCategory;
 import root.model.Song;
-import root.model.SongBindCategory;
+import root.model.SongBindSongCategory;
 import root.model.SongCategory;
 import root.param.MusicParam;
 import root.param.PageParam;
@@ -40,7 +40,7 @@ public class MusicService {
 	@Resource
 	private SongMapper songMapper;
 	@Resource
-	private SongBindCategoryMapper songBindCategoryMapper;
+	private SongBindSongCategoryMapper songBindCategoryMapper;
 	@Resource
 	private SongCategoryMapper songCategoryMapper;
 	@Resource
@@ -68,9 +68,9 @@ public class MusicService {
 			.singer(param.getSinger()).lyric(param.getLyric())
 			.weight(param.getWeight()).duration(param.getDuration()).build();
 		songMapper.insertSelective(song);
-		List<SongBindCategory> sbinList = Lists.newArrayList();
+		List<SongBindSongCategory> sbinList = Lists.newArrayList();
 		param.getCategoryNames().stream().forEach( categoryId -> {
-			SongBindCategory sbin = SongBindCategory.builder()
+			SongBindSongCategory sbin = SongBindSongCategory.builder()
 					.songId(song.getId()).songCategoryId(categoryId)
 					.createTime(new Date()).updateTime(new Date()).build();
 			sbinList.add(sbin);
@@ -176,9 +176,9 @@ public class MusicService {
 		songMapper.updateByPrimaryKeySelective(song);
 		songBindCategoryMapper.delBatch(Lists.newArrayList(param.getId()));
 		
-		List<SongBindCategory> sbinList = Lists.newArrayList();
+		List<SongBindSongCategory> sbinList = Lists.newArrayList();
 		param.getCategoryNames().stream().forEach( categoryId -> {
-			SongBindCategory sbin = SongBindCategory.builder()
+			SongBindSongCategory sbin = SongBindSongCategory.builder()
 					.songId(param.getId()).songCategoryId(categoryId)
 					.createTime(new Date()).updateTime(new Date()).build();
 			sbinList.add(sbin);

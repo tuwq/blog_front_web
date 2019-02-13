@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="root.mapper.FirendMapper" >
-  <resultMap id="BaseResultMap" type="root.model.Firend" >
+<mapper namespace="root.mapper.FriendMapper" >
+  <resultMap id="BaseResultMap" type="root.model.Friend" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="nickname" property="nickname" jdbcType="VARCHAR" />
     <result column="website" property="website" jdbcType="VARCHAR" />
@@ -15,21 +15,22 @@
     id, nickname, website, avatar, `desc`, weight, create_time, update_time
   </sql>
   
+  
   <select id="countById" parameterType="map" resultType="int">
   	SELECT count(1)
-  	FROM firend
+  	FROM friend
   	WHERE id = #{id}
   </select>
   
   <select id="info" parameterType="map" resultMap="BaseResultMap">
   	SELECT <include refid="Base_Column_List" />
-  	FROM firend
+  	FROM friend
   	WHERE id = #{id}
   </select>
   
   <delete id="delBatch" parameterType="map">
   	DELETE 
-  	FROM firend
+  	FROM friend
   	WHERE id in
   	<foreach collection="ids" item="id" separator="," index="index" open="(" close=")">
 		#{id}
@@ -38,37 +39,36 @@
   
   <select id="countAll" resultType="long">
   	SELECT count(1)
-  	FROM firend
+  	FROM friend
   </select>
   
   <select id="page" parameterType="map" resultMap="BaseResultMap">
   	SELECT <include refid="Base_Column_List" />
-  	FROM firend
+  	FROM friend
   	ORDER BY create_time desc
   	LIMIT #{skip},#{pageSize}
   </select>
   
-  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from firend
+    from friend
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from firend
+    delete from friend
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="root.model.Firend" >
-    insert into firend (id, nickname, website, 
+  <insert id="insert" parameterType="root.model.Friend" >
+    insert into friend (id, nickname, website, 
       avatar, `desc`, weight, 
       create_time, update_time)
     values (#{id,jdbcType=INTEGER}, #{nickname,jdbcType=VARCHAR}, #{website,jdbcType=VARCHAR}, 
       #{avatar,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR}, #{weight,jdbcType=INTEGER}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="root.model.Firend" keyProperty="id" useGeneratedKeys="true">
-    insert into firend
+  <insert id="insertSelective" parameterType="root.model.Friend" keyProperty="id" useGeneratedKeys="true">
+    insert into friend
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -122,8 +122,8 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="root.model.Firend" >
-    update firend
+  <update id="updateByPrimaryKeySelective" parameterType="root.model.Friend" >
+    update friend
     <set >
       <if test="nickname != null" >
         nickname = #{nickname,jdbcType=VARCHAR},
@@ -149,8 +149,8 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="root.model.Firend" >
-    update firend
+  <update id="updateByPrimaryKey" parameterType="root.model.Friend" >
+    update friend
     set nickname = #{nickname,jdbcType=VARCHAR},
       website = #{website,jdbcType=VARCHAR},
       avatar = #{avatar,jdbcType=VARCHAR},

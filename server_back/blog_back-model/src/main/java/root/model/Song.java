@@ -36,7 +36,7 @@ public class Song {
     private String lyric;
     
     // 歌曲分类信息
-    private List<SongCategory> SongCategoryList;
+    private List<SongCategory> songCategoryList;
 
     public Integer getId() {
         return id;
@@ -135,10 +135,11 @@ public class Song {
     }
 
 	public List<SongCategory> getSongCategoryList() {
-		return SongCategoryList;
+		return songCategoryList;
 	}
 
 	public void setSongCategoryList(List<SongCategory> songCategoryList) {
-		SongCategoryList = songCategoryList;
+		this.songCategoryList = songCategoryList;
 	}
+    
 }

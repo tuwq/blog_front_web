@@ -27,7 +27,7 @@ class SiderBarCommentItem extends React.Component {
                      <Link to={'/user/'+this.props.item.user.id} className="nickname">{this.props.item.user.nickname}</Link>
             			<span className="tip">&nbsp;评论于&nbsp;</span>
          			</div>
-                  <Link to={'/article/'+this.props.item.articale.id} className="articleName">{this.props.item.articale.title}</Link>
+                  <Link to={'/article/'+this.props.item.article.id} className="articleName">{this.props.item.article.title}</Link>
          		</div>
          		<div className="CommentContent">
                   {this.props.item.content}

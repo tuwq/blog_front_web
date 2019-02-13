@@ -25,15 +25,14 @@ import root.constant.ResultCode;
 import root.dto.ArticaleDto;
 import root.exception.CheckParamException;
 import root.exception.TokenException;
-import root.mapper.ArticaleCategoryMapper;
-import root.mapper.ArticaleMapper;
-import root.mapper.ArticaleUserMapper;
-import root.mapper.CategoryMapper;
+import root.mapper.ArticleBindArticleCategoryMapper;
+import root.mapper.ArticleMapper;
+import root.mapper.ArticleCategoryMapper;
 import root.mapper.SysUserMapper;
 import root.mapper.UserMapper;
-import root.model.Articale;
-import root.model.ArticaleCategory;
-import root.model.Category;
+import root.model.Article;
+import root.model.ArticleBindArticleCategory;
+import root.model.ArticleCategory;
 import root.model.User;
 import root.param.ArticleParam;
 import root.param.PageParam;
@@ -47,13 +46,11 @@ import root.util.ValidatorUtil;
 public class ArticleService {
 	
 	@Resource
-	private ArticaleMapper articaleMapper;
+	private ArticleMapper articaleMapper;
 	@Resource
-	private ArticaleCategoryMapper articaleCategoryMapper;
+	private ArticleBindArticleCategoryMapper articaleCategoryMapper;
 	@Resource
-	private ArticaleUserMapper articaleUserMapper;
-	@Resource
-	private CategoryMapper categoryMapper;
+	private ArticleCategoryMapper categoryMapper;
 	@Resource
 	private TokenService tokenService;
 	@Resource
@@ -92,7 +89,7 @@ public class ArticleService {
 			throw new CheckParamException("该后台用户","没有前台账号");
 		}
 		userMapper.increaseArtSum(frontId);
-		Articale articale = Articale.builder()
+		Article articale = Article.builder()
 		.userId(frontId)
 		.title(param.getTitle())
 		.weight(param.getWeight())
@@ -103,10 +100,10 @@ public class ArticleService {
 		.build();
 		articaleMapper.insertSelective(articale);
 		int articaleId = articale.getId();
-		List<ArticaleCategory> collect = param.getCategoryNames().stream().map( categoryId -> 
-			 ArticaleCategory.builder()
-			.articaleId(articaleId)
-			.categoryId(categoryId)
+		List<ArticleBindArticleCategory> collect = param.getCategoryNames().stream().map( categoryId -> 
+			 ArticleBindArticleCategory.builder()
+			.articleId(articaleId)
+			.articleCategoryId(categoryId)
 			.build()
 		).collect(Collectors.toList());
 		articaleCategoryMapper.insertBatch(collect);
@@ -137,17 +134,17 @@ public class ArticleService {
 		ValidatorUtil.check(param);
 		Long total = articaleMapper.countAll();
 		param.buildSkip();
-		List<Articale> data = articaleMapper.page(param.getPageSize(),param.getSkip());
+		List<Article> data = articaleMapper.page(param.getPageSize(),param.getSkip());
 		List<Integer> ids = data.stream().map(item -> item.getId()).collect(Collectors.toList());
 		for (int i = 0; i< ids.size();i++ ) {
-			List<Category> cateList = categoryMapper.getArtCategoryListById(ids.get(i));
-			data.get(i).setCategoryList(cateList);
+			List<ArticleCategory> cateList = categoryMapper.getArtCategoryListById(ids.get(i));
+			data.get(i).setArticleCategoryList(cateList);
 		}
 		List<ArticaleDto> dtoData = data.stream().map(item -> 
 			DtoUtil.adapt(new ArticaleDto(), item)
 		).collect(Collectors.toList());
 		dtoData.forEach(dto -> {
-			List<String> cateNameList = dto.getCategoryList().stream().map(item -> item.getName()).collect(Collectors.toList());
+			List<String> cateNameList = dto.getArticleCategoryList().stream().map(item -> item.getName()).collect(Collectors.toList());
 			dto.setCategoryName(String.join(",", cateNameList));
 			dto.setOperatorerName(dto.getUser().getUsername());
 			dto.setTimeAgo(TimeAgoUtils.format(dto.getUpdateTime()));
@@ -169,7 +166,6 @@ public class ArticleService {
 		if(ids.size()==0) {throw new CheckParamException("选择id","为空");}
 		articaleMapper.delBatch(ids);
 		articaleCategoryMapper.delBatch(ids);
-		articaleUserMapper.delBatch(ids);
 	}
 	
 	@Transactional
@@ -202,18 +198,18 @@ public class ArticleService {
 			return PageResult.<ArticaleDto>builder().data(Lists.newArrayList()).pageModel(new PageModel()).code(200).build();
 		}
 		param.buildSkip();
-		List<Articale> data = articaleMapper.pageByKeyWord(keyword,param.getPageSize(),param.getSkip());
+		List<Article> data = articaleMapper.pageByKeyWord(keyword,param.getPageSize(),param.getSkip());
 		List<Integer> ids = data.stream().map(item -> item.getId()).collect(Collectors.toList());
 		for (int i = 0; i< ids.size();i++ ) {
-			List<Category> cateList = categoryMapper.getArtCategoryListById(ids.get(i));
-			data.get(i).setCategoryList(cateList);
+			List<ArticleCategory> cateList = categoryMapper.getArtCategoryListById(ids.get(i));
+			data.get(i).setArticleCategoryList(cateList);
 		}
 		PageModel pageModel = new PageModel(total,data.size(),param.getCurrentPage(),param.getPageSize());
 		List<ArticaleDto> dtoData = data.stream().map(item -> 
 		DtoUtil.adapt(new ArticaleDto(), item)
 		).collect(Collectors.toList());
 		dtoData.forEach(dto -> {
-			List<String> cateNameList = dto.getCategoryList().stream().map(item -> item.getName()).collect(Collectors.toList());
+			List<String> cateNameList = dto.getArticleCategoryList().stream().map(item -> item.getName()).collect(Collectors.toList());
 			dto.setCategoryName(String.join(",", cateNameList));
 			dto.setOperatorerName(dto.getUser().getUsername());
 			dto.setTimeAgo(TimeAgoUtils.format(dto.getUpdateTime()));
@@ -235,11 +231,11 @@ public class ArticleService {
 		if (count == 0) {
 			throw new CheckParamException("文章","不存在");
 		}
-		Articale articale = articaleMapper.selectByPrimaryKey(id);
-		List<Category> categoryList = categoryMapper.getArtCategoryListById(id);
-		articale.setCategoryList(categoryList);
+		Article articale = articaleMapper.selectByPrimaryKey(id);
+		List<ArticleCategory> categoryList = categoryMapper.getArtCategoryListById(id);
+		articale.setArticleCategoryList(categoryList);
 		ArticaleDto dto = DtoUtil.adapt(new ArticaleDto(), articale);
-		List<Integer> cateids = dto.getCategoryList().stream().map(item -> item.getId()).collect(Collectors.toList());
+		List<Integer> cateids = dto.getArticleCategoryList().stream().map(item -> item.getId()).collect(Collectors.toList());
 		dto.setCategoryIds(cateids);
 		dto.setTimeAgo(TimeAgoUtils.format(dto.getUpdateTime()));
 		dto.formatTime();
@@ -261,7 +257,7 @@ public class ArticleService {
 		if (count == 0) {
 			throw new CheckParamException("文章","不存在");
 		}
-		Articale articale = articaleMapper.selectByPrimaryKey(id);
+		Article articale = articaleMapper.selectByPrimaryKey(id);
 		articale.setTitle(param.getTitle());
 		articale.setWeight(param.getWeight());
 		articale.setFaceCover(param.getCoverImg());
@@ -269,10 +265,10 @@ public class ArticleService {
 		articale.setUpdateTime(new Date());
 		articaleMapper.updateByPrimaryKeySelective(articale);
 		articaleCategoryMapper.delBatch(Lists.newArrayList(id));
-		List<ArticaleCategory> collect = param.getCategoryNames().stream().map( categoryId -> 
-			 ArticaleCategory.builder()
-			.articaleId(articale.getId())
-			.categoryId(categoryId)
+		List<ArticleBindArticleCategory> collect = param.getCategoryNames().stream().map( categoryId -> 
+			 ArticleBindArticleCategory.builder()
+			.articleId(articale.getId())
+			.articleCategoryId(categoryId)
 			.build()
 		).collect(Collectors.toList());
 		articaleCategoryMapper.insertBatch(collect);

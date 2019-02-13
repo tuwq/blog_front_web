@@ -9,18 +9,18 @@ import org.springframework.stereotype.Service;
 
 import root.beans.JsonResult;
 import root.dto.CategoryDto;
-import root.mapper.CategoryMapper;
-import root.model.Category;
+import root.mapper.ArticleCategoryMapper;
+import root.model.ArticleCategory;
 import root.util.DtoUtil;
 
 @Service
 public class CategoryService {
 
 	@Resource
-	private CategoryMapper categoryMapper;
+	private ArticleCategoryMapper categoryMapper;
 	
 	public JsonResult<List<CategoryDto>> info() {
-		List<Category> data = categoryMapper.getAll();
+		List<ArticleCategory> data = categoryMapper.getAll();
 		List<CategoryDto> categoryDtos = data.stream().map(item -> DtoUtil.adapt(new CategoryDto(), item)).collect(Collectors.toList());
 		return JsonResult.<List<CategoryDto>>success(categoryDtos);
 	}

@@ -2,12 +2,12 @@ package root.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import root.model.Firend;
+import root.model.Friend;
 import root.util.TimeUtil;
 
 @Setter
 @Getter
-public class FirendDto extends Firend{
+public class FirendDto extends Friend{
 
 	private String createTimeString;
 	

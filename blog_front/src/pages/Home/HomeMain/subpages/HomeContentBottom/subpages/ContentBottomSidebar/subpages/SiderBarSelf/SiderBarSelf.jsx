@@ -73,7 +73,7 @@ class SiderBarSelf extends React.Component {
          				</Link>
          			</div>
          			<div className="SelfStats">
-         				<span className="stateItem">{this.state.author.articaleSum}<span>文章</span></span>
+         				<span className="stateItem">{this.state.author.articleSum}<span>文章</span></span>
          				<span className="stateItem">{this.state.author.praise}<span>点赞</span></span>
          				<span className="stateItem">{this.state.followsSum}<span>关注</span></span>
          				<span className="stateItem">{this.state.fansSum}<span>粉丝</span></span>

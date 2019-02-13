@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="root.mapper.SongBindSongCategoryMapper" >
+  <resultMap id="BaseResultMap" type="root.model.SongBindSongCategory" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="song_id" property="songId" jdbcType="INTEGER" />
+    <result column="song_category_id" property="songCategoryId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, song_id, song_category_id, create_time, update_time
+  </sql>
+  
+  
+   <delete id="delBatch" parameterType="map">
+    DELETE 
+    FROM song_bind_song_category
+    WHERE song_id in
+    <foreach collection="songIds" item="id" separator="," index="index" open="(" close=")">
+    	#{id}
+  	</foreach>
+  </delete>
+  
+  <select id="insertBatch" parameterType="map">
+    insert into song_bind_song_category(song_id,song_category_id) values
+	  <foreach collection="list" item="item" separator=",">
+	    (#{item.songId},#{item.songCategoryId})
+	  </foreach>
+  </select>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from song_bind_song_category
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from song_bind_song_category
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="root.model.SongBindSongCategory" >
+    insert into song_bind_song_category (id, song_id, song_category_id, 
+      create_time, update_time)
+    values (#{id,jdbcType=INTEGER}, #{songId,jdbcType=INTEGER}, #{songCategoryId,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="root.model.SongBindSongCategory" >
+    insert into song_bind_song_category
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="songId != null" >
+        song_id,
+      </if>
+      <if test="songCategoryId != null" >
+        song_category_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="songId != null" >
+        #{songId,jdbcType=INTEGER},
+      </if>
+      <if test="songCategoryId != null" >
+        #{songCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="root.model.SongBindSongCategory" >
+    update song_bind_song_category
+    <set >
+      <if test="songId != null" >
+        song_id = #{songId,jdbcType=INTEGER},
+      </if>
+      <if test="songCategoryId != null" >
+        song_category_id = #{songCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="root.model.SongBindSongCategory" >
+    update song_bind_song_category
+    set song_id = #{songId,jdbcType=INTEGER},
+      song_category_id = #{songCategoryId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

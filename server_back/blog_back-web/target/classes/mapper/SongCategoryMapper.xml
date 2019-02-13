@@ -14,15 +14,15 @@
   <select id="getIdListBySongId" parameterType="map" resultType="int">
   	SELECT sc.id id
 	FROM song_category sc
-	LEFT JOIN song_bind_category bc ON bc.song_category_id = sc.id
-	WHERE bc.song_id = #{songId}
+	LEFT JOIN song_bind_song_category sbsc ON sbsc.song_category_id = sc.id
+	WHERE sbsc.song_id = #{songId}
   </select>
   
   <select id="getListBySongId" parameterType="map" resultMap="BaseResultMap">
   	SELECT sc.id id,sc.name name,sc.desc `desc`
 	FROM song_category sc
-	LEFT JOIN song_bind_category bc ON bc.song_category_id = sc.id
-	WHERE bc.song_id = #{songId}
+	LEFT JOIN song_bind_song_category sbsc ON sbsc.song_category_id = sc.id
+	WHERE sbsc.song_id = #{songId}
   </select>
   
   <select id="countAll" resultType="int">

@@ -29,13 +29,13 @@ axios.interceptors.response.use(
             // 跳转登录
             global.store.dispatch(userActions.save(undefined))
             _removeToken()
-            PubSub.publish(global.rediectLoginSubscribe,createBrowserHistory().location.pathname);         
+            PubSub.publish(global.rediectLoginSubscribe,createHashHistory().location.pathname);         
     	} else if (response.data.code == RESULT_CODE.TOKEN_MATURITY) {
             // 删除token和用户信息
             global.store.dispatch(userActions.save(undefined))
             _removeToken()
         } else if (response.data.code == RESULT_CODE.ITEM_NOT_FOUND) {
-            createBrowserHistory().replace('/notFound')
+            createHashHistory().replace('/notFound')
         }
         return response;
     },

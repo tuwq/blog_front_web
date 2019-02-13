@@ -35,7 +35,7 @@ class HomeFooter extends React.Component {
 	          	</div>
 	          	<div className="contact">
 	          		<ul className="itemList fontLink">
-	          			<li className="item "><a>@2018 赣ICP备18010202号</a></li>
+	          			<li className="item "><a>@2018-2019 赣ICP备18010202号</a></li>
 	          			<li className="item "><a></a></li>
 	          		</ul>
 	          	</div>

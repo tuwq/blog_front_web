@@ -22,7 +22,7 @@ import root.beans.JsonResult;
 import root.beans.PageResult;
 import root.dto.ArticaleDto;
 import root.exception.CheckParamException;
-import root.model.Articale;
+import root.model.Article;
 import root.param.ArticleParam;
 import root.param.PageParam;
 import root.service.ArticleService;

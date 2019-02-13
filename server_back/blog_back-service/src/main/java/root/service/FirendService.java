@@ -21,8 +21,8 @@ import root.constant.RedisCode;
 import root.dto.CommentDto;
 import root.dto.FirendDto;
 import root.exception.CheckParamException;
-import root.mapper.FirendMapper;
-import root.model.Firend;
+import root.mapper.FriendMapper;
+import root.model.Friend;
 import root.model.FrontImgConfig;
 import root.param.FirendParam;
 import root.param.PageParam;
@@ -34,7 +34,7 @@ import root.util.ValidatorUtil;
 public class FirendService {
 
 	@Resource
-	private FirendMapper firendMapper;
+	private FriendMapper firendMapper;
 	@Resource
 	private QiNiuIMGService qiNiuIMGService;
 	
@@ -53,7 +53,7 @@ public class FirendService {
 		if (!file.getContentType().equals("image/jpeg") && !file.getContentType().equals("image/png")) {
 			throw new CheckParamException("文件类型错误","请上传jpg或png文件类型的文件");
 		}
-		Firend firend = Firend.builder().nickname(nickname).website(website).desc(desc).build();
+		Friend firend = Friend.builder().nickname(nickname).website(website).desc(desc).build();
 		firendMapper.insertSelective(firend);
 		Integer fid = firend.getId();
 		String originName = file.getOriginalFilename();
@@ -76,7 +76,7 @@ public class FirendService {
 			return PageResult.<FirendDto>builder().code(200).data(Lists.newArrayList()).pageModel(new PageModel()).build();
 		}
 		param.buildSkip();
-		List<Firend> data = firendMapper.page(param.getSkip(),param.getPageSize());
+		List<Friend> data = firendMapper.page(param.getSkip(),param.getPageSize());
 		List<FirendDto> firendDtos = Lists.newArrayList();
 		data.forEach(item -> {
 			FirendDto dto = DtoUtil.adapt(new FirendDto(), item);
@@ -98,7 +98,7 @@ public class FirendService {
 		String originName = file.getOriginalFilename();
 		String avatar = MD5Util.encryPassword(Integer.toString(id)) + originName.substring(originName.lastIndexOf("."));
 		qiNiuIMGService.uploadFirendAvatar(file,avatar);
-		Firend friend = firendMapper.selectByPrimaryKey(id);
+		Friend friend = firendMapper.selectByPrimaryKey(id);
 		friend.setAvatar(avatar+"?v="+new Date().getTime());
 		firendMapper.updateByPrimaryKeySelective(friend);
 		return JsonResult.<String>success(avatar+"?v="+new Date().getTime());
@@ -115,7 +115,7 @@ public class FirendService {
 		List<Integer> ids = strList.stream().map(str->Integer.parseInt(str)).collect(Collectors.toList());
 		if(ids.size()==0) {throw new CheckParamException("选择id","为空");}
 		ids.stream().forEach(id -> {
-			Firend firend = firendMapper.selectByPrimaryKey(id);
+			Friend firend = firendMapper.selectByPrimaryKey(id);
 			// qiNiuIMGService.delFirendAvatar(firend.getAvatar());
 		});
 		firendMapper.delBatch(ids);
@@ -130,7 +130,7 @@ public class FirendService {
 		if (count == 0) {
 			throw new CheckParamException("内容","不存在");
 		}
-		Firend firend = firendMapper.info(id);
+		Friend firend = firendMapper.info(id);
 		FirendDto dto = DtoUtil.adapt(new FirendDto(), firend);
 		dto.formatNoSecondTime();
 		return JsonResult.<FirendDto>success(dto);
@@ -146,7 +146,7 @@ public class FirendService {
 		if (count == 0) {
 			throw new CheckParamException("内容","不存在");
 		}
-		Firend firend = Firend.builder().id(param.getId()).website(param.getWebsite())
+		Friend firend = Friend.builder().id(param.getId()).website(param.getWebsite())
 			.desc(param.getDesc()).nickname(param.getNickname()).build();
 		firendMapper.updateByPrimaryKeySelective(firend);
 	}
