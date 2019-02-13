@@ -40,7 +40,7 @@ public class User {
 
     private Integer commentSum;
 
-    private Integer articaleSum;
+    private Integer articleSum;
 
     private String beforeLoginIp;
 
@@ -169,15 +169,7 @@ public class User {
     public void setCommentSum(Integer commentSum) {
         this.commentSum = commentSum;
     }
-
-    public Integer getArticaleSum() {
-        return articaleSum;
-    }
-
-    public void setArticaleSum(Integer articaleSum) {
-        this.articaleSum = articaleSum;
-    }
-
+    
     public String getBeforeLoginIp() {
         return beforeLoginIp;
     }
@@ -209,5 +201,15 @@ public class User {
     public void setOperateTime(Date operateTime) {
         this.operateTime = operateTime;
     }
+
+	public Integer getArticleSum() {
+		return articleSum;
+	}
+
+	public void setArticleSum(Integer articleSum) {
+		this.articleSum = articleSum;
+	}
+
+
 
 }

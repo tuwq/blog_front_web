@@ -5,14 +5,14 @@ import javax.annotation.Resource;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import root.mapper.ArticaleMapper;
+import root.mapper.ArticleMapper;
 import root.mapper.UserMapper;
 
 @Service
 public class IncrDataHandler {
 
 	@Resource
-	private ArticaleMapper articaleMapper;
+	private ArticleMapper articaleMapper;
 	@Resource
 	private UserMapper userMapper;
 	

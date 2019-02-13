@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="root.model.Comment" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
-    <result column="articale_id" property="articaleId" jdbcType="INTEGER" />
+    <result column="article_id" property="articleId" jdbcType="INTEGER" />
     <result column="parent_id" property="parentId" jdbcType="INTEGER" />
     <result column="root_id" property="rootId" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
@@ -16,7 +16,7 @@
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, user_id, articale_id, parent_id, root_id, create_time, update_time, approval, 
+    id, user_id, article_id, parent_id, root_id, create_time, update_time, approval, 
     oppose
   </sql>
   <sql id="Blob_Column_List" >
@@ -35,11 +35,11 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="root.model.Comment" >
-    insert into comment (id, user_id, articale_id, 
+    insert into comment (id, user_id, article_id, 
       parent_id, root_id, create_time, 
       update_time, approval, oppose, 
       content)
-    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{articaleId,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{articleId,jdbcType=INTEGER}, 
       #{parentId,jdbcType=INTEGER}, #{rootId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP}, #{approval,jdbcType=INTEGER}, #{oppose,jdbcType=INTEGER}, 
       #{content,jdbcType=LONGVARCHAR})
@@ -53,8 +53,8 @@
       <if test="userId != null" >
         user_id,
       </if>
-      <if test="articaleId != null" >
-        articale_id,
+      <if test="articleId != null" >
+        article_id,
       </if>
       <if test="parentId != null" >
         parent_id,
@@ -85,8 +85,8 @@
       <if test="userId != null" >
         #{userId,jdbcType=INTEGER},
       </if>
-      <if test="articaleId != null" >
-        #{articaleId,jdbcType=INTEGER},
+      <if test="articleId != null" >
+        #{articleId,jdbcType=INTEGER},
       </if>
       <if test="parentId != null" >
         #{parentId,jdbcType=INTEGER},
@@ -117,8 +117,8 @@
       <if test="userId != null" >
         user_id = #{userId,jdbcType=INTEGER},
       </if>
-      <if test="articaleId != null" >
-        articale_id = #{articaleId,jdbcType=INTEGER},
+      <if test="articleId != null" >
+        article_id = #{articleId,jdbcType=INTEGER},
       </if>
       <if test="parentId != null" >
         parent_id = #{parentId,jdbcType=INTEGER},
@@ -147,7 +147,7 @@
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="root.model.Comment" >
     update comment
     set user_id = #{userId,jdbcType=INTEGER},
-      articale_id = #{articaleId,jdbcType=INTEGER},
+      article_id = #{articleId,jdbcType=INTEGER},
       parent_id = #{parentId,jdbcType=INTEGER},
       root_id = #{rootId,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -160,7 +160,7 @@
   <update id="updateByPrimaryKey" parameterType="root.model.Comment" >
     update comment
     set user_id = #{userId,jdbcType=INTEGER},
-      articale_id = #{articaleId,jdbcType=INTEGER},
+      article_id = #{articleId,jdbcType=INTEGER},
       parent_id = #{parentId,jdbcType=INTEGER},
       root_id = #{rootId,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},

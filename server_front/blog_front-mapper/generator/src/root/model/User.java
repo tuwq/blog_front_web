@@ -33,7 +33,7 @@ public class User {
 
     private Integer commentSum;
 
-    private Integer articaleSum;
+    private Integer articleSum;
 
     private String beforeLoginIp;
 
@@ -163,12 +163,12 @@ public class User {
         this.commentSum = commentSum;
     }
 
-    public Integer getArticaleSum() {
-        return articaleSum;
+    public Integer getArticleSum() {
+        return articleSum;
     }
 
-    public void setArticaleSum(Integer articaleSum) {
-        this.articaleSum = articaleSum;
+    public void setArticleSum(Integer articleSum) {
+        this.articleSum = articleSum;
     }
 
     public String getBeforeLoginIp() {

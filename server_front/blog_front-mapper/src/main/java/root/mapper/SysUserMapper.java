@@ -4,7 +4,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 import root.model.SysUser;
 
-@Mapper
 public interface SysUserMapper {
     int deleteByPrimaryKey(Integer id);
 

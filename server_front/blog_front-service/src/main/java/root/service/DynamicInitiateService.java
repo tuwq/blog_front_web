@@ -22,7 +22,7 @@ import root.exception.DynamicException;
 import root.mapper.CommentMapper;
 import root.mapper.UserInitiateDynamicMapper;
 import root.mapper.UserMapper;
-import root.model.Articale;
+import root.model.Article;
 import root.model.Comment;
 import root.model.User;
 import root.model.UserInitiateDynamic;
@@ -90,7 +90,7 @@ public class DynamicInitiateService {
 		}
 		List<DynamicInitiateDto> dynamicDtos = Lists.newArrayList();
 		rootCommentDynamicList.stream().forEach(commentDynamic -> {
-			Articale articale = commentMapper.getArtById(commentDynamic.getTypeId());
+			Article articale = commentMapper.getArtById(commentDynamic.getTypeId());
 			Comment comment = commentMapper.getByIdWithUser(commentDynamic.getTypeId());
 			CommentDto commentDto = DtoUtil.adapt(new CommentDto(), comment);
 			commentDto.formatNoSecondTime();
@@ -116,7 +116,7 @@ public class DynamicInitiateService {
 		}
 		List<DynamicInitiateDto> dynamicDtos = Lists.newArrayList();
 		childCommentDynamicList.forEach(commentDynamic -> {
-			Articale articale = commentMapper.getArtById(commentDynamic.getTypeId());
+			Article articale = commentMapper.getArtById(commentDynamic.getTypeId());
 			Comment comment = commentMapper.getByIdWithUser(commentDynamic.getTypeId());
 			User parentUser = commentMapper.getUserById(comment.getParentId());
 			CommentDto commentDto = DtoUtil.adapt(new CommentDto(), comment);

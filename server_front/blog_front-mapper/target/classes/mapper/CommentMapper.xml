@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="root.model.Comment" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
-    <result column="articale_id" property="articaleId" jdbcType="INTEGER" />
+    <result column="article_id" property="articleId" jdbcType="INTEGER" />
     <result column="parent_id" property="parentId" jdbcType="INTEGER" />
     <result column="root_id" property="rootId" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
@@ -16,17 +16,17 @@
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, user_id, articale_id, parent_id, root_id, create_time, update_time, approval, oppose
+    id, user_id, article_id, parent_id, root_id, create_time, update_time, approval, 
+    oppose
   </sql>
   <sql id="Blob_Column_List" >
     content
   </sql>
-    
-    
-  <resultMap id="commentMap" type="root.model.Comment" >
+  
+   <resultMap id="commentMap" type="root.model.Comment" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
-    <result column="articale_id" property="articaleId" jdbcType="INTEGER" />
+    <result column="article_id" property="articleId" jdbcType="INTEGER" />
     <result column="parent_id" property="parentId" jdbcType="INTEGER" />
     <result column="root_id" property="rootId" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
@@ -40,33 +40,33 @@
 		<result column="user_avatar" property="avatar"/>
 		<result column="user_desc" property="desc"/>
 	</association>
-	<association property="articale" javaType="root.model.Articale">
-		<result column="articale_id" property="id"/>
-		<result column="articale_title" property="title"/>
+	<association property="article" javaType="root.model.Article">
+		<result column="article_id" property="id"/>
+		<result column="article_title" property="title"/>
 	</association>
   </resultMap>
     
   <select id="pageRootByArtIdWithUser" parameterType="map" resultMap="commentMap">
-  	SELECT c.id id,c.user_id user_id,c.articale_id articale_id,
+  	SELECT c.id id,c.user_id user_id,c.article_id article_id,
   	c.parent_id parent_id,c.root_id root_id,
   	c.create_time create_time,c.update_time update_time,c.approval approval,c.oppose oppose,c.content content,
   	u.id user_id,u.nickname user_nickname,u.avatar user_avatar
 	FROM `comment` c
 	LEFT JOIN `user` u ON u.id = c.user_id
-	WHERE c.articale_id = #{articleId} AND c.root_id = 0
+	WHERE c.article_id = #{articleId} AND c.root_id = 0
 	ORDER BY c.approval desc,c.create_time desc
 	LIMIT #{skip},#{pageSize}
   </select>
     
   <select id="getWithArtAndUserByPageSize" parameterType="map" resultMap="commentMap">
-  	SELECT c.id id,c.user_id user_id,c.articale_id articale_id,
+	SELECT c.id id,c.user_id user_id,c.article_id article_id,
   	c.parent_id parent_id,c.root_id root_id,
   	c.create_time create_time,c.update_time update_time,c.approval approval,c.oppose oppose,c.content content,
   	u.id user_id,u.nickname user_nickname,u.avatar user_avatar,u.desc user_desc,
-  	a.id articale_id,a.title articale_title
+  	a.id article_id,a.title article_title
 	FROM `comment` c
 	LEFT JOIN `user` u ON u.id = c.user_id
-	LEFT JOIN articale a ON a.id = c.articale_id
+	LEFT JOIN article a ON a.id = c.article_id
 	GROUP BY c.id
 	ORDER BY c.create_time desc
 	LIMIT #{pageSize}
@@ -79,7 +79,7 @@
     <result column="user_avatar" property="avatar"/>
   </resultMap>  
   
-  <resultMap id="articleMap" type="root.model.Articale" >
+  <resultMap id="articleMap" type="root.model.Article" >
     <id column="article_id" property="id" jdbcType="INTEGER" />
     <result column="article_title" property="title" jdbcType="VARCHAR" />
   </resultMap>
@@ -87,12 +87,12 @@
  <select id="getArtById" parameterType="map" resultMap="articleMap">
  	SELECT a.id article_id,a.title article_title
 	FROM `comment` c
-	LEFT JOIN articale a ON a.id = c.articale_id
+	LEFT JOIN article a ON a.id = c.article_id
 	WHERE c.id = #{id}
  </select>
  
  <select id="getByIdWithUser" parameterType="map" resultMap="commentMap">
- 	SELECT c.id id,c.user_id user_id,c.articale_id articale_id,
+ 	SELECT c.id id,c.user_id user_id,c.article_id article_id,
   	c.parent_id parent_id,c.root_id root_id,
   	c.create_time create_time,c.update_time update_time,c.approval approval,c.oppose oppose,c.content content,
   	u.id user_id,u.nickname user_nickname,u.avatar user_avatar,u.desc user_desc
@@ -115,7 +115,7 @@
   </select> 
    
   <select id="getChildByRootIdWithUser" parameterType="map" resultMap="commentMap">
-  	SELECT c.id id,c.user_id user_id,c.articale_id articale_id,
+  	SELECT c.id id,c.user_id user_id,c.article_id article_id,
   	c.parent_id parent_id,c.root_id root_id,
   	c.create_time create_time,c.update_time update_time,c.approval approval,c.oppose oppose,c.content content,
   	u.id user_id,u.nickname user_nickname,u.avatar user_avatar
@@ -139,13 +139,13 @@
   </select>   
     
   <select id="pageByArtIdWithUser" parameterType="map" resultMap="commentMap">
-  	SELECT c.id id,c.user_id user_id,c.articale_id articale_id,
+  	SELECT c.id id,c.user_id user_id,c.article_id article_id,
   	c.parent_id parent_id,c.root_id root_id,
   	c.create_time create_time,c.update_time update_time,c.approval approval,c.oppose oppose,c.content content,
   	u.id user_id,u.nickname user_nickname,u.avatar user_avatar
 	FROM `comment` c
 	LEFT JOIN `user` u ON u.id = c.user_id
-	WHERE c.articale_id = #{articleId}
+	WHERE c.article_id = #{articleId}
 	ORDER BY c.approval desc,c.create_time desc
 	LIMIT #{skip},#{pageSize}
   </select>
@@ -153,8 +153,9 @@
   <select id="countByArtId" parameterType="map" resultType="long">
   	SELECT count(1)
 	FROM `comment`
-	WHERE articale_id = #{articleId}
+	WHERE article_id = #{articleId}
   </select>
+  
   
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 
@@ -169,11 +170,11 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="root.model.Comment" >
-    insert into `comment` (id, user_id, articale_id, 
+    insert into `comment` (id, user_id, article_id, 
       parent_id, root_id, create_time, 
       update_time, approval, oppose, 
       content)
-    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{articaleId,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{articleId,jdbcType=INTEGER}, 
       #{parentId,jdbcType=INTEGER}, #{rootId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP}, #{approval,jdbcType=INTEGER}, #{oppose,jdbcType=INTEGER}, 
       #{content,jdbcType=LONGVARCHAR})
@@ -187,8 +188,8 @@
       <if test="userId != null" >
         user_id,
       </if>
-      <if test="articaleId != null" >
-        articale_id,
+      <if test="articleId != null" >
+        article_id,
       </if>
       <if test="parentId != null" >
         parent_id,
@@ -219,8 +220,8 @@
       <if test="userId != null" >
         #{userId,jdbcType=INTEGER},
       </if>
-      <if test="articaleId != null" >
-        #{articaleId,jdbcType=INTEGER},
+      <if test="articleId != null" >
+        #{articleId,jdbcType=INTEGER},
       </if>
       <if test="parentId != null" >
         #{parentId,jdbcType=INTEGER},
@@ -251,8 +252,8 @@
       <if test="userId != null" >
         user_id = #{userId,jdbcType=INTEGER},
       </if>
-      <if test="articaleId != null" >
-        articale_id = #{articaleId,jdbcType=INTEGER},
+      <if test="articleId != null" >
+        article_id = #{articleId,jdbcType=INTEGER},
       </if>
       <if test="parentId != null" >
         parent_id = #{parentId,jdbcType=INTEGER},
@@ -281,7 +282,7 @@
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="root.model.Comment" >
     update `comment`
     set user_id = #{userId,jdbcType=INTEGER},
-      articale_id = #{articaleId,jdbcType=INTEGER},
+      article_id = #{articleId,jdbcType=INTEGER},
       parent_id = #{parentId,jdbcType=INTEGER},
       root_id = #{rootId,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -294,7 +295,7 @@
   <update id="updateByPrimaryKey" parameterType="root.model.Comment" >
     update `comment`
     set user_id = #{userId,jdbcType=INTEGER},
-      articale_id = #{articaleId,jdbcType=INTEGER},
+      article_id = #{articleId,jdbcType=INTEGER},
       parent_id = #{parentId,jdbcType=INTEGER},
       root_id = #{rootId,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},

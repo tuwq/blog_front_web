@@ -22,7 +22,7 @@ import root.exception.DynamicException;
 import root.mapper.CommentMapper;
 import root.mapper.UserMapper;
 import root.mapper.UserReceiveDynamicMapper;
-import root.model.Articale;
+import root.model.Article;
 import root.model.Comment;
 import root.model.UserInitiateDynamic;
 import root.model.UserReceiveDynamic;
@@ -94,7 +94,7 @@ public class DynamicReceiveService {
 		}
 		List<DynamicReceiveDto> dynamicDtos = Lists.newArrayList();
 		commentDynamicList.forEach(commentDynamic -> {
-			Articale articale = commentMapper.getArtById(commentDynamic.getTypeId());
+			Article articale = commentMapper.getArtById(commentDynamic.getTypeId());
 			Comment comment = commentMapper.getByIdWithUser(commentDynamic.getTypeId());
 			CommentDto commentDto = DtoUtil.adapt(new CommentDto(), comment);
 			commentDto.formatNoSecondTime();

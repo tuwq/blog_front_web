@@ -5,11 +5,10 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import root.model.Articale;
+import root.model.Article;
 import root.model.Comment;
 import root.model.User;
 
-@Mapper
 public interface CommentMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -79,7 +78,7 @@ public interface CommentMapper {
 	 * @param commentIds
 	 * @return
 	 */
-	Articale getArtById(@Param("id") Integer id);
+	Article getArtById(@Param("id") Integer id);
 	/**
 	 * 获得评论的文章信息和用户信息
 	 * @param pageSize

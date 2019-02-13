@@ -7,7 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import root.model.Category;
+import root.model.ArticleCategory;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,5 +18,5 @@ public class ShowCategoryArticleDto {
 	
 	private List<ArticaleDto> articaleList;
 	
-	private Category category;
+	private ArticleCategory category;
 }

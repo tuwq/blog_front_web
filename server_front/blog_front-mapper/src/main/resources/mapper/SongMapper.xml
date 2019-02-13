@@ -28,8 +28,8 @@
  <select id="countByKeyword" parameterType="map" resultType="long">
  	SELECT count(DISTINCT(s.id))
 	FROM song s
-	LEFT JOIN song_bind_category sbc ON sbc.song_id = s.id
-	LEFT JOIN song_category sc ON sc.id = sbc.song_category_id
+	LEFT JOIN song_bind_song_category sbsc ON sbsc.song_id = s.id
+	LEFT JOIN song_category sc ON sc.id = sbsc.song_category_id
 	<where>
 		<if test="keyword!=null and keyword!= ''">
 			and (s.song_name like concat('%', #{keyword}, '%') or s.singer like concat('%', #{keyword}, '%') or sc.`name` like concat('%', #{keyword}, '%'))
@@ -38,12 +38,12 @@
  </select>
   
  <select id="pageByKeyword" parameterType="map" resultMap="BaseResultMap">
- 	SELECT s.id id,s.song_name song_name,s.singer singer,s.cover cover,s.url url,
+	SELECT s.id id,s.song_name song_name,s.singer singer,s.cover cover,s.url url,
   	s.load_sum load_sum,s.praise praise,s.weight weight,s.duration duration,s.create_time create_time,
   	s.update_time update_time
 	FROM song s
-	LEFT JOIN song_bind_category sbc ON sbc.song_id = s.id
-	LEFT JOIN song_category sc ON sc.id = sbc.song_category_id
+	LEFT JOIN song_bind_song_category sbsc ON sbsc.song_id = s.id
+	LEFT JOIN song_category sc ON sc.id = sbsc.song_category_id
 	<where>
 		<if test="keyword!=null and keyword!= ''">
 			and (s.song_name like concat('%', #{keyword}, '%') or s.singer like concat('%', #{keyword}, '%') or sc.`name` like concat('%', #{keyword}, '%'))
@@ -57,8 +57,8 @@
   <select id="countByCategory" parameterType="map" resultType="long">
   	SELECT count(DISTINCT(s.id))
 	FROM song s
-	LEFT JOIN song_bind_category sbc ON sbc.song_id = s.id
-	WHERE sbc.song_category_id = #{categoryId}
+	LEFT JOIN song_bind_song_category sbsc ON sbsc.song_id = s.id
+	WHERE sbsc.song_category_id = #{categoryId}
   </select>
   
   <select id="pageByCategory" parameterType="map" resultMap="BaseResultMap">
@@ -66,8 +66,8 @@
   	s.load_sum load_sum,s.praise praise,s.weight weight,s.duration duration,s.create_time create_time,
   	s.update_time update_time
 	FROM song s
-	LEFT JOIN song_bind_category sbc ON sbc.song_id = s.id
-	WHERE sbc.song_category_id = #{categoryId}
+	LEFT JOIN song_bind_song_category sbsc ON sbsc.song_id = s.id
+	WHERE sbsc.song_category_id = #{categoryId}
 	GROUP BY s.id
 	ORDER BY s.weight desc,s.praise desc,s.create_time desc
 	LIMIT #{skip},#{pageSize}

@@ -14,7 +14,7 @@ public class Comment {
 
     private Integer userId;
 
-    private Integer articaleId;
+    private Integer articleId;
 
     private Integer parentId;
 
@@ -32,7 +32,7 @@ public class Comment {
     // 评论所属用户
     private User user;
     // 评论所属文章
-    private Articale articale;
+    private Article article;
     
     public Integer getId() {
         return id;
@@ -50,13 +50,6 @@ public class Comment {
         this.userId = userId;
     }
 
-    public Integer getArticaleId() {
-        return articaleId;
-    }
-
-    public void setArticaleId(Integer articaleId) {
-        this.articaleId = articaleId;
-    }
 
     public Integer getParentId() {
         return parentId;
@@ -122,11 +115,20 @@ public class Comment {
 		this.user = user;
 	}
 
-	public Articale getArticale() {
-		return articale;
+
+	public Integer getArticleId() {
+		return articleId;
 	}
 
-	public void setArticale(Articale articale) {
-		this.articale = articale;
+	public void setArticleId(Integer articleId) {
+		this.articleId = articleId;
+	}
+
+	public Article getArticle() {
+		return article;
+	}
+
+	public void setArticle(Article article) {
+		this.article = article;
 	}
 }

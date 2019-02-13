@@ -9,7 +9,6 @@ import root.model.SysUser;
 import root.model.User;
 import root.param.LoginParam;
 
-@Mapper
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
 

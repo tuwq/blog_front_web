@@ -9,16 +9,16 @@ import org.springframework.stereotype.Service;
 import com.google.common.collect.Lists;
 
 import root.beans.JsonResult;
-import root.mapper.FirendMapper;
-import root.model.Firend;
+import root.mapper.FriendMapper;
+import root.model.Friend;
 
 @Service
 public class FirendService {
 
 	@Resource
-	private FirendMapper firendMapper;
+	private FriendMapper firendMapper;
 
-	public JsonResult<List<Firend>> all() {
+	public JsonResult<List<Friend>> all() {
 		// 获得全部友链
 		// 检查数量
 		Long total = firendMapper.countAll();
@@ -26,8 +26,8 @@ public class FirendService {
 			return JsonResult.success(Lists.newArrayList());
 		}
 		List<Integer> ids = firendMapper.randomAll();
-		List<Firend> data = firendMapper.getAllByIds(ids);
-		return JsonResult.<List<Firend>>success(data);
+		List<Friend> data = firendMapper.getAllByIds(ids);
+		return JsonResult.<List<Friend>>success(data);
 	}
 	
 }

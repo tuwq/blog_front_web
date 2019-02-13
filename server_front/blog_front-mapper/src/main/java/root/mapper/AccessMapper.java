@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Param;
 
 import root.model.Access;
 
-@Mapper
 public interface AccessMapper {
     int deleteByPrimaryKey(Integer id);
 

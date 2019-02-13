@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import root.model.Category;
+import root.model.ArticleCategory;
 
 @Builder
 @Data
@@ -21,6 +21,6 @@ public class PageResult<T> {
 	
 	private PageModel pageModel;
 	
-	private Category category;
+	private ArticleCategory category;
 
 }

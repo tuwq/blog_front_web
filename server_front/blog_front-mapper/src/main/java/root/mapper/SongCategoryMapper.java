@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 import root.model.SongCategory;
 
-@Mapper
 public interface SongCategoryMapper {
     int deleteByPrimaryKey(Integer id);
 

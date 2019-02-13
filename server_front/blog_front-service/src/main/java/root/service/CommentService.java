@@ -20,7 +20,7 @@ import root.dto.CommentDto;
 import root.exception.CheckParamException;
 import root.exception.CommentException;
 import root.exception.NotFoundException;
-import root.mapper.ArticaleMapper;
+import root.mapper.ArticleMapper;
 import root.mapper.CommentMapper;
 import root.model.Comment;
 import root.model.User;
@@ -37,7 +37,7 @@ import root.util.ValidatorUtil;
 public class CommentService {
 
 	@Resource
-	private ArticaleMapper articaleMapper;
+	private ArticleMapper articaleMapper;
 	@Resource
 	private CommentMapper commentMapper;
 	@Resource
@@ -64,7 +64,7 @@ public class CommentService {
 		}
 		Integer userId = ThreadUtil.getCurrentUserId();
 		Comment comment = Comment.builder().content(param.getContent())
-				.userId(userId).articaleId(param.getArticleId())
+				.userId(userId).articleId(param.getArticleId())
 				.parentId(0).rootId(0).createTime(new Date()).updateTime(new Date()).build();
 		commentMapper.insertSelective(comment);
 		userDataHandler.recordOpear(userId,IpUtil.getIpAddress(ThreadUtil.getCurrentRequest()));
@@ -97,7 +97,7 @@ public class CommentService {
 		Integer parentUserId = commentMapper.getUserIdById(param.getParentId());
 		if (parentUserId == userId) {throw new CommentException(ResultCode.COMMENT_REPLY_MYSELF,"你不能回复你自己的评论");}
 		Comment comment = Comment.builder().content(param.getContent())
-					.userId(userId).articaleId(param.getArticleId())
+					.userId(userId).articleId(param.getArticleId())
 					.parentId(param.getParentId()).rootId(param.getRootId())
 					.createTime(new Date()).updateTime(new Date()).build();
 		commentMapper.insertSelective(comment);

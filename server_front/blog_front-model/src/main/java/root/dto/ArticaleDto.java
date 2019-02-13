@@ -3,14 +3,14 @@ package root.dto;
 import java.util.List;
 
 import lombok.Data;
-import root.model.Articale;
+import root.model.Article;
 import root.util.TimeUtil;
 
 @Data
-public class ArticaleDto extends Articale{
+public class ArticaleDto extends Article{
 	
 	// 分类
-	private String categoryName;
+	private String articleCategoryName;
 	// 分类id数组
 	private List<Integer> categoryIds;
 	// 操作人名
@@ -18,9 +18,9 @@ public class ArticaleDto extends Articale{
 	// ..月,日前的时间格式
 	private String timeAgo;
 	// 上一篇文章
-	private Articale prev;
+	private Article prev;
 	// 下一篇文章
-	private Articale next;
+	private Article next;
 	
 	private String createTimeString;
 	

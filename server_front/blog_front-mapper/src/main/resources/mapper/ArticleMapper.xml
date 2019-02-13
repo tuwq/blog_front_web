@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="root.mapper.ArticleMapper" >
+  <resultMap id="BaseResultMap" type="root.model.Article" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="face_cover" property="faceCover" jdbcType="VARCHAR" />
+    <result column="praise" property="praise" jdbcType="INTEGER" />
+    <result column="comment_sum" property="commentSum" jdbcType="INTEGER" />
+    <result column="browse_sum" property="browseSum" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="weight" property="weight" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="approval" property="approval" jdbcType="INTEGER" />
+    <result column="oppose" property="oppose" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="root.model.Article" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, title, face_cover, praise, comment_sum, browse_sum, status, weight, 
+    create_time, update_time, approval, oppose
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  
+  
+  <resultMap id="CategoryResultMap" type="root.model.Article" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="face_cover" property="faceCover" jdbcType="VARCHAR" />
+    <result column="praise" property="praise" jdbcType="INTEGER" />
+    <result column="comment_sum" property="commentSum" jdbcType="INTEGER" />
+    <result column="browse_sum" property="browseSum" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="weight" property="weight" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="approval" property="approval" jdbcType="INTEGER" />
+    <result column="oppose" property="oppose" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+    <association property="user" javaType="root.model.User">
+    <result column="user_id" property="id"/>
+    <result column="user_nickname" property="nickname"/>
+  </association>
+  </resultMap>
+    
+   <resultMap id="ArticleMap" type="root.model.Article">
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="faceCover" property="faceCover" jdbcType="VARCHAR" />
+    <result column="praise" property="praise" jdbcType="INTEGER" />
+    <result column="commentSum" property="commentSum" jdbcType="INTEGER" />
+    <result column="browseSum" property="browseSum" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="approval" property="approval" jdbcType="INTEGER" />
+    <result column="oppose" property="oppose" jdbcType="INTEGER" />
+    <association property="user" javaType="root.model.User">
+      <result column="user_nickname" property="nickname"/>
+      <result column="user_id" property="id"/>
+    </association>
+    <collection property="articleCategoryList" javaType="list" ofType="root.model.ArticleCategory">
+        <result column="category_id" property="id"/>
+      	<result column="category_name" property="name"/>
+    </collection>
+  </resultMap>
+  
+  <select id="createTimeByQuantity" parameterType="map" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List" />
+  FROM article
+  ORDER BY create_time desc,update_time desc
+  LIMIT 0,#{quantity}
+  </select>
+  
+  <select id="weightByQuantity" parameterType="map" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List" />
+  FROM article
+  ORDER BY weight desc,update_time desc
+  LIMIT 0,#{quantity}
+  </select>
+  
+  <update id="authPraiseSumIncr" parameterType="map">
+    UPDATE `user`
+  SET praise = praise + 1
+  WHERE id = (
+    SELECT user_id
+    FROM article
+    WHERE id = #{articleId}
+  )
+  </update>
+  
+  <update id="browseSumIncr" parameterType="map">
+  UPDATE article
+  SET browse_sum = browse_sum+1
+  WHERE id = #{id}
+  </update>
+  
+  <update id="praiseSumIncr" parameterType="map">
+    UPDATE article
+  SET praise = praise+1
+  WHERE id = #{id}
+  </update>
+  
+  <select id="getAuthIdById" parameterType="map" resultType="int">
+    SELECT user_id
+  FROM article
+  WHERE id = #{id}
+  </select>
+  
+  <update id="commentSumIncr" parameterType="map">
+    UPDATE article
+  SET comment_sum = comment_sum+1
+  WHERE id = #{id}
+  </update>
+  
+  <select id="getPrev" parameterType="int" resultMap="ArticleMap">
+    SELECT *
+  FROM article
+  WHERE id &lt; #{id}
+  ORDER BY id desc
+  LIMIT 1
+  </select>
+  
+  <select id="getNext" parameterType="int" resultMap="ArticleMap">
+    SELECT *
+  FROM article
+  WHERE id &gt; #{id}
+  ORDER BY id asc
+  LIMIT 1
+  </select>
+  
+  <select id="getByIdWithUser" parameterType="map" resultMap="ArticleMap">
+    SELECT a.id id,a.title title,a.face_cover faceCover,a.praise praise,a.comment_sum commentSum,a.browse_sum browseSum,
+    a.create_time create_time,a.update_time update_time,a.approval approval,a.oppose oppose,
+    a.status status,a.user_id user_id,a.content content,u.nickname user_nickname,u.id user_id
+  FROM article a
+  LEFT JOIN `user` u ON a.user_id = u.id
+  WHERE a.id = #{id}
+  </select>
+  
+  <select id="countById" parameterType="map" resultType="int">
+    SELECT count(1)
+    FROM article
+    WHERE id = #{id}
+  </select>
+  
+  <select id="countAll" resultType="long">
+    SELECT count(1)
+    FROM article
+  </select>
+  
+  <select id="pageWithUser" parameterType="map" resultMap="ArticleMap">
+    SELECT a.id id,a.title title,a.face_cover faceCover,a.praise praise,a.comment_sum commentSum,a.browse_sum browseSum,
+    a.create_time create_time,a.update_time update_time,a.approval approval,a.oppose oppose,
+    a.status status,a.user_id user_id,a.content content,u.id user_id,u.nickname user_nickname
+    FROM article a 
+    LEFT JOIN article_bind_article_category abac on a.id = abac.article_id
+  LEFT JOIN article_category ac on ac.id = abac.article_category_id
+  LEFT JOIN `user` u on u.id = a.user_id
+  GROUP BY a.id
+  ORDER BY a.praise desc,a.comment_sum desc,a.update_time desc
+  LIMIT #{skip}, #{pageSize}
+  </select>
+  
+  <select id="pageByKeyWord" parameterType="map" resultMap="ArticleMap">
+   SELECT a.id id,a.title title,a.face_cover faceCover,a.praise praise,a.comment_sum commentSum,a.browse_sum browseSum,
+    a.create_time create_time,a.update_time update_time,a.approval approval,a.oppose oppose,
+    a.status status,a.user_id user_id,a.content content,u.nickname user_nickname
+    FROM article a 
+    LEFT JOIN article_bind_article_category abac on a.id = abac.article_id
+  LEFT JOIN article_category ac on ac.id = abac.article_category_id
+  LEFT JOIN `user` u on u.id = a.user_id
+  <where>
+    <if test="keyword != null and keyword != ''" >
+      and (a.title like concat('%', #{keyword}, '%') or ac.name like concat('%', #{keyword}, '%') or a.content like concat('%', #{keyword}, '%'))
+    </if>
+  </where>
+  GROUP BY a.id
+  ORDER BY a.praise desc,a.comment_sum desc,a.update_time desc
+  LIMIT #{skip}, #{pageSize}
+  </select>
+  
+  <select id="countByKeyword" parameterType="map" resultType="long">
+    SELECT count(DISTINCT a.id) 
+  FROM article a 
+  LEFT JOIN article_bind_article_category abac on a.id = abac.article_id 
+  LEFT JOIN article_category ac on ac.id = abac.article_category_id
+  <where>
+    <if test="keyword!=null and keyword!= ''">
+      and (a.title like concat('%', #{keyword}, '%') or ac.name like concat('%', #{keyword}, '%') or a.content like concat('%', #{keyword}, '%'))
+    </if>
+  </where>
+  </select>
+  
+  <select id="categoryPage" parameterType="map" resultMap="CategoryResultMap">
+     SELECT a.id id,a.title title,a.face_cover face_cover,a.user_id user_id,a.praise praise,
+    a.create_time create_time,a.update_time update_time,a.approval approval,a.oppose oppose,
+    a.browse_sum browse_sum,a.comment_sum comment_sum,a.content content,
+    u.id user_id,u.nickname user_nickname
+  FROM article a
+  LEFT JOIN article_bind_article_category abac ON a.id = abac.article_id
+  LEFT JOIN `user` u ON u.id = a.user_id
+  WHERE abac.article_category_id = #{categoryId}
+  ORDER BY a.praise desc,a.comment_sum desc,a.update_time desc
+  LIMIT #{skip},#{pageSize}
+  </select>
+  
+  <select id="countAllByCategoryId" parameterType="int" resultType="long"> 
+  SELECT count(1)
+  FROM article a
+  LEFT JOIN article_bind_article_category abac ON abac.article_id = a.id
+  WHERE abac.article_category_id = #{categoryId}
+  </select>
+  
+  <select id="hotDiscuss" parameterType="map" resultMap="CategoryResultMap">
+   SELECT <include refid="Base_Column_List" />
+  FROM article
+  ORDER BY comment_sum desc
+  LIMIT 0,#{quantity}
+  </select>
+  
+  <select id="categoryArticle" parameterType="map" resultMap="CategoryResultMap">
+  SELECT a.id id,a.title title,a.face_cover face_cover,a.user_id user_id,
+    a.create_time create_time,a.update_time update_time,a.approval approval,a.oppose oppose,
+    a.browse_sum browse_sum,a.comment_sum comment_sum,a.content content
+  FROM article a
+  LEFT JOIN article_bind_article_category abac on a.id = abac.article_id
+  WHERE abac.article_category_id = #{category_id}
+  ORDER BY a.praise DESC,a.update_time DESC
+  LIMIT 0,#{quantity}
+  </select>
+  
+  <select id="praiseByQuantity" parameterType="map" resultMap="BaseResultMap">
+  SELECT <include refid="Base_Column_List" />
+  FROM article a
+  ORDER BY a.praise DESC,a.update_time DESC
+  LIMIT 0,#{quantity}
+  </select>
+  
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from article
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from article
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="root.model.Article" >
+    insert into article (id, user_id, title, 
+      face_cover, praise, comment_sum, 
+      browse_sum, status, weight, 
+      create_time, update_time, approval, 
+      oppose, content)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
+      #{faceCover,jdbcType=VARCHAR}, #{praise,jdbcType=INTEGER}, #{commentSum,jdbcType=INTEGER}, 
+      #{browseSum,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{weight,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{approval,jdbcType=INTEGER}, 
+      #{oppose,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="root.model.Article" >
+    insert into article
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="faceCover != null" >
+        face_cover,
+      </if>
+      <if test="praise != null" >
+        praise,
+      </if>
+      <if test="commentSum != null" >
+        comment_sum,
+      </if>
+      <if test="browseSum != null" >
+        browse_sum,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="weight != null" >
+        weight,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="approval != null" >
+        approval,
+      </if>
+      <if test="oppose != null" >
+        oppose,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="faceCover != null" >
+        #{faceCover,jdbcType=VARCHAR},
+      </if>
+      <if test="praise != null" >
+        #{praise,jdbcType=INTEGER},
+      </if>
+      <if test="commentSum != null" >
+        #{commentSum,jdbcType=INTEGER},
+      </if>
+      <if test="browseSum != null" >
+        #{browseSum,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approval != null" >
+        #{approval,jdbcType=INTEGER},
+      </if>
+      <if test="oppose != null" >
+        #{oppose,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="root.model.Article" >
+    update article
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="faceCover != null" >
+        face_cover = #{faceCover,jdbcType=VARCHAR},
+      </if>
+      <if test="praise != null" >
+        praise = #{praise,jdbcType=INTEGER},
+      </if>
+      <if test="commentSum != null" >
+        comment_sum = #{commentSum,jdbcType=INTEGER},
+      </if>
+      <if test="browseSum != null" >
+        browse_sum = #{browseSum,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null" >
+        weight = #{weight,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approval != null" >
+        approval = #{approval,jdbcType=INTEGER},
+      </if>
+      <if test="oppose != null" >
+        oppose = #{oppose,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="root.model.Article" >
+    update article
+    set user_id = #{userId,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      face_cover = #{faceCover,jdbcType=VARCHAR},
+      praise = #{praise,jdbcType=INTEGER},
+      comment_sum = #{commentSum,jdbcType=INTEGER},
+      browse_sum = #{browseSum,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      weight = #{weight,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      approval = #{approval,jdbcType=INTEGER},
+      oppose = #{oppose,jdbcType=INTEGER},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="root.model.Article" >
+    update article
+    set user_id = #{userId,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      face_cover = #{faceCover,jdbcType=VARCHAR},
+      praise = #{praise,jdbcType=INTEGER},
+      comment_sum = #{commentSum,jdbcType=INTEGER},
+      browse_sum = #{browseSum,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      weight = #{weight,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      approval = #{approval,jdbcType=INTEGER},
+      oppose = #{oppose,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -7,7 +7,7 @@ public class Comment {
 
     private Integer userId;
 
-    private Integer articaleId;
+    private Integer articleId;
 
     private Integer parentId;
 
@@ -39,12 +39,12 @@ public class Comment {
         this.userId = userId;
     }
 
-    public Integer getArticaleId() {
-        return articaleId;
+    public Integer getArticleId() {
+        return articleId;
     }
 
-    public void setArticaleId(Integer articaleId) {
-        this.articaleId = articaleId;
+    public void setArticleId(Integer articleId) {
+        this.articleId = articleId;
     }
 
     public Integer getParentId() {

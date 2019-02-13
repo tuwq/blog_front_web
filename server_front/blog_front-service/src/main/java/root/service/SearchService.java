@@ -14,10 +14,10 @@ import root.constant.ResultCode;
 import root.dto.ArticaleDto;
 import root.exception.CheckParamException;
 import root.exception.SearchNoResultException;
-import root.mapper.ArticaleMapper;
-import root.mapper.CategoryMapper;
-import root.model.Articale;
-import root.model.Category;
+import root.mapper.ArticleMapper;
+import root.mapper.ArticleCategoryMapper;
+import root.model.Article;
+import root.model.ArticleCategory;
 import root.param.PageParam;
 import root.util.DtoUtil;
 import root.util.TimeAgoUtils;
@@ -27,9 +27,9 @@ import root.util.ValidatorUtil;
 public class SearchService {
 
 	@Resource
-	private ArticaleMapper articaleMapper;
+	private ArticleMapper articaleMapper;
 	@Resource
-	private CategoryMapper categoryMapper;
+	private ArticleCategoryMapper categoryMapper;
 	
 	public PageResult<ArticaleDto> pageKeyword(PageParam param, String keyword) {
 		// 检查字段
@@ -48,16 +48,16 @@ public class SearchService {
 			throw new SearchNoResultException(ResultCode.SEARCH_KEYWORD_NOT_RESULT,"没有找到符合条件的搜索结果");
 		}
 		param.buildSkip();
-		List<Articale> data = articaleMapper.pageByKeyWord(keyword,param.getSkip(),param.getPageSize());
+		List<Article> data = articaleMapper.pageByKeyWord(keyword,param.getSkip(),param.getPageSize());
 		List<Integer> ids = data.stream().map( item -> item.getId()).collect(Collectors.toList());
 		for (int i = 0; i< ids.size();i++ ) {
-			List<Category> cateList = categoryMapper.getArtCategoryListById(ids.get(i));
-			data.get(i).setCategoryList(cateList);
+			List<ArticleCategory> cateList = categoryMapper.getArtCategoryListById(ids.get(i));
+			data.get(i).setArticleCategoryList(cateList);
 		}
 		List<ArticaleDto> dtoList = data.stream().map(item -> DtoUtil.adapt(new ArticaleDto(), item)).collect(Collectors.toList());
 		dtoList.forEach(dto -> {
-			List<String> cateNameList = dto.getCategoryList().stream().map(item -> item.getName()).collect(Collectors.toList());
-			dto.setCategoryName(String.join(",", cateNameList));
+			List<String> cateNameList = dto.getArticleCategoryList().stream().map(item -> item.getName()).collect(Collectors.toList());
+			dto.setArticleCategoryName(String.join(",", cateNameList));
 			dto.setOperatorerName(dto.getUser().getUsername());
 			dto.setTimeAgo(TimeAgoUtils.format(dto.getUpdateTime()));
 			dto.formatNoSecondTime();
@@ -80,16 +80,16 @@ public class SearchService {
 			throw new SearchNoResultException(ResultCode.SEARCH_KEYWORD_NOT_RESULT,"没有找到任何文章");
 		}
 		param.buildSkip();
-		List<Articale> data = articaleMapper.pageWithUser(param.getSkip(),param.getPageSize());
+		List<Article> data = articaleMapper.pageWithUser(param.getSkip(),param.getPageSize());
 		List<Integer> ids = data.stream().map(item -> item.getId()).collect(Collectors.toList());
 		for (int i = 0; i< ids.size();i++ ) {
-			List<Category> cateList = categoryMapper.getArtCategoryListById(ids.get(i));
-			data.get(i).setCategoryList(cateList);
+			List<ArticleCategory> cateList = categoryMapper.getArtCategoryListById(ids.get(i));
+			data.get(i).setArticleCategoryList(cateList);
 		}
 		List<ArticaleDto> dtoList = data.stream().map(item -> DtoUtil.adapt(new ArticaleDto(), item)).collect(Collectors.toList());
 		dtoList.forEach(dto -> {
-			List<String> cateNameList = dto.getCategoryList().stream().map(item -> item.getName()).collect(Collectors.toList());
-			dto.setCategoryName(String.join(",", cateNameList));
+			List<String> cateNameList = dto.getArticleCategoryList().stream().map(item -> item.getName()).collect(Collectors.toList());
+			dto.setArticleCategoryName(String.join(",", cateNameList));
 			dto.setOperatorerName(dto.getUser().getUsername());
 			dto.setTimeAgo(TimeAgoUtils.format(dto.getUpdateTime()));
 			dto.formatNoSecondTime();

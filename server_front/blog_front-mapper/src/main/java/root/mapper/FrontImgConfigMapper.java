@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 import root.model.FrontImgConfig;
 
-@Mapper
 public interface FrontImgConfigMapper {
     int deleteByPrimaryKey(Integer id);
 

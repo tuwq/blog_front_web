@@ -18,10 +18,10 @@ import root.constant.ResultCode;
 import root.dto.ArticaleDto;
 import root.exception.CheckParamException;
 import root.exception.NotFoundException;
-import root.mapper.ArticaleMapper;
-import root.mapper.CategoryMapper;
-import root.model.Articale;
-import root.model.Category;
+import root.mapper.ArticleMapper;
+import root.mapper.ArticleCategoryMapper;
+import root.model.Article;
+import root.model.ArticleCategory;
 import root.redis.RedisOperator;
 import root.util.DtoUtil;
 import root.util.JsonUtils;
@@ -33,9 +33,9 @@ public class ArticaleService {
 	@Resource
 	private IncrDataHandler incrDataHandler;
 	@Resource
-	private ArticaleMapper articaleMapper;
+	private ArticleMapper articaleMapper;
 	@Resource
-	private CategoryMapper categoryMapper;
+	private ArticleCategoryMapper categoryMapper;
 	@Resource
 	private RedisOperator redis;
 	@Resource
@@ -61,12 +61,12 @@ public class ArticaleService {
 			incrDataHandler.articleBrowseIncr(id);
 			return JsonResult.<ArticaleDto>success(cacheDto);
 		}
-		Articale articale = articaleMapper.getByIdWithUser(id);
-		List<Category> categoryList = categoryMapper.getArtCategoryListById(id);
-		articale.setCategoryList(categoryList);
+		Article articale = articaleMapper.getByIdWithUser(id);
+		List<ArticleCategory> categoryList = categoryMapper.getArtCategoryListById(id);
+		articale.setArticleCategoryList(categoryList);
 		ArticaleDto articaleDto = DtoUtil.adapt(new ArticaleDto(), articale);
-		Articale prev = articaleMapper.getPrev(id);
-		Articale next = articaleMapper.getNext(id);
+		Article prev = articaleMapper.getPrev(id);
+		Article next = articaleMapper.getNext(id);
 		articaleDto.setPrev(prev);
 		articaleDto.setNext(next);
 		articaleDto.setTimeAgo(TimeAgoUtils.format(articaleDto.getUpdateTime()));

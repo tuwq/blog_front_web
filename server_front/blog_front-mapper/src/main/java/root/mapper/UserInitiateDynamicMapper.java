@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Param;
 
 import root.model.UserInitiateDynamic;
 
-@Mapper
 public interface UserInitiateDynamicMapper {
     int deleteByPrimaryKey(Integer id);
 

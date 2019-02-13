@@ -17,7 +17,7 @@
     <result column="follower_sum" property="followerSum" jdbcType="INTEGER" />
     <result column="fans_sum" property="fansSum" jdbcType="INTEGER" />
     <result column="comment_sum" property="commentSum" jdbcType="INTEGER" />
-    <result column="articale_sum" property="articaleSum" jdbcType="INTEGER" />
+    <result column="article_sum" property="articleSum" jdbcType="INTEGER" />
     <result column="before_login_ip" property="beforeLoginIp" jdbcType="VARCHAR" />
     <result column="now_login_ip" property="nowLoginIp" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
@@ -25,7 +25,7 @@
   </resultMap>
   <sql id="Base_Column_List" >
     id, username, email, password, nickname, desc, website, avatar, praise, status, activation_code, 
-    activation_status, follower_sum, fans_sum, comment_sum, articale_sum, before_login_ip, 
+    activation_status, follower_sum, fans_sum, comment_sum, article_sum, before_login_ip, 
     now_login_ip, create_time, operate_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -44,14 +44,14 @@
       website, avatar, praise, 
       status, activation_code, activation_status, 
       follower_sum, fans_sum, comment_sum, 
-      articale_sum, before_login_ip, now_login_ip, 
+      article_sum, before_login_ip, now_login_ip, 
       create_time, operate_time)
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR}, 
       #{website,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, #{praise,jdbcType=INTEGER}, 
       #{status,jdbcType=INTEGER}, #{activationCode,jdbcType=VARCHAR}, #{activationStatus,jdbcType=INTEGER}, 
       #{followerSum,jdbcType=INTEGER}, #{fansSum,jdbcType=INTEGER}, #{commentSum,jdbcType=INTEGER}, 
-      #{articaleSum,jdbcType=INTEGER}, #{beforeLoginIp,jdbcType=VARCHAR}, #{nowLoginIp,jdbcType=VARCHAR}, 
+      #{articleSum,jdbcType=INTEGER}, #{beforeLoginIp,jdbcType=VARCHAR}, #{nowLoginIp,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{operateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="root.model.User" >
@@ -102,8 +102,8 @@
       <if test="commentSum != null" >
         comment_sum,
       </if>
-      <if test="articaleSum != null" >
-        articale_sum,
+      <if test="articleSum != null" >
+        article_sum,
       </if>
       <if test="beforeLoginIp != null" >
         before_login_ip,
@@ -164,8 +164,8 @@
       <if test="commentSum != null" >
         #{commentSum,jdbcType=INTEGER},
       </if>
-      <if test="articaleSum != null" >
-        #{articaleSum,jdbcType=INTEGER},
+      <if test="articleSum != null" >
+        #{articleSum,jdbcType=INTEGER},
       </if>
       <if test="beforeLoginIp != null" >
         #{beforeLoginIp,jdbcType=VARCHAR},
@@ -226,8 +226,8 @@
       <if test="commentSum != null" >
         comment_sum = #{commentSum,jdbcType=INTEGER},
       </if>
-      <if test="articaleSum != null" >
-        articale_sum = #{articaleSum,jdbcType=INTEGER},
+      <if test="articleSum != null" >
+        article_sum = #{articleSum,jdbcType=INTEGER},
       </if>
       <if test="beforeLoginIp != null" >
         before_login_ip = #{beforeLoginIp,jdbcType=VARCHAR},
@@ -260,7 +260,7 @@
       follower_sum = #{followerSum,jdbcType=INTEGER},
       fans_sum = #{fansSum,jdbcType=INTEGER},
       comment_sum = #{commentSum,jdbcType=INTEGER},
-      articale_sum = #{articaleSum,jdbcType=INTEGER},
+      article_sum = #{articleSum,jdbcType=INTEGER},
       before_login_ip = #{beforeLoginIp,jdbcType=VARCHAR},
       now_login_ip = #{nowLoginIp,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},

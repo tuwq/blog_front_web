@@ -7,7 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import root.mapper.ArticaleMapper;
+import root.mapper.ArticleMapper;
 import root.mapper.UserInitiateDynamicMapper;
 import root.mapper.UserMapper;
 import root.mapper.UserReceiveDynamicMapper;
@@ -18,7 +18,7 @@ import root.model.UserReceiveDynamic;
 public class CommentedDataHandler {
 
 	@Resource
-	private ArticaleMapper articaleMapper;
+	private ArticleMapper articaleMapper;
 	@Resource
 	private UserMapper userMapper;
 	@Resource
