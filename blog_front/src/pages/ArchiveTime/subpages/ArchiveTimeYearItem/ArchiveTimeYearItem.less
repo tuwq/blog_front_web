@@ -1,0 +1,100 @@
+@import url("../../../../base/style/constant.less");
+@media screen and (min-width: @pc_width) {
+.ArchiveTimeYearList {
+	display: flex;
+	align-content: flex-start;
+	flex-wrap: wrap;
+	height: 100%;
+	.ArchiveTimeYearItem {
+		flex: 0 1 33%;
+		max-width: 33%;
+		height: 150px;
+		transition: all .3s ease-out;
+		list-style: none;
+	    overflow: hidden;
+	    display: flex;
+	    align-items: center;
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		margin-bottom: 20px;
+		.monthAndDay {
+			font-size: 18px;
+		}
+		.content {
+			display: flex;
+			.cover {
+				img {
+					max-height: 150px;
+				}
+			}
+			.detail {
+				padding-left: 8px;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-around;
+				.detail-title {
+					display: inline-block;
+					font-size: 18px;
+					text-align: center;
+				}
+				.detail-category {
+					position: relative;
+				    display: inline-block;
+				    vertical-align: middle;
+					font-size: 12px;
+					text-decoration: none;
+				    outline: 0;
+				    background-color: rgb(228, 162, 189);
+				    padding: 5px 10px;
+				    margin: 10px 5px;
+				    border-radius: 5px;
+				    color: #fff;
+				    &:before {
+					    pointer-events: none;
+					    position: absolute;
+					    transform: translateY(10px);
+					    z-index: -1;
+					    content: '';
+					    top: 100%;
+					    left: 5%;
+					    height: 10px;
+					    width: 90%;
+					    opacity: 0;
+					    background: radial-gradient(ellipse at center,rgba(0,0,0,0.35) 0%,transparent 80%);
+					    transition-duration: .3s;
+					    transition-property: transform,opacity;
+					}
+				}
+				.detail-tag {
+					position: relative;
+				    display: inline-block;
+				    vertical-align: middle;
+					font-size: 12px;
+					text-decoration: none;
+				    outline: 0;
+				    background-color: rgb(199, 192, 218);
+				    padding: 5px 10px;
+				    margin: 10px 5px;
+				    border-radius: 5px;
+				    color: #fff;
+				    &:before {
+					    pointer-events: none;
+					    position: absolute;
+					    transform: translateY(10px);
+					    z-index: -1;
+					    content: '';
+					    top: 100%;
+					    left: 5%;
+					    height: 10px;
+					    width: 90%;
+					    opacity: 0;
+					    background: radial-gradient(ellipse at center,rgba(0,0,0,0.35) 0%,transparent 80%);
+					    transition-duration: .3s;
+					    transition-property: transform,opacity;
+					}
+				}
+			}
+		}
+	}
+}}

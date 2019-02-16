@@ -20,7 +20,7 @@ class CategoryTitle extends React.Component {
 
 	render() {
 		return (
-			<DocumentTitle title={'纤月的'+this.props.category.name}>
+			<DocumentTitle title={this.props.category.name}>
 				<div className="CategoryTitle">
 				  	<h2>{this.props.category.name}</h2>
 				  	<p>{this.props.category.desc}</p>

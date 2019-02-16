@@ -121,8 +121,8 @@ class HomeHeader extends React.Component {
                 <li className="HomeHeaderItem">
                   <a className="ItemLink">归档</a> 
                   <ul className="ItemMenu">
-                       <li><Link to="/articletag">标签</Link></li>
-                       <li><Link to="/archive">时间归档</Link></li>
+                       <li><Link to="/archiveTag">标签归档</Link></li>
+                       <li><Link to="/archiveTime">时间归档</Link></li>
                   </ul> 
                 </li>
           			<li className="HomeHeaderItem">
