@@ -1,16 +1,21 @@
 @import url("../../../../base/style/constant.less");
 @media screen and (min-width: @pc_width) {
 .MusicList {
+	flex: 1;
 	display: flex;
 	flex-wrap: wrap;
+	align-content: flex-start;
 	.MusicItem {
 		flex: 0 1 25%;
 		max-width: 25%;
 		position: relative;
+		height: 70px;
 		transition: all .3s ease-out;
 		list-style: none;
 	    overflow: hidden;
 	    margin-bottom: 20px;
+	    display: flex;
+	    align-items: center;
 		&:hover {
 	    	background: rgba(230,244,250,.5);
 	    }

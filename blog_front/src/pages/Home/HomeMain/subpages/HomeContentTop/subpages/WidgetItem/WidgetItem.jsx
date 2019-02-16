@@ -19,7 +19,7 @@ class WidgetItem extends React.Component {
 	render() {
 		return (
          	<div className="WidgetItem">
-     			<div className="thumb">
+     			<div className="cover">
      				<Link to={'/article/'+this.props.item.id}><img width="128" height="64" alt="" src={global.artImgPrefix+this.props.item.faceCover}></img></Link>
      			</div>
      			<div className="detail">
