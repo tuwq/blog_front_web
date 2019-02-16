@@ -106,17 +106,25 @@ class HomeHeader extends React.Component {
           				<a className="ItemLink">我</a>
                     <ul className="ItemMenu">
                          <li><Link to="/article/1">给我留言</Link></li>
-                         <li><a onClick={this.goCategory.bind(this,4)}>个人闲谈</a></li>
+                         <li><Link to="/extra/secretLetter">联系我</Link></li>
                     </ul>
           			</li>
           			<li className="HomeHeaderItem">
-          				<a className="ItemLink">值得看</a> 
+          				<a className="ItemLink">分类</a> 
                   <ul className="ItemMenu">
                        <li><a onClick={this.goCategory.bind(this,1)}>文章</a></li>
                        <li><a onClick={this.goCategory.bind(this,2)}>笔记</a></li>
                        <li><a onClick={this.goCategory.bind(this,3)}>短代码</a></li>
-                  </ul> 
+                       <li><a onClick={this.goCategory.bind(this,4)}>个人闲谈</a></li>
+                  </ul>
           			</li>
+                <li className="HomeHeaderItem">
+                  <a className="ItemLink">归档</a> 
+                  <ul className="ItemMenu">
+                       <li><Link to="/articletag">标签</Link></li>
+                       <li><Link to="/archive">时间归档</Link></li>
+                  </ul> 
+                </li>
           			<li className="HomeHeaderItem">
           				<a className="ItemLink">收藏</a> 
                   <ul className="ItemMenu">

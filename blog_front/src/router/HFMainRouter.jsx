@@ -20,6 +20,8 @@ import SearchRouter from './subrouters/SearchRouter'
 import CategoryRouter from './subrouters/CategoryRouter'
 import ArticleRouter from './subrouters/ArticleRouter'
 import MusicRouter from './subrouters/MusicRouter'
+import ArticleTagRouter from './subrouters/ArticleTagRouter'
+import ArchiveRouter from './subrouters/ArchiveRouter'
 import NotFound from '@/pages/NotFound/NotFound'
 import Firend from '@/pages/Firend/Firend'
 
@@ -44,6 +46,8 @@ class Main extends Component {
             <Route path="/search" component={SearchRouter} />
             <Route path="/category" component={CategoryRouter} />
             <Route path="/article" component={ArticleRouter} />
+            <Route path="/articletag" component={ArticleTagRouter} />
+            <Route path="/archive" component={ArchiveRouter} />
             <Route path="/music" component={MusicRouter} />
             <Route path="/firend" component={Firend} />
             <Route path="*" component={NotFound} />

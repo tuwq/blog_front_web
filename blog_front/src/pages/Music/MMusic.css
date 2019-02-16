@@ -1,1 +1,1 @@
-@media screen and (max-width:800px){.Music .Music-Padding{flex:1 1;background:#f5f6f8;padding:20px 0;width:100%}.Music .Music-Padding .Music-Wrapper{flex-direction:column;justify-content:space-between;width:100%;overflow:hidden}.Music .Music-Padding .Music-Wrapper .Music-Inner{display:flex;min-height:80vh}}
+@media screen and (max-width:800px){.Music{flex:1}.Music .Music-Padding{background:#f5f6f8;padding:20px 0;width:100%}.Music .Music-Padding .Music-Wrapper{width:100%;overflow:hidden}.Music .Music-Padding .Music-Wrapper .Music-Inner{display:flex;min-height:80vh}}

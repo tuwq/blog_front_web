@@ -46,7 +46,7 @@ class Firend extends React.Component {
 	render() {
 		return (
 			<div className="Firend">
-				<DocumentTitle title="纤月的友链">
+				<DocumentTitle title="友链">
 					<div className="Firend-Wrapper">
 						<div className="Firend-Inner">
 							<FirendTitle />

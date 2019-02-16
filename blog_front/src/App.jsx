@@ -48,8 +48,12 @@ class App extends Component {
   }
 
   render() {
+    const appStyle = {
+      display: 'flex',
+      flexDirection: 'column'
+    }
     return (
-      <div onClick={this.closeMenu}>
+      <div onClick={this.closeMenu} style={appStyle}>
           {
             this.props.children
           }

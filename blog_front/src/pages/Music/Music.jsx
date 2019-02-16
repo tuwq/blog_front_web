@@ -22,7 +22,7 @@ class Music extends React.Component {
 	render() {
 		return (
 			<div className="Music">
-				<DocumentTitle title="纤月的歌单">
+				<DocumentTitle title="歌单">
 					<div className="Music-Padding">
 						<div className="Music-Wrapper">
 							<div className="Music-Inner">

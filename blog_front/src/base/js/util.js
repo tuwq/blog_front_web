@@ -9,7 +9,7 @@ export function shuffle(arr) {
 	return _arr
 }
 
-function getRandomInt(min,max) {
+export function getRandomInt(min,max) {
 	return Math.floor(Math.random() * (max - min + 1) + min) 
 }
 
