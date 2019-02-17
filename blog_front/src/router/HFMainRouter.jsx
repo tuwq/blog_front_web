@@ -22,8 +22,9 @@ import ArticleRouter from './subrouters/ArticleRouter'
 import MusicRouter from './subrouters/MusicRouter'
 import ArchiveTagRouter from './subrouters/ArchiveTagRouter'
 import ArchiveTimeRouter from './subrouters/ArchiveTimeRouter'
+import ArchiveCategoryRouter from './subrouters/ArchiveCategoryRouter'
 import NotFound from '@/pages/NotFound/NotFound'
-import Firend from '@/pages/Firend/Firend'
+import Friend from '@/pages/Friend/Friend'
 
 
 class Main extends Component {
@@ -48,8 +49,9 @@ class Main extends Component {
             <Route path="/article" component={ArticleRouter} />
             <Route path="/archiveTag" component={ArchiveTagRouter} />
             <Route path="/archiveTime" component={ArchiveTimeRouter} />
+            <Route path="/archiveCategory" component={ArchiveCategoryRouter} />
             <Route path="/music" component={MusicRouter} />
-            <Route path="/firend" component={Firend} />
+            <Route path="/friend" component={Friend} />
             <Route path="*" component={NotFound} />
           </Switch>
           <HomeFooter />

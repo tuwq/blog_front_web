@@ -20,7 +20,7 @@ class ArchiveTimeYearTitle extends React.Component {
 	render() {
 		return (
           <div className="ArchiveTimeYearTitle">
-          	 <h1 className="yearTime">{this.props.yearTime}</h1>
+          	 <h1 className="title">{this.props.yearTime}</h1>
           </div>
         )
 	}

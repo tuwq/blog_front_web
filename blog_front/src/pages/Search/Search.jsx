@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { withRouter } from 'react-router-dom'
+import DocumentTitle from 'react-document-title'
 
 import SearchMain from './subpages/SearchMain/SearchMain'
 
@@ -29,7 +30,9 @@ class Search extends React.Component {
 	render() {
 		return (
 			<div className="Search">
-			  	<SearchMain />
+				<DocumentTitle title="搜索文章">
+					<SearchMain />
+				</DocumentTitle>
         	</div>
         )
 	}

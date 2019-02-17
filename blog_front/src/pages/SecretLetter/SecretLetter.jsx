@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import * as RESULT_CODE from 'api/Constant/resultCode'
 import { withRouter } from 'react-router-dom'
+import DocumentTitle from 'react-document-title'
 
 import { checkSecretLetterForm } from 'base/js/check'
 import { sendSecretLetterApi } from 'api/SecretLetter/secretLetter'
@@ -66,6 +67,7 @@ class SecretLetter extends React.Component {
 	render() {
 		return (
 			<div id="SecretLetter" className="SecretLetter">
+				<DocumentTitle title="私信">
 				<div className="wrap">
 					<div className="content">
 						<h2>私信</h2>
@@ -86,6 +88,7 @@ class SecretLetter extends React.Component {
 						</form>
 					</div>
 				</div>
+				</DocumentTitle>
         	</div>
         )
 	}

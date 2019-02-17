@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { withRouter } from 'react-router-dom'
+import DocumentTitle from 'react-document-title'
 import * as RESULT_CODE from 'api/Constant/resultCode'
 
 import { checkmail } from 'base/js/check'
@@ -71,6 +72,7 @@ class FindPass extends React.Component {
 	render() {
 		return (
 			<div id="FindPass" className="FindPass">
+				<DocumentTitle title="找回密码">
 				<div className="FindPass-wrapper">
 					<div className="content">
 						<h2>找回密码</h2>
@@ -89,6 +91,7 @@ class FindPass extends React.Component {
 						</form>
 					</div>
 				</div>
+				</DocumentTitle>
         	</div>
         )
 	}

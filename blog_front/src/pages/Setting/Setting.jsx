@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { withRouter } from 'react-router-dom'
+import DocumentTitle from 'react-document-title'
 
 import SettingMain from './subpages/SettingMain/SettingMain'
 
@@ -22,7 +23,9 @@ class Setting extends React.Component {
 	render() {
 		return (
 			<div id="Setting" className="Setting">
+				<DocumentTitle title="用户设置">
 				<SettingMain />
+				</DocumentTitle>
         	</div>
         )
 	}

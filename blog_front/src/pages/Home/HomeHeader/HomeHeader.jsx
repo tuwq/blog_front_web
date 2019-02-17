@@ -123,6 +123,7 @@ class HomeHeader extends React.Component {
                   <ul className="ItemMenu">
                        <li><Link to="/archiveTag">标签归档</Link></li>
                        <li><Link to="/archiveTime">时间归档</Link></li>
+                        <li><Link to="/archiveCategory">分类归档</Link></li>
                   </ul> 
                 </li>
           			<li className="HomeHeaderItem">
@@ -134,7 +135,7 @@ class HomeHeader extends React.Component {
                 <li className="HomeHeaderItem">
                   <a className="ItemLink">友链</a> 
                    <ul className="ItemMenu">
-                      <li><Link to="/firend">友情链接</Link></li>
+                      <li><Link to="/friend">友情链接</Link></li>
                       <li><Link to="/article/16">申请友链</Link></li>
                   </ul>
                 </li>
