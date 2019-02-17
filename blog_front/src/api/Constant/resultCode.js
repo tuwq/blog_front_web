@@ -1,3 +1,4 @@
+export const REQUEST_SUCCESS = 200
 // 请求参数不正确
 export const PARAM_ERROR = 270
 // 查找的目标资源不存在,比如文章

@@ -112,8 +112,8 @@ class HomeHeader extends React.Component {
           			<li className="HomeHeaderItem">
           				<a className="ItemLink">分类</a> 
                   <ul className="ItemMenu">
-                       <li><a onClick={this.goCategory.bind(this,1)}>文章</a></li>
-                       <li><a onClick={this.goCategory.bind(this,2)}>笔记</a></li>
+                       <li><a onClick={this.goCategory.bind(this,1)}>手记</a></li>
+                       <li><a onClick={this.goCategory.bind(this,2)}>学习笔记</a></li>
                        <li><a onClick={this.goCategory.bind(this,3)}>短代码</a></li>
                        <li><a onClick={this.goCategory.bind(this,4)}>个人闲谈</a></li>
                   </ul>

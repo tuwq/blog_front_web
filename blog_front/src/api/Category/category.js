@@ -1,7 +1,14 @@
-export function categoryPageApi(currentPage,pageSize,categoryId,success) {
+export function categoryPageByIdApi(currentPage,pageSize,categoryId,success) {
 	axios.get(global.serverUrl+'/articleCategory/list',{
 		params: {currentPage,pageSize,categoryId}
 	}).then((res)=>{
+		success(res)
+	})
+}
+
+export function categoryAllApi(success) {
+	axios.get(global.serverUrl+'/articleCategory/all')
+	.then((res)=>{
 		success(res)
 	})
 }

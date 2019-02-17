@@ -23,8 +23,8 @@ class ArchiveCategoryParentCollection extends React.Component {
 	render() {
 		return (
           <div className="ArchiveCategoryParentCollection">
-          	 <ArchiveCategoryParentTitle />
-          	 <ArchiveCategoryList />
+          	 <ArchiveCategoryParentTitle parentItem={this.props.parentItem}/>
+          	 <ArchiveCategoryList childList={this.props.parentItem.childCategoryList}/>
           </div>
         )
 	}

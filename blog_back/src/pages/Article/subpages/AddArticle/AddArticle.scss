@@ -36,6 +36,7 @@
 	}
 	.info {
 		display: flex;
+		flex-wrap: wrap;
 		.title {
 			flex: 0 1 50%;
 			max-width: 50%;

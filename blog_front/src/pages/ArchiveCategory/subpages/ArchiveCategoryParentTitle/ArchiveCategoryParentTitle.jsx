@@ -20,8 +20,8 @@ class ArchiveCategoryParentTitle extends React.Component {
 	render() {
 		return (
           <div className="ArchiveCategoryParentTitle">
-          	 <Link to="" className="title">学习笔记</Link>
-          	 <span className="count">9</span>
+          	 <Link to={'/category/' + this.props.parentItem.id} className="title">{this.props.parentItem.name}</Link>
+          	 <span className="count">{this.props.parentItem.articleCount}</span>
           </div>
         )
 	}

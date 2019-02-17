@@ -20,8 +20,8 @@ class ArchiveCategoryItem extends React.Component {
 	render() {
 		return (
           <div className="ArchiveCategoryItem">
-          	 <Link to="" className="title">JavaScript</Link>
-          	 <span className="count">11</span>
+          	 <Link to={'/category/' + this.props.item.id} className="title">{this.props.item.name}</Link>
+          	 <span className="count">{this.props.item.articleCount}</span>
           </div>
         )
 	}

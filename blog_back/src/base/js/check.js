@@ -12,13 +12,17 @@ export function isNumber(str) {
 	return (/^\d+$/.test(str))
 }
 
-export function checkContent(title,categoryNames,content,cover_img) {
+export function checkContent(title,articleCategoryIds,articleTagIds,content,cover_img) {
 	if (title == '' || title == undefined || title == null) {
 		alert('标题不能空')
 		return false
 	} 
-	if (categoryNames.length==0) {
+	if (articleCategoryIds.length==0) {
 		alert('分类不能空')
+		return false
+	}
+	if (articleTagIds.length==0) {
+		alert('标签不能空')
 		return false
 	}
 	if (content == '' || content == undefined || content == null) {

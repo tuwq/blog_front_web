@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { withRouter } from 'react-router-dom'
 
-import CategoryMain from './subpages/CategoryMain/CategoryMain'
+import CategoryContent from './subpages/CategoryContent/CategoryContent'
 
 
 import './Category.less'
@@ -28,7 +28,7 @@ class Category extends React.Component {
 	render() {
 		return (
 			<div className="Category">
-			  	<CategoryMain />
+			  	<CategoryContent />
         	</div>
         )
 	}

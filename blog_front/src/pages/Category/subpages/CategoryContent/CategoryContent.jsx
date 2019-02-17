@@ -8,13 +8,13 @@ import CategoryTitle from '../CategoryTitle/CategoryTitle'
 import CategoryCollection from '../CategoryCollection/CategoryCollection'
 import LoadMore from 'base/general/LoadMore/LoadMore'
 
-import { categoryPageApi } from 'api/Category/category'
+import { categoryPageByIdApi } from 'api/Category/category'
 import { isNumber } from 'base/js/check'
 
-import './CategoryMain.less'
-import './MCategoryMain.less'
+import './CategoryContent.less'
+import './MCategoryContent.less'
 
-class CategoryMain extends React.Component {
+class CategoryContent extends React.Component {
 
 	constructor(props,context) {
 		super(props,context)
@@ -68,7 +68,7 @@ class CategoryMain extends React.Component {
 		this.setState({
 			pend: true
 		})
-		categoryPageApi(currentPage,this.state.pageSize,nowId,(res)=>{
+		categoryPageByIdApi(currentPage,this.state.pageSize,nowId,(res)=>{
 			if (res.data.code == 200) {
 				this.setState({
 					data: this.state.data.concat(res.data.data),
@@ -94,7 +94,7 @@ class CategoryMain extends React.Component {
 		  backgroundImage: 'url(' + this.props.imgConfig.categoryImg + ')',
 		};
 		return (
-			<div className="CategoryMain">
+			<div className="CategoryContent">
 			  	<div className="Content-Wrapper" style={imgStyle}>
 			  		<div className="content">
 			  	 	{
@@ -130,7 +130,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default withRouter(
-	connect(mapStateToProps, mapDispatchToProps)(CategoryMain)
+	connect(mapStateToProps, mapDispatchToProps)(CategoryContent)
 )
 
 

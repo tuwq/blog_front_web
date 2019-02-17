@@ -22,9 +22,11 @@ class ArchiveCategoryList extends React.Component {
 	render() {
 		return (
           <div className="ArchiveCategoryList">
-          	 <ArchiveCategoryItem />
-          	 <ArchiveCategoryItem />
-          	 <ArchiveCategoryItem />
+          	 {
+          	 	this.props.childList.map((item, index)=>{
+          	 		return (<ArchiveCategoryItem item={item} key={index} />)
+          	 	})
+          	 }
           </div>
         )
 	}

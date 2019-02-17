@@ -17,13 +17,22 @@
         </div>
         <div class="categroy">
           <h2>文章分类</h2>
-          <div class="checkbox-group" v-if="categoryList">
-            <div class="checkbox-control" v-for="(item,index) in categoryList" :key="item.id">
-              <label for="article">{{item.name}}</label> 
-              <input type="checkbox" id="article" :value="item.id" v-model="categoryNames">
+          <div class="checkbox-group" v-if="articleCategoryList">
+            <div class="checkbox-control" v-for="(item,index) in articleCategoryList" :key="item.id">
+              <label for="articleCategory">{{item.name}}</label> 
+              <input type="checkbox" id="articleCategory" :value="item.id" v-model="articleCategoryIds">
             </div>
           </div>
           <div><input type="number" v-model="weight" placeholder="权重"></div>
+        </div>
+        <div class="categroy">
+          <h2>文章标签</h2>
+          <div class="checkbox-group" v-if="articleTagList">
+            <div class="checkbox-control" v-for="(item,index) in articleTagList" :key="item.id">
+              <label for="articleTag">{{item.name}}</label> 
+              <input type="checkbox" id="articleTag" :value="item.id" v-model="articleTagIds">
+            </div>
+          </div>
         </div>
      </div>
   </div>
@@ -33,7 +42,8 @@
     import { mavonEditor } from 'mavon-editor'
     import 'mavon-editor/dist/css/index.css'
     import { addArticleApi,getImgURIApi,getFaceCoverUrlApi } from 'api/Article/article'
-    import { getCategoryListApi } from 'api/Category/category'
+    import { getArticleCategoryAllApi } from 'api/ArticleCategory/articleCategory'
+    import { getArticleTagAllApi } from 'api/ArticleTag/articleTag'
     import { checkContent } from 'base/js/check'
     import ArticleTemplate from '../ArticleTemplate/ArticleTemplate'
   export default {  
@@ -41,8 +51,10 @@
     	return {
         title: '',
         weight: 0,
-    		categoryNames: [],
-        categoryList: [],
+    		articleCategoryIds: [],
+        articleTagIds: [],
+        articleCategoryList: [],
+        articleTagList: [],
         content: '',
         img_file: {},
         faceCover: '',
@@ -50,9 +62,14 @@
     	}
     },
     created() {
-      getCategoryListApi((res)=>{
+      getArticleCategoryAllApi((res)=>{
         if (res.data.code == 200) {
-         this.categoryList = res.data.result
+         this.articleCategoryList = res.data.result
+        }
+      })
+      getArticleTagAllApi((res)=>{
+        if (res.data.code == 200) {
+         this.articleTagList = res.data.result
         }
       })
     },
@@ -101,13 +118,15 @@
         })
       },
       finish() {
-        console.log(this.weight)
-        if (checkContent(this.title,this.categoryNames,this.content,this.faceCover)) {
-          addArticleApi(this.title,this.weight,this.categoryNames,this.content,this.faceCover,(res)=>{
+        console.log(this.articleTagIds)
+        if (checkContent(this.title,this.articleCategoryIds,this.articleTagIds,this.content,this.faceCover)) {
+          addArticleApi(this.title,this.weight,this.articleCategoryIds,this.articleTagIds,this.content,
+            this.faceCover,(res)=>{
             if(res.data.code==200) {
                 alert('发表成功了')
                 this.title = ''
-                this.categoryNames=[]
+                this.articleCategoryIds=[]
+                this.articleTagIds = []
                 this.content=''
             }
           })
