@@ -1,4 +1,5 @@
 @import url("../../../../base/style/constant.less");
+@import url("../../../../base/style/an.less");
 @media screen and (min-width: @pc_width) {
 .ArchiveTimeYearList {
 	display: flex;
@@ -8,7 +9,7 @@
 	.ArchiveTimeYearItem {
 		flex: 0 1 33%;
 		max-width: 33%;
-		height: 150px;
+		height: 170px;
 		transition: all .3s ease-out;
 		list-style: none;
 	    overflow: hidden;
@@ -18,14 +19,22 @@
 		display: flex;
 		flex-direction: column;
 		margin-bottom: 20px;
+		&:hover {
+			.cover {img {.image-scale-after !important;}}
+		}
 		.monthAndDay {
-			font-size: 18px;
+			font-size: 17px;
 		}
 		.content {
 			display: flex;
 			.cover {
+				overflow: hidden;
 				img {
 					max-height: 150px;
+					display: block;
+					vertical-align: middle;
+					.image-scale-before;
+					.image-opacity;
 				}
 			}
 			.detail {

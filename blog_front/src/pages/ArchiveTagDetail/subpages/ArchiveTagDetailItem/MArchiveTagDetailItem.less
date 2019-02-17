@@ -4,17 +4,22 @@
 	position: relative;
 	display: flex;
 	flex-direction: column;
+	height: 100%;
+    padding: 20px 50px;
+    margin-bottom: 100px;
 	.ArchiveTagDetailItem {
 		display: flex;
-		justify-content: space-between;
 		overflow: hidden;
 		padding: 0 20px;
 		margin-bottom: 20px;
+		height: 120px;
 		&:hover {
 			.cover {img {.image-scale-after}}
 		}
 		.cover {
+			flex: 1;
 			overflow: hidden;
+			min-width: 50%;
 			a {
 				display: block;
 				max-height: 100%;
