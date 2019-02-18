@@ -42,8 +42,8 @@ class ArchiveTagItem extends React.Component {
 			fontSize: fontSize
 		}
 		return (
-          <Link to="/archiveTag/1" className="ArchiveTagItem" style={itemStyle}>
-          	 {this.props.tagName}
+          <Link to={"/archiveTag/" + this.props.item.id} className="ArchiveTagItem" style={itemStyle}>
+          	 {this.props.item.name}
           </Link>
         )
 	}

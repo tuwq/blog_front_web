@@ -59,4 +59,6 @@ global.childCommentPageSize = 3
 global.dynamicInitiatePageSize = 5
 global.dynamicReceivePageSize = 5
 global.musicSongPageSize = 20
+global.archiveTagPageSize = 12
+global.archiveTimePageSize = 10
 

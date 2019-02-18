@@ -3,10 +3,12 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { withRouter } from 'react-router-dom'
 import DocumentTitle from 'react-document-title'
 
+
 import FriendList from './subpages/FriendList/FriendList'
 import FriendTitle from './subpages/FriendTitle/FriendTitle'
 
 import { getFriendsApi } from 'api/Friend/friend'
+import { shuffle } from 'base/js/util'
 
 import './Friend.less'
 import './MFriend.less'
@@ -35,7 +37,7 @@ class Friend extends React.Component {
 		getFriendsApi((res)=>{
 			if (res.data.code == 200) {
 				this.setState({
-					data: res.data.result
+					data: shuffle(res.data.result)
 				})
 			}
 		})

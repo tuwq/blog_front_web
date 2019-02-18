@@ -1,1 +1,1 @@
-@media screen and (min-width:800px){.ArchiveTagDetailCollection{height:100%;overflow:hidden;background-color:rgba(255,255,255,.9);border-radius:10px}}
+@media screen and (min-width:800px){.ArchiveTagDetailCollection{overflow:hidden;height:100%;background-color:rgba(255,255,255,.9);border-radius:10px;display:flex;flex-direction:column}}

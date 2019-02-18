@@ -18,7 +18,7 @@ class ArchiveTagDetailTitle extends React.Component {
 	render() {
 		return (
           <div className="ArchiveTagDetailTitle">
-          	<h1 className="title">{this.props.tagName}</h1>	
+          	<h1 className="title">{this.props.articleTag.name}</h1>	
           </div>
         )
 	}

@@ -13,7 +13,7 @@ class ArchiveTimeYearCollection extends React.Component {
 
 	constructor(props,context) {
 		super(props,context)
-		this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+		this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
 	}
 
 	componentDidMount() {
@@ -23,8 +23,8 @@ class ArchiveTimeYearCollection extends React.Component {
 	render() {
 		return (
           <div className="ArchiveTimeYearCollection">
-          	 <ArchiveTimeYearTitle yearTime='2019'/>
-          	 <ArchiveTimeYearList />
+      		<ArchiveTimeYearTitle yearTime='2019'/>
+  	 		<ArchiveTimeYearList />
           </div>
         )
 	}

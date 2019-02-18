@@ -17,21 +17,15 @@ class ArchiveTagDetailList extends React.Component {
 	componentDidMount() {
 
 	}
+
 	render() {
 		return (
           <div className="ArchiveTagDetailList">
-           	<ArchiveTagDetailItem />
-           	<ArchiveTagDetailItem />
-           	<ArchiveTagDetailItem />
-           	<ArchiveTagDetailItem />
-            <ArchiveTagDetailItem />
-            <ArchiveTagDetailItem />
-            <ArchiveTagDetailItem />
-            <ArchiveTagDetailItem />
-            <ArchiveTagDetailItem />
-            <ArchiveTagDetailItem />
-            <ArchiveTagDetailItem />
-            <ArchiveTagDetailItem />
+            {
+              this.props.data.map((item, index)=>{
+                return (<ArchiveTagDetailItem item={item} key={index}/>)
+              })
+            }
           </div>
         )
 	}
