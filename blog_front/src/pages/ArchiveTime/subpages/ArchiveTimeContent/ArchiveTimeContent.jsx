@@ -22,9 +22,8 @@ class ArchiveTimeContent extends React.Component {
 		this.state = {
 			currentPage: 1,
 			pageSize: global.archiveTimePageSize,
-			data: [],
 			pageModel: {},
-			articleTag: {}
+			resultData: undefined
 		}
 	}
 
@@ -41,13 +40,11 @@ class ArchiveTimeContent extends React.Component {
 	pageData(page) {
 		pageArticleByCreateTimeApi(page, this.state.pageSize, (res)=>{
 			if (res.data.code == RESULT_CODE.REQUEST_SUCCESS) {
+				let resultData = res.data.mapData
 				this.setState({
-					data: res.data.data,
+					resultData: resultData,
 					pageModel: res.data.pageModel,
 					currentPage: res.data.pageModel.currentPage
-				})
-				res.data.data.map((item)=>{
-					console.log(item.createTime)
 				})
 			}
 		})
@@ -56,9 +53,20 @@ class ArchiveTimeContent extends React.Component {
 	render() {
 		return (
           <div className="ArchiveTimeContent">
-          	<ArchiveTimeYearCollection />
-          	<ArchiveTimeYearCollection />
-          	<ArchiveTimeYearCollection />
+          	{
+      			this.state.resultData!=undefined
+      			?(<React.Fragment>
+      				{
+      					Object.keys(this.state.resultData).sort((a, b)=>{
+							return b - a;
+						}).map((key, index) => {
+		          			return (<ArchiveTimeYearCollection data={this.state.resultData[key]} yearTime={key} key={index}/>)
+		          		})
+      				}	
+      				<Pagination pageModel={this.state.pageModel} loadPageFn={this.pageData.bind(this)}/>
+      			</React.Fragment>)
+      			:(<div></div>)
+          	}
           </div>
         )
 	}

@@ -23,8 +23,8 @@ class ArchiveTimeYearCollection extends React.Component {
 	render() {
 		return (
           <div className="ArchiveTimeYearCollection">
-      		<ArchiveTimeYearTitle yearTime='2019'/>
-  	 		<ArchiveTimeYearList />
+      		<ArchiveTimeYearTitle yearTime={this.props.yearTime}/>
+  	 		<ArchiveTimeYearList data={this.props.data}/>
           </div>
         )
 	}

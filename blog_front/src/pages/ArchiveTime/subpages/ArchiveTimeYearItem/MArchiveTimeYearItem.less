@@ -16,28 +16,25 @@
 		&:hover {
 			.cover {img {.image-scale-after}}
 		}
-		.cover {
-			overflow: hidden;
-			a {
-				display: block;
-				max-height: 100%;
-				img {
-					display: block;
-					vertical-align: middle;
-					.image-scale-before;
-					.image-opacity;
-				}
-			}
-		}
 		.monthAndDay {
+			display: block;
 			font-size: 18px;
 		}
 		.content {
 			display: flex;
 			flex-direction: column;
 			.cover {
-				img {
-					max-height: 150px;
+				overflow: hidden;
+				a {
+					display: block;
+					max-height: 100%;
+					img {
+						width: 180px;
+						height: 125px;
+						border-radius: 50%;
+						.image-scale-before;
+						.image-opacity;
+					}
 				}
 			}
 			.detail {
@@ -45,10 +42,22 @@
 				display: flex;
 				flex-direction: column;
 				justify-content: space-around;
+				.detail-title-wrapper {
+					overflow: hidden;
+					text-overflow: ellipsis;
+				}
+				.detail-control {
+					flex: 1;
+					overflow: hidden;
+					max-height: 50px;
+				}
 				.detail-title {
-					display: inline-block;
-					font-size: 18px;
-					text-align: center;
+					display: block;
+					max-height: 24px;
+					font-size: 16px;
+					font-weight: 400;
+					overflow: hidden;
+					text-overflow: ellipsis;
 				}
 				.detail-category {
 					position: relative;

@@ -6,15 +6,17 @@
 	align-content: flex-start;
 	flex-wrap: wrap;
 	height: 100%;
+	width: 90%;
+	margin: 0 auto;
 	.ArchiveTimeYearItem {
 		flex: 0 1 33%;
 		max-width: 33%;
-		height: 170px;
+		height: 160px;
 		transition: all .3s ease-out;
 		list-style: none;
 	    overflow: hidden;
 	    display: flex;
-	    align-items: center;
+	    justify-content: center;
 		overflow: hidden;
 		display: flex;
 		flex-direction: column;
@@ -23,29 +25,51 @@
 			.cover {img {.image-scale-after !important;}}
 		}
 		.monthAndDay {
+			display: block;
+			flex: 1;
 			font-size: 17px;
 		}
 		.content {
 			display: flex;
+			height: 100%;
 			.cover {
+				height: 100%;
+				flex: 0 1 40%;
+				max-width: 40%;
 				overflow: hidden;
-				img {
-					max-height: 150px;
-					display: block;
-					vertical-align: middle;
-					.image-scale-before;
-					.image-opacity;
+				a {
+					img {
+						width: 180px;
+						height: 125px;
+						border-radius: 50%;
+						.image-scale-before;
+						.image-opacity;
+					}
 				}
 			}
 			.detail {
-				padding-left: 8px;
 				display: flex;
+				padding-left: 8px;
+				flex: 0 1 60%;
+				max-width: 60%;
+				width: 0;
 				flex-direction: column;
-				justify-content: space-around;
+				.detail-title-wrapper {
+					overflow: hidden;
+					text-overflow: ellipsis;
+				}
+				.detail-control {
+					flex: 1;
+					overflow: hidden;
+					max-height: 50px;
+				}
 				.detail-title {
-					display: inline-block;
-					font-size: 18px;
-					text-align: center;
+					display: block;
+					max-height: 24px;
+					font-size: 16px;
+					font-weight: 400;
+					overflow: hidden;
+					text-overflow: ellipsis;
 				}
 				.detail-category {
 					position: relative;

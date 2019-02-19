@@ -21,11 +21,11 @@ class ArchiveTimeYearList extends React.Component {
 	render() {
 		return (
           <div className="ArchiveTimeYearList">
-          	 <ArchiveTimeYearItem />
-          	 <ArchiveTimeYearItem />
-          	 <ArchiveTimeYearItem />
-          	 <ArchiveTimeYearItem />
-          	 <ArchiveTimeYearItem />
+          	 {
+          	 	this.props.data.map((item, index)=>{
+          	 		return (<ArchiveTimeYearItem item={item} key={index}/>)
+          	 	})
+          	 }
           </div>
         )
 	}

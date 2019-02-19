@@ -19,24 +19,28 @@ class ArchiveTimeYearItem extends React.Component {
 	render() {
 		return (
           <div className="ArchiveTimeYearItem">
-          	 <h4 className="monthAndDay">8月31日</h4>
+          	 <h4 className="monthAndDay">{this.props.item.monthString}月{this.props.item.dayString}日</h4>
           	 <div className="content">
           	 	<div className="cover">
-          	 		<Link to={'/article/1'}><img alt="" src='http://img.twenq.com/upload/artimg/2019/1/1547211260_49656023_p0_master1200.jpg'></img></Link>
+          	 		<Link to={'/article/' + this.props.item.id}><img alt="" src={global.artImgPrefix+this.props.item.faceCover}></img></Link>
           	 	</div>
           	 	<div className="detail">
-          	 		<div className="detail-control">
-          	 			<Link to={'/article/1'} className="detail-title">Web常见安全漏洞</Link>
+          	 		<div className="detail-title-wrapper">
+          	 			<Link to={'/article/' + this.props.item.id} className="detail-title">{this.props.item.title}</Link>
           	 		</div>
           	 		<div className="detail-control">
-          	 			
-          	 			<a className="detail-category">文章</a>
-          	 			<a className="detail-category">短代码</a>
+                              {
+                                   this.props.item.articleCategoryList.map((item, index)=>{
+                                        return (<Link to={'category/' + item.id} key={index} className="detail-category">{item.name}</Link>)
+                                   })
+                              }
           	 		</div>
           	 		<div className="detail-control">
-          	 			<a className="detail-tag">Java</a>
-          	 			<a className="detail-tag">分布式</a>
-          	 			<a className="detail-tag">分布式</a>
+                              {
+                                   this.props.item.articleTagList.map((item, index)=>{
+                                        return (<Link to={'archiveTag/' + item.id} key={index} className="detail-tag">{item.name}</Link>)
+                                   })
+                              }
           	 		</div>
           	 	</div>
           	 </div>
