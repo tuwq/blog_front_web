@@ -10,6 +10,7 @@ import {
 } from 'react-router-dom';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 
+import BackGround from '@/pages/BackGround/BackGround'
 import HomeHeader from '@/pages/Home/HomeHeader/HomeHeader'
 import HomeFooter from '@/pages/Home/HomeFooter/HomeFooter'
 import FixControl from 'base/general/FixControl/FixControl'
@@ -41,19 +42,21 @@ class Main extends Component {
     return (
         <React.Fragment>
           <HomeHeader />
-          <Switch>
-            <Route exact path="/" component={HomeRouter} />
-            <Route path="/user" component={UserRouter} />
-            <Route path="/search" component={SearchRouter} />
-            <Route path="/category" component={CategoryRouter} />
-            <Route path="/article" component={ArticleRouter} />
-            <Route path="/archiveTag" component={ArchiveTagRouter} />
-            <Route path="/archiveTime" component={ArchiveTimeRouter} />
-            <Route path="/archiveCategory" component={ArchiveCategoryRouter} />
-            <Route path="/music" component={MusicRouter} />
-            <Route path="/friend" component={Friend} />
-            <Route path="*" component={NotFound} />
-          </Switch>
+            <BackGround>
+            <Switch>
+              <Route exact path="/" component={HomeRouter} />
+              <Route path="/user" component={UserRouter} />
+              <Route path="/search" component={SearchRouter} />
+              <Route path="/category" component={CategoryRouter} />
+              <Route path="/article" component={ArticleRouter} />
+              <Route path="/archiveTag" component={ArchiveTagRouter} />
+              <Route path="/archiveTime" component={ArchiveTimeRouter} />
+              <Route path="/archiveCategory" component={ArchiveCategoryRouter} />
+              <Route path="/music" component={MusicRouter} />
+              <Route path="/friend" component={Friend} />
+              <Route path="*" component={NotFound} />
+            </Switch>
+            </BackGround>
           <HomeFooter />
           <FixControl />
           <SearchModal />
