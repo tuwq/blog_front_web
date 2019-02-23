@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import root.beans.PageModel;
 import root.beans.PageResult;
 import root.constant.ResultCode;
-import root.dto.ArticaleDto;
+import root.dto.ArticleDto;
 import root.exception.CheckParamException;
 import root.exception.SearchNoResultException;
 import root.mapper.ArticleMapper;
@@ -31,7 +31,7 @@ public class SearchService {
 	@Resource
 	private ArticleCategoryMapper categoryMapper;
 	
-	public PageResult<ArticaleDto> pageKeyword(PageParam param, String keyword) {
+	public PageResult<ArticleDto> pageKeyword(PageParam param, String keyword) {
 		// 检查字段
 		// 获得根据关键字查询的的文章总数
 		// 如果没有数量返回无内容异常
@@ -54,7 +54,7 @@ public class SearchService {
 			List<ArticleCategory> cateList = categoryMapper.getArtCategoryListById(ids.get(i));
 			data.get(i).setArticleCategoryList(cateList);
 		}
-		List<ArticaleDto> dtoList = data.stream().map(item -> DtoUtil.adapt(new ArticaleDto(), item)).collect(Collectors.toList());
+		List<ArticleDto> dtoList = data.stream().map(item -> DtoUtil.adapt(new ArticleDto(), item)).collect(Collectors.toList());
 		dtoList.forEach(dto -> {
 			List<String> cateNameList = dto.getArticleCategoryList().stream().map(item -> item.getName()).collect(Collectors.toList());
 			dto.setArticleCategoryName(String.join(",", cateNameList));
@@ -63,10 +63,10 @@ public class SearchService {
 			dto.formatNoSecondTime();
 		});
 		PageModel pageModel = new PageModel(total,dtoList.size(),param.getCurrentPage(),param.getPageSize());
-		return PageResult.<ArticaleDto>builder().pageModel(pageModel).data(dtoList).code(200).build();
+		return PageResult.<ArticleDto>builder().pageModel(pageModel).data(dtoList).code(200).build();
 	}
 
-	public PageResult<ArticaleDto> pageAll(PageParam param) {
+	public PageResult<ArticleDto> pageAll(PageParam param) {
 		// 检查字段
 		// 查询文章总数
 		// 没有数量返回无内容异常
@@ -86,7 +86,7 @@ public class SearchService {
 			List<ArticleCategory> cateList = categoryMapper.getArtCategoryListById(ids.get(i));
 			data.get(i).setArticleCategoryList(cateList);
 		}
-		List<ArticaleDto> dtoList = data.stream().map(item -> DtoUtil.adapt(new ArticaleDto(), item)).collect(Collectors.toList());
+		List<ArticleDto> dtoList = data.stream().map(item -> DtoUtil.adapt(new ArticleDto(), item)).collect(Collectors.toList());
 		dtoList.forEach(dto -> {
 			List<String> cateNameList = dto.getArticleCategoryList().stream().map(item -> item.getName()).collect(Collectors.toList());
 			dto.setArticleCategoryName(String.join(",", cateNameList));
@@ -95,7 +95,7 @@ public class SearchService {
 			dto.formatNoSecondTime();
 		});
 		PageModel pageModel = new PageModel(total,dtoList.size(),param.getCurrentPage(),param.getPageSize());
-		return PageResult.<ArticaleDto>builder().pageModel(pageModel).data(dtoList).code(200).build();
+		return PageResult.<ArticleDto>builder().pageModel(pageModel).data(dtoList).code(200).build();
 	}
 
 	

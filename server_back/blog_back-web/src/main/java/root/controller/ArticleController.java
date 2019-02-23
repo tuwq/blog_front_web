@@ -20,7 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import root.beans.ImgURIResult;
 import root.beans.JsonResult;
 import root.beans.PageResult;
-import root.dto.ArticaleDto;
+import root.dto.ArticleDto;
 import root.exception.CheckParamException;
 import root.model.Article;
 import root.param.ArticleParam;
@@ -46,7 +46,7 @@ public class ArticleController {
 	}
 	
 	@GetMapping("/list")
-	public PageResult<ArticaleDto> list(PageParam param) {
+	public PageResult<ArticleDto> list(PageParam param) {
 		return articleService.list(param);
 	}
 	
@@ -63,12 +63,12 @@ public class ArticleController {
 	}
 	
 	@PostMapping("/search")
-	public PageResult<ArticaleDto> listBySearch(@RequestBody PageParam param) {
+	public PageResult<ArticleDto> listBySearch(@RequestBody PageParam param) {
 		return articleService.listByKeyWord(param.getKeyword(),param);
 	} 
 	
 	@GetMapping("/{id}")
-	public JsonResult<ArticaleDto> detail(@PathVariable("id") String id) {
+	public JsonResult<ArticleDto> detail(@PathVariable("id") String id) {
 		if(!StringUtils.isNumeric(id)) {
 			throw new CheckParamException("文章","不存在");
 		}

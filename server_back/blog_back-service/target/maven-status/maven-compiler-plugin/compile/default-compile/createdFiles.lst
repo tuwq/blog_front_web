@@ -1,8 +1,9 @@
 root\service\QiNiuMusicService.class
 root\service\FirendService.class
 root\service\QiNiuIMGService.class
+root\service\ArticleTagService.class
 root\service\SysUserService.class
-root\service\CategoryService.class
+root\service\ArticleCategoryService.class
 root\service\TokenService.class
 root\service\ArticleService.class
 root\service\StatisicService.class

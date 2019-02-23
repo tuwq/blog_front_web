@@ -5,7 +5,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import root.constant.ResultCode;
-import root.dto.ArticaleDto;
+import root.dto.ArticleDto;
 import root.dto.SysUserDto;
 import root.exception.TokenException;
 import root.mapper.SysUserMapper;

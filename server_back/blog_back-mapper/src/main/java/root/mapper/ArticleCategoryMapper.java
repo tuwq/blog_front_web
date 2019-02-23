@@ -20,11 +20,11 @@ public interface ArticleCategoryMapper {
 
     int updateByPrimaryKey(ArticleCategory record);
     /**
-     * 获得指定文章id的分类列表
+     * 获取文章的分类列表
      * @param integer
      * @return
      */
-	List<ArticleCategory> getArtCategoryListById(@Param("id") Integer id);
+	List<ArticleCategory> getArticleCategoryListById(@Param("articleId") Integer articleId);
 	/**
 	 * 获得全部的分类
 	 * @return

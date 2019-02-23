@@ -23,5 +23,7 @@ public class ImgConfigDto{
 	private String logoImg;
 	// 7 轮播
 	private List<String> sliderImgList;
+	// 8 主背景
+	private String mainImg;
 	
 }

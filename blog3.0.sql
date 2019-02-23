@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 127.0.0.1
-Source Server Version : 80011
-Source Host           : localhost:3306
+Source Server         : 47.106.191.63
+Source Server Version : 50725
+Source Host           : 47.106.191.63:3306
 Source Database       : blog
 
 Target Server Type    : MYSQL
-Target Server Version : 80011
+Target Server Version : 50725
 File Encoding         : 65001
 
-Date: 2019-02-13 19:56:54
+Date: 2019-02-23 19:21:45
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -57,7 +57,7 @@ CREATE TABLE `article_bind_article_category` (
   `article_id` int(11) NOT NULL COMMENT '文章id',
   `article_category_id` int(11) NOT NULL COMMENT '分类id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1768 DEFAULT CHARSET=utf8 COMMENT='处理分类与文章关系的数据表,文章需要通过该表获得分类信息';
+) ENGINE=InnoDB AUTO_INCREMENT=1839 DEFAULT CHARSET=utf8 COMMENT='处理分类与文章关系的数据表,文章需要通过该表获得分类信息';
 
 -- ----------------------------
 -- Table structure for article_bind_article_tag
@@ -68,7 +68,7 @@ CREATE TABLE `article_bind_article_tag` (
   `article_tag_id` int(11) NOT NULL COMMENT '文章标签的id',
   `article_id` int(11) NOT NULL COMMENT '文章的id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for article_category
@@ -80,6 +80,7 @@ CREATE TABLE `article_category` (
   `desc` varchar(255) NOT NULL DEFAULT '' COMMENT '分类的描述',
   `article_sum` int(10) NOT NULL DEFAULT '0' COMMENT '该分类的文章数量,由消息队列更新',
   `comment_sum` int(10) NOT NULL DEFAULT '0' COMMENT '分类的评论数量,由定时任务进行更新',
+  `parent_categoray_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='分类的数据表,描述分类的信息';
 
@@ -89,13 +90,13 @@ CREATE TABLE `article_category` (
 DROP TABLE IF EXISTS `article_tag`;
 CREATE TABLE `article_tag` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '文章标签的名称',
-  `desc` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '文章标签的描述',
+  `name` varchar(255) NOT NULL COMMENT '文章标签的名称',
+  `desc` varchar(255) NOT NULL COMMENT '文章标签的描述',
   `article_sum` int(11) NOT NULL COMMENT '文章标签的文章数量',
   `comment_sum` int(11) NOT NULL COMMENT '文章标签的评论数量',
   `weight` int(11) NOT NULL COMMENT '文章标签的排序权重',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='文章标签表';
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COMMENT='文章标签表';
 
 -- ----------------------------
 -- Table structure for article_tag_bind_article_category
@@ -124,7 +125,7 @@ CREATE TABLE `comment` (
   `approval` int(20) NOT NULL DEFAULT '0' COMMENT '评论的赞数',
   `oppose` int(20) NOT NULL DEFAULT '0' COMMENT '评论的踩数',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='评论的数据表,添加parent_id和root_id字段使其支持评论嵌套';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='评论的数据表,添加parent_id和root_id字段使其支持评论嵌套';
 
 -- ----------------------------
 -- Table structure for friend
@@ -154,7 +155,7 @@ CREATE TABLE `front_img_config` (
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建的时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新的时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='前台页面配置表，方便更换背景图片等信息';
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='前台页面配置表，方便更换背景图片等信息';
 
 -- ----------------------------
 -- Table structure for song
@@ -269,7 +270,7 @@ CREATE TABLE `user_initiate_dynamic` (
   `initiate_user_id` int(11) NOT NULL COMMENT '动态发起者的id',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建动态的时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='动态数据表.用于监视用户的动作';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='动态数据表.用于监视用户的动作';
 
 -- ----------------------------
 -- Table structure for user_receive_dynamic
@@ -282,4 +283,4 @@ CREATE TABLE `user_receive_dynamic` (
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建动态的时间',
   `visit` int(11) NOT NULL DEFAULT '0' COMMENT '用户是否看过这条动态,0:没看过,1:看过',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;

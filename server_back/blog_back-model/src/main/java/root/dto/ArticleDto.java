@@ -4,14 +4,19 @@ import java.util.List;
 
 import lombok.Data;
 import root.model.Article;
+import root.model.ArticleCategory;
 import root.util.TimeUtil;
 
 @Data
-public class ArticaleDto extends Article{
+public class ArticleDto extends Article {
 	// 分类
 	private String categoryName;
 	// 分类id数组
-	private List<Integer> categoryIds;
+	private List<Integer> articleCategoryIds;
+	// 标签id数组
+	private List<Integer> articleTagIds;
+	// 分类数据
+	private List<ArticleCategory> articleCategoryList;
 	// 操作人名
 	private String operatorerName;
 	// ..日前的时间格式

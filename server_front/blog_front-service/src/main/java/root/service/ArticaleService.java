@@ -15,7 +15,7 @@ import root.beans.JsonResult;
 import root.configConstant.BlogConfigProperties;
 import root.constant.RedisCode;
 import root.constant.ResultCode;
-import root.dto.ArticaleDto;
+import root.dto.ArticleDto;
 import root.exception.CheckParamException;
 import root.exception.NotFoundException;
 import root.mapper.ArticleMapper;
@@ -41,7 +41,7 @@ public class ArticaleService {
 	@Resource
 	private BlogConfigProperties blogConfigProperties;
 	
-	public JsonResult<ArticaleDto> detail(Integer id) {
+	public JsonResult<ArticleDto> detail(Integer id) {
 		// 检查字段,访问id不存在去404
 		// 检查资源是否存在,不存在去404
 		// 获得文章信息
@@ -57,14 +57,14 @@ public class ArticaleService {
 		}
 		String artDtoJson = redis.get(RedisCode.ARTICLE_INFO_CACHE+":"+id);
 		if (artDtoJson != null) {
-			ArticaleDto cacheDto = JsonUtils.jsonToPojo(artDtoJson, ArticaleDto.class);
+			ArticleDto cacheDto = JsonUtils.jsonToPojo(artDtoJson, ArticleDto.class);
 			incrDataHandler.articleBrowseIncr(id);
-			return JsonResult.<ArticaleDto>success(cacheDto);
+			return JsonResult.<ArticleDto>success(cacheDto);
 		}
 		Article articale = articaleMapper.getByIdWithUser(id);
 		List<ArticleCategory> categoryList = categoryMapper.getArtCategoryListById(id);
 		articale.setArticleCategoryList(categoryList);
-		ArticaleDto articaleDto = DtoUtil.adapt(new ArticaleDto(), articale);
+		ArticleDto articaleDto = DtoUtil.adapt(new ArticleDto(), articale);
 		Article prev = articaleMapper.getPrev(id);
 		Article next = articaleMapper.getNext(id);
 		articaleDto.setPrev(prev);
@@ -73,6 +73,6 @@ public class ArticaleService {
 		articaleDto.formatNoSecondTime();
 		redis.set(RedisCode.ARTICLE_INFO_CACHE+":"+id,JsonUtils.objectToJson(articaleDto),blogConfigProperties.getCache().getArticleInfoTimeout());
 		incrDataHandler.articleBrowseIncr(id);
-		return JsonResult.<ArticaleDto>success(articaleDto);
+		return JsonResult.<ArticleDto>success(articaleDto);
 	}
 }

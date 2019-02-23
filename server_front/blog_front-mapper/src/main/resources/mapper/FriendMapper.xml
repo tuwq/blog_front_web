@@ -53,7 +53,7 @@
       #{avatar,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR}, #{weight,jdbcType=INTEGER}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="root.model.Friend" >
+  <insert id="insertSelective" parameterType="root.model.Friend" keyProperty="id" useGeneratedKeys="true">
     insert into friend
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

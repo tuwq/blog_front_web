@@ -1,15 +1,17 @@
 package root.model;
 
-public class ArticleCategory {
+public class  ArticleCategory {
     private Integer id;
 
     private String name;
-    
+
     private String desc;
 
     private Integer articleSum;
 
     private Integer commentSum;
+
+    private Integer parentCategorayId;
 
     public Integer getId() {
         return id;
@@ -28,26 +30,34 @@ public class ArticleCategory {
     }
 
     public String getDesc() {
-		return desc;
-	}
+        return desc;
+    }
 
-	public void setDesc(String desc) {
-		this.desc = desc;
-	}
+    public void setDesc(String desc) {
+        this.desc = desc == null ? null : desc.trim();
+    }
 
-	public Integer getArticleSum() {
-		return articleSum;
-	}
+    public Integer getArticleSum() {
+        return articleSum;
+    }
 
-	public void setArticleSum(Integer articleSum) {
-		this.articleSum = articleSum;
-	}
+    public void setArticleSum(Integer articleSum) {
+        this.articleSum = articleSum;
+    }
 
-	public Integer getCommentSum() {
+    public Integer getCommentSum() {
         return commentSum;
     }
 
     public void setCommentSum(Integer commentSum) {
         this.commentSum = commentSum;
+    }
+
+    public Integer getParentCategorayId() {
+        return parentCategorayId;
+    }
+
+    public void setParentCategorayId(Integer parentCategorayId) {
+        this.parentCategorayId = parentCategorayId;
     }
 }

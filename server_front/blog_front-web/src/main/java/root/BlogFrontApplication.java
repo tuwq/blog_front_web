@@ -11,7 +11,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 @MapperScan(basePackages="root.mapper")
 public class BlogFrontApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(BlogFrontApplication.class, args);
 	}

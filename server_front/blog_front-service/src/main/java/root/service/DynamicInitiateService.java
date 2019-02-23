@@ -14,7 +14,7 @@ import com.google.common.collect.Lists;
 import root.beans.PageModel;
 import root.beans.PageResult;
 import root.constant.ResultCode;
-import root.dto.ArticaleDto;
+import root.dto.ArticleDto;
 import root.dto.CommentDto;
 import root.dto.DynamicInitiateDto;
 import root.exception.CheckParamException;
@@ -96,7 +96,7 @@ public class DynamicInitiateService {
 			commentDto.formatNoSecondTime();
 			commentDto.setTimeAgo(TimeAgoUtils.format(commentDto.getCreateTime()));
 			DynamicInitiateDto dynamicDto = DynamicInitiateDto.builder()
-								.articaleDto(DtoUtil.adapt(new ArticaleDto(), articale))
+								.articaleDto(DtoUtil.adapt(new ArticleDto(), articale))
 								.commentDto(commentDto)
 								.userInitiateDynamic(commentDynamic).build();
 			dynamicDtos.add(dynamicDto);
@@ -124,7 +124,7 @@ public class DynamicInitiateService {
 			commentDto.setTimeAgo(TimeAgoUtils.format(commentDto.getCreateTime()));
 			commentDto.setParentUser(parentUser);
 			DynamicInitiateDto dynamicDto = DynamicInitiateDto.builder()
-										.articaleDto(DtoUtil.adapt(new ArticaleDto(), articale))
+										.articaleDto(DtoUtil.adapt(new ArticleDto(), articale))
 										.commentDto(commentDto)
 										.userInitiateDynamic(commentDynamic).build();
 			dynamicDtos.add(dynamicDto);

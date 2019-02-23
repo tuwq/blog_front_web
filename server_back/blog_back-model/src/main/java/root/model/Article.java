@@ -39,8 +39,6 @@ public class Article {
 
     private String content;
     
-    private List<ArticleCategory> articleCategoryList;
-    
     private User user;
 
     public Integer getId() {
@@ -162,14 +160,6 @@ public class Article {
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	public List<ArticleCategory> getArticleCategoryList() {
-		return articleCategoryList;
-	}
-
-	public void setArticleCategoryList(List<ArticleCategory> articleCategoryList) {
-		this.articleCategoryList = articleCategoryList;
 	}
 
 }

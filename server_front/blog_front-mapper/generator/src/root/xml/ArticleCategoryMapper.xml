@@ -7,9 +7,10 @@
     <result column="desc" property="desc" jdbcType="VARCHAR" />
     <result column="article_sum" property="articleSum" jdbcType="INTEGER" />
     <result column="comment_sum" property="commentSum" jdbcType="INTEGER" />
+    <result column="parent_categoray_id" property="parentCategorayId" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, name, desc, article_sum, comment_sum
+    id, name, desc, article_sum, comment_sum, parent_categoray_id
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -23,9 +24,11 @@
   </delete>
   <insert id="insert" parameterType="root.model.ArticleCategory" >
     insert into article_category (id, name, desc, 
-      article_sum, comment_sum)
+      article_sum, comment_sum, parent_categoray_id
+      )
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR}, 
-      #{articleSum,jdbcType=INTEGER}, #{commentSum,jdbcType=INTEGER})
+      #{articleSum,jdbcType=INTEGER}, #{commentSum,jdbcType=INTEGER}, #{parentCategorayId,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="root.model.ArticleCategory" >
     insert into article_category
@@ -45,6 +48,9 @@
       <if test="commentSum != null" >
         comment_sum,
       </if>
+      <if test="parentCategorayId != null" >
+        parent_categoray_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -61,6 +67,9 @@
       </if>
       <if test="commentSum != null" >
         #{commentSum,jdbcType=INTEGER},
+      </if>
+      <if test="parentCategorayId != null" >
+        #{parentCategorayId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -79,6 +88,9 @@
       <if test="commentSum != null" >
         comment_sum = #{commentSum,jdbcType=INTEGER},
       </if>
+      <if test="parentCategorayId != null" >
+        parent_categoray_id = #{parentCategorayId,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -87,7 +99,8 @@
     set name = #{name,jdbcType=VARCHAR},
       desc = #{desc,jdbcType=VARCHAR},
       article_sum = #{articleSum,jdbcType=INTEGER},
-      comment_sum = #{commentSum,jdbcType=INTEGER}
+      comment_sum = #{commentSum,jdbcType=INTEGER},
+      parent_categoray_id = #{parentCategorayId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -3,6 +3,7 @@ D:\eclipse-workspace\blog_back\blog_back-model\src\main\java\root\model\UserFoll
 D:\eclipse-workspace\blog_back\blog_back-model\src\main\java\root\param\LoginParam.java
 D:\eclipse-workspace\blog_back\blog_back-model\src\main\java\root\beans\ImgNode.java
 D:\eclipse-workspace\blog_back\blog_back-model\src\main\java\root\beans\PageModel.java
+D:\eclipse-workspace\blog_back\blog_back-model\src\main\java\root\dto\ArticleCategoryDto.java
 D:\eclipse-workspace\blog_back\blog_back-model\src\main\java\root\beans\TokenExceptionResult.java
 D:\eclipse-workspace\blog_back\blog_back-model\src\main\java\root\dto\StatisicDto.java
 D:\eclipse-workspace\blog_back\blog_back-model\src\main\java\root\model\ArticleTagBindArticleCategory.java
@@ -15,14 +16,13 @@ D:\eclipse-workspace\blog_back\blog_back-model\src\main\java\root\dto\SysUserDto
 D:\eclipse-workspace\blog_back\blog_back-model\src\main\java\root\dto\EveryDayDto.java
 D:\eclipse-workspace\blog_back\blog_back-model\src\main\java\root\dto\ImgConfigDto.java
 D:\eclipse-workspace\blog_back\blog_back-model\src\main\java\root\model\SongBindSongCategory.java
+D:\eclipse-workspace\blog_back\blog_back-model\src\main\java\root\dto\ArticleDto.java
 D:\eclipse-workspace\blog_back\blog_back-model\src\main\java\root\param\PageParam.java
 D:\eclipse-workspace\blog_back\blog_back-model\src\main\java\root\model\UserInitiateDynamic.java
-D:\eclipse-workspace\blog_back\blog_back-model\src\main\java\root\dto\CategoryDto.java
 D:\eclipse-workspace\blog_back\blog_back-model\src\main\java\root\model\SysUser.java
 D:\eclipse-workspace\blog_back\blog_back-model\src\main\java\root\dto\UserDto.java
 D:\eclipse-workspace\blog_back\blog_back-model\src\main\java\root\model\ArticleBindArticleCategory.java
 D:\eclipse-workspace\blog_back\blog_back-model\src\main\java\root\param\ArticleParam.java
-D:\eclipse-workspace\blog_back\blog_back-model\src\main\java\root\dto\ArticaleDto.java
 D:\eclipse-workspace\blog_back\blog_back-model\src\main\java\root\param\FirendParam.java
 D:\eclipse-workspace\blog_back\blog_back-model\src\main\java\root\model\User.java
 D:\eclipse-workspace\blog_back\blog_back-model\src\main\java\root\beans\ImgURIResult.java

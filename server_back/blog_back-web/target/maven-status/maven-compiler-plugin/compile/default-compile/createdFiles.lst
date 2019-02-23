@@ -1,10 +1,11 @@
 root\controller\ConfigController.class
+root\controller\ArticleTagController.class
 root\controller\StatisicController.class
 root\controller\UserManageController.class
-root\controller\CategoryController.class
 root\controller\LoginController.class
 root\controller\MusicCategoryController.class
 root\Interceptor\TokenInterceptor.class
+root\controller\ArticleCategoryController.class
 root\controller\ArticleController.class
 root\advice\ExceptionAdvice.class
 root\controller\CommentController.class

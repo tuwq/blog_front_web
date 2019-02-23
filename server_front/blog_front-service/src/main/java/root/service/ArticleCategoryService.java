@@ -1,10 +1,11 @@
 package root.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
@@ -14,7 +15,8 @@ import root.beans.PageResult;
 import root.configConstant.BlogConfigProperties;
 import root.constant.RedisCode;
 import root.constant.ResultCode;
-import root.dto.ArticaleDto;
+import root.dto.ArticleDto;
+import root.dto.ArticleCategoryDto;
 import root.dto.ShowCategoryArticleDto;
 import root.exception.CheckParamException;
 import root.exception.NotFoundException;
@@ -41,7 +43,7 @@ public class ArticleCategoryService {
 	@Resource
 	private RedisOperator redis;
 	
-	public PageResult<ArticaleDto> categoryList(PageParam param, Integer id) {
+	public PageResult<ArticleDto> categoryList(PageParam param, Integer id) {
 		// 检查字段
 		// 分类id的分类是否存在，不存在返回404
 		// 分类id下的所有文章总数
@@ -60,40 +62,40 @@ public class ArticleCategoryService {
 		ArticleCategory category = categoryMapper.selectByPrimaryKey(id);
 		Long total = articaleMapper.countAllByCategoryId(id);
 		if(total == 0) {
-			return PageResult.<ArticaleDto>builder().data(Lists.newArrayList()).pageModel(new PageModel()).code(200).build();
+			return PageResult.<ArticleDto>builder().data(Lists.newArrayList()).pageModel(new PageModel()).code(200).build();
 		}
 		param.buildSkip();
 		List<Article> articaleList = articaleMapper.categoryPage(param.getSkip(),param.getPageSize(),id);
-		List<ArticaleDto> articaleDtoList = Lists.newArrayList();
+		List<ArticleDto> articaleDtoList = Lists.newArrayList();
 		articaleList.forEach(articale -> {
-			ArticaleDto articaleDto = DtoUtil.adapt(new ArticaleDto(), articale);
+			ArticleDto articaleDto = DtoUtil.adapt(new ArticleDto(), articale);
 			articaleDto.setTimeAgo(TimeAgoUtils.format(articaleDto.getCreateTime()));
 			articaleDto.formatNoSecondTime();
 			articaleDtoList.add(articaleDto);
 		});
 		PageModel pageModel = new PageModel(total,articaleDtoList.size(),param.getCurrentPage(),param.getPageSize());
-		return PageResult.<ArticaleDto>builder().category(category).pageModel(pageModel).code(200).data(articaleDtoList).build();
+		return PageResult.<ArticleDto>builder().category(category).pageModel(pageModel).code(200).data(articaleDtoList).build();
 	}
 	
-	public JsonResult<List<ArticaleDto>> praise(Integer quantity) {
+	public JsonResult<List<ArticleDto>> praise(Integer quantity) {
 		// 根据集体点赞数和更新时间获取指定数量文章数据
 		if (quantity == null) {
 			throw new CheckParamException("数量","未指定");
 		}
 		String cacheList = redis.get(RedisCode.ARTICLE_LIST_PRAISE_CACHE);
 		if (cacheList != null) {
-			return JsonResult.<List<ArticaleDto>>success(JsonUtils.jsonToList(cacheList, ArticaleDto.class));
+			return JsonResult.<List<ArticleDto>>success(JsonUtils.jsonToList(cacheList, ArticleDto.class));
 		}
 		List<Article> praiseList = articaleMapper.praiseByQuantity(quantity);
-		List<ArticaleDto> articaleDtoList = Lists.newArrayList();
+		List<ArticleDto> articaleDtoList = Lists.newArrayList();
 		praiseList.forEach(articale -> {
-			ArticaleDto articaleDto = DtoUtil.adapt(new ArticaleDto(), articale);
+			ArticleDto articaleDto = DtoUtil.adapt(new ArticleDto(), articale);
 			articaleDto.setTimeAgo(TimeAgoUtils.format(articaleDto.getUpdateTime()));
 			articaleDto.formatNoSecondTime();
 			articaleDtoList.add(articaleDto);
 		});
 		redis.set(RedisCode.ARTICLE_LIST_PRAISE_CACHE, JsonUtils.objectToJson(articaleDtoList),blogConfigProperties.getCache().getArticleListIndexTimeout());
-		return JsonResult.<List<ArticaleDto>>success(articaleDtoList);
+		return JsonResult.<List<ArticleDto>>success(articaleDtoList);
 	}
 
 	public JsonResult<ShowCategoryArticleDto> categoryArticale(Integer quantity) {
@@ -107,9 +109,9 @@ public class ArticleCategoryService {
 			return JsonResult.<ShowCategoryArticleDto>success(JsonUtils.jsonToPojo(cacheDto, ShowCategoryArticleDto.class));
 		}
 		List<Article> articaleList = articaleMapper.categoryArticle(blogConfigProperties.getCategory().getArticleId(),quantity);
-		List<ArticaleDto> articaleDtoList = Lists.newArrayList();
+		List<ArticleDto> articaleDtoList = Lists.newArrayList();
 		articaleList.forEach(articale -> {
-			ArticaleDto articaleDto = DtoUtil.adapt(new ArticaleDto(), articale);
+			ArticleDto articaleDto = DtoUtil.adapt(new ArticleDto(), articale);
 			articaleDto.setTimeAgo(TimeAgoUtils.format(articaleDto.getUpdateTime()));
 			articaleDto.formatNoSecondTime();
 			articaleDtoList.add(articaleDto);
@@ -132,9 +134,9 @@ public class ArticleCategoryService {
 			return JsonResult.<ShowCategoryArticleDto>success(JsonUtils.jsonToPojo(cacheDto, ShowCategoryArticleDto.class));
 		}
 		List<Article> articaleList = articaleMapper.categoryArticle(blogConfigProperties.getCategory().getNodeId(),quantity);
-		List<ArticaleDto> articaleDtoList = Lists.newArrayList();
+		List<ArticleDto> articaleDtoList = Lists.newArrayList();
 		articaleList.forEach(articale -> {
-			ArticaleDto articaleDto = DtoUtil.adapt(new ArticaleDto(), articale);
+			ArticleDto articaleDto = DtoUtil.adapt(new ArticleDto(), articale);
 			articaleDto.setTimeAgo(TimeAgoUtils.format(articaleDto.getUpdateTime()));
 			articaleDto.formatNoSecondTime();
 			articaleDtoList.add(articaleDto);
@@ -157,9 +159,9 @@ public class ArticleCategoryService {
 			return JsonResult.<ShowCategoryArticleDto>success(JsonUtils.jsonToPojo(cacheDto, ShowCategoryArticleDto.class));
 		}
 		List<Article> articaleList = articaleMapper.categoryArticle(blogConfigProperties.getCategory().getShortCodeId(),quantity);
-		List<ArticaleDto> articaleDtoList = Lists.newArrayList();
+		List<ArticleDto> articaleDtoList = Lists.newArrayList();
 		articaleList.forEach(articale -> {
-			ArticaleDto articaleDto = DtoUtil.adapt(new ArticaleDto(), articale);
+			ArticleDto articaleDto = DtoUtil.adapt(new ArticleDto(), articale);
 			articaleDto.setTimeAgo(TimeAgoUtils.format(articaleDto.getUpdateTime()));
 			articaleDto.formatNoSecondTime();
 			articaleDtoList.add(articaleDto);
@@ -182,9 +184,9 @@ public class ArticleCategoryService {
 			return JsonResult.<ShowCategoryArticleDto>success(JsonUtils.jsonToPojo(cacheDto, ShowCategoryArticleDto.class));
 		}
 		List<Article> articaleList = articaleMapper.categoryArticle(blogConfigProperties.getCategory().getChatId(),quantity);
-		List<ArticaleDto> articaleDtoList = Lists.newArrayList();
+		List<ArticleDto> articaleDtoList = Lists.newArrayList();
 		articaleList.forEach(articale -> {
-			ArticaleDto articaleDto = DtoUtil.adapt(new ArticaleDto(), articale);
+			ArticleDto articaleDto = DtoUtil.adapt(new ArticleDto(), articale);
 			articaleDto.setTimeAgo(TimeAgoUtils.format(articaleDto.getUpdateTime()));
 			articaleDto.formatNoSecondTime();
 			articaleDtoList.add(articaleDto);
@@ -207,9 +209,9 @@ public class ArticleCategoryService {
 			return JsonResult.<ShowCategoryArticleDto>success(JsonUtils.jsonToPojo(cacheDto, ShowCategoryArticleDto.class));
 		}
 		List<Article> articaleList = articaleMapper.hotDiscuss(quantity);
-		List<ArticaleDto> articaleDtoList = Lists.newArrayList();
+		List<ArticleDto> articaleDtoList = Lists.newArrayList();
 		articaleList.forEach(articale -> {
-			ArticaleDto articaleDto = DtoUtil.adapt(new ArticaleDto(), articale);
+			ArticleDto articaleDto = DtoUtil.adapt(new ArticleDto(), articale);
 			articaleDto.setTimeAgo(TimeAgoUtils.format(articaleDto.getUpdateTime()));
 			articaleDto.formatNoSecondTime();
 			articaleDtoList.add(articaleDto);
@@ -220,40 +222,66 @@ public class ArticleCategoryService {
 		return JsonResult.<ShowCategoryArticleDto>success(showCADto);
 	}
 
-	public JsonResult<List<ArticaleDto>> weight(Integer quantity) {
+	public JsonResult<List<ArticleDto>> weight(Integer quantity) {
 		// 根据权重和更新时间
 		if (quantity == null) {
 			throw new CheckParamException("数量","未指定");
 		}
 		String cacheDtoList = redis.get(RedisCode.ARTICLE_LIST_WEIGHT_CACHE);
 		if (cacheDtoList != null) {
-			return JsonResult.<List<ArticaleDto>>success(JsonUtils.jsonToList(cacheDtoList, ArticaleDto.class));
+			return JsonResult.<List<ArticleDto>>success(JsonUtils.jsonToList(cacheDtoList, ArticleDto.class));
 		}
 		List<Article> praiseList = articaleMapper.weightByQuantity(quantity);
-		List<ArticaleDto> articaleDtoList = Lists.newArrayList();
+		List<ArticleDto> articaleDtoList = Lists.newArrayList();
 		praiseList.forEach(articale -> {
-			ArticaleDto articaleDto = DtoUtil.adapt(new ArticaleDto(), articale);
+			ArticleDto articaleDto = DtoUtil.adapt(new ArticleDto(), articale);
 			articaleDto.setTimeAgo(TimeAgoUtils.format(articaleDto.getUpdateTime()));
 			articaleDto.formatNoSecondTime();
 			articaleDtoList.add(articaleDto);
 		});
 		redis.set(RedisCode.ARTICLE_LIST_WEIGHT_CACHE, JsonUtils.objectToJson(articaleDtoList),blogConfigProperties.getCache().getArticleListIndexTimeout());
-		return JsonResult.<List<ArticaleDto>>success(articaleDtoList);
+		return JsonResult.<List<ArticleDto>>success(articaleDtoList);
 	}
 
-	public JsonResult<List<ArticaleDto>> newTime(Integer quantity) {
+	public JsonResult<List<ArticleDto>> newTime(Integer quantity) {
 		// 根据创建时间
 		if (quantity == null) {
 			throw new CheckParamException("数量","未指定");
 		}
 		List<Article> praiseList = articaleMapper.createTimeByQuantity(quantity);
-		List<ArticaleDto> articaleDtoList = Lists.newArrayList();
+		List<ArticleDto> articaleDtoList = Lists.newArrayList();
 		praiseList.forEach(articale -> {
-			ArticaleDto articaleDto = DtoUtil.adapt(new ArticaleDto(), articale);
+			ArticleDto articaleDto = DtoUtil.adapt(new ArticleDto(), articale);
 			articaleDto.setTimeAgo(TimeAgoUtils.format(articaleDto.getUpdateTime()));
 			articaleDto.formatNoSecondTime();
 			articaleDtoList.add(articaleDto);
 		});
-		return JsonResult.<List<ArticaleDto>>success(articaleDtoList);
+		return JsonResult.<List<ArticleDto>>success(articaleDtoList);
 	}
+	
+	/**
+	 * 所有分类的信息,包括子分类
+	 * 所有分类的文章数量信息
+	 * @return
+	 */
+	public JsonResult<List<ArticleCategoryDto>> all() {
+		List<ArticleCategoryDto> data = new ArrayList<ArticleCategoryDto>();
+		List<ArticleCategory> rootArticleCategoryList = categoryMapper.findByParentCategoryId(0);
+		rootArticleCategoryList.stream().forEach( parentItem -> {
+			ArticleCategoryDto parentItemDto = DtoUtil.adapt(new ArticleCategoryDto(), parentItem);
+			Long articleCount = articaleMapper.countAllByCategoryId(parentItemDto.getId());
+			parentItemDto.setArticleCount(articleCount);
+			List<ArticleCategory> childCategoryList = categoryMapper.findByParentCategoryId(parentItemDto.getId());
+			List<ArticleCategoryDto> childCategoryDtoList = childCategoryList
+					.stream().map(child -> DtoUtil.adapt(new ArticleCategoryDto(), child)).collect(Collectors.toList());
+			parentItemDto.setChildCategoryList(childCategoryDtoList);
+			childCategoryDtoList.stream().forEach( childDto -> {
+				Long articleCount2 = articaleMapper.countAllByCategoryId(childDto.getId());
+				childDto.setArticleCount(articleCount2);
+			});
+			data.add(parentItemDto);
+		});
+		return JsonResult.<List<ArticleCategoryDto>>success(data);
+	}
+
 }

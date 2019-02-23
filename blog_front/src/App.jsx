@@ -58,6 +58,12 @@ class App extends Component {
             (this.props.player.palyStatus&&this.props.songs.songList.length>0)&&
             (<Player />)
           }         
+          {
+            this.PCFlag&&
+            (<Live2DModel modelUrl="https://twenq.com/static/live2d/xuexiaoban/model.json" 
+              goHomeFn={this.goHomeFn.bind(this)}
+              openMusicFn={this.openMusicFn.bind(this)}/>)
+          }
       </div>
     );
   }
@@ -187,11 +193,6 @@ export default withRouter(
   {
     (this.props.player.palyStatus&&this.props.songs.songList.length>0)&&
     (<Player />)
-  }
-  {
-    <Live2DModel modelUrl="http://img.twenq.com/live2d/xuexiaoban/model.json" 
-      goHomeFn={this.goHomeFn.bind(this)}
-      openMusicFn={this.openMusicFn.bind(this)}/>
   }
   /*{
       this.PCFlag&&

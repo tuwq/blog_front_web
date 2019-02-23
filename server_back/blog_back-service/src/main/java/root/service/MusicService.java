@@ -17,7 +17,7 @@ import com.google.common.collect.Lists;
 import root.beans.JsonResult;
 import root.beans.PageModel;
 import root.beans.PageResult;
-import root.dto.ArticaleDto;
+import root.dto.ArticleDto;
 import root.dto.FirendDto;
 import root.dto.SongDto;
 import root.exception.CheckParamException;

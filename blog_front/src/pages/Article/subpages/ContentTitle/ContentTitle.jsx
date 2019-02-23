@@ -24,7 +24,6 @@ class ContentTitle extends React.Component {
 	}
 
 	render() {
-		console.log(this.props.data)
 		var categoryName = null
 		categoryName = this.props.data.articleCategoryList.map((item,index)=>{
 			return (<Link key={index} to={'/category/'+item.id}>{item.name}&nbsp;</Link>)

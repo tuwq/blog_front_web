@@ -17,7 +17,9 @@ public class ArticleParam {
 	private String title;
 	
 	@Size(min=1,message = "分类不可以为空")
-	private Set<Integer> categoryNames;
+	private Set<Integer> articleCategoryIds;
+	@Size(min=1,message = "标签不可以为空")
+	private Set<Integer> articleTagIds;
 	@NotNull
 	private Integer weight;
 	@NotBlank(message = "内容不可以为空")

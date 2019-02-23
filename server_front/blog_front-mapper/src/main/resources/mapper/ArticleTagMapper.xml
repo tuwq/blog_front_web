@@ -10,8 +10,25 @@
     <result column="weight" property="weight" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, name, desc, article_sum, comment_sum, weight
+    id, name, `desc`, article_sum, comment_sum, weight
   </sql>
+  
+  <select id="all" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from article_tag
+  </select>
+  
+  <select id="getArticleTagListByArticleId" resultMap="BaseResultMap">
+	SELECT atag.id, atag.name
+	FROM article_bind_article_tag abat
+	LEFT JOIN article_tag atag ON atag.id = abat.article_tag_id
+	<where>
+		<if test="articleId!=null and articleId !=''">
+			AND abat.article_id = #{articleId}
+		</if>
+	</where>
+  </select>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -23,7 +40,7 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="root.model.ArticleTag" >
-    insert into article_tag (id, name, desc, 
+    insert into article_tag (id, name, `desc`, 
       article_sum, comment_sum, weight
       )
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR}, 
@@ -40,7 +57,7 @@
         name,
       </if>
       <if test="desc != null" >
-        desc,
+        `desc`,
       </if>
       <if test="articleSum != null" >
         article_sum,
@@ -80,7 +97,7 @@
         name = #{name,jdbcType=VARCHAR},
       </if>
       <if test="desc != null" >
-        desc = #{desc,jdbcType=VARCHAR},
+        `desc` = #{desc,jdbcType=VARCHAR},
       </if>
       <if test="articleSum != null" >
         article_sum = #{articleSum,jdbcType=INTEGER},
@@ -97,7 +114,7 @@
   <update id="updateByPrimaryKey" parameterType="root.model.ArticleTag" >
     update article_tag
     set name = #{name,jdbcType=VARCHAR},
-      desc = #{desc,jdbcType=VARCHAR},
+      `desc` = #{desc,jdbcType=VARCHAR},
       article_sum = #{articleSum,jdbcType=INTEGER},
       comment_sum = #{commentSum,jdbcType=INTEGER},
       weight = #{weight,jdbcType=INTEGER}

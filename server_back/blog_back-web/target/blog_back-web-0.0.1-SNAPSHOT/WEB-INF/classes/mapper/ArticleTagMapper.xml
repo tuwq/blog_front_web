@@ -12,6 +12,29 @@
   <sql id="Base_Column_List" >
     id, name, `desc`, article_sum, comment_sum, weight
   </sql>
+  
+  <resultMap id="tagMap" type="root.model.ArticleTag" >
+    <id column="tag_id" property="id" jdbcType="INTEGER" />
+    <result column="tag_name" property="name" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <select id="findAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from article_tag
+  </select>
+  
+  <select id="getArticleTagListById" parameterType="map" resultMap="tagMap">
+  	SELECT at.id tag_id,at.name tag_name
+	FROM article_tag at,article_bind_article_tag abat
+	<where>
+		<if test="articleId!=null and articleId !=''">
+			AND abat.article_id = #{articleId}
+		</if>
+		AND at.id = abat.article_tag_id 
+	</where>
+  </select>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

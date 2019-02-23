@@ -10,6 +10,21 @@
     id, article_tag_id, article_id
   </sql>
   
+  <insert id="insertBatch" parameterType="map">
+  	insert into article_bind_article_tag(article_id,article_tag_id) values
+	<foreach collection="list" item="item" separator=",">
+		(#{item.articleId},#{item.articleTagId})
+	</foreach>
+  </insert>
+  
+  <delete id="delBatch" parameterType="map">
+  	DELETE FROM article_bind_article_tag
+  	WHERE article_id in 
+  	<foreach collection="ids" item="id" separator="," index="no" open="(" close=")">
+		#{id}
+	</foreach>
+  </delete>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

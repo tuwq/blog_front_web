@@ -13,20 +13,20 @@ import root.mapper.FriendMapper;
 import root.model.Friend;
 
 @Service
-public class FirendService {
+public class FriendService {
 
 	@Resource
-	private FriendMapper firendMapper;
+	private FriendMapper friendMapper;
 
 	public JsonResult<List<Friend>> all() {
 		// 获得全部友链
 		// 检查数量
-		Long total = firendMapper.countAll();
+		Long total = friendMapper.countAll();
 		if (total == 0) {
 			return JsonResult.success(Lists.newArrayList());
 		}
-		List<Integer> ids = firendMapper.randomAll();
-		List<Friend> data = firendMapper.getAllByIds(ids);
+		List<Integer> ids = friendMapper.randomAll();
+		List<Friend> data = friendMapper.getAllByIds(ids);
 		return JsonResult.<List<Friend>>success(data);
 	}
 	

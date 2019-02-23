@@ -205,12 +205,12 @@
     a.create_time create_time,a.update_time update_time,a.approval approval,a.oppose oppose,
     a.browse_sum browse_sum,a.comment_sum comment_sum,a.content content,
     u.id user_id,u.nickname user_nickname
-  FROM article a
-  LEFT JOIN article_bind_article_category abac ON a.id = abac.article_id
-  LEFT JOIN `user` u ON u.id = a.user_id
-  WHERE abac.article_category_id = #{categoryId}
-  ORDER BY a.praise desc,a.comment_sum desc,a.update_time desc
-  LIMIT #{skip},#{pageSize}
+	  FROM article a
+	  LEFT JOIN article_bind_article_category abac ON a.id = abac.article_id
+	  LEFT JOIN `user` u ON u.id = a.user_id
+	  WHERE abac.article_category_id = #{categoryId}
+	  ORDER BY a.praise desc,a.comment_sum desc,a.update_time desc
+	  LIMIT #{skip},#{pageSize}
   </select>
   
   <select id="countAllByCategoryId" parameterType="int" resultType="long"> 
@@ -244,6 +244,31 @@
   ORDER BY a.praise DESC,a.update_time DESC
   LIMIT 0,#{quantity}
   </select>
+  
+  
+  <select id="countByArticleTag" parameterType="int" resultType="long">
+ 	SELECT COUNT(1)
+	FROM article a
+	LEFT JOIN article_bind_article_tag abat ON abat.article_id = a.id
+	WHERE abat.article_tag_id = #{articleTagId}
+  </select>
+  
+   <select id="pageArticleByArticleTagId" parameterType="map" resultMap="BaseResultMap">
+ 	SELECT a.id, a.face_cover, a.title, a.create_time,a.update_time
+	FROM article a
+	LEFT JOIN article_bind_article_tag abat ON abat.article_id = a.id
+	WHERE abat.article_tag_id = #{articleTagId}
+	ORDER BY a.create_time desc
+	LIMIT #{skip},#{pageSize}
+  </select>
+  
+  <select id="pageAllByCreateTime" resultMap="BaseResultMap">
+ 	SELECT <include refid="Base_Column_List" />
+	FROM article a
+	ORDER BY a.create_time DESC
+	LIMIT #{skip},#{pageSize}
+  </select>
+  
   
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 

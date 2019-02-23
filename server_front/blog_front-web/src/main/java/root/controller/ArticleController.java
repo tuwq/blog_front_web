@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import root.beans.JsonResult;
 import root.constant.ResultCode;
-import root.dto.ArticaleDto;
+import root.dto.ArticleDto;
 import root.exception.NotFoundException;
 import root.service.ArticaleService;
 
@@ -23,10 +23,11 @@ public class ArticleController {
 	private ArticaleService articaleService;
 	
 	@GetMapping("/{id}")
-	public JsonResult<ArticaleDto> detail(@PathVariable String id) {
+	public JsonResult<ArticleDto> detail(@PathVariable String id) {
 		if (!StringUtils.isNumeric(id)) {
 			throw new NotFoundException(ResultCode.ITEM_NOT_FOUND,"访问文章的不存在");
 		}
 		return articaleService.detail(Integer.parseInt(id));
 	}
+	
 }

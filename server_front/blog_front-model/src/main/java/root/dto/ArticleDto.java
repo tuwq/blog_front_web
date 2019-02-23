@@ -4,10 +4,12 @@ import java.util.List;
 
 import lombok.Data;
 import root.model.Article;
+import root.model.ArticleCategory;
+import root.model.ArticleTag;
 import root.util.TimeUtil;
 
 @Data
-public class ArticaleDto extends Article{
+public class ArticleDto extends Article {
 	
 	// 分类
 	private String articleCategoryName;
@@ -25,6 +27,16 @@ public class ArticaleDto extends Article{
 	private String createTimeString;
 	
 	private String updateTimeString;
+	// 年份
+	private String yearString;
+	// 月份
+	private String monthString;
+	// 日份
+	private String dayString;
+	
+	List<ArticleCategory> articleCategoryList;
+	
+	List<ArticleTag> articleTagList;
 	
 	public void formatTime() {
 		this.createTimeString = TimeUtil.format(this.getCreateTime().getTime());

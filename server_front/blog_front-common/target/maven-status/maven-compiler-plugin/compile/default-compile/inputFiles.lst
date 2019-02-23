@@ -4,6 +4,7 @@ D:\eclipse-workspace\blog_front\blog_front-common\src\main\java\root\configConst
 D:\eclipse-workspace\blog_front\blog_front-common\src\main\java\root\util\DtoUtil.java
 D:\eclipse-workspace\blog_front\blog_front-common\src\main\java\root\util\DefaultValueUtil.java
 D:\eclipse-workspace\blog_front\blog_front-common\src\main\java\root\util\ThreadUtil.java
+D:\eclipse-workspace\blog_front\blog_front-common\src\main\java\root\util\SortUtil.java
 D:\eclipse-workspace\blog_front\blog_front-common\src\main\java\root\redis\RedisOperator.java
 D:\eclipse-workspace\blog_front\blog_front-common\src\main\java\root\configConstant\MailProperties.java
 D:\eclipse-workspace\blog_front\blog_front-common\src\main\java\root\configConstant\QiniuProperties.java

@@ -6,6 +6,6 @@ import root.model.ArticleCategory;
 
 @Setter
 @Getter
-public class CategoryDto extends ArticleCategory{
+public class ArticleCategoryDto extends ArticleCategory {
 	
 }

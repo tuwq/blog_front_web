@@ -1,13 +1,14 @@
 D:\eclipse-workspace\blog_back\blog_back-service\src\main\java\root\service\MusicService.java
+D:\eclipse-workspace\blog_back\blog_back-service\src\main\java\root\service\ArticleCategoryService.java
 D:\eclipse-workspace\blog_back\blog_back-service\src\main\java\root\service\StatisicService.java
 D:\eclipse-workspace\blog_back\blog_back-service\src\main\java\root\service\FirendService.java
 D:\eclipse-workspace\blog_back\blog_back-service\src\main\java\root\service\ArticleService.java
 D:\eclipse-workspace\blog_back\blog_back-service\src\main\java\root\service\TokenService.java
+D:\eclipse-workspace\blog_back\blog_back-service\src\main\java\root\service\ArticleTagService.java
 D:\eclipse-workspace\blog_back\blog_back-service\src\main\java\root\service\QiNiuIMGService.java
 D:\eclipse-workspace\blog_back\blog_back-service\src\main\java\root\service\CommentService.java
 D:\eclipse-workspace\blog_back\blog_back-service\src\main\java\root\service\MusicCategoryService.java
 D:\eclipse-workspace\blog_back\blog_back-service\src\main\java\root\service\QiNiuMusicService.java
-D:\eclipse-workspace\blog_back\blog_back-service\src\main\java\root\service\CategoryService.java
 D:\eclipse-workspace\blog_back\blog_back-service\src\main\java\root\service\UserManageService.java
 D:\eclipse-workspace\blog_back\blog_back-service\src\main\java\root\service\SysUserService.java
 D:\eclipse-workspace\blog_back\blog_back-service\src\main\java\root\service\FileService.java

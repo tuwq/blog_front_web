@@ -141,5 +141,24 @@ public interface ArticleMapper {
 	 * @return
 	 */
 	List<Article> createTimeByQuantity(@Param("quantity") Integer quantity);
+	/**
+	 * 
+	 * @param articleTagId
+	 * @return
+	 */
+	Long countByArticleTag(@Param("articleTagId") Integer articleTagId);
+	/**
+	 * 标签下的所有文章
+	 * @param articleTagId2 
+	 * @param integer 
+	 */
+	List<Article> pageArticleByArticleTagId(@Param("skip") Integer skip,@Param("pageSize") Integer pageSize,@Param("articleTagId")  Integer articleTagId2);
+	/**
+	 * 时间归档排序
+	 * @param skip
+	 * @param pageSize
+	 * @return
+	 */
+	List<Article> pageAllByCreateTime(@Param("skip") Integer skip, @Param("pageSize") Integer pageSize);
 	
 }

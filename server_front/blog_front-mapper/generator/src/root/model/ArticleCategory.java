@@ -11,6 +11,8 @@ public class ArticleCategory {
 
     private Integer commentSum;
 
+    private Integer parentCategorayId;
+
     public Integer getId() {
         return id;
     }
@@ -49,5 +51,13 @@ public class ArticleCategory {
 
     public void setCommentSum(Integer commentSum) {
         this.commentSum = commentSum;
+    }
+
+    public Integer getParentCategorayId() {
+        return parentCategorayId;
+    }
+
+    public void setParentCategorayId(Integer parentCategorayId) {
+        this.parentCategorayId = parentCategorayId;
     }
 }

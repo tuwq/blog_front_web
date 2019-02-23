@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import root.beans.PageResult;
-import root.dto.ArticaleDto;
+import root.dto.ArticleDto;
 import root.param.PageParam;
 import root.service.SearchService;
 
@@ -22,12 +22,12 @@ public class SearchController {
 	private SearchService searchService;
 	
 	@PostMapping("/page/keyword")
-	public PageResult<ArticaleDto> pageKeyword(@RequestBody PageParam param) {
+	public PageResult<ArticleDto> pageKeyword(@RequestBody PageParam param) {
 		return searchService.pageKeyword(param,param.getKeyword());
 	}
 	
 	@GetMapping("/page/all")
-	public PageResult<ArticaleDto> pageAll(PageParam param) {
+	public PageResult<ArticleDto> pageAll(PageParam param) {
 		return searchService.pageAll(param);
 	}
 	

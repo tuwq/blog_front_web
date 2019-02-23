@@ -9,19 +9,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import root.beans.JsonResult;
-import root.dto.CategoryDto;
-import root.service.CategoryService;
+import root.model.Friend;
+import root.service.FriendService;
 
 @RestController
-@RequestMapping("/sys/category")
-public class CategoryController {
+@RequestMapping("/friend")
+public class FriendController {
 
 	@Resource
-	private CategoryService categoryService;
+	private FriendService friendService; 
 	
-	@GetMapping("/info")
-	public JsonResult<List<CategoryDto>> info() {
-		return categoryService.info();
+	@GetMapping("/all")
+	public JsonResult<List<Friend>> all() {
+		return friendService.all();
 	}
-	
 }

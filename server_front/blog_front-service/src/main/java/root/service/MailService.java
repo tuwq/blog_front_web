@@ -36,9 +36,6 @@ public class MailService {
 	public void sendSecretLetter(String subject, String content) {
 		SimpleMailMessage message = new SimpleMailMessage();
 	    message.setFrom(from);
-	    
-	    System.out.println(blogConfigProperties.getFront().getMyMail());
-	    
 	    message.setTo(blogConfigProperties.getFront().getMyMail());
 	    message.setSubject(subject);
 	    message.setText(content);

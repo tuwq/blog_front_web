@@ -17,6 +17,7 @@ root\configConstant\CacheProperties.class
 root\exception\SearchNoResultException.class
 root\util\MD5Util.class
 root\util\RegExUtil.class
+root\util\SortUtil.class
 root\constant\RedisCode.class
 root\redis\RedisOperator.class
 root\exception\CommentException.class
@@ -24,6 +25,7 @@ root\exception\FileUploadException.class
 root\util\DtoUtil.class
 root\filter\FilterConfig.class
 root\util\DefaultValueUtil.class
+root\util\SortUtil$1.class
 root\configConstant\FrontProperties.class
 root\exception\CheckParamException.class
 root\util\TimeUtil.class

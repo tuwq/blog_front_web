@@ -60,6 +60,9 @@ public class ConfigService {
 			if (item.getBelong() == 7) {
 				sliderImgList.add(item.getImg());
 			}
+			if (item.getBelong() == 8) {
+				configDto.setMainImg(item.getImg());
+			}
 		});
 		configDto.setSliderImgList(sliderImgList);
 		redis.set(RedisCode.CONFIG_IMG_CACHE, JsonUtils.objectToJson(configDto),blogConfigProperties.getCache().getConfigImgTimeout());

@@ -1,7 +1,6 @@
 root\beans\PageModel.class
 root\beans\ImgNode.class
 root\param\FirendParam.class
-root\dto\CategoryDto.class
 root\dto\EveryDayDto.class
 root\model\UserInitiateDynamic.class
 root\param\MusicParam$MusicParamBuilder.class
@@ -35,10 +34,12 @@ root\beans\PageResult$PageResultBuilder.class
 root\model\ArticleTag.class
 root\model\Friend$FriendBuilder.class
 root\beans\JsonResult.class
+root\model\ArticleBindArticleTag$ArticleBindArticleTagBuilder.class
 root\model\Article.class
 root\dto\SongDto.class
 root\model\Song.class
 root\model\SysUser.class
+root\dto\ArticleDto.class
 root\model\UserFollow.class
 root\beans\JsonResult$JsonResultBuilder.class
 root\beans\ImgNode$ImgNodeBuilder.class
@@ -55,5 +56,5 @@ root\dto\FirendDto.class
 root\param\ArticleParam.class
 root\beans\TokenExceptionResult$TokenExceptionResultBuilder.class
 root\dto\CommentDto$CommentDtoBuilder.class
-root\dto\ArticaleDto.class
+root\dto\ArticleCategoryDto.class
 root\model\ArticleCategory.class

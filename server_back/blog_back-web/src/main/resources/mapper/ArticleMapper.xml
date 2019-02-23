@@ -43,10 +43,6 @@
     <association property="user" javaType="root.model.User">
     	<result column="user_name" property="username"/>
     </association>
-    <collection property="articleCategoryList" javaType="list" ofType="root.model.ArticleCategory">
-        <result column="category_id" property="id"/>
-    	<result column="category_name" property="name"/>
-    </collection>
   </resultMap>
  
  <select id="countAllBrowseSum" resultType="long">
@@ -145,7 +141,7 @@
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{approval,jdbcType=INTEGER}, 
       #{oppose,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="root.model.Article" >
+  <insert id="insertSelective" parameterType="root.model.Article" keyProperty="id" useGeneratedKeys="true">
     insert into article
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

@@ -14,7 +14,7 @@ import root.async.VisitDataHandler;
 import root.beans.PageModel;
 import root.beans.PageResult;
 import root.constant.ResultCode;
-import root.dto.ArticaleDto;
+import root.dto.ArticleDto;
 import root.dto.CommentDto;
 import root.dto.DynamicReceiveDto;
 import root.exception.CheckParamException;
@@ -100,7 +100,7 @@ public class DynamicReceiveService {
 			commentDto.formatNoSecondTime();
 			commentDto.setTimeAgo(TimeAgoUtils.format(commentDto.getCreateTime()));
 			DynamicReceiveDto dynamicDto = DynamicReceiveDto.builder()
-								.articaleDto(DtoUtil.adapt(new ArticaleDto(), articale))
+								.articaleDto(DtoUtil.adapt(new ArticleDto(), articale))
 								.commentDto(commentDto)
 								.userInitiateDynamic(commentDynamic).build();
 			dynamicDtos.add(dynamicDto);

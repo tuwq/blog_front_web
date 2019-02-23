@@ -1,5 +1,6 @@
 package root.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -22,17 +23,21 @@ import root.beans.PageModel;
 import root.beans.PageResult;
 import root.constant.RedisCode;
 import root.constant.ResultCode;
-import root.dto.ArticaleDto;
+import root.dto.ArticleDto;
 import root.exception.CheckParamException;
 import root.exception.TokenException;
 import root.mapper.ArticleBindArticleCategoryMapper;
+import root.mapper.ArticleBindArticleTagMapper;
 import root.mapper.ArticleMapper;
+import root.mapper.ArticleTagMapper;
 import root.mapper.ArticleCategoryMapper;
 import root.mapper.SysUserMapper;
 import root.mapper.UserMapper;
 import root.model.Article;
 import root.model.ArticleBindArticleCategory;
+import root.model.ArticleBindArticleTag;
 import root.model.ArticleCategory;
+import root.model.ArticleTag;
 import root.model.User;
 import root.param.ArticleParam;
 import root.param.PageParam;
@@ -48,9 +53,13 @@ public class ArticleService {
 	@Resource
 	private ArticleMapper articaleMapper;
 	@Resource
-	private ArticleBindArticleCategoryMapper articaleCategoryMapper;
+	private ArticleBindArticleCategoryMapper articleBindArticleCategoryMapper;
 	@Resource
-	private ArticleCategoryMapper categoryMapper;
+	private ArticleBindArticleTagMapper articleBindArticleTagMapper;
+	@Resource
+	private ArticleCategoryMapper articleCategoryMapper;
+	@Resource
+	private ArticleTagMapper articleTagMapper;
 	@Resource
 	private TokenService tokenService;
 	@Resource
@@ -66,13 +75,14 @@ public class ArticleService {
 	
 	@Transactional
 	public void add(ArticleParam param) {
-		// 检查字段
-		// 检查token
-		// 给该后台用户的前台用户id文章编写数加1
-		// 创建文章对象
-		// TODO 数据库分类表，用户表需要更新文章数量,rabbitmq
-		// 创建文章分类关系对象
-		// 插入
+		/**
+		 * 检查字段
+		 * 检查token
+		 * 给该后台用户的前台用户id文章编写数加1
+		 * 创建文章对象
+		 * 创建文章分类关系对象
+		 * 创建文章标签关系对象
+		 */
 		ValidatorUtil.check(param);
 		Integer userId = tokenService.checkToken();
 		// 这个id是后台用户的id
@@ -80,17 +90,16 @@ public class ArticleService {
 			// token不存在
 			throw new TokenException(ResultCode.TOKEN_TOLOGIN,"TOKEN到期了");
 		}
-		Integer frontId = sysUserMapper.FrontUserIdById(userId);
-		if (frontId == null) {
+		Integer frontUserId = sysUserMapper.FrontUserIdById(userId);
+		if (frontUserId == null) {
 			throw new CheckParamException("该后台用户","没有前台账号");
 		}
-		User front = userMapper.selectByPrimaryKey(frontId);
+		User front = userMapper.selectByPrimaryKey(frontUserId);
 		if (front == null) {
 			throw new CheckParamException("该后台用户","没有前台账号");
 		}
-		userMapper.increaseArtSum(frontId);
 		Article articale = Article.builder()
-		.userId(frontId)
+		.userId(frontUserId)
 		.title(param.getTitle())
 		.weight(param.getWeight())
 		.faceCover(param.getCoverImg())
@@ -99,14 +108,23 @@ public class ArticleService {
 		.updateTime(new Date())
 		.build();
 		articaleMapper.insertSelective(articale);
+		
 		int articaleId = articale.getId();
-		List<ArticleBindArticleCategory> collect = param.getCategoryNames().stream().map( categoryId -> 
+		List<ArticleBindArticleCategory> collect = param.getArticleCategoryIds().stream().map( categoryId -> 
 			 ArticleBindArticleCategory.builder()
 			.articleId(articaleId)
 			.articleCategoryId(categoryId)
 			.build()
 		).collect(Collectors.toList());
-		articaleCategoryMapper.insertBatch(collect);
+		List<ArticleBindArticleTag> collect2 = param.getArticleTagIds().stream().map( tagId -> 
+			ArticleBindArticleTag.builder()
+			.articleId(articaleId)
+			.articleTagId(tagId)
+			.build()
+		).collect(Collectors.toList());
+		articleBindArticleCategoryMapper.insertBatch(collect);
+		articleBindArticleTagMapper.insertBatch(collect2);
+		userMapper.increaseArtSum(frontUserId);
 	}
 	
 	@Transactional
@@ -124,7 +142,7 @@ public class ArticleService {
 		return new ImgURIResult(Lists.newArrayList());
 	}
 
-	public PageResult<ArticaleDto> list(PageParam param) {
+	public PageResult<ArticleDto> list(PageParam param) {
 		// 检查字段
 		// 获取skip数量
 		// 获得文章和用户信息
@@ -135,28 +153,28 @@ public class ArticleService {
 		Long total = articaleMapper.countAll();
 		param.buildSkip();
 		List<Article> data = articaleMapper.page(param.getPageSize(),param.getSkip());
-		List<Integer> ids = data.stream().map(item -> item.getId()).collect(Collectors.toList());
-		for (int i = 0; i< ids.size();i++ ) {
-			List<ArticleCategory> cateList = categoryMapper.getArtCategoryListById(ids.get(i));
-			data.get(i).setArticleCategoryList(cateList);
-		}
-		List<ArticaleDto> dtoData = data.stream().map(item -> 
-			DtoUtil.adapt(new ArticaleDto(), item)
-		).collect(Collectors.toList());
-		dtoData.forEach(dto -> {
-			List<String> cateNameList = dto.getArticleCategoryList().stream().map(item -> item.getName()).collect(Collectors.toList());
+		List<ArticleDto> dataDto = new ArrayList<ArticleDto>();
+		data.stream().forEach(item -> {
+			ArticleDto dto = DtoUtil.adapt(new ArticleDto(), item);
+			List<ArticleCategory> articleCategoryList = this.articleCategoryMapper.getArticleCategoryListById(dto.getId());
+			dto.setArticleCategoryList(articleCategoryList);
+			List<String> cateNameList = dto.getArticleCategoryList().stream().map(articleCategory -> articleCategory.getName()).collect(Collectors.toList());
 			dto.setCategoryName(String.join(",", cateNameList));
 			dto.setOperatorerName(dto.getUser().getUsername());
 			dto.setTimeAgo(TimeAgoUtils.format(dto.getUpdateTime()));
 			dto.formatTime();
+			dataDto.add(dto);
 		});
 		PageModel pageModel = new PageModel(total,data.size(),param.getCurrentPage(),param.getPageSize());
-		return PageResult.<ArticaleDto>builder().data(dtoData).pageModel(pageModel).code(200).build();
+		return PageResult.<ArticleDto>builder().data(dataDto).pageModel(pageModel).code(200).build();
 	}
 	
+	/**
+	 * 批量删除文章,和文章绑定关系的分类关系表
+	 * @param idsStr
+	 */
 	@Transactional
 	public void delBatch(String idsStr) {
-		// 批量删除文章,和文章绑定关系的分类关系表
 		if (StringUtils.isBlank(idsStr)) {
 			throw new CheckParamException("选择的id","是空的");
 		}
@@ -165,7 +183,7 @@ public class ArticleService {
 		List<Integer> ids = strList.stream().map(str->Integer.parseInt(str)).collect(Collectors.toList());
 		if(ids.size()==0) {throw new CheckParamException("选择id","为空");}
 		articaleMapper.delBatch(ids);
-		articaleCategoryMapper.delBatch(ids);
+		articleBindArticleCategoryMapper.delBatch(ids);
 	}
 	
 	@Transactional
@@ -181,49 +199,51 @@ public class ArticleService {
 		articaleMapper.updateBatch(ids);
 	}
 
-	public PageResult<ArticaleDto> listByKeyWord(String keyword, PageParam param) {
-		// 检查字段
-		// 获得关键字过滤条件后的总数
-		// 获得skip的数量
-		// 获得文章和用户信息，根据关键字
-		// 获得文章的分类信息
-		// 计算最大页码
-		// 处理合适的结构返回前端
+	/**
+	 * 检查字段
+	 * 获得关键字过滤条件后的总数
+	 * 获得skip的数量
+	 * 获得文章和用户信息，根据关键字
+	 * 获得文章的分类信息
+	 * 计算最大页码
+	 * 处理合适的结构返回前端
+	 */
+	public PageResult<ArticleDto> listByKeyWord(String keyword, PageParam param) {
 		ValidatorUtil.check(param);
 		if(StringUtils.isBlank(keyword)) {
 			throw new CheckParamException("关键字","不能为空");
 		}
 		Long total = articaleMapper.countAllByKeyWord(keyword);
 		if(total == 0) {
-			return PageResult.<ArticaleDto>builder().data(Lists.newArrayList()).pageModel(new PageModel()).code(200).build();
+			return PageResult.<ArticleDto>builder().data(Lists.newArrayList()).pageModel(new PageModel()).code(200).build();
 		}
 		param.buildSkip();
 		List<Article> data = articaleMapper.pageByKeyWord(keyword,param.getPageSize(),param.getSkip());
-		List<Integer> ids = data.stream().map(item -> item.getId()).collect(Collectors.toList());
-		for (int i = 0; i< ids.size();i++ ) {
-			List<ArticleCategory> cateList = categoryMapper.getArtCategoryListById(ids.get(i));
-			data.get(i).setArticleCategoryList(cateList);
-		}
-		PageModel pageModel = new PageModel(total,data.size(),param.getCurrentPage(),param.getPageSize());
-		List<ArticaleDto> dtoData = data.stream().map(item -> 
-		DtoUtil.adapt(new ArticaleDto(), item)
-		).collect(Collectors.toList());
-		dtoData.forEach(dto -> {
-			List<String> cateNameList = dto.getArticleCategoryList().stream().map(item -> item.getName()).collect(Collectors.toList());
+		List<ArticleDto> dataDto = new ArrayList<ArticleDto>();
+		data.stream().forEach(item -> {
+			ArticleDto dto = DtoUtil.adapt(new ArticleDto(), item);
+			List<ArticleCategory> articleCategoryList = this.articleCategoryMapper.getArticleCategoryListById(dto.getId());
+			dto.setArticleCategoryList(articleCategoryList);
+			List<String> cateNameList = dto.getArticleCategoryList().stream().map(articleCategory -> articleCategory.getName()).collect(Collectors.toList());
 			dto.setCategoryName(String.join(",", cateNameList));
 			dto.setOperatorerName(dto.getUser().getUsername());
 			dto.setTimeAgo(TimeAgoUtils.format(dto.getUpdateTime()));
 			dto.formatTime();
+			dataDto.add(dto);
 		});
-		return PageResult.<ArticaleDto>builder().data(dtoData).pageModel(pageModel).code(200).build();
+		PageModel pageModel = new PageModel(total,data.size(),param.getCurrentPage(),param.getPageSize());
+		return PageResult.<ArticleDto>builder().data(dataDto).pageModel(pageModel).code(200).build();
 	}
-
-	public JsonResult<ArticaleDto> detail(Integer id) {
-		// 检查字段
-		// 查询文章
-		// 是否存在
-		// 查找分类
-		// 处理结构返回前端
+	
+	/**
+	 * 检查字段
+	 * 查询文章
+	 * 是否存在
+	 * 查找分类
+	 * 查找标签
+	 * 处理结构返回前端
+	 */
+	public JsonResult<ArticleDto> detail(Integer id) {
 		if ( id == null) {
 			throw new CheckParamException("文章id","为空");
 		}
@@ -232,23 +252,29 @@ public class ArticleService {
 			throw new CheckParamException("文章","不存在");
 		}
 		Article articale = articaleMapper.selectByPrimaryKey(id);
-		List<ArticleCategory> categoryList = categoryMapper.getArtCategoryListById(id);
-		articale.setArticleCategoryList(categoryList);
-		ArticaleDto dto = DtoUtil.adapt(new ArticaleDto(), articale);
-		List<Integer> cateids = dto.getArticleCategoryList().stream().map(item -> item.getId()).collect(Collectors.toList());
-		dto.setCategoryIds(cateids);
+		List<ArticleCategory> categoryList = articleCategoryMapper.getArticleCategoryListById(id);
+		List<ArticleTag> tagList = articleTagMapper.getArticleTagListById(id);
+		List<Integer> categoryIds = categoryList.stream().map(item -> item.getId()).collect(Collectors.toList());
+		List<Integer> tagIds = tagList.stream().map(item -> item.getId()).collect(Collectors.toList());
+		ArticleDto dto = DtoUtil.adapt(new ArticleDto(), articale);
+		dto.setArticleCategoryIds(categoryIds);
+		dto.setArticleTagIds(tagIds);
 		dto.setTimeAgo(TimeAgoUtils.format(dto.getUpdateTime()));
 		dto.formatTime();
-		return JsonResult.<ArticaleDto>success(dto);
+		return JsonResult.<ArticleDto>success(dto);
 	}
 
+	/**
+	 * 检查字段
+	 * 文章是否存在
+	 * 修改文章
+	 * 删除原先的分类关系
+	 * 新建文章的分类关系
+	 * 删除原先的标签关系
+	 * 新建文章的标签关系
+	 */
 	@Transactional
 	public JsonResult<Void> update(Integer id, ArticleParam param) {
-		// 检查字段
-		// 文章是否存在
-		// 修改文章
-		// 删除原先的分类关系
-		// 新键文章的分类关系
 		if(id == null) {
 			throw new CheckParamException("文章id","为空");
 		}
@@ -264,14 +290,22 @@ public class ArticleService {
 		articale.setContent(param.getContent());
 		articale.setUpdateTime(new Date());
 		articaleMapper.updateByPrimaryKeySelective(articale);
-		articaleCategoryMapper.delBatch(Lists.newArrayList(id));
-		List<ArticleBindArticleCategory> collect = param.getCategoryNames().stream().map( categoryId -> 
+		this.articleBindArticleCategoryMapper.delBatch(Lists.newArrayList(id));
+		List<ArticleBindArticleCategory> collect = param.getArticleCategoryIds().stream().map( categoryId -> 
 			 ArticleBindArticleCategory.builder()
 			.articleId(articale.getId())
 			.articleCategoryId(categoryId)
 			.build()
 		).collect(Collectors.toList());
-		articaleCategoryMapper.insertBatch(collect);
+		this.articleBindArticleCategoryMapper.insertBatch(collect);
+		this.articleBindArticleTagMapper.delBatch(Lists.newArrayList(id));
+		List<ArticleBindArticleTag> collect2 = param.getArticleTagIds().stream().map(tagId -> 
+			ArticleBindArticleTag.builder()
+			.articleId(articale.getId())
+			.articleTagId(tagId)
+			.build()
+		).collect(Collectors.toList());
+		this.articleBindArticleTagMapper.insertBatch(collect2);
 		redis.del(RedisCode.ARTICLE_INFO_CACHE+":"+id);
 		return JsonResult.<Void>success();
 	}

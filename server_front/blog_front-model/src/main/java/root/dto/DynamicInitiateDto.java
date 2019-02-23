@@ -17,7 +17,7 @@ public class DynamicInitiateDto {
 	// 动态信息
 	private UserInitiateDynamic userInitiateDynamic;
 	// 动态的文章信息
-	private ArticaleDto articaleDto;
+	private ArticleDto articaleDto;
 	// 动态的评论信息
 	private CommentDto commentDto;
 }

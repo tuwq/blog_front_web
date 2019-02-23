@@ -29,6 +29,6 @@ public interface ArticleBindArticleCategoryMapper {
      * 批量删除文章分类关系
      * @param ids
      */
-	void delBatch(@Param("ids") List<Integer> ids);
+	int delBatch(@Param("ids") List<Integer> ids);
 	
 }

@@ -16,7 +16,7 @@ import root.model.ArticleCategory;
 @Getter
 public class ShowCategoryArticleDto {
 	
-	private List<ArticaleDto> articaleList;
+	private List<ArticleDto> articaleList;
 	
 	private ArticleCategory category;
 }

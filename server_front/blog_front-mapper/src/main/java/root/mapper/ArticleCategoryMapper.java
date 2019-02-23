@@ -30,5 +30,11 @@ public interface ArticleCategoryMapper {
 	 * @param integer
 	 * @return
 	 */
-	List<ArticleCategory> getArtCategoryListById(@Param("id") Integer id);
+	List<ArticleCategory> getArtCategoryListById(@Param("articleId") Integer articleId);
+	/**
+	 * 获取父分类的子分类列表
+	 * @param i
+	 * @return
+	 */
+	List<ArticleCategory> findByParentCategoryId(@Param("parentCategorayId") Integer parentCategorayId);
 }

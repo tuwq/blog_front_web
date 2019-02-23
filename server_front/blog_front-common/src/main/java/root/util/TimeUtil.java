@@ -40,13 +40,44 @@ public class TimeUtil {
     	return c.getTime().getTime();
     }
     
+    public static String getYearByTimeStamp(Date date) {
+	   Calendar now = Calendar.getInstance();
+	   now.setTime(date);
+	   return now.get(Calendar.YEAR) + "";
+       /*System.out.println("年: " + now.get(Calendar.YEAR));  
+       System.out.println("月: " + (now.get(Calendar.MONTH) + 1) + "");  
+       System.out.println("日: " + now.get(Calendar.DAY_OF_MONTH));  
+       System.out.println("时: " + now.get(Calendar.HOUR_OF_DAY));  
+       System.out.println("分: " + now.get(Calendar.MINUTE));  
+       System.out.println("秒: " + now.get(Calendar.SECOND));  
+       System.out.println("当前时间毫秒数：" + now.getTimeInMillis());  
+       System.out.println(now.getTime());  */
+    }
+    
+    public static String getMonthByDate(Date date) {
+       Calendar now = Calendar.getInstance();
+  	   now.setTime(date);
+  	   return (now.get(Calendar.MONTH) + 1) + "";
+    }
+    
+    public static String getDayOfMonth(Date date) {
+    Calendar now = Calendar.getInstance();
+   	   now.setTime(date);
+   	   return now.get(Calendar.DAY_OF_MONTH) + "";
+    }
+    
 	public static void main(String[] args) {
-		long skipTime = TimeUtil.getSkipTime(Calendar.MINUTE, 60);
+		/*long skipTime = TimeUtil.getSkipTime(Calendar.MINUTE, 60);
 		System.out.println(skipTime);
 		String beforeTime = TimeUtil.format(TimeUtil.getSkipTime(Calendar.DATE, -1));
 		String nowTime = TimeUtil.format(new Date().getTime());
 		System.out.println(beforeTime);
-		System.out.println(nowTime);
+		System.out.println(nowTime);*/
+		// 1547211266000	1547197161000 1547022585000
+		String yearByTimeStamp = TimeUtil.getYearByTimeStamp(new Date(1547022585000L));
+		String monthByDate = TimeUtil.getMonthByDate(new Date(1547022585000L));
+		String dayOfMonth = TimeUtil.getDayOfMonth(new Date(1547022585000L));
+		System.out.println(yearByTimeStamp + "年" + monthByDate + "月" + dayOfMonth + "日");
 	}
 
 }
