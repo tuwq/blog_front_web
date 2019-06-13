@@ -1,13 +1,13 @@
 // 上线服务器的地址
 global.serverUrl = '/api'
 // 图片存储服务器的地址
-global.imgServerUrl = 'http://img.twenq.com/'
+global.imgServerUrl = 'http://blog.img.tuwq.cn/'
 // 用户头像地址的前缀
 global.userAvatarPrefix = global.imgServerUrl + 'upload/user/avatar/'
 global.artImgPrefix = global.imgServerUrl + 'upload/artimg/'
 global.firendAvatarPrefix = global.imgServerUrl + 'upload/firend/avatar/'
 // 音乐存储服务器的地址
-global.musicServerUrl = 'http://music.twenq.com/'
+global.musicServerUrl = 'http://blog.music.tuwq.cn/'
 global.musicCoverPrefix = global.musicServerUrl + 'upload/music/cover/'
 global.musicResourcePrefix = global.musicServerUrl + 'upload/music/resource/'
 // token的过期时间
@@ -60,5 +60,5 @@ global.dynamicInitiatePageSize = 5
 global.dynamicReceivePageSize = 5
 global.musicSongPageSize = 20
 global.archiveTagPageSize = 12
-global.archiveTimePageSize = 10
+global.archiveTimePageSize = 12
 

@@ -60,7 +60,7 @@ class App extends Component {
           }         
           {
             this.PCFlag&&
-            (<Live2DModel modelUrl="https://twenq.com/static/live2d/xuexiaoban/model.json" 
+            (<Live2DModel modelUrl="https://blog.tuwq.cn/static/live2d/xuexiaoban/model.json" 
               goHomeFn={this.goHomeFn.bind(this)}
               openMusicFn={this.openMusicFn.bind(this)}/>)
           }
