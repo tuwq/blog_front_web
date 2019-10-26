@@ -31,7 +31,6 @@ root\exception\CheckParamException.class
 root\util\TimeUtil.class
 root\util\ThreadUtil.class
 root\exception\DynamicException.class
-root\filter\HttpFilter.class
 root\configConstant\CategoryProperties.class
 root\configConstant\BlogPropertiesConfiguration.class
 root\configConstant\BlogConfigProperties.class

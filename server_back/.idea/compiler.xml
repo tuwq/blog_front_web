@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="blog_back-web" />
+        <module name="blog_back-common" />
+        <module name="blog_back-service" />
+        <module name="blog_back-mapper" />
+        <module name="blog_back-model" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="blog_back" target="1.8" />
+      <module name="blog_back-common" target="1.8" />
+      <module name="blog_back-mapper" target="1.8" />
+      <module name="blog_back-model" target="1.8" />
+      <module name="blog_back-service" target="1.8" />
+      <module name="blog_back-web" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

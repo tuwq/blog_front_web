@@ -5,6 +5,7 @@ root\controller\UserManageController.class
 root\controller\LoginController.class
 root\controller\MusicCategoryController.class
 root\Interceptor\TokenInterceptor.class
+root\controller\TestController.class
 root\controller\ArticleCategoryController.class
 root\controller\ArticleController.class
 root\advice\ExceptionAdvice.class

@@ -6,6 +6,8 @@ import Slider from 'base/general/Slider/Slider'
 import HomeReactSwipe from 'base/general/HomeReactSwipe/HomeReactSwipe'
 import WidgetCollection from './subpages/WidgetCollection/WidgetCollection'
 
+import HomeContentTopMain from './subpages/HomeContentTopMain/HomeContentTopMain'
+
 import { artWeightApi } from 'api/Category/category'
 
 import './HomeContentTop.less'
@@ -46,11 +48,7 @@ class HomeContentTop extends React.Component {
 	render() {
 		return (
          	<section id="HomeContentTop" className="HomeContentTop">
-         		{
-					this.state.data.length>0&&
-					(<Slider data={this.state.data}/>)
-				}
-         	 	<WidgetCollection />
+				<HomeContentTopMain />
          	</section>
         )
 	}

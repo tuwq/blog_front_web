@@ -12,6 +12,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import root.async.AccessDataHandler;
+import root.util.IpUtil;
 
 
 public class AccessInterceptor implements HandlerInterceptor{
@@ -22,7 +23,7 @@ public class AccessInterceptor implements HandlerInterceptor{
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		accessDataHandler.saveIp(request);
+		accessDataHandler.saveIp(IpUtil.getIpAddress(request));
 		return true;
 	}
 

@@ -105,4 +105,12 @@ public class ArticleCategoryController {
 		}
 		return articleCategoryService.hotDiscuss(Integer.parseInt(quantity));
 	}
+
+	@GetMapping("/randomArticle/{quantity}")
+	public JsonResult<List<ArticleDto>> randomArticle(@PathVariable("quantity") String quantity) {
+		if (!StringUtils.isNumeric(quantity)) {
+			throw new CheckParamException("数量","未指定");
+		}
+		return articleCategoryService.randomArticle(Integer.parseInt(quantity));
+	}
 }

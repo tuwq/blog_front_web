@@ -33,6 +33,7 @@ root\param\MusicParam.class
 root\beans\PageResult$PageResultBuilder.class
 root\model\ArticleTag.class
 root\model\Friend$FriendBuilder.class
+root\param\EditFriendParam.class
 root\beans\JsonResult.class
 root\model\ArticleBindArticleTag$ArticleBindArticleTagBuilder.class
 root\model\Article.class
@@ -41,6 +42,7 @@ root\model\Song.class
 root\model\SysUser.class
 root\dto\ArticleDto.class
 root\model\UserFollow.class
+root\param\AddFriendParam.class
 root\beans\JsonResult$JsonResultBuilder.class
 root\beans\ImgNode$ImgNodeBuilder.class
 root\beans\FileUploadExceptionResult$FileUploadExceptionResultBuilder.class

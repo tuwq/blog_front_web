@@ -1,6 +1,18 @@
-export function addFirendApi(formdata,success) {
-	axios.post(global.serverUrl+'/sys/firend/add',formdata,{
-		headers:{'Content-Type':'multipart/form-data'}
+// export function addFirendApi(formdata,success) {
+// 	axios.post(global.serverUrl+'/sys/firend/add',formdata,{
+// 		headers:{'Content-Type':'multipart/form-data'}
+// 	}).then((res)=>{
+// 		success(res)
+// 	})
+// }
+
+export function addFirendApi(state,success) {
+	let nickname = state.nickname
+	let avatarSite = state.avatarSite
+	let website = state.website
+	let desc = state.desc
+	axios.post(global.serverUrl+'/sys/firend/insert',{
+		nickname,avatarSite,website,desc
 	}).then((res)=>{
 		success(res)
 	})
@@ -8,10 +20,11 @@ export function addFirendApi(formdata,success) {
 
 export function EditFirendApi(id,state,success) {
 	let nickname = state.nickname
+	let avatarSite = state.avatarSite
 	let desc = state.desc
 	let website = state.website
-	axios.put(global.serverUrl+'/sys/firend/edit',{
-		id,nickname,desc,website
+	axios.put(global.serverUrl+'/sys/firend/update',{
+		id,nickname,avatarSite,desc,website
 	}).then((res)=>{
 		success(res)
 	})

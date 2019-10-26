@@ -3,6 +3,7 @@ root\controller\SearchController.class
 root\controller\ArticleTagController.class
 root\WebMvcConfig.class
 root\controller\InformartionController.class
+root\interceptor\HttpInterceptor.class
 META-INF\spring-configuration-metadata.json
 root\controller\UserController.class
 root\controller\PraiseController.class

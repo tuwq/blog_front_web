@@ -25,10 +25,9 @@ public class AccessDataHandler {
 	private BlogConfigProperties blogConfigProperties;
 	
 	@Async
-	public void saveIp(HttpServletRequest request) {
+	public void saveIp(String ip) {
 		// 获得客户端Ip
 		// 保存对象放入redis中
-		String ip = IpUtil.getIpAddress(request);
 		Access access = Access.builder().ipAddress(ip).createTime(new Date()).build();
 		redis.hset(RedisCode.IP_STORAGE,RedisCode.IP_CODE+":"+ip, JsonUtils.objectToJson(access));
 	}

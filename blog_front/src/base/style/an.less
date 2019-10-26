@@ -9,6 +9,11 @@
 .image-scale-after {
 	transform: scale(1.2);
 }
+// 图片渐渐显示
+.image-fade {
+	animation: image_fade .6s  linear;
+}
+
 .image-opacity {
 	// 加载开始状态下改变,状态1 ->状态2 手动改变
 	position: relative;
@@ -135,6 +140,12 @@
 	50%{transform: scale(1.2);opacity: .3;}
 	100%{transform: scale(1.1);opacity: 1;}
 }
+@keyframes image_fade{
+	0%{opacity: 0;}
+	50%{opacity: .3;}
+	100%{opacity: 1;}
+}
+
 @keyframes fontZomm {
 	0%{font-size: 12px;}
 	100% {font-size: 18px;}

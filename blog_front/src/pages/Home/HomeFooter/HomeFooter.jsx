@@ -7,6 +7,7 @@ import './MHomeFooter.less'
 
 import qqSvg from 'static/svg/qq.svg'
 import githubSvg from 'static/svg/github.svg'
+import weixinSvg from 'static/svg/weixin.svg'
 
 class HomeFooter extends React.Component {
 
@@ -30,13 +31,14 @@ class HomeFooter extends React.Component {
           		</div>
 	          	<div className="contact">
 	          		<ul className="itemList">
-	          			<li className="item"><a target="_blank" href="https://github.com/tuwq"><span><img width="20" height="20" alt="" src={githubSvg}/></span></a></li>
+					  	<li className="item"><a target="_blank" href="https://blog.tuwq.cn/static/image/weixin_qrcode.png"><span><img width="20" height="20" alt="" src={weixinSvg}/></span></a></li>
 	          			<li className="item"><a target="_blank" href="tencent://message/?uin=1246361002&Site=&Menu=yes"><span><img width="20" height="20" alt="" src={qqSvg}/></span></a></li>
+						<li className="item"><a target="_blank" href="https://github.com/tuwq"><span><img width="20" height="20" alt="" src={githubSvg}/></span></a></li>
 	          		</ul>
 	          	</div>
 	          	<div className="contact">
 	          		<ul className="itemList fontLink">
-	          			<li className="item"><a target="_blank" href="http://www.miitbeian.gov.cn">@2018-2019 赣ICP备18010202号</a></li>
+	          			<li className="item"><a target="_blank" href="http://beian.miit.gov.cn">@2018-2019 赣ICP备18010202号</a></li>
 	          		</ul>
 	          	</div>
           	</div>

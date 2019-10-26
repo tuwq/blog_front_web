@@ -1,0 +1,31 @@
+@import url("../../../../../../../base/style/constant.less");
+@media screen and (max-width: @mobile_width) {
+.SiderBarCommentItem {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 15px;
+	padding-bottom: 15px;
+	border-bottom: 1px solid #fcfcfc;
+	overflow: hidden;
+	.CommentTitle {
+		display: flex;
+		align-items: center;
+		-webkit-box-align: center;
+		font-size: 13px;
+		flex-direction: column;
+		a:nth-child(1) {margin-right: 5px;}
+		a:nth-child(3) {padding-left: 5px;}
+	}
+	.CommentContent {
+		flex: 1;
+		max-height: 52px;
+		padding: 10px 20px;
+		border-radius: 3px;
+		word-break: break-all;
+		font-size: 1.4rem;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		color: @home_content_sider_font_color;
+		background: rgba(255, 255, 255, .3);
+	}	
+}}

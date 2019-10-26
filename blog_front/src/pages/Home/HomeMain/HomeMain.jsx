@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 
-import HomeContentTop from './subpages/HomeContentTop/HomeContentTop'
-import HomeContentBottom from './subpages/HomeContentBottom/HomeContentBottom'
+import HomeContentContainer from './subpages/HomeContentContainer/HomeContentContainer'
+import HomeSideBarContainer from './subpages/HomeSideBarContainer/HomeSideBarContainer'
 
 import './HomeMain.less'
 import './MHomeMain.less'
@@ -22,8 +22,8 @@ class HomeMain extends React.Component {
 		return (
           <div id="HomeMain" className="HomeMain">
           	 <div className="HomeMain-Wrapper">
-          	 	<HomeContentTop />
-          	 	<HomeContentBottom />
+          	 	<HomeContentContainer />
+				<HomeSideBarContainer />
           	 </div>
           </div>
         )

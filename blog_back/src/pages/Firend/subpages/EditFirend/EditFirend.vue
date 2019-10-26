@@ -9,12 +9,15 @@
           <div class="form-control">
             <input type="text" placeholder="昵称" v-model="nickname"/>
           </div>
-          <div class="form-control">
+          <!-- <div class="form-control">
             <span class="image" @click="chooseAvatar">
               上传头像
               <img ref="$avatarImg" width="60" height="60" alt="" :src="avatar"/>
               <input type="file" ref="$fileInput" style="display: none;"/>
             </span>
+          </div> -->
+          <div class="form-control">
+            <input type="text" placeholder="头像地址" v-model="avatarSite"/>
           </div>
           <div class="form-control">
             <input type="text" placeholder="网站" v-model="website"/>
@@ -42,6 +45,7 @@
     data() {
       return {
         nickname: '',
+        avatarSite: '',
         website: '',
         desc: '',
         avatar: '',
@@ -49,12 +53,12 @@
       }
     },
     mounted() {
-      $(this.$refs.$fileInput).on('change',()=>{
-        this.uploadAvatar()
-      })
+      // $(this.$refs.$fileInput).on('change',()=>{
+      //   this.uploadAvatar()
+      // })
     },
     destroyed() {
-      $(this.$refs.$fileInput).off('change')
+      // $(this.$refs.$fileInput).off('change')
     },
     methods: {
       initData(id) {
@@ -67,7 +71,7 @@
             this.nickname = res.data.result.nickname
             this.website = res.data.result.website
             this.desc = res.data.result.desc
-            this.avatar = global.firendAvatarimgUrl + res.data.result.avatar+'?v='+new Date().getTime()
+            this.avatarSite = res.data.result.avatar
           }
         })
       },

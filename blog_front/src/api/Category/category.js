@@ -13,15 +13,17 @@ export function categoryAllApi(success) {
 	})
 }
 
-export function artWeightApi(success) {
-	axios.get(global.serverUrl+'/articleCategory/artWeight/'+global.artWeightQuantity)
+export function artWeightApi(success, quantity) {
+	quantity = quantity>0?quantity:global.artWeightQuantity
+	axios.get(global.serverUrl+'/articleCategory/artWeight/'+ quantity)
 	.then((res)=>{
 		success(res)
 	})
 }
 
-export function artNewTimeApi(success) {
-	axios.get(global.serverUrl+'/articleCategory/newTime/'+global.artNewTimeQuantity)
+export function artNewTimeApi(success, quantity) {
+	quantity = quantity>0?quantity:global.artNewTimeQuantity
+	axios.get(global.serverUrl+'/articleCategory/newTime/' + quantity)
 	.then((res)=>{
 		success(res)
 	})
@@ -64,6 +66,15 @@ export function chatCategoryApi(success) {
 
 export function artHotDiscussApi(success) {
 	axios.get(global.serverUrl+'/articleCategory/hotDiscuss/'+global.artHotDiscussQuantity)
+	.then((res)=>{
+		success(res)
+	})
+}
+
+
+export function randomArticleApi(success, quantity) {
+	quantity = quantity>0?quantity:global.randomArticleQuantity
+	axios.get(global.serverUrl+'/articleCategory/randomArticle/' + quantity)
 	.then((res)=>{
 		success(res)
 	})

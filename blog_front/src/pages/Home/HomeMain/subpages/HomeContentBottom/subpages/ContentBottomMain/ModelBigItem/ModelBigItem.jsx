@@ -15,11 +15,11 @@ class ModelBigItem extends React.Component {
 	constructor(props,context) {
 		super(props,context)
 		this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
-      this.$content = React.createRef()
+        this.$content = React.createRef()
 	}
 
 	componentDidMount() {
-		let ht = marked(this.props.item.content)
+	  let ht = marked(this.props.item.content)
       let text = $(ht).text()
       $(this.$content.current).text(text)
 	}

@@ -284,4 +284,23 @@ public class ArticleCategoryService {
 		return JsonResult.<List<ArticleCategoryDto>>success(data);
 	}
 
+	/**
+	 * 随机取出指定数量{@param quantity}文章
+	 * @param quantity
+	 * @return
+	 */
+	public JsonResult<List<ArticleDto>> randomArticle(Integer quantity) {
+		if (quantity == null) {
+			throw new CheckParamException("数量","未指定");
+		}
+		List<Article> data = articaleMapper.randomArticleByQuantity(quantity);
+		List<ArticleDto> articaleDtoList = Lists.newArrayList();
+		data.forEach(articale -> {
+			ArticleDto articaleDto = DtoUtil.adapt(new ArticleDto(), articale);
+			articaleDto.setTimeAgo(TimeAgoUtils.format(articaleDto.getUpdateTime()));
+			articaleDto.formatNoSecondTime();
+			articaleDtoList.add(articaleDto);
+		});
+		return JsonResult.<List<ArticleDto>>success(articaleDtoList);
+	}
 }

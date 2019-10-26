@@ -20,7 +20,7 @@ class FriendItem extends React.Component {
 		return (
 			<a href={this.props.item.website} className="FriendItem" target="_blank">
 			 	<div className="box">
-			 		<img className="avatar" alt="" src={global.firendAvatarPrefix+this.props.item.avatar}/>
+			 		<img className="avatar" alt="" src={this.props.item.avatar}/>
 					<div className="info">
 						<h4 className="name">{this.props.item.nickname}</h4>
 						<p className="desc">{this.props.item.desc}</p>

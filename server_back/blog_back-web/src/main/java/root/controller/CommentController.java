@@ -39,5 +39,5 @@ public class CommentController {
 		commentService.delBatch(ids);
 		return JsonResult.<Void>success();
 	}
-	
+
 }

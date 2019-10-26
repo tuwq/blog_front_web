@@ -45,7 +45,7 @@ global.artPraiseKey = 'artPraiseKey'
 // 首页火热文章获取数
 global.articalePraiseQuantity = 4
 global.artNewTimeQuantity = 4 
-global.artWeightQuantity = 3
+global.artWeightQuantity = 10
 global.articaleCategoryQuantity = 5
 global.nodeCategoryQuantity = 3
 global.shortCodeCategoryQuantity = 4
@@ -61,4 +61,6 @@ global.dynamicReceivePageSize = 5
 global.musicSongPageSize = 20
 global.archiveTagPageSize = 12
 global.archiveTimePageSize = 12
+global.newUpdateTimeQuantity = 10
+global.randomArticleQuantity = 10
 

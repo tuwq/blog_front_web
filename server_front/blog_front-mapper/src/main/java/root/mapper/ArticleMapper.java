@@ -160,5 +160,11 @@ public interface ArticleMapper {
 	 * @return
 	 */
 	List<Article> pageAllByCreateTime(@Param("skip") Integer skip, @Param("pageSize") Integer pageSize);
-	
+
+	/**
+	 * 指定数量随机取出文章
+	 * @param quantity
+	 * @return
+	 */
+    List<Article> randomArticleByQuantity(@Param("quantity") Integer quantity);
 }

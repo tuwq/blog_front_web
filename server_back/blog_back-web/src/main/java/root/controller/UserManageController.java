@@ -39,4 +39,5 @@ public class UserManageController {
 		userManageService.updateBatch(ids);
 		return JsonResult.<Void>success();
 	}
+
 }

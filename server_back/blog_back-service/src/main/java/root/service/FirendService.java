@@ -24,6 +24,8 @@ import root.exception.CheckParamException;
 import root.mapper.FriendMapper;
 import root.model.Friend;
 import root.model.FrontImgConfig;
+import root.param.AddFriendParam;
+import root.param.EditFriendParam;
 import root.param.FirendParam;
 import root.param.PageParam;
 import root.util.DtoUtil;
@@ -148,6 +150,22 @@ public class FirendService {
 		}
 		Friend firend = Friend.builder().id(param.getId()).website(param.getWebsite())
 			.desc(param.getDesc()).nickname(param.getNickname()).build();
+		firendMapper.updateByPrimaryKeySelective(firend);
+	}
+
+    public void insert(AddFriendParam param) {
+		Friend firend = Friend.builder().nickname(param.getNickname())
+				.website(param.getWebsite()).desc(param.getDesc()).avatar(param.getAvatarSite()).build();
+		firendMapper.insertSelective(firend);
+    }
+
+	public void update(EditFriendParam param) {
+		int count = firendMapper.countById(param.getId());
+		if (count == 0) {
+			throw new CheckParamException("内容","不存在");
+		}
+		Friend firend = Friend.builder().id(param.getId()).website(param.getWebsite())
+				.desc(param.getDesc()).nickname(param.getNickname()).avatar(param.getAvatarSite()).build();
 		firendMapper.updateByPrimaryKeySelective(firend);
 	}
 }

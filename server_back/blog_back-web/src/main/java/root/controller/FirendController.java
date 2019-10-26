@@ -2,6 +2,7 @@ package root.controller;
 
 import javax.annotation.Resource;
 
+import com.qiniu.util.Json;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,9 +19,12 @@ import root.beans.JsonResult;
 import root.beans.PageResult;
 import root.dto.FirendDto;
 import root.exception.CheckParamException;
+import root.param.AddFriendParam;
+import root.param.EditFriendParam;
 import root.param.FirendParam;
 import root.param.PageParam;
 import root.service.FirendService;
+import root.util.ValidatorUtil;
 
 @RestController
 @RequestMapping("/sys/firend")
@@ -68,5 +72,19 @@ public class FirendController {
 	public JsonResult<Void> delBatch(@PathVariable("ids") String ids){
 		firendService.delBatch(ids);
 		return JsonResult.<Void>success();
+	}
+
+	@PostMapping("/insert")
+	public JsonResult<Void> insert(@RequestBody AddFriendParam param) {
+		ValidatorUtil.check(param);
+		firendService.insert(param);
+		return JsonResult.success();
+	}
+
+	@PutMapping("/update")
+	public JsonResult<Void> update(@RequestBody EditFriendParam param) {
+		ValidatorUtil.check(param);
+		firendService.update(param);
+		return JsonResult.success();
 	}
 }

@@ -9,12 +9,15 @@
           <div class="form-control">
             <input type="text" placeholder="昵称" v-model="nickname"/>
           </div>
-          <div class="form-control">
+          <!-- <div class="form-control">
             <span class="image" @click="chooseAvatar">
               上传头像
               <img ref="$avatarImg" width="60" height="60" alt="" src=""/>
               <input type="file" ref="$fileInput" style="display: none;"/>
             </span>
+          </div> -->
+          <div class="form-control">
+            <input type="text" placeholder="头像地址" v-model="avatarSite"/>
           </div>
           <div class="form-control">
             <input type="text" placeholder="网站" v-model="website"/>
@@ -39,16 +42,17 @@
     	
     },
     mounted() {
-      $(this.$refs.$fileInput).on('change',()=>{
-        this.uploadAvatar()
-      })
+      // $(this.$refs.$fileInput).on('change',()=>{
+      //   this.uploadAvatar()
+      // })
     },
     destroyed() {
-      $(this.$refs.$fileInput).off('change')
+      // $(this.$refs.$fileInput).off('change')
     },
     data() {
       return {
         nickname: '',
+        avatarSite: '',
         website: '',
         desc: '',
         error: ''
@@ -56,22 +60,31 @@
     },
     methods: {
     	finish() {
-        let file = this.$refs.$fileInput.files[0]
-        var formdata = new FormData()
-        formdata.append('file',file)
-        formdata.append("nickname", this.nickname)
-        formdata.append("website", this.website)
-        formdata.append("desc", this.desc)
-        addFirendApi(formdata,(res)=>{
-           if (res.data.code == 200) {
+        addFirendApi(this, (res)=>{
+          if (res.data.code == 200) {
             this.nickname = ''
+            this.avatarSite = ''
             this.website = ''
             this.desc = ''
-            this.error = '上传成功'
-           } else if(res.data.code == RESULT_CODE.PARAM_ERROR_CODE || res.data.code == RESULT_CODE.FILE_UPLOAD_FAIL){
-            this.error = res.data.msg
-           }
+            this.error = '添加成功'
+          }
         })
+        // let file = this.$refs.$fileInput.files[0]
+        // var formdata = new FormData()
+        // formdata.append('file',file)
+        // formdata.append("nickname", this.nickname)
+        // formdata.append("website", this.website)
+        // formdata.append("desc", this.desc)
+        // addFirendApi(formdata,(res)=>{
+        //    if (res.data.code == 200) {
+        //     this.nickname = ''
+        //     this.website = ''
+        //     this.desc = ''
+        //     this.error = '上传成功'
+        //    } else if(res.data.code == RESULT_CODE.PARAM_ERROR_CODE || res.data.code == RESULT_CODE.FILE_UPLOAD_FAIL){
+        //     this.error = res.data.msg
+        //    }
+        // })
       },
       chooseAvatar() {
         this.$refs.$fileInput.click()

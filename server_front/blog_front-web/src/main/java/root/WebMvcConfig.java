@@ -2,14 +2,12 @@ package root;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
-import root.filter.HttpFilter;
 import root.interceptor.AccessInterceptor;
+import root.interceptor.HttpInterceptor;
 import root.interceptor.NeedLoginInterceptor;
 
 @Configuration
@@ -26,8 +24,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter  {
 	}
 	
 	@Bean
-    public HttpFilter getHttpFilter() {
-        return new HttpFilter();
+    public HttpInterceptor getHttpInterceptor() {
+        return new HttpInterceptor();
     }
 
 	@Bean
@@ -42,7 +40,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter  {
 	
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(getHttpFilter()).addPathPatterns("/**");
+        registry.addInterceptor(getHttpInterceptor()).addPathPatterns("/**");
         registry.addInterceptor(getNeedLoginInterceptor())
         .addPathPatterns("/user/**","/follow/**","/comment/add/**","/dynamic/receive")
         .excludePathPatterns("/user/info");
