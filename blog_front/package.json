@@ -39,7 +39,7 @@
     "less": "^3.5.3",
     "less-loader": "^4.1.0",
     "lodash": "^4.17.10",
-    "marked": "^0.4.0",
+    "marked": "^0.7.0",
     "object-assign": "4.1.1",
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "2.0.8",
