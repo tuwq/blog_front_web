@@ -21,7 +21,7 @@
     "marked": "^0.4.0",
     "mavon-editor": "^2.6.15",
     "moment": "^2.22.2",
-    "node-sass": "^4.9.2",
+    "node-sass": "^4.13.1",
     "pygmentize-bundled": "^2.3.0",
     "sass-loader": "^7.0.3",
     "vue": "^2.5.2",
