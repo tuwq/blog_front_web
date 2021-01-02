@@ -1,0 +1,48 @@
+@import url("../../../base/style/login-common.less");
+@import url("../../../base/style/article-common.less");
+@media screen and (max-width: @mobile_width) {
+.CommentEditor {
+	.title {
+		background: rgba(255,255,255,0);
+		margin-bottom: 15px;
+		margin-top: 30px;
+		font-size: 18px;
+		font-weight: 500;
+		small {font-size: 75%;font-weight: 400;color: @black_color;a{.common-reply-small;}}
+	}
+	.form {
+		textarea {
+			.common-textarea;
+		}
+		.user {
+			margin: 0 -10px;
+			display: flex;
+			padding: 0 10px;
+			flex-direction: column;
+			.user-control {
+				flex:  0 1 30%;
+				padding: 0 10px;
+				padding-left: 0px;
+				margin-bottom: 15px;
+				border-radius: 15px;
+				.common-form-control;
+				button {.common-form-width-button;background: @blue_color;}
+			}
+			.msg {
+				.common-form-pink-msg
+			}
+		}
+		.form-group {
+			margin-bottom: 15px;
+			display: flex;
+			justify-content: center;
+			button {
+				.common-form-width-button;
+				width: auto;
+				color: #fff;
+				background-color: @green_color;
+			}
+			.msg {.common-form-pink-msg;display: inline-block;margin-left: 10px;}
+		}
+	}
+}}

@@ -1,4 +1,11 @@
 # 全栈我的博客 https://blog.tuwq.cn
+## 代码地址
+	前台_前端: https://github.com/tuwq/blog_front_web
+	前台_后端: https://github.com/tuwq/blog_front_server
+
+	后台_前端: 重写中,暂无
+	后台_后台: 重写中,暂无
+
 # 技术栈
 ## 前台展示,兼容chrome,firefox,edge.支持响应式
 	前端:	Less + React + Redux

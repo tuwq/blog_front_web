@@ -1,0 +1,50 @@
+.VolumeBar {
+	display: none;
+	position: absolute;
+	top: -120px;
+	left: -3.5px;
+	width: 19px;
+	background: #f1f2f2;
+	border-radius: 4px;
+	cursor: pointer;
+	padding: 10px 0 10px 0;
+	transition: 1s;
+	z-index: 99999;
+	&:hover {display: block;}
+	.bar-inner {
+		width: 3px;
+		height: 100px;
+		margin: 0 auto;
+		background: #b0aeb2;
+		position: relative;
+		.progress {
+			width: 4px;
+			height: 100px;
+			margin: 0 auto;
+			background-color: #8adced;
+			position: absolute;
+			bottom: 0;
+			z-index: 9999999;
+			touch-action: none;
+		}
+		.progress-btn-wrapper {
+			position: absolute;
+		    left: -6px;
+		    bottom: -15px;
+		    width: 30px;
+		    height: 30px;
+		    -ms-touch-action: none;
+		    touch-action: none;
+		    transform: translate3d(0,-90px,0);
+		}
+		.progress-btn {
+			position: relative;
+		    box-sizing: border-box;
+		    width: 16px;
+		    height: 16px;
+		    border: 3px solid #fff;
+		    border-radius: 50%;
+		    background: #8adced;
+		}
+	}
+}

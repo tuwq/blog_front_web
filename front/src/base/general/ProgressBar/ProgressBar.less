@@ -1,0 +1,41 @@
+.ProgressBar {
+	height: 30px;
+	.bar-inner {
+		position: relative;
+      	top: 13px;
+      	height: 4px;
+      	background: rgba(0, 0, 0, 0.3);
+		.progress {
+			position: absolute;
+	        height: 100%;
+	        background: #8adced;
+		}
+		.progress-btn-wrapper {
+			position: absolute;
+	        left: -8px;
+	        top: -13px;
+	        width: 30px;
+	        height: 30px;
+	        touch-action: none;
+			.progress-btn {
+				position: relative;
+	          	top: 7px;
+	          	left: 7px;
+	          	box-sizing: border-box;
+	         	width: 16px;
+	          	height: 16px;
+	          	border: 3px solid #fff;
+	          	border-radius: 50%;
+	          	background: #8adced;
+	          	animation: lightg 1.5s ease-in-out infinite alternate;
+			}
+		}
+	}
+}
+@keyframes lightg {
+	0%{box-shadow: 0 0 100px  #00B6E2;}
+	25%{box-shadow: 0 0 300px  #00B6E2;}
+	50% {box-shadow: 0px 0px 500px #00B6E2;}
+	75%{box-shadow: 0 0 300px  #00B6E2;}
+	100%{box-shadow: 0px 0px 100px #00B6E2;}
+}

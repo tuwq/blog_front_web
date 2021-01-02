@@ -1,0 +1,36 @@
+@import url("../../base/style/constant.less");
+@import url("../../base/style/login-common.less");
+@media screen and (min-width: @pc_width) {
+	.UpdatePass {
+		display: flex;
+		flex-direction: column;
+		height: 100vh;
+		.UpdatePass-wrapper {
+			position: relative;
+			flex: 1;
+			display: flex;
+			justify-content: center;
+			margin: 0 auto;
+			.content {
+				display: flex;
+				flex-direction: column;
+				h2 {margin-top: 72px;padding: 5px 10px;text-align: center;font-size: 30px;font-weight: 500;}
+				p {margin-top: 20px;padding: 5px 10px; text-align: center;}
+				p:nth-child(3){color: @pink_color;}
+				.form {
+					.form-control {
+						padding: 5px 5px;
+						margin-bottom: 10px;
+						height: 50px;
+						.common-form-control;
+						& button {
+							.common-form-width-button;
+							color: #fff;
+    						background-color: #1abc9c;
+						}
+					}
+				}
+			}
+		}
+	}
+}

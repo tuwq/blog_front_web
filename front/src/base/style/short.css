@@ -1,0 +1,19 @@
+.hide {
+	display: none;
+}
+.show {
+    display: block;
+}
+.clearfix, .container, .container-fluid, .form-horizontal .form-group, .modal-footer, .modal-header, .row {
+    zoom: 1;
+}
+.clearfix:after, .clearfix:before, .container-fluid:after, .container-fluid:before, .container:after, .container:before, .form-horizontal .form-group:after, .form-horizontal .form-group:before, .modal-footer:after, .modal-footer:before, .modal-header:after, .modal-header:before, .row:after, .row:before {
+    content: '';
+    display: table;
+}
+a {
+    color: #69bbea;
+}
+a, a:hover {
+    text-decoration: none;
+}

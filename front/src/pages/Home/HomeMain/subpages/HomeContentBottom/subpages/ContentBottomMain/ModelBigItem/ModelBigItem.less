@@ -1,0 +1,61 @@
+@import url("../../../../../../../../base/style/an.less");
+@media screen and (min-width: @pc_width) {
+.ModelBigItem {
+	display: flex;
+	flex: 0 1 100%;
+	margin-right: 20px;
+	padding: 0 5px;
+	&:hover {
+		.image {
+			img {
+				.image-scale-after;
+			}
+		}
+	}
+	.image {
+		flex: 0 1 40%;
+		overflow: hidden;
+		margin-right: 20px;
+		a {
+			max-height: 100%;
+			img {
+				max-height: 220px;
+				.image-scale-before;
+				.image-opacity;
+			}
+		}
+	}
+	.description {
+		flex: 0 1 60%;
+		width: 0;
+		display: flex;
+		flex-direction: column;
+		.title {
+			max-height: 25px;
+			margin-right: 20px;
+			overflow: hidden;
+			line-height: 25px;
+			font-size: 18px;
+			font-weight: 400;
+			margin-bottom: 20px;
+			text-overflow: ellipsis;
+		}
+		.meta {
+			color: @gray_color;
+			font-size: 15px;
+			margin-bottom: 10px;
+			span {
+				margin-right: 20px;
+				i {padding-right: 5px;}
+			}
+		}
+		.content {
+			margin-top: 10px;
+			font-size: 14px;
+			line-height: 25px;
+			max-height: 80px;
+			overflow: hidden;
+			color: @gray_color;
+		}
+	}
+}}

@@ -1,0 +1,61 @@
+@import url("../../../../base/style/an.less");
+@import url("../../../../base/style/login-common.less");
+@media screen and (max-width: @mobile_width) {
+.SearchItem {
+	box-shadow: 1px 1px 5px 5px @article_border_color;
+	background-color: @article_border_color;
+	overflow: hidden;
+	border-radius: 15px;
+	position: relative;
+	margin-bottom: 20px;
+	transition: all .3s;
+	a{&:hover{color: @lightblue_color;}transition: all .2s}
+	.image {
+		div {
+			height: 140px;
+			background-image: url(http://pcij2jrr4.bkt.clouddn.com/upload/temp/search.png);
+			border-radius: 15px;
+			position: relative;
+		    display: block;
+		    background-position: 50% 50%;
+		    background-size: cover;
+		}
+	}
+	.content {
+		border-radius: 15px;
+		transition: all .4s;
+		width: 100%;
+		height: 100%;
+		padding: 20px;
+		h2 {
+			color: #fff;
+			text-align: center;
+			max-width: 600px;
+			overflow: hidden;
+			margin: 0 auto;
+			font-size: 25px;
+			text-overflow: ellipsis;
+    		white-space: nowrap;
+    		&:hover {
+    			.font-color-animation;
+    		}
+		}
+		p {
+			color: #fff;
+			max-height: 40px;
+			text-shadow: ellipsis;
+			overflow: hidden;
+		}
+		.line {
+			.common-line-bottom;
+		}
+		.meta {
+			color: #fff;
+			text-align: center;
+			font-size: 14px;
+			svg {fill: #fff}
+			span {margin-right: 5px;}
+			i {padding-right: 2px;}
+		}
+	}
+}}

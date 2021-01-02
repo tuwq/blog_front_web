@@ -1,1 +1,0 @@
-export const now_user_info = state => state.now_user_info

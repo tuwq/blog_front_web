@@ -1,0 +1,45 @@
+@import url("../../../../../../../../base/style/an.less");
+@media screen and (max-width: @mobile_width) {
+.ModelMediumCollection {
+	.ModelMediumList {
+		.ModelMediumItem {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: nowrap;
+			max-width: 100%;
+			max-height: 100px;
+			overflow: hidden;
+			margin-bottom: 20px;
+			padding: 10px;
+			padding-right: 5px;
+			&:hover {
+				.image {img{.image-scale-after}}
+			}
+			.image {overflow: hidden;img{max-height: 175px;.image-scale-before;.image-opacity;}}
+			.description {
+				padding-left: 20px;
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				overflow: hidden;
+				max-width: 100%;
+				.section-title {
+					margin: 10px 0;
+					font-size: 17px;
+					overflow: hidden;
+					max-height: 20px;
+					line-height: 20px;
+				}
+				.section-content {
+					margin-top: 5px;
+					font-size: 14px;
+					line-height: 16px;
+					max-height: 30px;
+					overflow: hidden;
+					color: @gray_color;
+					text-overflow: ellipsis;
+				}
+			}
+		}
+	}
+}}

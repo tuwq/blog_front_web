@@ -1,0 +1,27 @@
+@import url("../../../base/style/constant.less");
+@media screen and (max-width: @mobile_width) {
+.Pagination {
+	color: @pink_color;
+	.pages {
+		display: flex;
+		justify-content: center;
+		border-radius: 4px;
+		margin: 20px 0;
+		li {	
+			a {
+				z-index: 3;
+				color: #fff;
+				background: @lightpink_color;
+				border: 1px solid @lightpink_color;
+				padding: 6px 8px;
+				font-size: 12px;
+				position: relative;
+			}
+			&.current a{
+				color: #fff;
+				background: @lightblue_color;
+				border: 1px solid @lightblue_color;
+			}
+		}
+	}
+}}

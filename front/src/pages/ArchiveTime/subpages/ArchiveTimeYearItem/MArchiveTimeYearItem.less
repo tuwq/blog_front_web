@@ -1,0 +1,121 @@
+@import url("../../../../base/style/an.less");
+@media screen and (max-width: @mobile_width) {
+.ArchiveTimeYearList {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+    padding: 20px 50px;
+    margin-bottom: 100px;
+	.ArchiveTimeYearItem {
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
+		padding: 0 20px;
+		margin-bottom: 20px;
+		&:hover {
+			.cover {img {.image-scale-after}}
+		}
+		.monthAndDay {
+			display: block;
+			font-size: 18px;
+		}
+		.content {
+			display: flex;
+			flex-direction: column;
+			.cover {
+				overflow: hidden;
+				a {
+					display: block;
+					max-height: 100%;
+					img {
+						width: 180px;
+						height: 125px;
+						border-radius: 50%;
+						.image-scale-before;
+						.image-opacity;
+					}
+				}
+			}
+			.detail {
+				padding-left: 8px;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-around;
+				.detail-title-wrapper {
+					overflow: hidden;
+					text-overflow: ellipsis;
+				}
+				.detail-control {
+					flex: 1;
+					overflow: hidden;
+					max-height: 50px;
+				}
+				.detail-title {
+					display: block;
+					max-height: 24px;
+					font-size: 16px;
+					font-weight: 400;
+					overflow: hidden;
+					text-overflow: ellipsis;
+				}
+				.detail-category {
+					position: relative;
+				    display: inline-block;
+				    vertical-align: middle;
+					font-size: 12px;
+					text-decoration: none;
+				    outline: 0;
+				    background-color: rgb(228, 162, 189);
+				    padding: 5px 10px;
+				    margin: 10px 5px;
+				    border-radius: 5px;
+				    color: #fff;
+				    &:before {
+					    pointer-events: none;
+					    position: absolute;
+					    transform: translateY(10px);
+					    z-index: -1;
+					    content: '';
+					    top: 100%;
+					    left: 5%;
+					    height: 10px;
+					    width: 90%;
+					    opacity: 0;
+					    background: radial-gradient(ellipse at center,rgba(0,0,0,0.35) 0%,transparent 80%);
+					    transition-duration: .3s;
+					    transition-property: transform,opacity;
+					}
+				}
+				.detail-tag {
+					position: relative;
+				    display: inline-block;
+				    vertical-align: middle;
+					font-size: 12px;
+					text-decoration: none;
+				    outline: 0;
+				    background-color: rgb(199, 192, 218);
+				    padding: 5px 10px;
+				    margin: 10px 5px;
+				    border-radius: 5px;
+				    color: #fff;
+				    &:before {
+					    pointer-events: none;
+					    position: absolute;
+					    transform: translateY(10px);
+					    z-index: -1;
+					    content: '';
+					    top: 100%;
+					    left: 5%;
+					    height: 10px;
+					    width: 90%;
+					    opacity: 0;
+					    background: radial-gradient(ellipse at center,rgba(0,0,0,0.35) 0%,transparent 80%);
+					    transition-duration: .3s;
+					    transition-property: transform,opacity;
+					}
+				}
+			}
+		}
+	}
+}}

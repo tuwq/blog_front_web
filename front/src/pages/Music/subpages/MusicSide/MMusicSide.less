@@ -1,0 +1,28 @@
+@import url("../../../../base/style/constant.less");
+@media screen and (max-width: @mobile_width) {
+.Music {
+	.MusicSide {
+		display: flex;
+		position: fixed;
+		top: 0;
+        width: 0;
+		max-width: 30%;
+		overflow: hidden;
+    	min-height: 1px;
+    	background: rgb(254, 212, 102);
+    	color: #fff;
+    	flex-direction: column;
+    	z-index: 2;
+    	height: 100%;
+    	transition: all .2s ease;
+        &.extra {
+            width: auto;
+            padding: 10px 15px;
+        }
+    	.sideClose {
+    		display: block;
+    		text-align: center;
+    	}
+    	
+	}	
+}}

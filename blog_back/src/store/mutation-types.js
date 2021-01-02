@@ -1,1 +1,0 @@
-export const SET_NOW_USER_INFO = 'SET_NOW_USER_INFO'

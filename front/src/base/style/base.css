@@ -1,0 +1,152 @@
+body {
+    font: 14px/1.5 Titillium,"Lucida Sans Typewriter","Helvetica Neue",Helvetica,Arial,"\5FAE\8F6F\96C5\9ED1","Microsoft YaHei","\5B8B\4F53";
+    color: #34495e;
+    min-height: 100%;
+}
+* {
+   /* cursor: url(../images/huaji.cur),default!important; */
+}
+* {
+    box-sizing: border-box;
+}
+html {
+    font-size: 62.5%;
+    color: #000;
+    background: #fff;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    height: 100%;
+}
+html {
+    font-family: sans-serif;
+}
+article, aside, details, figcaption, figure, footer, header, main, menu, nav, section, hgroup, summary {
+    display: block;
+}
+button, input, optgroup, select, textarea {
+    color: inherit;
+    font: inherit;
+}
+body, button, input, optgroup, select, textarea {
+    margin: 0;
+}
+button, hr, input {
+    overflow: visible;
+}
+label {
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 2.3;
+}
+img, label, legend {
+    max-width: 100%;
+}
+ul li {
+    color: inherit;
+}
+a {
+    color: inherit;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+}
+li, ol, ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+img, label, legend {
+    max-width: 100%;
+    vertical-align: middle;
+}
+fieldset, img, input, button {          
+    border: none;
+    padding: 0;
+    margin: 0;
+    outline-style: none;
+    text-decoration: none;
+}
+s, i, em {
+    font-style: normal;
+    text-decoration: none;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+    text-decoration: none;
+}
+a:hover {
+    color: #69bbea;
+}
+p {
+    margin: 0 0 10px;
+}
+html|* > svg {
+    transform-origin: 50% 50% 0px;
+}
+html, body, ul, li, ol, dl, dd, dt, p, h1, h2, h3, h4, h5, h6, form, fieldset, legend, img {
+    margin: 0;
+    padding: 0;
+}
+input {
+   border: none;
+   outline: none;
+}
+table {
+    border-collapse: collapse; 
+}
+svg:not(:root), symbol, image, marker, pattern, foreignObject {
+    overflow: hidden;
+}
+input, textarea {
+    font-size: inherit;
+    height: inherit;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+h2 {
+    font-size: 30px;
+}
+input {
+    -webkit-appearance: textfield;
+    background-color: white;
+    -webkit-rtl-ordering: logical;
+    cursor: text;
+    padding: 1px;
+    border-width: 2px;
+    border-style: inset;
+    border-color: initial;
+    border-image: initial;
+}
+input, textarea, select, button {
+    text-rendering: auto;
+    color: initial;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    margin: 0em;
+    font: 400 13.3333px Arial;
+}
+textarea {
+    -webkit-appearance: textarea;
+    background-color: white;
+    -webkit-rtl-ordering: logical;
+    flex-direction: column;
+    resize: auto;
+    cursor: text;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    border-width: 1px;
+    border-style: solid;
+    border-color: initial;
+    border-image: initial;
+    padding: 2px;
+}
+
+

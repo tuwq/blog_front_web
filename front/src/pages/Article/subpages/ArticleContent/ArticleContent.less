@@ -1,0 +1,47 @@
+@import url("../../../../base/style/article-common.less");
+@import url("../../../../base/style/contentStyle.less");
+@media screen and (min-width: @pc_width) {
+.ArticleContent {
+	width: 1000px;
+	margin: 0 auto;
+	.article {
+		box-shadow: 1px 1px 5px 5px @article_border_color;
+		position: relative;
+		overflow: hidden;
+		border-radius: 15px;
+		margin-bottom: 20px;
+		background-color: rgba(255,255,255,.8);
+		.thumbnail {
+			border-radius: 15px;
+			transition: all 0.6s;
+			min-height: 400px;
+			position: relative;
+			display: block;
+			background-position: 50% 50%;
+   			background-size: cover;
+		}
+		.content-wrapper {
+			padding: 30px;
+			.content {
+				background-color: rgba(255,255,255,0);
+				.ContentStyle;
+			}
+			.content-footer {
+				display: flex;
+				justify-content: space-between;
+				margin: 40px 0 30px;
+				font-size: 12px;
+				color: @gray_color;
+			}
+		}
+		.support {
+			padding: 10px 0 40px;
+			text-align: center;
+			color: @gray_color;
+			button {
+				.common-button-red;
+				margin-bottom: 20px;
+			}
+		}
+	}
+}}
