@@ -4,7 +4,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 import ModelMediumTitle from 'base/general/ModelMediumTitle/ModelMediumTitle'
 import ModelCrowdList from '../ModelCrowdList/ModelCrowdList'
 
-import { nodeCategoryApi } from 'api/Category/category'
+import { findListByArticleAndQuantityApi } from 'api/Category/category'
 
 import './ModelCrowdCollection.less'
 import './MModelCrowdCollection.less'
@@ -32,14 +32,14 @@ class ModelCrowdCollection extends React.Component {
 	}
 
 	initData() {
-		nodeCategoryApi((res)=>{
+		findListByArticleAndQuantityApi((res)=>{
 			if (res.data.code == 200) {
 				this.setState({
 					category: res.data.result.category,
 					data: res.data.result.articaleList
 				})
 			}
-		})
+		}, global.deployCategoryId, global.deployCategoryQuantity)
 	}
 
 	render() {

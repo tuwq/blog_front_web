@@ -8,6 +8,9 @@ import * as userActions from 'store/actions/user'
 
 import { _removeToken,_getToken } from 'base/js/cookie'
 import { logoutApi } from 'api/Login/login'
+import { categoryAllApi } from 'api/Category/category'
+
+import * as RESULT_CODE from 'api/Constant/resultCode'
 
 import './HomeHeader.less'
 import './MHomeHeader.less'
@@ -24,10 +27,13 @@ class HomeHeader extends React.Component {
     this.$userMenu = React.createRef()
     this.$userLink = React.createRef()
     PubSub.subscribe(global.userMenuSubscribe,this.subscribeMenu)
+    this.state = {
+      articleCategoryIdList: []
+    }
   }
 
 	componentDidMount() {
-    
+    this.initArticleCategoryIdList()
 	}
 
   componentWillUnmount() {
@@ -37,6 +43,16 @@ class HomeHeader extends React.Component {
     this.setState = (state,callback)=>{
       return
     };
+  }
+
+  initArticleCategoryIdList() {
+    categoryAllApi((res)=>{
+			if (res.data.code == RESULT_CODE.REQUEST_SUCCESS) {
+				this.setState({
+					articleCategoryIdList: res.data.result
+				})
+			}
+		})
   }
 
   goCategory(categoryId) {
@@ -109,15 +125,17 @@ class HomeHeader extends React.Component {
                          <li><Link to="/extra/secretLetter">联系我</Link></li>
                     </ul>
           			</li>
-          			<li className="HomeHeaderItem">
+          			{/* <li className="HomeHeaderItem">
           				<a className="ItemLink">分类</a> 
                   <ul className="ItemMenu">
-                       <li><a onClick={this.goCategory.bind(this,1)}>手记</a></li>
-                       <li><a onClick={this.goCategory.bind(this,2)}>学习笔记</a></li>
-                       <li><a onClick={this.goCategory.bind(this,3)}>短代码</a></li>
-                       <li><a onClick={this.goCategory.bind(this,4)}>个人闲谈</a></li>
+                      {
+                        this.state.articleCategoryIdList.map((item, index)=>{
+                          let articleCateogoryId = item.id
+                          return (<li key={index}><a onClick={this.goCategory.bind(this,articleCateogoryId)}>{item.name}</a></li>)
+                        })
+                      }
                   </ul>
-          			</li>
+          			</li> */}
                 <li className="HomeHeaderItem">
                   <a className="ItemLink">归档</a> 
                   <ul className="ItemMenu">

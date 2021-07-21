@@ -88,12 +88,12 @@ class ArticleContent extends React.Component {
 							<div className="statement"><span>© 著作权归作者所有,如需转载请注明出处</span></div>
 						</div>
 					</div>
-					<div  className="support">
+					{/* <div  className="support">
 						<button onClick={this.praiseIncr.bind(this)}>
 							赞<i>&nbsp;</i>{this.state.praiseSum}
 						</button>
 						<p>如果觉得我的文章对你有用，请随意赞赏</p>
-					</div>
+					</div> */}
 				</article>
         	</div>
         )

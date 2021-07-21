@@ -39,7 +39,7 @@ class LongCollection extends React.Component {
 					data: res.data.result
 				})
 			}
-		})
+		}, global.nodeCategoryId)
 	}
 
 	clickTitleFn() {

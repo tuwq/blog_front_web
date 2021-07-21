@@ -42,13 +42,13 @@ global.clearLocalSearchSongSubscribe = 'clearLocalSearchSongSubscribe'
 global.clearMusicKeywordSubscribe = 'clearMusicKeywordSubscribe'
 // 文章点赞的密钥
 global.artPraiseKey = 'artPraiseKey'
-// 首页火热文章获取数
+// 首页文章获取数
 global.articalePraiseQuantity = 4
 global.artNewTimeQuantity = 4 
 global.artWeightQuantity = 10
-global.articaleCategoryQuantity = 5
-global.nodeCategoryQuantity = 3
-global.shortCodeCategoryQuantity = 4
+global.nodeCategoryQuantity = 4
+global.deployCategoryQuantity = 3
+global.codedemoCategoryQuantity = 4
 global.chatCategoryQuantity = 4
 global.artHotDiscussQuantity = 3
 
@@ -64,3 +64,7 @@ global.archiveTimePageSize = 12
 global.newUpdateTimeQuantity = 10
 global.randomArticleQuantity = 10
 
+global.nodeCategoryId = 1
+global.deployCategoryId = 2
+global.codedemoCategoryId = 3
+global.chatCategoryId = 4

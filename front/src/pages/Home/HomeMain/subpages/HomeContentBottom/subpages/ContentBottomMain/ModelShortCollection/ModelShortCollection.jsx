@@ -3,7 +3,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 
 import ModelShortList from '../ModelShortList/ModelShortList'
 
-import { shortCodeCategoryApi,chatCategoryApi } from 'api/Category/category'
+import { findListByArticleAndQuantityApi } from 'api/Category/category'
 
 import './ModelShortCollection.less'
 import './ModelShortCollection.less'
@@ -33,22 +33,22 @@ class ModelShortCollection extends React.Component {
 	}
 
 	initData() {
-		shortCodeCategoryApi((res)=>{
+		findListByArticleAndQuantityApi((res)=>{
 			if (res.data.code == 200) {
 				this.setState({
 					shortCodeList: res.data.result.articaleList,
 					shortCodeCategory: res.data.result.category
 				})
 			}
-		})
-		chatCategoryApi((res)=>{
+		}, global.codedemoCategoryId, codedemoCategoryQuantity)
+		findListByArticleAndQuantityApi((res)=>{
 			if (res.data.code == 200) {
 				this.setState({
 					chatList: res.data.result.articaleList,
 					chatCategory: res.data.result.category
 				})
 			}
-		})
+		}, global.chatCategoryId, global.chatCategoryQuantity)
 	}
 
 	render() {

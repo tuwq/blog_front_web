@@ -5,9 +5,7 @@ import ModelMediumTitle from 'base/general/ModelMediumTitle/ModelMediumTitle'
 import ModelMediumList from '../ModelMediumList/ModelMediumList'
 import ModelBigItem from '../ModelBigItem/ModelBigItem'
 
-import { articaleCategoryApi } from 'api/Category/category'
-
-import rightSvg from 'static/svg/right.svg'
+import { findListByArticleAndQuantityApi } from 'api/Category/category'
 
 import './ModelMediumCollection.less'
 import './MModelMediumCollection.less'
@@ -36,17 +34,17 @@ class ModelMediumCollection extends React.Component {
 	}
 
 	initData() {
-		articaleCategoryApi((res)=>{
+		findListByArticleAndQuantityApi((res)=>{
 			if (res.data.code == 200) {
 				let category = res.data.result.category
 				let result = res.data.result.articaleList
 				this.setState({
 					category: category,
 					articleBigItem: result[0],
-					articleList: result.slice(1)
+					articleList: result
 				})
 			}
-		})
+		}, global.nodeCategoryId, global.nodeCategoryQuantity)
 	}
 
 	
@@ -59,7 +57,7 @@ class ModelMediumCollection extends React.Component {
          			(
          				<React.Fragment>
          					<ModelMediumTitle category={this.state.category}/>
-         					<ModelBigItem item={this.state.articleBigItem}/>
+         					{/* <ModelBigItem item={this.state.articleBigItem}/> */}
          					<ModelMediumList articleList={this.state.articleList}/>
          				</React.Fragment>
      				)

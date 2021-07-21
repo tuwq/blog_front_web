@@ -25,11 +25,11 @@ class HomeSideBarMain extends React.Component {
 	render() {
 		return (
          	<aside id="HomeSideBarMain" className="HomeSideBarMain">
-         		<SiderBarSelf />
+         		{/* <SiderBarSelf /> */}
 				<SiderContactMe />
-         		<SiderBarCommentCollection />
-				<SiderBarSwitchCollection />
-				<Advertisement />
+         		{/* <SiderBarCommentCollection /> */}
+				{/* <SiderBarSwitchCollection /> */}
+				{/* <Advertisement /> */}
          	</aside>
         )
 	}

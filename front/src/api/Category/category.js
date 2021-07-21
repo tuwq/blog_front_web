@@ -36,30 +36,10 @@ export function artPraiseApi(success) {
 	})
 }
 
-export function articaleCategoryApi(success) {
-	axios.get(global.serverUrl+'/articleCategory/articaleCategory/'+global.articaleCategoryQuantity)
-	.then((res)=>{
-		success(res)
-	})
-}
-
-export function nodeCategoryApi(success) {
-	axios.get(global.serverUrl+'/articleCategory/nodeCategory/'+global.nodeCategoryQuantity)
-	.then((res)=>{
-		success(res)
-	})
-}
-
-export function shortCodeCategoryApi(success) {
-	axios.get(global.serverUrl+'/articleCategory/shortCodeCategory/'+global.shortCodeCategoryQuantity)
-	.then((res)=>{
-		success(res)
-	})
-}
-
-export function chatCategoryApi(success) {
-	axios.get(global.serverUrl+'/articleCategory/chatCategory/'+global.chatCategoryQuantity)
-	.then((res)=>{
+export function findListByArticleAndQuantityApi(success, articleCategoryId, quantity) {
+	axios.get(global.serverUrl+'/articleCategory/findListByArticleAndQuantity/' + quantity,{
+		params: { articleCategoryId }
+	}).then((res)=>{
 		success(res)
 	})
 }
@@ -71,11 +51,11 @@ export function artHotDiscussApi(success) {
 	})
 }
 
-
-export function randomArticleApi(success, quantity) {
+export function randomArticleApi(success, articleCategoryId, quantity) {
 	quantity = quantity>0?quantity:global.randomArticleQuantity
-	axios.get(global.serverUrl+'/articleCategory/randomArticle/' + quantity)
-	.then((res)=>{
+	axios.get(global.serverUrl+'/articleCategory/randomArticle/' + quantity,{
+		params: { articleCategoryId }
+	}).then((res)=>{
 		success(res)
 	})
 }
